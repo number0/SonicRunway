@@ -17,6 +17,11 @@
 // _AddUI and _AddUIParameter to generate sliders, toggles,
 // etc.
 //
+// Parameter values can be controlled via OSC with addresses
+// of the form:
+//
+// /Runway/PatternName/ParameterName
+//
 class SrUiMixin {
 public:
     SrUiMixin(const std::string & name);

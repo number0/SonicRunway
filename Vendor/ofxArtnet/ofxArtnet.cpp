@@ -96,6 +96,9 @@ void ofxArtnet::threadedFunction(){
 
 int ofxArtnet::sendDmx( string targetIp, const unsigned char* data512, int size )
 {
+    artnet_send_dmx(node, 0, targetIp.c_str(), size , data512);
+    
+    /*
     int result = ARTNET_EOK;
     if ( status == NODES_FOUND)
     {
@@ -109,6 +112,7 @@ int ofxArtnet::sendDmx( string targetIp, const unsigned char* data512, int size 
         ofLogError() << "node is not found";
     }
     return result;
+     */
 }
 
 int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )

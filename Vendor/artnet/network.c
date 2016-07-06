@@ -176,17 +176,25 @@ static int get_ifaces(iface_t **if_head) {
  */
 static void add_iface_if_needed(iface_t **head, iface_t **tail,
                                 struct ifaddrs *ifa) {
+    printf("add_iface_if_needed\n");
     // skip down, loopback and non inet interfaces
-    if (!ifa || !ifa->ifa_addr) return;
-    if (!(ifa->ifa_flags & IFF_UP)) return;
-    if (ifa->ifa_flags & IFF_LOOPBACK) return;
-    if (ifa->ifa_addr->sa_family != AF_INET) return;
+    if (!ifa || !ifa->ifa_addr) { printf("null or null addr\n"); return; }
+   
+    // XXX work here to figure out how to print IP
+    struct sockaddr_in *sckin = (struct sockaddr_in *) ifa->ifa_addr;
+    printf("IP: %s\n", inet_ntoa(sckin->sin_addr));
+    
+    if (!(ifa->ifa_flags & IFF_UP)) { printf("UP\n"); return; }
+    if (ifa->ifa_flags & IFF_LOOPBACK) { printf("LOOPBACK\n"); return; }
+    if (ifa->ifa_addr->sa_family != AF_INET) { printf("!= AF_INET\n"); return; }
     iface_t *iface = new_iface(head, tail);
     struct sockaddr_in *sin = (struct sockaddr_in*) ifa->ifa_addr;
     iface->ip_addr.sin_addr = sin->sin_addr;
     strncpy(iface->if_name, ifa->ifa_name, IFNAME_SIZE - 1);
     
+    printf("got here\n");
     if (ifa->ifa_flags & IFF_BROADCAST) {
+        printf("  broadcast\n");
         sin = (struct sockaddr_in *) ifa->ifa_broadaddr;
         iface->bcast_addr.sin_addr = sin->sin_addr;
     }
@@ -497,8 +505,9 @@ int artnet_net_send(node n, artnet_packet p) {
     addr.sin_addr = p->to;
     p->from = n->state.ip_addr;
     
-    if (n->state.verbose)
-        printf("sending to %s\n" , inet_ntoa(addr.sin_addr));
+    if (n->state.verbose) {
+        //printf("sending to %s\n" , inet_ntoa(addr.sin_addr));
+    }
     
     ret = sendto(n->sd,
                  (char*) &p->data, // char* required for win32
