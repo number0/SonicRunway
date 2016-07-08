@@ -20,15 +20,23 @@ void
 SrArtnet::UpdateLights()
 {
     if (_artnet.status != NODES_FOUND) {
-        return;
+        //printf("status != NODES_FOUND\n");
+        //return;
     }
     
     std::vector<unsigned char> data(512 * 3);
     
     const ofFloatPixels & pixels = _model->GetFloatPixels();
+    if (not pixels.isAllocated()) {
+        printf("pixels not allocated\n");
+        return;
+    }
     
     for (int i=0; i < _model->GetLightsPerGate(); i++) {
         ofFloatColor color = pixels.getColor(0, i);
+        
+        // TMP
+        //color = ofFloatColor::white;
         
         color.setHsb(color.getHue(), color.getSaturation(),
                      color.getBrightness() * color.getBrightness());
@@ -57,6 +65,10 @@ SrArtnet::UpdateLights()
     //    artnet.sendDmx("10.0.0.149", 0xf, 0xf, _testImage.getPixels(), 512);
     
     _artnet.sendDmx("192.168.0.50", &data[0], 512);
+    _artnet.sendDmx("192.168.3.202", &data[0], 512);
+    
+    //_artnet.sendDmx("192.168.0.51", &data[0], 512);
+    //_artnet.sendDmx("192.168.3.202", 0 /* subnet */, 0 /* universe */, &data[0], 512);
     
 }
 

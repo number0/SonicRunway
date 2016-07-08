@@ -25,10 +25,13 @@
 		300CF0511C652BD800295FBF /* libyaml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 300CF0461C652BD800295FBF /* libyaml.a */; };
 		3012AAAD1C9BAA2A005B2B46 /* ExamplePattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3012AAAB1C9BAA2A005B2B46 /* ExamplePattern.cpp */; };
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
+		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
 		303B2BD61CA24D4F00322318 /* StripesPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 303B2BD41CA24D4F00322318 /* StripesPattern.cpp */; };
+		30511CBB1D05233000372B44 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30511CB91D05233000372B44 /* Video.cpp */; };
+		30511CBF1D05335100372B44 /* fire_small.mov in Resources */ = {isa = PBXBuildFile; fileRef = 30511CBE1D05335100372B44 /* fire_small.mov */; };
 		305892A41C9921240030F338 /* UiMixin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 305892A21C9921240030F338 /* UiMixin.cpp */; };
 		306565A31C472E7C00917ADB /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306565A11C472E7C00917ADB /* App.cpp */; };
 		3068B2461CB579B30092949A /* previsCameraData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3068B2421CB576BF0092949A /* previsCameraData.txt */; };
@@ -138,6 +141,8 @@
 		3012AAAB1C9BAA2A005B2B46 /* ExamplePattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExamplePattern.cpp; path = Patterns/ExamplePattern.cpp; sourceTree = "<group>"; };
 		3012AAAC1C9BAA2A005B2B46 /* ExamplePattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExamplePattern.hpp; path = Patterns/ExamplePattern.hpp; sourceTree = "<group>"; };
 		301742251CAE3140007F3D32 /* libaubio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libaubio.dylib; path = ../../../../../../../../usr/local/Cellar/aubio/0.4.2/lib/libaubio.dylib; sourceTree = "<group>"; };
+		30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoPattern.cpp; path = Patterns/VideoPattern.cpp; sourceTree = "<group>"; };
+		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
 		302F35941C93CA39001D5E51 /* OnsetHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OnsetHistory.hpp; path = Input/OnsetHistory.hpp; sourceTree = "<group>"; };
@@ -147,6 +152,9 @@
 		302F359A1C972DE6001D5E51 /* EventHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = EventHistory.hpp; path = Input/EventHistory.hpp; sourceTree = "<group>"; };
 		303B2BD41CA24D4F00322318 /* StripesPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StripesPattern.cpp; path = Patterns/StripesPattern.cpp; sourceTree = "<group>"; };
 		303B2BD51CA24D4F00322318 /* StripesPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StripesPattern.hpp; path = Patterns/StripesPattern.hpp; sourceTree = "<group>"; };
+		30511CB91D05233000372B44 /* Video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Video.cpp; path = Input/Video.cpp; sourceTree = "<group>"; };
+		30511CBA1D05233000372B44 /* Video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Video.hpp; path = Input/Video.hpp; sourceTree = "<group>"; };
+		30511CBE1D05335100372B44 /* fire_small.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = fire_small.mov; path = Resources/fire_small.mov; sourceTree = "<group>"; };
 		305892A21C9921240030F338 /* UiMixin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiMixin.cpp; sourceTree = "<group>"; };
 		305892A31C9921240030F338 /* UiMixin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UiMixin.hpp; sourceTree = "<group>"; };
 		306565A11C472E7C00917ADB /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
@@ -313,6 +321,7 @@
 				30B8DCEA1CB58C3A00164558 /* skyTexture.png */,
 				300802101CB723AD0031DAF2 /* burner1.png */,
 				300802111CB723AD0031DAF2 /* burner2.png */,
+				30511CBE1D05335100372B44 /* fire_small.mov */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -383,6 +392,8 @@
 				30E16C271CDC00D4008729E7 /* ScrollingPattern.hpp */,
 				30E16C2C1CDEF76C008729E7 /* BeatPattern.cpp */,
 				30E16C2D1CDEF76C008729E7 /* BeatPattern.hpp */,
+				30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */,
+				30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -400,6 +411,8 @@
 				302F35971C972BE2001D5E51 /* BeatHistory.hpp */,
 				302F35991C972DE6001D5E51 /* EventHistory.cpp */,
 				302F359A1C972DE6001D5E51 /* EventHistory.hpp */,
+				30511CB91D05233000372B44 /* Video.cpp */,
+				30511CBA1D05233000372B44 /* Video.hpp */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -738,6 +751,7 @@
 				308CEE591C48593A007C124A /* tod.c in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				30511CBB1D05233000372B44 /* Video.cpp in Sources */,
 				479DCA850DD8BB469A777AD4 /* ofxAubioBeat.cpp in Sources */,
 				C60077973A257D8F44947E2E /* ofxAubioBlock.cpp in Sources */,
 				67383740F5CC47ED5F955A76 /* ofxAubioMelBands.cpp in Sources */,
@@ -769,6 +783,7 @@
 				30E57E2A1CE194730031D5AF /* UdpSocket.cpp in Sources */,
 				302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */,
 				3002E85E1C88F9C900689E57 /* Previs.cpp in Sources */,
+				30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */,
 				30E16C281CDC00D5008729E7 /* ScrollingPattern.cpp in Sources */,
 				30C844391C42D110006452BE /* Model.cpp in Sources */,
 				30E57E2B1CE194730031D5AF /* OscOutboundPacketStream.cpp in Sources */,

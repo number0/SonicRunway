@@ -714,13 +714,19 @@ int artnet_send_dmx(artnet_node vn,
     {
         p.to.s_addr = inet_addr( targetIp );
         tmp = find_entry_from_ip(&(n->node_list), p.to);
+        /*
         if (tmp == 0 )
         {
+            printf("tmp == 0\n");
             artnet_error("%s : %s is not found", __FUNCTION__, targetIp);
             return ARTNET_EARG;
         }
         p.data.admx.universe = tmp->pub.swout[ 0 ];
-        artnet_net_send(n, &p);
+         */
+        for(int univ = 0; univ < 5; univ++) {
+            p.data.admx.universe = univ;
+            artnet_net_send(n, &p);
+        }
         
     }
     port->seq++;

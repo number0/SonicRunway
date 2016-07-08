@@ -13,6 +13,7 @@
 #include "FftPattern.hpp"
 #include "ExamplePattern.hpp"
 #include "StripesPattern.hpp"
+#include "VideoPattern.hpp"
 
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
@@ -39,9 +40,6 @@ SrApp::SrApp() :
     _patternPanel.setup("Patterns");
     _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
-    ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
-                       _model.GetSampleRate(), _model.GetBufferSize(), 4);
-    
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_audioUI.GetUiPanel());
     
@@ -53,6 +51,7 @@ SrApp::SrApp() :
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio);
     _AddPattern(beatPattern);
+    beatPattern->SetEnabled(false);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
@@ -63,7 +62,18 @@ SrApp::SrApp() :
     _AddPattern(stripesPattern);
     stripesPattern->SetEnabled(false);
     
+    /*
+    SrVideoPattern *videoPattern =
+        new SrVideoPattern("Video", &_model, &_audio);
+    _AddPattern(videoPattern);
+    videoPattern->SetEnabled(true);
+     */
+    
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
+    
+    ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
+                       _model.GetSampleRate(), _model.GetBufferSize(), 4);
+    printf("done constructing\n");
 }
 
 SrApp::~SrApp()
@@ -143,5 +153,5 @@ SrApp::Draw()
     _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
                  1280, 720);
     
-    _artnet.UpdateLights();
+    //_artnet.UpdateLights();
 }
