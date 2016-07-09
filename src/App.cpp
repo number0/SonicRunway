@@ -62,12 +62,10 @@ SrApp::SrApp() :
     _AddPattern(stripesPattern);
     stripesPattern->SetEnabled(false);
     
-    /*
     SrVideoPattern *videoPattern =
-        new SrVideoPattern("Video", &_model, &_audio);
+        new SrVideoPattern("Video", "fire_small.mov", &_model, &_audio);
     _AddPattern(videoPattern);
-    videoPattern->SetEnabled(true);
-     */
+    videoPattern->SetEnabled(false);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     

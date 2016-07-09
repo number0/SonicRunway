@@ -96,7 +96,9 @@ void ofxArtnet::threadedFunction(){
 
 int ofxArtnet::sendDmx( string targetIp, const unsigned char* data512, int size )
 {
-    artnet_send_dmx(node, 0, targetIp.c_str(), size , data512);
+    // XXX RJ - disabled error checking because the lumigeek boards
+    // don't respond correctly to artnet discovery.  Just go ahead
+    // and broadcast the data!
     
     /*
     int result = ARTNET_EOK;
@@ -113,6 +115,8 @@ int ofxArtnet::sendDmx( string targetIp, const unsigned char* data512, int size 
     }
     return result;
      */
+    
+    artnet_send_dmx(node, 0, targetIp.c_str(), size , data512);
 }
 
 int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )

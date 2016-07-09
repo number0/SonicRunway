@@ -19,10 +19,15 @@ SrArtnet::SrArtnet(SrModel * model) :
 void
 SrArtnet::UpdateLights()
 {
+    // XXX disabling this check because the Lumigeek boards don't
+    // correctly respond to artnet discovery.  Just go ahead and blast
+    // the signal anyway :)
+    /*
     if (_artnet.status != NODES_FOUND) {
-        //printf("status != NODES_FOUND\n");
-        //return;
+        printf("status != NODES_FOUND\n");
+        return;
     }
+     */
     
     std::vector<unsigned char> data(512 * 3);
     
@@ -34,7 +39,7 @@ SrArtnet::UpdateLights()
     
     for (int i=0; i < _model->GetLightsPerGate(); i++) {
         ofFloatColor color = pixels.getColor(0, i);
-        
+      
         // TMP
         //color = ofFloatColor::white;
         

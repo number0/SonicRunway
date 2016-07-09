@@ -9,13 +9,16 @@
 #include "VideoPattern.hpp"
 
 SrVideoPattern::SrVideoPattern(const std::string & name,
+                               const std::string & videoFileName,
                                SrModel * model,
                                SrAudio * audio) :
     SrPattern(name, model, audio),
-    _video("fire_small.mov", OF_LOOP_NORMAL),
-    _gateIndex(0)
+    _video(videoFileName, OF_LOOP_NORMAL),
+    _gateIndex(0),
+    _scroll(false)
 {
-    
+    _scroll.setName("Scroll");
+    _AddUIParameter(_scroll);
 }
 
 SrVideoPattern::~SrVideoPattern()
@@ -27,9 +30,11 @@ void
 SrVideoPattern::_Update()
 {
     _video.GoToNextFrame();
-    _gateIndex++;
-    if (_gateIndex > GetModel()->GetNumGates()) {
-        _gateIndex = 0;
+    if (_scroll) {
+        _gateIndex++;
+        if (_gateIndex > GetModel()->GetNumGates()) {
+            _gateIndex = 0;
+        }
     }
 }
 

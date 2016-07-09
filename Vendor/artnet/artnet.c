@@ -713,8 +713,12 @@ int artnet_send_dmx(artnet_node vn,
     if( targetIp != 0 )
     {
         p.to.s_addr = inet_addr( targetIp );
-        tmp = find_entry_from_ip(&(n->node_list), p.to);
+        // XXX RJ - Disabling this check because our lumigeek boards
+        // don't register correctly.  Go ahead and broadcast the signal
+        // even if the node isn't registered correctly.
+        
         /*
+        tmp = find_entry_from_ip(&(n->node_list), p.to);
         if (tmp == 0 )
         {
             printf("tmp == 0\n");
@@ -723,6 +727,12 @@ int artnet_send_dmx(artnet_node vn,
         }
         p.data.admx.universe = tmp->pub.swout[ 0 ];
          */
+        
+        // XXX RJ - broadcasting the same signal to all 6 universes on
+        // the Lumigeek for now.  This is because the lumigeek doesn't
+        // 'latch' until it receives data for all universes.  We will
+        // need to change this so we can send the right data to each
+        // of the first two universes.
         for(int univ = 0; univ < 5; univ++) {
             p.data.admx.universe = univ;
             artnet_net_send(n, &p);

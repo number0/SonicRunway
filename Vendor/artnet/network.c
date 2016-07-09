@@ -176,6 +176,11 @@ static int get_ifaces(iface_t **if_head) {
  */
 static void add_iface_if_needed(iface_t **head, iface_t **tail,
                                 struct ifaddrs *ifa) {
+    // XXX RJ - added some print statements here to debug networking
+    // I don't think there is any functional difference from the
+    // original artnet code, but if something isn't working, it's
+    // worth double checking.
+    
     printf("add_iface_if_needed\n");
     // skip down, loopback and non inet interfaces
     if (!ifa || !ifa->ifa_addr) { printf("null or null addr\n"); return; }

@@ -721,6 +721,7 @@
 				7AD999491D29E652002BD0F3 /* light.png in Resources */,
 				7AD9994F1D2A118F002BD0F3 /* shaderGeom.glsl in Resources */,
 				300802121CB723AD0031DAF2 /* burner1.png in Resources */,
+				30511CBF1D05335100372B44 /* fire_small.mov in Resources */,
 				7AD999501D2A118F002BD0F3 /* shaderVert.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
