@@ -29,6 +29,8 @@
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
+		303A0CD41D31516F005D4636 /* PhrasePattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 303A0CD21D31516F005D4636 /* PhrasePattern.cpp */; };
+		303A0CD71D315715005D4636 /* TriggerPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 303A0CD51D315715005D4636 /* TriggerPattern.cpp */; };
 		303B2BD61CA24D4F00322318 /* StripesPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 303B2BD41CA24D4F00322318 /* StripesPattern.cpp */; };
 		30511CBB1D05233000372B44 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30511CB91D05233000372B44 /* Video.cpp */; };
 		30511CBF1D05335100372B44 /* fire_small.mov in Resources */ = {isa = PBXBuildFile; fileRef = 30511CBE1D05335100372B44 /* fire_small.mov */; };
@@ -150,6 +152,10 @@
 		302F35971C972BE2001D5E51 /* BeatHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BeatHistory.hpp; path = Input/BeatHistory.hpp; sourceTree = "<group>"; };
 		302F35991C972DE6001D5E51 /* EventHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventHistory.cpp; path = Input/EventHistory.cpp; sourceTree = "<group>"; };
 		302F359A1C972DE6001D5E51 /* EventHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = EventHistory.hpp; path = Input/EventHistory.hpp; sourceTree = "<group>"; };
+		303A0CD21D31516F005D4636 /* PhrasePattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhrasePattern.cpp; path = Patterns/PhrasePattern.cpp; sourceTree = "<group>"; };
+		303A0CD31D31516F005D4636 /* PhrasePattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PhrasePattern.hpp; path = Patterns/PhrasePattern.hpp; sourceTree = "<group>"; };
+		303A0CD51D315715005D4636 /* TriggerPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TriggerPattern.cpp; path = Patterns/TriggerPattern.cpp; sourceTree = "<group>"; };
+		303A0CD61D315715005D4636 /* TriggerPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TriggerPattern.hpp; path = Patterns/TriggerPattern.hpp; sourceTree = "<group>"; };
 		303B2BD41CA24D4F00322318 /* StripesPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StripesPattern.cpp; path = Patterns/StripesPattern.cpp; sourceTree = "<group>"; };
 		303B2BD51CA24D4F00322318 /* StripesPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StripesPattern.hpp; path = Patterns/StripesPattern.hpp; sourceTree = "<group>"; };
 		30511CB91D05233000372B44 /* Video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Video.cpp; path = Input/Video.cpp; sourceTree = "<group>"; };
@@ -394,6 +400,10 @@
 				30E16C2D1CDEF76C008729E7 /* BeatPattern.hpp */,
 				30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */,
 				30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */,
+				303A0CD21D31516F005D4636 /* PhrasePattern.cpp */,
+				303A0CD31D31516F005D4636 /* PhrasePattern.hpp */,
+				303A0CD51D315715005D4636 /* TriggerPattern.cpp */,
+				303A0CD61D315715005D4636 /* TriggerPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -760,6 +770,7 @@
 				30E57E2C1CE194730031D5AF /* OscPrintReceivedElements.cpp in Sources */,
 				30AEA5981C4052A80034C794 /* README.md in Sources */,
 				302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */,
+				303A0CD41D31516F005D4636 /* PhrasePattern.cpp in Sources */,
 				306565A31C472E7C00917ADB /* App.cpp in Sources */,
 				30C844361C42C17E006452BE /* AudioUI.cpp in Sources */,
 				30B8DCE91CB589AC00164558 /* Environment.cpp in Sources */,
@@ -790,6 +801,7 @@
 				30E57E2B1CE194730031D5AF /* OscOutboundPacketStream.cpp in Sources */,
 				3074F8D11C874AF2008BD5EF /* Pattern.cpp in Sources */,
 				30E57E261CE194730031D5AF /* ofxOscReceiver.cpp in Sources */,
+				303A0CD71D315715005D4636 /* TriggerPattern.cpp in Sources */,
 				30E57E291CE194730031D5AF /* NetworkingUtils.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				308CEE551C48593A007C124A /* artnet.c in Sources */,

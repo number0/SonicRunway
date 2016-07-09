@@ -17,19 +17,28 @@
 SrAudioUI::SrAudioUI(SrAudio * audio) :
     SrUiMixin("Audio"),
     _audio(audio),
-    _playDelayedAudioParam(false)
+    _playDelayedAudioParam(false),
+    _resetDownbeatParam(false),
+    _resetMeasureParam(false)
 {
     _audio = audio;
     
     _playDelayedAudioParam.setName("Play Delayed Audio");
-    _playDelayedAudioParam.addListener(this,
-                                       &This::_OnPlayDelayedAudioButtonPressed);
+    _playDelayedAudioParam.addListener(
+        this, &This::_OnPlayDelayedAudioButtonPressed);
     _AddUIParameter(_playDelayedAudioParam);
+    
+    _resetDownbeatParam.setName("Tap Downbeat");
+    _AddUIParameter(_resetDownbeatParam);
+    _resetMeasureParam.setName("Tap Measure 1");
+    _AddUIParameter(_resetMeasureParam);
    
     _beatGui.setup("Beat");
     _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
+    _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
+    _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
     _AddUI(&_beatGui);
-   
+    
     _onsetGui.setup("Onset");
     _onsetGui.add(_gotOnsetSlider.setup("onset", 0, 0, 1.0));
     _onsetGui.add(_onsetThresholdSlider.setup("threshold", 0, 0, 2));
@@ -66,10 +75,22 @@ SrAudioUI::Update()
     
     bool isRecentOnset = (onset.GetSecondsSinceLastEvent()[0] < 0.05);
     
+    if ((bool) _resetDownbeatParam) {
+        _audio->ResetDownbeat();
+        _resetDownbeatParam = false;
+    }
+    
+    if ((bool) _resetMeasureParam) {
+        _audio->ResetMeasure();
+        _resetMeasureParam = false;
+    }
+    
     _gotOnsetSlider = (float) isRecentOnset;
     _onsetNoveltySlider = onset.GetNovelty()[0];
     _onsetThresholdedNoveltySlider = onset.GetThresholdedNovelty()[0];
     _bpmSlider = _audio->GetBeatHistory().GetBpm()[0];
+    _beatIndexSlider = _audio->GetBeatHistory().GetBeatIndex()[0];
+    _measureIndexSlider = _audio->GetBeatHistory().GetMeasureIndex()[0];
     
     // XXX should set onset threshold here from slider..
 }
@@ -77,8 +98,9 @@ SrAudioUI::Update()
 void
 SrAudioUI::_OnPlayDelayedAudioButtonPressed(bool &on)
 {
-    _audio -> SetOutputAudioDelayed(on);
+    _audio->SetOutputAudioDelayed(on);
 }
+
 
 /*
 void

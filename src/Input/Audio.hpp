@@ -48,6 +48,12 @@ public:
     
     void SetOutputAudioDelayed(bool sendAudioOut);
     
+    // Reset it so the next beat will be 1.
+    void ResetDownbeat();
+    
+    // Reset it so the next measure will be 1.
+    void ResetMeasure();
+    
     typedef vector<vector<float> > AudioVecBuffer;
     const AudioVecBuffer & GetFullAudioBuffer(float delayInSeconds) const;
     

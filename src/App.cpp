@@ -12,7 +12,9 @@
 #include "BeatPattern.hpp"
 #include "FftPattern.hpp"
 #include "ExamplePattern.hpp"
+#include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
+#include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 
 extern "C" void CGSSetDebugOptions(int);
@@ -56,6 +58,7 @@ SrApp::SrApp() :
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
     _AddPattern(fftPattern);
+    fftPattern->SetEnabled(false);
     
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio);
@@ -66,6 +69,16 @@ SrApp::SrApp() :
         new SrVideoPattern("Video", "fire_small.mov", &_model, &_audio);
     _AddPattern(videoPattern);
     videoPattern->SetEnabled(false);
+    
+    SrTriggerPattern *triggerPattern =
+        new SrTriggerPattern("Trigger", &_model, &_audio);
+    _AddPattern(triggerPattern);
+    triggerPattern->SetEnabled(true);
+    
+    SrPhrasePattern *phrasePattern =
+        new SrPhrasePattern("Phrase", &_model, &_audio);
+    _AddPattern(phrasePattern);
+    phrasePattern->SetEnabled(true);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     

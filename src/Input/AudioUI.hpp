@@ -30,6 +30,7 @@ public:
     
 private:
     void _OnPlayDelayedAudioButtonPressed(bool &on);
+    void _OnTapDownbeatButtonPressed(bool &on);
 
 private:
     
@@ -38,7 +39,12 @@ private:
     ofxPanel _beatGui;
     
     ofParameter<bool> _playDelayedAudioParam;
+    ofParameter<bool> _resetDownbeatParam;
+    ofParameter<bool> _resetMeasureParam;
+    
     ofxFloatSlider _bpmSlider;
+    ofxFloatSlider _beatIndexSlider;
+    ofxFloatSlider _measureIndexSlider;
     
     ofxPanel _onsetGui;
     

@@ -12,7 +12,13 @@
 SrBeatHistory::SrBeatHistory(SrModel * model) :
     SrEventHistory(model, SrFrequencyOncePerAudioIn),
     _bpm(model, SrFrequencyOncePerAudioIn),
-    _gotBeat(false)
+    _beatIndex(model, SrFrequencyOncePerAudioIn),
+    _measureIndex(model, SrFrequencyOncePerAudioIn),
+    _gotBeat(false),
+    _currentBeatIndex(1),
+    _currentMeasureIndex(1),
+    _resetBeat(true),
+    _resetMeasure(true)
 {
     int bufferSize = model->GetBufferSize();
     int hopSize = bufferSize / 2;
@@ -33,6 +39,30 @@ void
 SrBeatHistory::_OnBeatEvent(float & time)
 {
     _gotBeat = true;
+    _currentBeatIndex++;
+    
+    // Yes, we're only supporting 4/4 time :)
+    if (_currentBeatIndex > 4) {
+        _currentBeatIndex = 1;
+    }
+    
+    if (_resetBeat) {
+        _currentBeatIndex = 1;
+        _resetBeat = false;
+    }
+    
+    if (_currentBeatIndex == 1) {
+        _currentMeasureIndex++;
+        
+        if (_currentMeasureIndex > 8) {
+            _currentMeasureIndex = 1;
+        }
+        
+        if (_resetMeasure) {
+            _currentMeasureIndex = 1;
+            _resetMeasure = false;
+        }
+    }
 }
 
 void
@@ -40,8 +70,11 @@ SrBeatHistory::AudioIn(float * input, int bufferSize, int nChannels)
 {
     _beat.audioIn(input, bufferSize, nChannels);
     
-    // Push the current beat
+    // Push a bool value indicating whether or not a beat was received.
     _Push(_gotBeat);
+    
+    _beatIndex.Push(_currentBeatIndex);
+    _measureIndex.Push(_currentMeasureIndex);
     
     // Reset the flag
     _gotBeat = false;
@@ -53,4 +86,28 @@ const SrFloatBuffer &
 SrBeatHistory::GetBpm() const
 {
     return _bpm;
+}
+
+const SrIntBuffer &
+SrBeatHistory::GetBeatIndex() const
+{
+    return _beatIndex;
+}
+
+const SrIntBuffer &
+SrBeatHistory::GetMeasureIndex() const
+{
+    return _measureIndex;
+}
+
+void
+SrBeatHistory::ResetDownbeat()
+{
+    _resetBeat = true;
+}
+
+void
+SrBeatHistory::ResetMeasure()
+{
+    _resetMeasure = true;
 }

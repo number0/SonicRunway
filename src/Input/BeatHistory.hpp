@@ -24,12 +24,33 @@ public:
     
     const SrFloatBuffer & GetBpm() const;
     
+    // Buffer containing the current beat [1-4]
+    const SrIntBuffer & GetBeatIndex() const;
+    
+    // Buffer containing the current measure in the phrase [1-8]
+    const SrIntBuffer & GetMeasureIndex() const;
+    
+    // Make it so the next beat will be 1.
+    void ResetDownbeat();
+    
+    // Make it so the next measure will be 1.
+    void ResetMeasure();
+    
 private:
     void _OnBeatEvent(float & time);
     
 private:
     SrFloatBuffer _bpm;
+    SrIntBuffer _beatIndex;
+    SrIntBuffer _measureIndex;
+    
     bool _gotBeat;
+    
+    int _currentBeatIndex;
+    int _currentMeasureIndex;
+    
+    bool _resetBeat;
+    bool _resetMeasure;
     
     ofxAubioBeat _beat;
 };

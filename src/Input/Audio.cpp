@@ -169,3 +169,15 @@ SrAudio::AudioOutDelayed(float * output, int bufferSize, int nChannels,
         output[i*nChannels] = thisBuffer[i];
     }
 }
+
+void
+SrAudio::ResetDownbeat()
+{
+    _beatHistory.ResetDownbeat();
+}
+
+void
+SrAudio::ResetMeasure()
+{
+    _beatHistory.ResetMeasure();
+}
