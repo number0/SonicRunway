@@ -19,6 +19,7 @@
 #include "ofxOscParameterSync.h"
 
 class SrPattern;
+class SrPreset;
 
 //
 // Main app.
@@ -36,6 +37,7 @@ public:
     
 private:
     void _AddPattern(SrPattern * pattern);
+    void _AddPreset(SrPreset * preset);
     
 private:
     SrModel _model;
@@ -45,11 +47,14 @@ private:
     SrArtnet _artnet;
     
     std::vector<SrPattern *> _patterns;
+    std::vector<SrPreset *> _presets;
     ofxPanel _globalPanel;
     ofxPanel _patternPanel;
+    ofxPanel _presetPanel;
     ofxOscParameterSync _oscParameterSync;
     float _uiColumnWidth;
     float _uiMargin;
+    
 };
 
 #endif

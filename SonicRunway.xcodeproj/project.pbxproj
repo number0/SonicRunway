@@ -26,6 +26,7 @@
 		3012AAAD1C9BAA2A005B2B46 /* ExamplePattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3012AAAB1C9BAA2A005B2B46 /* ExamplePattern.cpp */; };
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
+		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
@@ -145,6 +146,8 @@
 		301742251CAE3140007F3D32 /* libaubio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libaubio.dylib; path = ../../../../../../../../usr/local/Cellar/aubio/0.4.2/lib/libaubio.dylib; sourceTree = "<group>"; };
 		30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoPattern.cpp; path = Patterns/VideoPattern.cpp; sourceTree = "<group>"; };
 		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
+		30216C3F1D31976300D2B07F /* Preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preset.cpp; sourceTree = "<group>"; };
+		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
 		302F35941C93CA39001D5E51 /* OnsetHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OnsetHistory.hpp; path = Input/OnsetHistory.hpp; sourceTree = "<group>"; };
@@ -632,6 +635,8 @@
 				302695351C8FEE1D007F749C /* Buffer.hpp */,
 				308CEE5B1C48598D007C124A /* Artnet.cpp */,
 				308CEE5C1C48598D007C124A /* Artnet.hpp */,
+				30216C3F1D31976300D2B07F /* Preset.cpp */,
+				30216C401D31976300D2B07F /* Preset.hpp */,
 				305892A21C9921240030F338 /* UiMixin.cpp */,
 				305892A31C9921240030F338 /* UiMixin.hpp */,
 				3068B2471CB5808E0092949A /* Util.cpp */,
@@ -805,6 +810,7 @@
 				30E57E291CE194730031D5AF /* NetworkingUtils.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				308CEE551C48593A007C124A /* artnet.c in Sources */,
+				30216C411D31976300D2B07F /* Preset.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				30E16C2E1CDEF76C008729E7 /* BeatPattern.cpp in Sources */,
 				306DFD3F1C80100200AB9225 /* ofxArtnet.cpp in Sources */,

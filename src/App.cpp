@@ -17,6 +17,8 @@
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 
+#include "Preset.hpp"
+
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
@@ -42,6 +44,9 @@ SrApp::SrApp() :
     _patternPanel.setup("Patterns");
     _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
+    _presetPanel.setup("Presets");
+    _presetPanel.setPosition(_uiMargin + _uiColumnWidth, 600);
+    
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_audioUI.GetUiPanel());
     
@@ -53,12 +58,12 @@ SrApp::SrApp() :
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio);
     _AddPattern(beatPattern);
-    beatPattern->SetEnabled(false);
+    beatPattern->SetEnabled(true);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
     _AddPattern(fftPattern);
-    fftPattern->SetEnabled(false);
+    fftPattern->SetEnabled(true);
     
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio);
@@ -78,13 +83,15 @@ SrApp::SrApp() :
     SrPhrasePattern *phrasePattern =
         new SrPhrasePattern("Phrase", &_model, &_audio);
     _AddPattern(phrasePattern);
-    phrasePattern->SetEnabled(true);
+    phrasePattern->SetEnabled(false);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
-    printf("done constructing\n");
+    
+    SrPreset *testPreset = new SrPreset("Test Preset", "test.preset");
+    _AddPreset(testPreset);
 }
 
 SrApp::~SrApp()
@@ -105,6 +112,13 @@ SrApp::_AddPattern(SrPattern * pattern)
     _patterns.push_back(pattern);
     _patternPanel.add(pattern->GetUiPanel());
     _model.GetParameterGroup().add(pattern->GetParameterGroup());
+}
+
+void
+SrApp::_AddPreset(SrPreset * preset)
+{
+    _presets.push_back(preset);
+    _presetPanel.add(preset->GetUiPanel());
 }
 
 void
@@ -160,6 +174,7 @@ SrApp::Draw()
     
     _globalPanel.draw();
     _patternPanel.draw();
+    _presetPanel.draw();
     
     _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
                  1280, 720);
