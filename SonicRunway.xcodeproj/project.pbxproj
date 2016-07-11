@@ -27,7 +27,6 @@
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
-		30216C431D32A69600D2B07F /* fireplace.mov in Resources */ = {isa = PBXBuildFile; fileRef = 30216C421D32A69600D2B07F /* fireplace.mov */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
@@ -36,6 +35,7 @@
 		303B2BD61CA24D4F00322318 /* StripesPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 303B2BD41CA24D4F00322318 /* StripesPattern.cpp */; };
 		30511CBB1D05233000372B44 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30511CB91D05233000372B44 /* Video.cpp */; };
 		305892A41C9921240030F338 /* UiMixin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 305892A21C9921240030F338 /* UiMixin.cpp */; };
+		305AD66E1D333F8A00A72E88 /* fireplace2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 305AD66D1D333F8A00A72E88 /* fireplace2.mov */; };
 		306565A31C472E7C00917ADB /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306565A11C472E7C00917ADB /* App.cpp */; };
 		3068B2461CB579B30092949A /* previsCameraData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3068B2421CB576BF0092949A /* previsCameraData.txt */; };
 		3068B2491CB5808E0092949A /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3068B2471CB5808E0092949A /* Util.cpp */; };
@@ -148,7 +148,6 @@
 		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
 		30216C3F1D31976300D2B07F /* Preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preset.cpp; sourceTree = "<group>"; };
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
-		30216C421D32A69600D2B07F /* fireplace.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = fireplace.mov; path = Resources/fireplace.mov; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
 		302F35941C93CA39001D5E51 /* OnsetHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OnsetHistory.hpp; path = Input/OnsetHistory.hpp; sourceTree = "<group>"; };
@@ -166,6 +165,7 @@
 		30511CBA1D05233000372B44 /* Video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Video.hpp; path = Input/Video.hpp; sourceTree = "<group>"; };
 		305892A21C9921240030F338 /* UiMixin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiMixin.cpp; sourceTree = "<group>"; };
 		305892A31C9921240030F338 /* UiMixin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UiMixin.hpp; sourceTree = "<group>"; };
+		305AD66D1D333F8A00A72E88 /* fireplace2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = fireplace2.mov; path = Resources/fireplace2.mov; sourceTree = "<group>"; };
 		306565A11C472E7C00917ADB /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		306565A21C472E7C00917ADB /* App.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = App.hpp; sourceTree = "<group>"; };
 		3068B2421CB576BF0092949A /* previsCameraData.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = previsCameraData.txt; path = Resources/previsCameraData.txt; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 				30B8DCEA1CB58C3A00164558 /* skyTexture.png */,
 				300802101CB723AD0031DAF2 /* burner1.png */,
 				300802111CB723AD0031DAF2 /* burner2.png */,
-				30216C421D32A69600D2B07F /* fireplace.mov */,
+				305AD66D1D333F8A00A72E88 /* fireplace2.mov */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -731,8 +731,8 @@
 			files = (
 				7AD9994E1D2A118F002BD0F3 /* shaderFrag.glsl in Resources */,
 				3068B2461CB579B30092949A /* previsCameraData.txt in Resources */,
-				30216C431D32A69600D2B07F /* fireplace.mov in Resources */,
 				30B8DCEB1CB58C3A00164558 /* skyTexture.png in Resources */,
+				305AD66E1D333F8A00A72E88 /* fireplace2.mov in Resources */,
 				300802131CB723AD0031DAF2 /* burner2.png in Resources */,
 				7AD999491D29E652002BD0F3 /* light.png in Resources */,
 				7AD9994F1D2A118F002BD0F3 /* shaderGeom.glsl in Resources */,

@@ -71,7 +71,7 @@ SrApp::SrApp() :
     stripesPattern->SetEnabled(false);
     
     SrVideoPattern *videoPattern =
-        new SrVideoPattern("Video", "fireplace.mov", &_model, &_audio);
+        new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
     _AddPattern(videoPattern);
     videoPattern->SetEnabled(false);
     
