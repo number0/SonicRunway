@@ -39,6 +39,7 @@ SrDiagnosticPattern::_Draw() const
     ofFloatColor blue(0,0,1.0);
     ofFloatColor yellow(1.0,1.0,0.0);
     ofFloatColor white(1.0,1.0,1.0);
+    ofFloatColor cyan(0.0,1.0,1.0);
     
     for(int x = 0; x < numGates; x++) {
         for(int y = 0; y < lightsPerGate; y++) {
@@ -51,6 +52,8 @@ SrDiagnosticPattern::_Draw() const
                 ofSetColor(green);
             } else if (y == x) {
                 ofSetColor(white);
+            } else if (y < x and y % 5 == 0) {
+                ofSetColor(cyan);
             } else if (y == (int) lightsPerGate / 2) {
                 ofSetColor(yellow);
             } else {
