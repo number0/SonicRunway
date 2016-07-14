@@ -22,6 +22,7 @@ SrAudio::SrAudio(SrModel * model) :
     _model(model),
     _lowOnsetHistory(model),
     _beatHistory(model),
+    _lowRMS(model, SrFrequencyOncePerAudioIn),
     _outputDelayed(false),
     _fullAudioBufferIndex(0)
 {
@@ -49,11 +50,16 @@ SrAudio::SrAudio(SrModel * model) :
                                "sampleRate", sampleRate,
                             "bandwidth", 200,
                                "cutoffFrequency", 500);
+    _rmsLow = factory.create("RMS");
+    
     _inputBuffer.resize(bufferSize);
     _bandPassBuffer.resize(bufferSize);
     
     _bandPass->input("signal").set(_inputBuffer);
     _bandPass->output("signal").set(_bandPassBuffer);
+    
+    _rmsLow->input("array").set(_bandPassBuffer);
+    _rmsLow->output("rms").set(_rmsOutput);
     
     int hopSize = bufferSize / 2;
     
@@ -85,6 +91,12 @@ const vector<SrFloatBuffer> &
 SrAudio::GetFfts() const
 {
     return _ffts;
+}
+
+const SrFloatBuffer &
+SrAudio::GetLowRMS() const
+{
+    return _lowRMS;
 }
 
 std::vector<float>
@@ -124,11 +136,14 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
     
     // Run audio analysis
     _bandPass->compute();
+    _rmsLow->compute();
     
     float *energies = _bands.energies;
     for (size_t i = 0; i < _ffts.size(); i++) {
         _ffts[i].Push(energies[i]);
     }
+    
+    _lowRMS.Push(_rmsOutput);
 }
 
 /*

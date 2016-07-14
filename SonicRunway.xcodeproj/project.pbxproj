@@ -57,6 +57,7 @@
 		30E16C281CDC00D5008729E7 /* ScrollingPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E16C261CDC00D4008729E7 /* ScrollingPattern.cpp */; };
 		30E16C2E1CDEF76C008729E7 /* BeatPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E16C2C1CDEF76C008729E7 /* BeatPattern.cpp */; };
 		30E3602E1D37BC5D0046FA70 /* DiagnosticPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E3602C1D37BC5D0046FA70 /* DiagnosticPattern.cpp */; };
+		30E360311D37CA880046FA70 /* RmsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E3602F1D37CA880046FA70 /* RmsPattern.cpp */; };
 		30E57E231CE194730031D5AF /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57DFC1CE194730031D5AF /* ofxOscBundle.cpp */; };
 		30E57E241CE194730031D5AF /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57DFE1CE194730031D5AF /* ofxOscMessage.cpp */; };
 		30E57E251CE194730031D5AF /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57E001CE194730031D5AF /* ofxOscParameterSync.cpp */; };
@@ -211,6 +212,8 @@
 		30E16C2D1CDEF76C008729E7 /* BeatPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BeatPattern.hpp; path = Patterns/BeatPattern.hpp; sourceTree = "<group>"; };
 		30E3602C1D37BC5D0046FA70 /* DiagnosticPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagnosticPattern.cpp; path = Patterns/DiagnosticPattern.cpp; sourceTree = "<group>"; };
 		30E3602D1D37BC5D0046FA70 /* DiagnosticPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DiagnosticPattern.hpp; path = Patterns/DiagnosticPattern.hpp; sourceTree = "<group>"; };
+		30E3602F1D37CA880046FA70 /* RmsPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RmsPattern.cpp; path = Patterns/RmsPattern.cpp; sourceTree = "<group>"; };
+		30E360301D37CA880046FA70 /* RmsPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RmsPattern.hpp; path = Patterns/RmsPattern.hpp; sourceTree = "<group>"; };
 		30E57DFA1CE194730031D5AF /* ofxOsc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
 		30E57DFB1CE194730031D5AF /* ofxOscArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscArg.h; sourceTree = "<group>"; };
 		30E57DFC1CE194730031D5AF /* ofxOscBundle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscBundle.cpp; sourceTree = "<group>"; };
@@ -412,6 +415,8 @@
 				303A0CD61D315715005D4636 /* TriggerPattern.hpp */,
 				30E3602C1D37BC5D0046FA70 /* DiagnosticPattern.cpp */,
 				30E3602D1D37BC5D0046FA70 /* DiagnosticPattern.hpp */,
+				30E3602F1D37CA880046FA70 /* RmsPattern.cpp */,
+				30E360301D37CA880046FA70 /* RmsPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 				9C7B8B4D99CDFC508E76CC3A /* ofxAubioOnset.cpp in Sources */,
 				30E57E2C1CE194730031D5AF /* OscPrintReceivedElements.cpp in Sources */,
 				30AEA5981C4052A80034C794 /* README.md in Sources */,
+				30E360311D37CA880046FA70 /* RmsPattern.cpp in Sources */,
 				302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */,
 				303A0CD41D31516F005D4636 /* PhrasePattern.cpp in Sources */,
 				306565A31C472E7C00917ADB /* App.cpp in Sources */,

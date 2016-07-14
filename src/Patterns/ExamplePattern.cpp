@@ -36,7 +36,7 @@ SrExamplePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue = _hueParam;
     float angle = _angleParam;
     
-    float t = angle / 270.0;
+    float t = angle / (GetModel()->GetLightsPerGate() - 1);
     int index = t * buffer->size();
     
     // Make sure we don't access outside the buffer when t == 1

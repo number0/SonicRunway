@@ -40,6 +40,7 @@ public:
     const SrOnsetHistory & GetLowOnsetHistory() const;
     const SrBeatHistory & GetBeatHistory() const;
     const vector<SrFloatBuffer> & GetFfts() const;
+    const SrFloatBuffer & GetLowRMS() const;
     
     void AudioIn(float * input, int bufferSize, int nChannels);
     //void AudioOut(float * output, int bufferSize, int nChannels) const;
@@ -63,12 +64,14 @@ private:
     SrModel * _model;
     SrOnsetHistory _lowOnsetHistory;
     SrBeatHistory _beatHistory;
+    SrFloatBuffer _lowRMS;
     vector<SrFloatBuffer> _ffts;
     int _fullAudioBufferIndex;
     
     AudioVecBuffer _fullAudioBuffer;
     
     essentia::standard::Algorithm *_bandPass;
+    essentia::standard::Algorithm *_rmsLow;
     
     bool _outputDelayed;
     
@@ -76,6 +79,7 @@ private:
     
     vector<Real> _inputBuffer;
     vector<Real> _bandPassBuffer;
+    Real _rmsOutput;
 };
 
 #endif

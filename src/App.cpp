@@ -17,6 +17,7 @@
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
+#include "RmsPattern.hpp"
 
 #include "Preset.hpp"
 
@@ -71,10 +72,14 @@ SrApp::SrApp() :
     _AddPattern(stripesPattern);
     stripesPattern->SetEnabled(false);
     
+    /*
+     // Disabled b/c it seems like it might be slow.
+     //
     SrVideoPattern *videoPattern =
         new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
     _AddPattern(videoPattern);
     videoPattern->SetEnabled(false);
+     */
     
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio);
@@ -90,6 +95,11 @@ SrApp::SrApp() :
         new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
     _AddPattern(diagnosticPattern);
     diagnosticPattern->SetEnabled(false);
+    
+    SrRmsPattern *rmsPattern =
+        new SrRmsPattern("RMS", &_model, &_audio);
+    _AddPattern(rmsPattern);
+    rmsPattern->SetEnabled(false);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
