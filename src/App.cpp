@@ -16,6 +16,7 @@
 #include "StripesPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
+#include "DiagnosticPattern.hpp"
 
 #include "Preset.hpp"
 
@@ -58,7 +59,7 @@ SrApp::SrApp() :
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio);
     _AddPattern(beatPattern);
-    beatPattern->SetEnabled(true);
+    beatPattern->SetEnabled(false);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
@@ -84,6 +85,11 @@ SrApp::SrApp() :
         new SrPhrasePattern("Phrase", &_model, &_audio);
     _AddPattern(phrasePattern);
     phrasePattern->SetEnabled(false);
+    
+    SrDiagnosticPattern *diagnosticPattern =
+        new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
+    _AddPattern(diagnosticPattern);
+    diagnosticPattern->SetEnabled(false);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
