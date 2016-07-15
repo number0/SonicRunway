@@ -7,6 +7,7 @@
 //
 
 #include "ExamplePattern.hpp"
+#include <algorithm>
 
 SrExamplePattern::SrExamplePattern(const std::string & name,
                                  SrModel * model, SrAudio * audio) :
@@ -21,7 +22,7 @@ SrExamplePattern::SrExamplePattern(const std::string & name,
     
     _angleParam.setName("Angle");
     _angleParam.setMin(0.0);
-    _angleParam.setMax(360.0);
+    _angleParam.setMax(270.0);
     _AddUIParameter(_angleParam);
 }
 
@@ -36,11 +37,11 @@ SrExamplePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue = _hueParam;
     float angle = _angleParam;
     
-    float t = angle / (GetModel()->GetLightsPerGate() - 1);
+    float t = angle / 270; // degrees
     int index = t * buffer->size();
     
-    // Make sure we don't access outside the buffer when t == 1
-    index = index % buffer->size();
+    // Clamp to buffer size
+    index = std::min(index, (int) buffer->size() - 1);
     
     ofFloatColor c;
     c.setHsb(hue, 1.0, 0.8);
