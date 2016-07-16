@@ -18,9 +18,13 @@ class SrModel;
 
 //
 // A group of parameter settings that can be applied
-// to the app
+// to the app.  When 'saved', a preset writes out the
+// model's current parameter values (hierarchically) to
+// the given file.  When 'applied', it sets the values.
 //
-// XXX in progress!
+// The intent here is to provide a way to configure the
+// runway across a variety of patterns and settings, and
+// return to that state with a single button.
 //
 class SrPreset : public SrUiMixin {
     typedef SrPreset This;
