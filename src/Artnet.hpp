@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "ofxArtnet.hpp"
 #include "ofMain.h"
+#include "UiMixin.hpp"
 
 class SrModel;
 
@@ -19,15 +20,17 @@ class SrModel;
 // Artnet output - translates the current buffer into Artnet/DMX signals
 // to update the LED colors.
 //
-class SrArtnet {
+class SrArtnet : public SrUiMixin {
 public:
-    SrArtnet(SrModel * model);
+    SrArtnet(const std::string & name, SrModel * model);
     ~SrArtnet();
     
     void UpdateLights();
     
 private:
     SrModel * _model;
+    ofParameter<bool> _enabledParam;
+    ofxToggle _enabledToggle;
     
     ofxArtnet _artnet;
     ofImage _testImage;

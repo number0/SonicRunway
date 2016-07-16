@@ -7,10 +7,13 @@
 //
 
 #include "Util.hpp"
+#include "Debug.hpp"
 
 #ifdef __APPLE__
 #include "CoreFoundation/CoreFoundation.h"
 #endif
+
+using namespace std;
 
 static std::string
 _GetResourcePath()
@@ -30,7 +33,7 @@ _GetResourcePath()
     return std::string(path);
 #endif
     
-    printf("_GetResourcePath only understood for __APPLE__\n");
+    SrError("_GetResourcePath only understood for __APPLE__\n");
     return std::string("");
 }
 
@@ -46,4 +49,96 @@ SrUtil_GetAbsolutePathForResource(const std::string & localPath)
 {
     std::string resourcePath = _GetResourcePath();
     return resourcePath + '/' + localPath;
+}
+
+/*
+std::string
+SrUtil_GetFullPath(const ofAbstractParameter & param)
+{
+    std::vector<std::string> pathVec = param.getGroupHierarchyNames();
+    std::string ret;
+    for(auto iter = pathVec.begin(); iter != pathVec.end(); iter++) {
+        ret += "/" + (*iter);
+    }
+   
+    return ret;
+}
+ */
+
+// From stack overflow:
+// http://stackoverflow.com/questions/236129/split-a-string-in-c
+static vector<string> &
+_SplitString(const string &s, char delim, vector<string> &elems) {
+    stringstream ss(s);
+    string item;
+    while (getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+vector<string>
+SrUtil_SplitString(const string &s, char delim) {
+    vector<string> elems;
+    _SplitString(s, delim, elems);
+    return elems;
+}
+
+static ofAbstractParameter *
+_FindParameterInGroup(ofParameterGroup & parameterGroup,
+                      const std::string & name)
+{
+    for(auto iter = parameterGroup.begin();
+        iter != parameterGroup.end();
+        iter++) {
+        SrDebug("      checking %s\n", (*iter)->getName().c_str());
+        if ((*iter)->getName() == name) {
+            return iter->get();
+        }
+    }
+    
+    return NULL;
+}
+
+static ofAbstractParameter *
+_FindParameterRecurse(ofParameterGroup & parameterGroup,
+                      const vector<string> & pathVec,
+                      size_t pathIdx)
+{
+    if (pathIdx > pathVec.size()) {
+        SrError("Index error looking for parameter\n");
+        return NULL;
+    }
+    
+    ofAbstractParameter * param =
+        _FindParameterInGroup(parameterGroup, pathVec[pathIdx]);
+    
+    if (not param) {
+        return NULL;
+    }
+    
+    if (pathIdx == pathVec.size() - 1) {
+        return param;
+    }
+    
+    ofParameterGroup * groupPtr =
+        dynamic_cast<ofParameterGroup *>(param);
+    if (not groupPtr) {
+        SrError("%s is not a parameter group\n", param->getName().c_str());
+        return NULL;
+    }
+    
+    return _FindParameterRecurse(*groupPtr, pathVec, pathIdx + 1);
+}
+
+ofAbstractParameter *
+SrUtil_FindParameter(ofParameterGroup & parameterGroup,
+                     const std::string & path)
+{
+    vector<string> pathVec = SrUtil_SplitString(path, '/');
+    
+    // Start at path index 2.  index 0 is the empty place to the left
+    // of the first /.  Index 1 is the first token, which should match
+    // the parameter group.  XXX would be nice to verify this...
+    return _FindParameterRecurse(parameterGroup, pathVec, 2);
 }

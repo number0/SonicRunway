@@ -47,7 +47,10 @@ private:
     SrArtnet _artnet;
     
     std::vector<SrPattern *> _patterns;
+    ofParameterGroup _patternsParameterGroup;
+    
     std::vector<SrPreset *> _presets;
+    
     ofxPanel _globalPanel;
     ofxPanel _patternPanel;
     ofxPanel _presetPanel;

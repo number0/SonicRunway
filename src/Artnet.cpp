@@ -8,12 +8,20 @@
 
 #include "Artnet.hpp"
 #include "Model.hpp"
+#include "Debug.hpp"
 
-SrArtnet::SrArtnet(SrModel * model) :
-    _model(model)
+SrArtnet::SrArtnet(const std::string & name,
+                   SrModel * model) :
+    SrUiMixin(name),
+    _model(model),
+    _enabledParam(false)
 {
     _artnet.setup("192.168.0.1");
     _artnet.verbose = false;
+    
+    _enabledToggle.setup(_enabledParam);
+    _enabledParam.setName("Enabled");
+    _AddUIParameter(_enabledParam);
 }
 
 void
@@ -24,16 +32,20 @@ SrArtnet::UpdateLights()
     // the signal anyway :)
     /*
     if (_artnet.status != NODES_FOUND) {
-        printf("status != NODES_FOUND\n");
+        SrWarn("status != NODES_FOUND\n");
         return;
     }
      */
+    
+    if (not (bool) _enabledParam) {
+        return;
+    }
     
     std::vector<unsigned char> data(512 * 3);
     
     const ofFloatPixels & pixels = _model->GetFloatPixels();
     if (not pixels.isAllocated()) {
-        printf("pixels not allocated\n");
+        SrError("pixels not allocated\n");
         return;
     }
     
@@ -43,18 +55,6 @@ SrArtnet::UpdateLights()
         // TMP
         //color = ofFloatColor::white;
         
-        color.setHsb(color.getHue(), color.getSaturation(),
-                     color.getBrightness() * color.getBrightness());
-        data[i*3] = color[0] * 255;
-        data[i*3 + 1] = color[1] * 255;
-        data[i*3 + 2] = color[2] * 255;
-    }
-    
-    /*
-    for(int i=0; i < _model->GetNumGates(); i++) {
-        int y = _model->GetLightsPerGate() / 3.0;
-        ofFloatColor color = pixels.getColor(i, y);
-        
         // XXX hacking gamma correction by squaring the
         // brightness.  Clearly there is a more accurate way...
         color.setHsb(color.getHue(), color.getSaturation(),
@@ -63,13 +63,8 @@ SrArtnet::UpdateLights()
         data[i*3 + 1] = color[1] * 255;
         data[i*3 + 2] = color[2] * 255;
     }
-     */
     
-    //list nodes for sending
-    //with subnet / universe
-    //    artnet.sendDmx("10.0.0.149", 0xf, 0xf, _testImage.getPixels(), 512);
-    
-    _artnet.sendDmx("192.168.0.50", &data[0], 512);
+    //_artnet.sendDmx("192.168.0.50", &data[0], 512);
     _artnet.sendDmx("192.168.3.202", &data[0], 512);
     
     //_artnet.sendDmx("192.168.0.51", &data[0], 512);

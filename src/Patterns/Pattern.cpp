@@ -9,6 +9,7 @@
 #include "Pattern.hpp"
 #include "Model.hpp"
 #include "Audio.hpp"
+#include "Debug.hpp"
 
 SrPattern::SrPattern(const std::string & name,
                      SrModel * model,
@@ -19,7 +20,7 @@ SrPattern::SrPattern(const std::string & name,
     _enabledBuffer(model),
     _enabledParam(true)
 {
-    printf("constructed pattern\n");
+    SrDebug("constructed pattern %s\n", name.c_str());
     _enabledToggle.setup(_enabledParam);
     _enabledParam.setName("Enabled");
     _AddUIParameter(_enabledParam);
@@ -27,7 +28,7 @@ SrPattern::SrPattern(const std::string & name,
 
 SrPattern::~SrPattern()
 {
-    printf("destroyed pattern\n");
+    SrDebug("destroyed pattern\n");
 }
 
 SrModel *

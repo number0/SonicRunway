@@ -28,7 +28,7 @@ SrApp::SrApp() :
     _model(),
     _audio(&_model),
     _audioUI(&_audio),
-    _artnet(&_model),
+    _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
     _uiColumnWidth(220),
     _uiMargin(10)
@@ -43,14 +43,20 @@ SrApp::SrApp() :
     _globalPanel.setup("Global");
     _globalPanel.setPosition(_uiMargin,_uiMargin);
     
-    _patternPanel.setup("Patterns");
+    _patternPanel.setup("PatternsUI");
     _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
     _presetPanel.setup("Presets");
     _presetPanel.setPosition(_uiMargin + _uiColumnWidth, 600);
     
     _globalPanel.add(_previs.GetUiPanel());
+    _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audioUI.GetUiPanel());
+    
+    _patternsParameterGroup.setName("Patterns");
+    _model.GetParameterGroup().add(_patternsParameterGroup);
+    _model.GetParameterGroup().add(_audioUI.GetParameterGroup());
+    _model.GetParameterGroup().add(_previs.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
         new SrExamplePattern("Example", &_model, &_audio);
@@ -106,7 +112,8 @@ SrApp::SrApp() :
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
-    SrPreset *testPreset = new SrPreset("Test Preset", "test.preset");
+    SrPreset *testPreset = new SrPreset("Test Preset", &_model,
+                                        "/tmp/test.preset");
     _AddPreset(testPreset);
 }
 
@@ -127,7 +134,7 @@ SrApp::_AddPattern(SrPattern * pattern)
 {
     _patterns.push_back(pattern);
     _patternPanel.add(pattern->GetUiPanel());
-    _model.GetParameterGroup().add(pattern->GetParameterGroup());
+    _patternsParameterGroup.add(pattern->GetParameterGroup());
 }
 
 void
@@ -195,5 +202,5 @@ SrApp::Draw()
     _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
                  1280, 720);
     
-    //_artnet.UpdateLights();
+    _artnet.UpdateLights();
 }

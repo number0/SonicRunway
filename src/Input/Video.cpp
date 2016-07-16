@@ -8,6 +8,7 @@
 
 #include "Video.hpp"
 #include "Util.hpp"
+#include "Debug.hpp"
 
 SrVideo::SrVideo(const std::string & relativeFileName,
                  ofLoopType loop)
@@ -20,7 +21,7 @@ SrVideo::SrVideo(const std::string & relativeFileName,
     _player.setLoopState(loop);
     
     if (not _player.isLoaded()) {
-        printf("failed to load %s\n", relativeFileName.c_str());
+        SrError("failed to load %s\n", relativeFileName.c_str());
         return;
     }
 }

@@ -51,6 +51,7 @@
 		30AEA5981C4052A80034C794 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 30AEA5971C4052A80034C794 /* README.md */; };
 		30B8DCE91CB589AC00164558 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B8DCE71CB589AC00164558 /* Environment.cpp */; };
 		30B8DCEB1CB58C3A00164558 /* skyTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B8DCEA1CB58C3A00164558 /* skyTexture.png */; };
+		30C2F45B1D3AE647003F4910 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C2F4591D3AE647003F4910 /* Debug.cpp */; };
 		30C844331C422B01006452BE /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C844311C422B01006452BE /* Audio.cpp */; };
 		30C844361C42C17E006452BE /* AudioUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C844341C42C17E006452BE /* AudioUI.cpp */; };
 		30C844391C42D110006452BE /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C844371C42D110006452BE /* Model.cpp */; };
@@ -199,6 +200,8 @@
 		30B8DCE71CB589AC00164558 /* Environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Environment.cpp; path = Previs/Environment.cpp; sourceTree = "<group>"; };
 		30B8DCE81CB589AC00164558 /* Environment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Environment.hpp; path = Previs/Environment.hpp; sourceTree = "<group>"; };
 		30B8DCEA1CB58C3A00164558 /* skyTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skyTexture.png; path = Resources/skyTexture.png; sourceTree = "<group>"; };
+		30C2F4591D3AE647003F4910 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		30C2F45A1D3AE647003F4910 /* Debug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Debug.hpp; sourceTree = "<group>"; };
 		30C844311C422B01006452BE /* Audio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Audio.cpp; path = Input/Audio.cpp; sourceTree = "<group>"; };
 		30C844321C422B01006452BE /* Audio.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Audio.hpp; path = Input/Audio.hpp; sourceTree = "<group>"; };
 		30C844341C42C17E006452BE /* AudioUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUI.cpp; path = Input/AudioUI.cpp; sourceTree = "<group>"; };
@@ -638,15 +641,17 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				306565A11C472E7C00917ADB /* App.cpp */,
 				306565A21C472E7C00917ADB /* App.hpp */,
-				30C844371C42D110006452BE /* Model.cpp */,
-				30C844381C42D110006452BE /* Model.hpp */,
-				30AC5FEA1C448C7600B793E9 /* Types.hpp */,
-				30E16C251CDBEF59008729E7 /* SimpleBuffer.hpp */,
-				302695351C8FEE1D007F749C /* Buffer.hpp */,
 				308CEE5B1C48598D007C124A /* Artnet.cpp */,
 				308CEE5C1C48598D007C124A /* Artnet.hpp */,
+				302695351C8FEE1D007F749C /* Buffer.hpp */,
+				30C2F4591D3AE647003F4910 /* Debug.cpp */,
+				30C2F45A1D3AE647003F4910 /* Debug.hpp */,
+				30C844371C42D110006452BE /* Model.cpp */,
+				30C844381C42D110006452BE /* Model.hpp */,
 				30216C3F1D31976300D2B07F /* Preset.cpp */,
 				30216C401D31976300D2B07F /* Preset.hpp */,
+				30AC5FEA1C448C7600B793E9 /* Types.hpp */,
+				30E16C251CDBEF59008729E7 /* SimpleBuffer.hpp */,
 				305892A21C9921240030F338 /* UiMixin.cpp */,
 				305892A31C9921240030F338 /* UiMixin.hpp */,
 				3068B2471CB5808E0092949A /* Util.cpp */,
@@ -779,6 +784,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				30511CBB1D05233000372B44 /* Video.cpp in Sources */,
+				30C2F45B1D3AE647003F4910 /* Debug.cpp in Sources */,
 				479DCA850DD8BB469A777AD4 /* ofxAubioBeat.cpp in Sources */,
 				C60077973A257D8F44947E2E /* ofxAubioBlock.cpp in Sources */,
 				67383740F5CC47ED5F955A76 /* ofxAubioMelBands.cpp in Sources */,

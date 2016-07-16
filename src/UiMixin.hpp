@@ -20,7 +20,7 @@
 // Parameter values can be controlled via OSC with addresses
 // of the form:
 //
-// /Runway/PatternName/ParameterName
+// /Runway/Patterns/PatternName/ParameterName
 //
 class SrUiMixin {
 public:

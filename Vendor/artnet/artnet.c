@@ -673,8 +673,9 @@ int artnet_send_dmx(artnet_node vn,
     
     check_nullnode(vn);
     
-    if (n->state.mode != ARTNET_ON)
+    if (n->state.mode != ARTNET_ON) {
         return ARTNET_EACTION;
+    }
     
     if (port_id < 0 || port_id >= ARTNET_MAX_PORTS) {
         artnet_error("%s : port index out of bounds (%i < 0 || %i > ARTNET_MAX_PORTS)", __FUNCTION__, port_id);
@@ -709,6 +710,8 @@ int artnet_send_dmx(artnet_node vn,
     p.data.admx.lengthHi = short_get_high_byte(length);
     p.data.admx.length = short_get_low_byte(length);
     memcpy(&p.data.admx.data, data, length);
+    
+    printf("length %d, p.data.admx.length %d\n", length, p.data.admx.length);
     
     if( targetIp != 0 )
     {

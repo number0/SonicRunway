@@ -11,13 +11,24 @@
 
 #include <stdio.h>
 #include <string>
+#include "ofxGui.h"
 
 // Set the current working directory to the location of resources
 // so we can load text files, images, etc.
 void
 SrUtil_ChangeToResourceDirectory();
 
+// Get a resolved file path for the given resource
 std::string
 SrUtil_GetAbsolutePathForResource(const std::string & localPath);
+
+// Split the string with the given delimeter character
+std::vector<std::string>
+SrUtil_SplitString(const std::string & s, char delim);
+
+// Find the parameter at the given path, or return NULL.
+ofAbstractParameter *
+SrUtil_FindParameter(ofParameterGroup & parameterGroup,
+                     const std::string & path);
 
 #endif /* Util_hpp */
