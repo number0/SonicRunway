@@ -74,28 +74,19 @@ problematic we can use ofMutex to make it thread safe.
 
 TODO:
 
+- Expand library of patterns.
+
 - Improve FFT visualization.
 
-- Try an RMS-based onset detection -- perhaps combined with beat
-  detection?
+- Improve RMS detection
 
-- Experiment with TouchOSC input.
+- Make ArtNet broadcast to 2 universes to cover all LEDs
 
-- Replace SrTime concepts with regular floats and ofGetElapsedTime?
-  (maybe doesn't matter anymore, given recent fps refactoring)
+- Add ability to create, name and delete presets.  
+  Store them with the src?
 
-- Provide a generic UI widget for graphing a buffer.  Allow patterns
-  to publish these values for debugging.
-
-- Replace binary 'onset' and beat detection with something fuzzier --
-  perhaps a few band-pass filters piped into RMS?
-
-- Make Fft and other filters automatically adjust to global volume level.
-
-- Hook up a second station and figure out how to broadcast to multiple
-  boards.
-
-- Design master pattern controller to switch between patterns.
+- Design master pattern controller to switch between presets.
 
 - Fix up gamma correction -- look at other libraries to implement 
   mapping to LED color space.
+
