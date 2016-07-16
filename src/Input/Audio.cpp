@@ -64,6 +64,8 @@ SrAudio::SrAudio(SrModel * model) :
     int hopSize = bufferSize / 2;
     
     _bands.setup("default", bufferSize, hopSize, sampleRate);
+    
+    _fftSumMax = 0.1;
 }
 
 SrAudio::~SrAudio()
@@ -118,6 +120,22 @@ SrAudio::GetCurrentFftSum() const
 }
 
 
+float
+SrAudio::GetCalibratedFftSum() const
+{
+    float fftSum = GetCurrentFftSum();
+    
+    // Rescale the FFT Sum to be between 0-1 using the following:
+    // OldRange = (OldMax - OldMin)
+    // NewRange = (NewMax - NewMin)
+    // NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+    float oldRange = _fftSumMax - 0;
+    float newRange = 1 - 0;
+    float newValue = (((fftSum - 0) * newRange) / oldRange) + 0;
+    
+    return newValue;
+}
+
 void
 SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
 {
@@ -152,6 +170,11 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
     }
     
     _lowRMS.Push(_rmsOutput);
+    
+    float fftSum = GetCurrentFftSum();
+    if (_fftSumMax < fftSum) {
+        _fftSumMax = fftSum;
+    }
 }
 
 /*

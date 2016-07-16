@@ -45,6 +45,7 @@ private:
     ofxFloatSlider _bpmSlider;
     ofxFloatSlider _beatIndexSlider;
     ofxFloatSlider _measureIndexSlider;
+    ofxFloatSlider _beatFftSumSlider;
     
     ofxPanel _onsetGui;
     
