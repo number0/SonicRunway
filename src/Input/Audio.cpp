@@ -110,6 +110,14 @@ SrAudio::GetCurrentFftValues() const
     return ret;
 }
 
+float
+SrAudio::GetCurrentFftSum() const
+{
+    std::vector<float> fftValues = GetCurrentFftValues();
+    return std::accumulate(fftValues.begin(), fftValues.end(), 0.0);;
+}
+
+
 void
 SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
 {

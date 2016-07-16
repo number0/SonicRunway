@@ -14,6 +14,7 @@
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
+#include "StarPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -71,6 +72,10 @@ SrApp::SrApp() :
         new SrStripesPattern("Stripes", &_model, &_audio);
     _AddPattern(stripesPattern);
     stripesPattern->SetEnabled(false);
+    
+    SrStarPattern *starPattern =
+        new SrStarPattern("Star", &_model, &_audio);
+    _AddPattern(starPattern);
     
     /*
      // Disabled b/c it seems like it might be slow.

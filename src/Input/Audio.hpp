@@ -59,6 +59,7 @@ public:
     const AudioVecBuffer & GetFullAudioBuffer(float delayInSeconds) const;
     
     std::vector<float> GetCurrentFftValues() const;
+    float GetCurrentFftSum() const;
     
 private:
     SrModel * _model;
