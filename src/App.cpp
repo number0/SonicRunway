@@ -27,8 +27,7 @@ extern "C" void CGSDeferredUpdates(int);
 
 SrApp::SrApp() :
     _model(),
-    _audio(&_model),
-    _audioUI(&_audio),
+    _audio("Audio", &_model),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
     _uiColumnWidth(220),
@@ -52,11 +51,11 @@ SrApp::SrApp() :
     
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
-    _globalPanel.add(_audioUI.GetUiPanel());
+    _globalPanel.add(_audio.GetUiPanel());
     
     _patternsParameterGroup.setName("Patterns");
     _model.GetParameterGroup().add(_patternsParameterGroup);
-    _model.GetParameterGroup().add(_audioUI.GetParameterGroup());
+    _model.GetParameterGroup().add(_audio.GetParameterGroup());
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
@@ -171,7 +170,7 @@ SrApp::Update()
         pattern->Update();
     }
     
-    _audioUI.Update();
+    _audio.UpdateUI();
     _previs.Update();
     
     std::string fpsStr = "frame rate: "

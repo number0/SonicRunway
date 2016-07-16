@@ -78,7 +78,7 @@ TODO:
 
 - Improve FFT visualization.
 
-- Improve RMS detection
+- Improve RMS detection, include multiple frequency ranges.
 
 - Make ArtNet broadcast to 2 universes to cover all LEDs
 

@@ -12,7 +12,6 @@
 #include <stdio.h>
 
 #include "Audio.hpp"
-#include "AudioUI.hpp"
 #include "Model.hpp"
 #include "Artnet.hpp"
 #include "Previs.hpp"
@@ -42,7 +41,6 @@ private:
 private:
     SrModel _model;
     SrAudio _audio;
-    SrAudioUI _audioUI;
     SrPrevis _previs;
     SrArtnet _artnet;
     

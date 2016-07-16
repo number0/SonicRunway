@@ -15,6 +15,7 @@
 #include "ofxAubio.h"
 #include "Types.hpp"
 #include "Buffer.hpp"
+#include "UiMixin.hpp"
 #include "OnsetHistory.hpp"
 #include "BeatHistory.hpp"
 
@@ -26,15 +27,18 @@
 class ofApp;
 class SrModel;
 
+
 // XXX this should be defined in essentia somewhere..
 typedef float Real;
 
 //
 // SrAudio - Audio input and processing.
 //
-class SrAudio {
+class SrAudio : public SrUiMixin {
+    typedef SrAudio This;
+    
 public:
-    SrAudio(SrModel * model);
+    SrAudio(const std::string & name, SrModel * model);
     ~SrAudio();
     
     const SrOnsetHistory & GetLowOnsetHistory() const;
@@ -61,6 +65,15 @@ public:
     std::vector<float> GetCurrentFftValues() const;
     float GetCurrentFftSum() const;
     
+    void UpdateUI();
+    
+private:
+    void _InitAlgorithms();
+    void _InitUI();
+    
+    void _OnPlayDelayedAudioButtonPressed(bool &on);
+    void _OnTapDownbeatButtonPressed(bool &on);
+    
 private:
     SrModel * _model;
     SrOnsetHistory _lowOnsetHistory;
@@ -81,6 +94,27 @@ private:
     vector<Real> _inputBuffer;
     vector<Real> _bandPassBuffer;
     Real _rmsOutput;
+    
+    // UI ------------------
+    ofxPanel _beatGui;
+    
+    ofParameter<bool> _playDelayedAudioParam;
+    ofParameter<bool> _resetDownbeatParam;
+    ofParameter<bool> _resetMeasureParam;
+    
+    ofxFloatSlider _bpmSlider;
+    ofxFloatSlider _beatIndexSlider;
+    ofxFloatSlider _measureIndexSlider;
+    
+    ofxPanel _onsetGui;
+    
+    ofxFloatSlider _gotOnsetSlider;
+    ofxFloatSlider _onsetThresholdSlider;
+    ofxFloatSlider _onsetNoveltySlider;
+    ofxFloatSlider _onsetThresholdedNoveltySlider;
+    
+    ofxPanel _bandsGui;
+    ofPolyline _bandPlot;
 };
 
 #endif

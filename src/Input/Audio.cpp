@@ -18,26 +18,38 @@
 using namespace essentia;
 using namespace standard;
 
-SrAudio::SrAudio(SrModel * model) :
+SrAudio::SrAudio(const std::string & name,
+                 SrModel * model) :
+    SrUiMixin(name),
     _model(model),
     _lowOnsetHistory(model),
     _beatHistory(model),
     _lowRMS(model, SrFrequencyOncePerAudioIn),
     _outputDelayed(false),
-    _fullAudioBufferIndex(0)
+    _fullAudioBufferIndex(0),
+    _playDelayedAudioParam(false),
+    _resetDownbeatParam(false),
+    _resetMeasureParam(false)
+{
+    _InitAlgorithms();
+    _InitUI();
+}
+
+void
+SrAudio::_InitAlgorithms()
 {
     // Allocate one float buffer for each FFT band
     for (size_t i = 0; i < 40; i++) {
         _ffts.push_back(
-            SrFloatBuffer(model, SrFrequencyOncePerAudioIn));
+            SrFloatBuffer(_model, SrFrequencyOncePerAudioIn));
     }
     
     // Allocate the full audio buffer, with enough space to
     // store delayed audio for the full length of the runway.
-    _fullAudioBuffer.resize(model->GetBuffersPerSecond() *
-                            model->GetMaxBufferDuration());
+    _fullAudioBuffer.resize(_model->GetBuffersPerSecond() *
+                            _model->GetMaxBufferDuration());
     for(size_t i=0; i<_fullAudioBuffer.size(); i++) {
-        _fullAudioBuffer[i].resize(model->GetBufferSize());
+        _fullAudioBuffer[i].resize(_model->GetBufferSize());
     }
     
     essentia::init();
@@ -64,6 +76,49 @@ SrAudio::SrAudio(SrModel * model) :
     int hopSize = bufferSize / 2;
     
     _bands.setup("default", bufferSize, hopSize, sampleRate);
+}
+
+void
+SrAudio::_InitUI()
+{
+    _playDelayedAudioParam.setName("Play Delayed Audio");
+    _playDelayedAudioParam.addListener(
+                                       this, &This::_OnPlayDelayedAudioButtonPressed);
+    _AddUIParameter(_playDelayedAudioParam);
+    
+    _resetDownbeatParam.setName("Tap Downbeat");
+    _AddUIParameter(_resetDownbeatParam);
+    _resetMeasureParam.setName("Tap Measure 1");
+    _AddUIParameter(_resetMeasureParam);
+    
+    _beatGui.setup("Beat");
+    _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
+    _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
+    _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
+    _AddUI(&_beatGui);
+    
+    _onsetGui.setup("Onset");
+    _onsetGui.add(_gotOnsetSlider.setup("onset", 0, 0, 1.0));
+    _onsetGui.add(_onsetThresholdSlider.setup("threshold", 0, 0, 2));
+    _onsetGui.add(_onsetNoveltySlider.setup(
+                                            "onset novelty", 0, 0, 10000));
+    _onsetGui.add(_onsetThresholdedNoveltySlider.setup(
+                                                       "thr. novelty", 0, -1000, 1000));
+    _AddUI(&_onsetGui);
+    
+    // Set a default value for the slider (assignment op overloaded)
+    _onsetThresholdSlider =
+    GetLowOnsetHistory().GetThreshold()[0];
+    
+    /*
+     _bandsGui.setup("SrAudioMelBends");
+     for (int i = 0; i < 40; i++) {
+     _bandPlot.addVertex(50 + i * 650 / 40.,
+     240 - 100 *
+     _audio->GetCurrentFftValues()[i]);
+     }
+     */
+    
 }
 
 SrAudio::~SrAudio()
@@ -203,4 +258,37 @@ void
 SrAudio::ResetMeasure()
 {
     _beatHistory.ResetMeasure();
+}
+
+void
+SrAudio::UpdateUI()
+{
+    const SrOnsetHistory & onset = GetLowOnsetHistory();
+    
+    bool isRecentOnset = (onset.GetSecondsSinceLastEvent()[0] < 0.05);
+    
+    if ((bool) _resetDownbeatParam) {
+        ResetDownbeat();
+        _resetDownbeatParam = false;
+    }
+    
+    if ((bool) _resetMeasureParam) {
+        ResetMeasure();
+        _resetMeasureParam = false;
+    }
+    
+    _gotOnsetSlider = (float) isRecentOnset;
+    _onsetNoveltySlider = onset.GetNovelty()[0];
+    _onsetThresholdedNoveltySlider = onset.GetThresholdedNovelty()[0];
+    _bpmSlider = GetBeatHistory().GetBpm()[0];
+    _beatIndexSlider = GetBeatHistory().GetBeatIndex()[0];
+    _measureIndexSlider = GetBeatHistory().GetMeasureIndex()[0];
+    
+    // XXX should set onset threshold here from slider..
+}
+
+void
+SrAudio::_OnPlayDelayedAudioButtonPressed(bool &on)
+{
+    SetOutputAudioDelayed(on);
 }
