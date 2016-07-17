@@ -36,7 +36,7 @@ SrStarPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
     int number = static_cast<int>(_numberParam);
     float threshold = _thresholdParam;
-    float fftSum = GetAudio()->GetCurrentFftSum();
+    float fftSum = GetAudio()->GetCalibratedFftSum();
     
     if (fftSum < threshold) {
         return;

@@ -97,7 +97,7 @@ SrAudio::_InitUI()
     _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
     _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
     _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
-    _beatGui.add(_fftSumSlider.setup("FFT Sum", 0, 0, 1)); // XXX Not really part of 'beat'
+    _beatGui.add(_fftSumSlider.setup("Calibrated FFT", 0, 0, 1)); // XXX Not really part of 'beat'
     _AddUI(&_beatGui);
     
     _onsetGui.setup("Onset");
@@ -230,6 +230,10 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
     float fftSum = GetCurrentFftSum();
     if (_fftSumMax < fftSum) {
         _fftSumMax = fftSum;
+    } else {
+        // If not setting a new max slowly walk the max down so that
+        // if audio levels go down max will slowly adjust.
+        _fftSumMax -= 0.001;
     }
 }
 
@@ -307,7 +311,7 @@ SrAudio::UpdateUI()
     _bpmSlider = GetBeatHistory().GetBpm()[0];
     _beatIndexSlider = GetBeatHistory().GetBeatIndex()[0];
     _measureIndexSlider = GetBeatHistory().GetMeasureIndex()[0];
-    _fftSumSlider = GetCurrentFftSum();
+    _fftSumSlider = GetCalibratedFftSum();
     
     // XXX should set onset threshold here from slider..
 }

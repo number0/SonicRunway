@@ -16,6 +16,7 @@
 #include "StripesPattern.hpp"
 #include "StarPattern.hpp"
 #include "RainbowPattern.hpp"
+#include "ArcPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -82,10 +83,16 @@ SrApp::SrApp() :
     SrStarPattern *starPattern =
         new SrStarPattern("Star", &_model, &_audio);
     _AddPattern(starPattern);
+    starPattern->SetEnabled(false);
     
     SrRainbowPattern *rainbowPattern =
     new SrRainbowPattern("Rainbow", &_model, &_audio);
     _AddPattern(rainbowPattern);
+    rainbowPattern->SetEnabled(false);
+    
+    SrArcPattern *arcPattern =
+    new SrArcPattern("Arc", &_model, &_audio);
+    _AddPattern(arcPattern);
     
     /*
      // Disabled b/c it seems like it might be slow.
