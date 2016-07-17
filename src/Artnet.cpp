@@ -59,8 +59,10 @@ SrArtnet::UpdateLights()
         // brightness.  Clearly there is a more accurate way...
         color.setHsb(color.getHue(), color.getSaturation(),
                      color.getBrightness() * color.getBrightness());
-        data[i*3] = color[0] * 255;
-        data[i*3 + 1] = color[1] * 255;
+        
+        // XXX switch red and green b/c of the particular LEDs we have.
+        data[i*3] = color[1] * 255;
+        data[i*3 + 1] = color[0] * 255;
         data[i*3 + 2] = color[2] * 255;
     }
     

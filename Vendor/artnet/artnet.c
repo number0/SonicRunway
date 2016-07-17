@@ -711,8 +711,6 @@ int artnet_send_dmx(artnet_node vn,
     p.data.admx.length = short_get_low_byte(length);
     memcpy(&p.data.admx.data, data, length);
     
-    printf("length %d, p.data.admx.length %d\n", length, p.data.admx.length);
-    
     if( targetIp != 0 )
     {
         p.to.s_addr = inet_addr( targetIp );
@@ -731,15 +729,19 @@ int artnet_send_dmx(artnet_node vn,
         p.data.admx.universe = tmp->pub.swout[ 0 ];
          */
         
-        // XXX RJ - broadcasting the same signal to all 6 universes on
-        // the Lumigeek for now.  This is because the lumigeek doesn't
-        // 'latch' until it receives data for all universes.  We will
-        // need to change this so we can send the right data to each
-        // of the first two universes.
-        for(int univ = 0; univ < 5; univ++) {
-            p.data.admx.universe = univ;
-            artnet_net_send(n, &p);
-        }
+        // XXX RJ - Hacked the output here for our special case.
+        // Each DMX universe can control 170 LEDs.  We broadcast
+        // the first 170 to universe 0, and the next to univers 1.
+        // Since our string has only 277 LEDs, this is enough.
+        
+        // Broadcast the entire stream to universe 0
+        p.data.admx.universe = 0;
+        artnet_net_send(n, &p);
+        
+        // Broadcast the next 170 (*3 for RGB) to universe 1
+        memcpy(&p.data.admx.data, &(data[170*3]), 170*3);
+        p.data.admx.universe = 1;
+        artnet_net_send(n, &p);
         
     }
     port->seq++;
