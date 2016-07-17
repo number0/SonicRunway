@@ -60,6 +60,7 @@ public:
     
     std::vector<float> GetCurrentFftValues() const;
     float GetCurrentFftSum() const;
+    float GetCalibratedFftSum() const;
     
 private:
     SrModel * _model;
@@ -81,6 +82,8 @@ private:
     vector<Real> _inputBuffer;
     vector<Real> _bandPassBuffer;
     Real _rmsOutput;
+    
+    float _fftSumMax;
 };
 
 #endif

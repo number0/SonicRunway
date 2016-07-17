@@ -10,6 +10,7 @@
 		101D2DB773940813A5C898CD /* ofxAubioPitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC8A94359FD331BAD8CFA /* ofxAubioPitch.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		29D2205D1D3ABE380040B22B /* StarPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205B1D3ABE380040B22B /* StarPattern.cpp */; };
+		29D220601D3AC50E0040B22B /* RainbowPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */; };
 		3002E85E1C88F9C900689E57 /* Previs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3002E85C1C88F9C900689E57 /* Previs.cpp */; };
 		300802121CB723AD0031DAF2 /* burner1.png in Resources */ = {isa = PBXBuildFile; fileRef = 300802101CB723AD0031DAF2 /* burner1.png */; };
 		300802131CB723AD0031DAF2 /* burner2.png in Resources */ = {isa = PBXBuildFile; fileRef = 300802111CB723AD0031DAF2 /* burner2.png */; };
@@ -132,6 +133,8 @@
 		2834D88A62CD23F3DE2C47D1 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxButton.h; path = ../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
 		29D2205B1D3ABE380040B22B /* StarPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StarPattern.cpp; path = Patterns/StarPattern.cpp; sourceTree = "<group>"; };
 		29D2205C1D3ABE380040B22B /* StarPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StarPattern.hpp; path = Patterns/StarPattern.hpp; sourceTree = "<group>"; };
+		29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RainbowPattern.cpp; path = Patterns/RainbowPattern.cpp; sourceTree = "<group>"; };
+		29D2205F1D3AC50E0040B22B /* RainbowPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RainbowPattern.hpp; path = Patterns/RainbowPattern.hpp; sourceTree = "<group>"; };
 		3002E85C1C88F9C900689E57 /* Previs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Previs.cpp; path = Previs/Previs.cpp; sourceTree = "<group>"; };
 		3002E85D1C88F9C900689E57 /* Previs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Previs.hpp; path = Previs/Previs.hpp; sourceTree = "<group>"; };
 		300802101CB723AD0031DAF2 /* burner1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = burner1.png; path = Resources/burner1.png; sourceTree = "<group>"; };
@@ -425,6 +428,8 @@
 				30E360301D37CA880046FA70 /* RmsPattern.hpp */,
 				29D2205B1D3ABE380040B22B /* StarPattern.cpp */,
 				29D2205C1D3ABE380040B22B /* StarPattern.hpp */,
+				29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */,
+				29D2205F1D3AC50E0040B22B /* RainbowPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -840,6 +845,7 @@
 				306DFD3F1C80100200AB9225 /* ofxArtnet.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				30FDB28D1C8A65350079CE93 /* FftPattern.cpp in Sources */,
+				29D220601D3AC50E0040B22B /* RainbowPattern.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				308CEE5D1C48598D007C124A /* Artnet.cpp in Sources */,
 				308CEE581C48593A007C124A /* receive.c in Sources */,

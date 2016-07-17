@@ -37,6 +37,7 @@ SrAudioUI::SrAudioUI(SrAudio * audio) :
     _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
     _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
     _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
+    _beatGui.add(_beatFftSumSlider.setup("fftsum", 0, 0, 1));
     _AddUI(&_beatGui);
     
     _onsetGui.setup("Onset");
@@ -91,6 +92,7 @@ SrAudioUI::Update()
     _bpmSlider = _audio->GetBeatHistory().GetBpm()[0];
     _beatIndexSlider = _audio->GetBeatHistory().GetBeatIndex()[0];
     _measureIndexSlider = _audio->GetBeatHistory().GetMeasureIndex()[0];
+    _beatFftSumSlider = _audio->GetCurrentFftSum();
     
     // XXX should set onset threshold here from slider..
 }
