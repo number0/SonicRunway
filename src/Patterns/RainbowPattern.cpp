@@ -49,20 +49,22 @@ SrRainbowPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
-    if (!_manualControlParam) {
-        _hueBiasParam += _hueBiasChange;
-        if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {
-            _hueBiasChange = -_hueBiasChange;
-        }
-        
-        _saturationParam += _saturationChange;
-        if (_saturationParam >= 0.9 || _saturationParam <= 0.0) {
-            _saturationChange = -_saturationChange;
-        }
-        
-        _brightnessParam += _brightnessChange;
-        if (_brightnessParam >= 0.9 || _brightnessParam <= 0.0) {
-            _brightnessChange = -_brightnessChange;
+    if(IsEnabled()) {
+        if (!_manualControlParam) {
+            _hueBiasParam += _hueBiasChange;
+            if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {
+                _hueBiasChange = -_hueBiasChange;
+            }
+            
+            _saturationParam += _saturationChange;
+            if (_saturationParam >= 0.9 || _saturationParam <= 0.0) {
+                _saturationChange = -_saturationChange;
+            }
+            
+            _brightnessParam += _brightnessChange;
+            if (_brightnessParam >= 0.9 || _brightnessParam <= 0.0) {
+                _brightnessChange = -_brightnessChange;
+            }
         }
     }
 }

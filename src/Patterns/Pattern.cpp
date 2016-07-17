@@ -55,6 +55,12 @@ SrPattern::GetEnabled() const
     return _enabledBuffer;
 }
 
+bool
+SrPattern::IsEnabled() const
+{
+    return _enabledParam;
+}
+
 void
 SrPattern::Update()
 {
