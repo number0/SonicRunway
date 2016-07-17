@@ -58,14 +58,14 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         }
         
         float fftValue = ffts[band];
-       
+
         ofFloatColor c;
         float baseColor = 0.15 + hueShift;
         float hue = baseColor - 0.4 * (1.0 - fftValue);
         if (hue < 0.0) {
             hue += 1.0;
         }
-       
+
         hue = fmod(hue, 1.0);
         c.setHsb(hue, 1.0, fftValue * 2.0);
         

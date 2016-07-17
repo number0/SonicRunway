@@ -15,6 +15,7 @@
 #include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
 #include "StarPattern.hpp"
+#include "RainbowPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -47,7 +48,7 @@ SrApp::SrApp() :
     _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
     _presetPanel.setup("Presets");
-    _presetPanel.setPosition(_uiMargin + _uiColumnWidth, 600);
+    _presetPanel.setPosition(_uiMargin, 600);
     
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
@@ -71,7 +72,7 @@ SrApp::SrApp() :
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
     _AddPattern(fftPattern);
-    fftPattern->SetEnabled(true);
+    fftPattern->SetEnabled(false);
     
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio);
@@ -81,6 +82,10 @@ SrApp::SrApp() :
     SrStarPattern *starPattern =
         new SrStarPattern("Star", &_model, &_audio);
     _AddPattern(starPattern);
+    
+    SrRainbowPattern *rainbowPattern =
+    new SrRainbowPattern("Rainbow", &_model, &_audio);
+    _AddPattern(rainbowPattern);
     
     /*
      // Disabled b/c it seems like it might be slow.

@@ -64,6 +64,7 @@ public:
     
     std::vector<float> GetCurrentFftValues() const;
     float GetCurrentFftSum() const;
+    float GetCalibratedFftSum() const;
     
     void UpdateUI();
     
@@ -95,12 +96,16 @@ private:
     vector<Real> _bandPassBuffer;
     Real _rmsOutput;
     
+    float _fftSumMax;
+    
     // UI ------------------
     ofxPanel _beatGui;
     
     ofParameter<bool> _playDelayedAudioParam;
     ofParameter<bool> _resetDownbeatParam;
     ofParameter<bool> _resetMeasureParam;
+    
+    ofxFloatSlider _fftSumSlider;
     
     ofxFloatSlider _bpmSlider;
     ofxFloatSlider _beatIndexSlider;

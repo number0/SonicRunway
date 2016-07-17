@@ -76,6 +76,8 @@ SrAudio::_InitAlgorithms()
     int hopSize = bufferSize / 2;
     
     _bands.setup("default", bufferSize, hopSize, sampleRate);
+    
+    _fftSumMax = 0.1;
 }
 
 void
@@ -95,6 +97,7 @@ SrAudio::_InitUI()
     _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
     _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
     _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
+    _beatGui.add(_fftSumSlider.setup("FFT Sum", 0, 0, 1)); // XXX Not really part of 'beat'
     _AddUI(&_beatGui);
     
     _onsetGui.setup("Onset");
@@ -173,6 +176,22 @@ SrAudio::GetCurrentFftSum() const
 }
 
 
+float
+SrAudio::GetCalibratedFftSum() const
+{
+    float fftSum = GetCurrentFftSum();
+    
+    // Rescale the FFT Sum to be between 0-1 using the following:
+    // OldRange = (OldMax - OldMin)
+    // NewRange = (NewMax - NewMin)
+    // NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+    float oldRange = _fftSumMax - 0;
+    float newRange = 1 - 0;
+    float newValue = (((fftSum - 0) * newRange) / oldRange) + 0;
+    
+    return newValue;
+}
+
 void
 SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
 {
@@ -207,6 +226,11 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
     }
     
     _lowRMS.Push(_rmsOutput);
+    
+    float fftSum = GetCurrentFftSum();
+    if (_fftSumMax < fftSum) {
+        _fftSumMax = fftSum;
+    }
 }
 
 /*
@@ -283,6 +307,7 @@ SrAudio::UpdateUI()
     _bpmSlider = GetBeatHistory().GetBpm()[0];
     _beatIndexSlider = GetBeatHistory().GetBeatIndex()[0];
     _measureIndexSlider = GetBeatHistory().GetMeasureIndex()[0];
+    _fftSumSlider = GetCurrentFftSum();
     
     // XXX should set onset threshold here from slider..
 }
