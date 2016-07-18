@@ -17,6 +17,7 @@
 #include "StarPattern.hpp"
 #include "RainbowPattern.hpp"
 #include "ArcPattern.hpp"
+#include "PhasorPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -93,6 +94,10 @@ SrApp::SrApp() :
     SrArcPattern *arcPattern =
     new SrArcPattern("Arc", &_model, &_audio);
     _AddPattern(arcPattern);
+    
+    SrPhasorPattern *phasorPattern =
+    new SrPhasorPattern("Phasor", &_model, &_audio);
+    _AddPattern(phasorPattern);
     
     /*
      // Disabled b/c it seems like it might be slow.
