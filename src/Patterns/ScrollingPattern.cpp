@@ -49,24 +49,14 @@ SrScrollingPattern::_Update()
         const ofColor & color = currentColors[i];
         _image.setColor(_index, i, color);
     }
+    
+    _image.update();
 }
 
 void
 SrScrollingPattern::_Draw() const
 {
-    const SrModel * model = GetModel();
-    int numGates = model->GetNumGates();
-    int lightsPerGate = model->GetLightsPerGate();
-    
-    for(int x = 0; x < numGates; x++) {
-        for(int y = 0; y < lightsPerGate; y++) {
-            int imageX = (x * model->GetFramesPerGate() + _index)
-                      % (int) _image.getWidth();
-           
-            // XXX could be more efficient rendering fbo
-            // instead of iterating here..
-            ofSetColor(_image.getColor(imageX, y));
-            ofDrawRectangle(x, y, 1, 1);
-        }
-    }
+    ofSetColor(ofColor::white);
+    _image.draw(-_index,0);
+    _image.draw(-_index + GetModel()->GetNumGates(),0);
 }
