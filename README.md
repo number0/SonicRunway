@@ -76,6 +76,12 @@ TODO:
 
 - Expand library of patterns.
 
+- Figure out how to build standalone app.  Product->Archive does this mostly,
+  but dependencies on dylibs causes problems.  This means either figuring out
+  how to bundle dylibs with the app, or compiling them statically.  Some info:
+
+http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
+
 - Improve FFT visualization.
 
 - Improve RMS detection, include multiple frequency ranges.
