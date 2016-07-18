@@ -11,6 +11,7 @@
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		295D34481D3C0E0C009CDC91 /* ArcPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D34461D3C0E0C009CDC91 /* ArcPattern.cpp */; };
 		295D34501D3C48B8009CDC91 /* PhasorPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D344E1D3C48B8009CDC91 /* PhasorPattern.cpp */; };
+		295D34541D3C5A14009CDC91 /* TrailsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D34521D3C5A14009CDC91 /* TrailsPattern.cpp */; };
 		29D2205D1D3ABE380040B22B /* StarPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205B1D3ABE380040B22B /* StarPattern.cpp */; };
 		29D220601D3AC50E0040B22B /* RainbowPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */; };
 		3002E85E1C88F9C900689E57 /* Previs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3002E85C1C88F9C900689E57 /* Previs.cpp */; };
@@ -136,6 +137,8 @@
 		295D34471D3C0E0C009CDC91 /* ArcPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ArcPattern.hpp; path = Patterns/ArcPattern.hpp; sourceTree = "<group>"; };
 		295D344E1D3C48B8009CDC91 /* PhasorPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhasorPattern.cpp; path = Patterns/PhasorPattern.cpp; sourceTree = "<group>"; };
 		295D344F1D3C48B8009CDC91 /* PhasorPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PhasorPattern.hpp; path = Patterns/PhasorPattern.hpp; sourceTree = "<group>"; };
+		295D34521D3C5A14009CDC91 /* TrailsPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TrailsPattern.cpp; path = Patterns/TrailsPattern.cpp; sourceTree = "<group>"; };
+		295D34531D3C5A14009CDC91 /* TrailsPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TrailsPattern.hpp; path = Patterns/TrailsPattern.hpp; sourceTree = "<group>"; };
 		29D2205B1D3ABE380040B22B /* StarPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StarPattern.cpp; path = Patterns/StarPattern.cpp; sourceTree = "<group>"; };
 		29D2205C1D3ABE380040B22B /* StarPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StarPattern.hpp; path = Patterns/StarPattern.hpp; sourceTree = "<group>"; };
 		29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RainbowPattern.cpp; path = Patterns/RainbowPattern.cpp; sourceTree = "<group>"; };
@@ -437,6 +440,8 @@
 				295D34471D3C0E0C009CDC91 /* ArcPattern.hpp */,
 				295D344E1D3C48B8009CDC91 /* PhasorPattern.cpp */,
 				295D344F1D3C48B8009CDC91 /* PhasorPattern.hpp */,
+				295D34521D3C5A14009CDC91 /* TrailsPattern.cpp */,
+				295D34531D3C5A14009CDC91 /* TrailsPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -812,6 +817,7 @@
 				306565A31C472E7C00917ADB /* App.cpp in Sources */,
 				30B8DCE91CB589AC00164558 /* Environment.cpp in Sources */,
 				101D2DB773940813A5C898CD /* ofxAubioPitch.cpp in Sources */,
+				295D34541D3C5A14009CDC91 /* TrailsPattern.cpp in Sources */,
 				303B2BD61CA24D4F00322318 /* StripesPattern.cpp in Sources */,
 				30E57E2E1CE194730031D5AF /* OscTypes.cpp in Sources */,
 				302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */,

@@ -18,6 +18,7 @@
 #include "RainbowPattern.hpp"
 #include "ArcPattern.hpp"
 #include "PhasorPattern.hpp"
+#include "TrailsPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -98,6 +99,10 @@ SrApp::SrApp() :
     SrPhasorPattern *phasorPattern =
     new SrPhasorPattern("Phasor", &_model, &_audio);
     _AddPattern(phasorPattern);
+    
+    SrTrailsPattern *trailsPattern =
+    new SrTrailsPattern("Trails", &_model, &_audio);
+    _AddPattern(trailsPattern);
     
     /*
      // Disabled b/c it seems like it might be slow.
