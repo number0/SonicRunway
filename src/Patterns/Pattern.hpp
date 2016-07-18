@@ -52,6 +52,8 @@ public:
     // buffered across time.
     void SetEnabled(bool enabled);
     
+    bool IsEnabled() const;
+    
 protected:
     
     // Update the pattern in response to the current state.
