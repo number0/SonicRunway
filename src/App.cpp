@@ -65,32 +65,26 @@ SrApp::SrApp() :
     SrExamplePattern *examplePattern =
         new SrExamplePattern("Example", &_model, &_audio);
     _AddPattern(examplePattern);
-    examplePattern->SetEnabled(false);
     
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio);
     _AddPattern(beatPattern);
-    beatPattern->SetEnabled(false);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
     _AddPattern(fftPattern);
-    fftPattern->SetEnabled(false);
     
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio);
     _AddPattern(stripesPattern);
-    stripesPattern->SetEnabled(false);
     
     SrStarPattern *starPattern =
         new SrStarPattern("Star", &_model, &_audio);
     _AddPattern(starPattern);
-    starPattern->SetEnabled(false);
     
     SrRainbowPattern *rainbowPattern =
     new SrRainbowPattern("Rainbow", &_model, &_audio);
     _AddPattern(rainbowPattern);
-    rainbowPattern->SetEnabled(false);
     
     SrArcPattern *arcPattern =
     new SrArcPattern("Arc", &_model, &_audio);
@@ -110,18 +104,15 @@ SrApp::SrApp() :
     SrVideoPattern *videoPattern =
         new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
     _AddPattern(videoPattern);
-    videoPattern->SetEnabled(false);
      */
     
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio);
     _AddPattern(triggerPattern);
-    triggerPattern->SetEnabled(true);
     
     SrPhrasePattern *phrasePattern =
         new SrPhrasePattern("Phrase", &_model, &_audio);
     _AddPattern(phrasePattern);
-    phrasePattern->SetEnabled(false);
     
     SrDiagnosticPattern *diagnosticPattern =
         new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
@@ -131,7 +122,10 @@ SrApp::SrApp() :
     SrRmsPattern *rmsPattern =
         new SrRmsPattern("RMS", &_model, &_audio);
     _AddPattern(rmsPattern);
-    rmsPattern->SetEnabled(false);
+    
+    // Enable the patterns we want on by default.
+    triggerPattern->SetEnabled(true);
+    rmsPattern->SetEnabled(true);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     

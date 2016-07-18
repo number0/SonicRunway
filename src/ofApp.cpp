@@ -6,6 +6,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    essentia::init();
+    
     _app = new SrApp();
     
     // set the size of the window
@@ -13,6 +15,8 @@ void ofApp::setup(){
 }
 
 void ofApp::exit(){
+    essentia::shutdown();
+    
     delete _app;
     
     ofSoundStreamStop();

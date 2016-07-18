@@ -16,8 +16,8 @@
 #include "Types.hpp"
 #include "Buffer.hpp"
 #include "UiMixin.hpp"
-#include "OnsetHistory.hpp"
 #include "BeatHistory.hpp"
+#include "RmsFilter.hpp"
 
 #include "ofMain.h"
 
@@ -41,10 +41,12 @@ public:
     SrAudio(const std::string & name, SrModel * model);
     ~SrAudio();
     
-    const SrOnsetHistory & GetLowOnsetHistory() const;
     const SrBeatHistory & GetBeatHistory() const;
     const vector<SrFloatBuffer> & GetFfts() const;
-    const SrFloatBuffer & GetLowRMS() const;
+    
+    const SrFloatBuffer & GetLows() const;
+    const SrFloatBuffer & GetMids() const;
+    const SrFloatBuffer & GetHighs() const;
     
     void AudioIn(float * input, int bufferSize, int nChannels);
     //void AudioOut(float * output, int bufferSize, int nChannels) const;
@@ -77,24 +79,21 @@ private:
     
 private:
     SrModel * _model;
-    SrOnsetHistory _lowOnsetHistory;
-    SrBeatHistory _beatHistory;
-    SrFloatBuffer _lowRMS;
-    vector<SrFloatBuffer> _ffts;
-    int _fullAudioBufferIndex;
     
+    vector<Real> _inputBuffer;
     AudioVecBuffer _fullAudioBuffer;
     
-    essentia::standard::Algorithm *_bandPass;
-    essentia::standard::Algorithm *_rmsLow;
+    SrRmsFilter _lowFilter;
+    SrRmsFilter _midFilter;
+    SrRmsFilter _highFilter;
+    
+    SrBeatHistory _beatHistory;
+    vector<SrFloatBuffer> _ffts;
+    int _fullAudioBufferIndex;
     
     bool _outputDelayed;
     
     ofxAubioMelBands _bands;
-    
-    vector<Real> _inputBuffer;
-    vector<Real> _bandPassBuffer;
-    Real _rmsOutput;
     
     float _fftSumMax;
     
@@ -110,13 +109,6 @@ private:
     ofxFloatSlider _bpmSlider;
     ofxFloatSlider _beatIndexSlider;
     ofxFloatSlider _measureIndexSlider;
-    
-    ofxPanel _onsetGui;
-    
-    ofxFloatSlider _gotOnsetSlider;
-    ofxFloatSlider _onsetThresholdSlider;
-    ofxFloatSlider _onsetNoveltySlider;
-    ofxFloatSlider _onsetThresholdedNoveltySlider;
     
     ofxPanel _bandsGui;
     ofPolyline _bandPlot;

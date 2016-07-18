@@ -22,9 +22,11 @@ SrAudio::SrAudio(const std::string & name,
                  SrModel * model) :
     SrUiMixin(name),
     _model(model),
-    _lowOnsetHistory(model),
+    _inputBuffer(_model->GetBufferSize()),
+    _lowFilter("Low", model, this, 200, 700, _inputBuffer),
+    _midFilter("Mid", model, this, 700, 3000, _inputBuffer),
+    _highFilter("High", model, this, 3000, 20000, _inputBuffer),
     _beatHistory(model),
-    _lowRMS(model, SrFrequencyOncePerAudioIn),
     _outputDelayed(false),
     _fullAudioBufferIndex(0),
     _playDelayedAudioParam(false),
@@ -52,26 +54,10 @@ SrAudio::_InitAlgorithms()
         _fullAudioBuffer[i].resize(_model->GetBufferSize());
     }
     
-    essentia::init();
     AlgorithmFactory & factory = AlgorithmFactory::instance();
     
     int sampleRate = _model->GetSampleRate();
     int bufferSize = _model->GetBufferSize();
-    
-    _bandPass = factory.create("BandPass",
-                               "sampleRate", sampleRate,
-                            "bandwidth", 200,
-                               "cutoffFrequency", 500);
-    _rmsLow = factory.create("RMS");
-    
-    _inputBuffer.resize(bufferSize);
-    _bandPassBuffer.resize(bufferSize);
-    
-    _bandPass->input("signal").set(_inputBuffer);
-    _bandPass->output("signal").set(_bandPassBuffer);
-    
-    _rmsLow->input("array").set(_bandPassBuffer);
-    _rmsLow->output("rms").set(_rmsOutput);
     
     int hopSize = bufferSize / 2;
     
@@ -88,6 +74,10 @@ SrAudio::_InitUI()
                                        this, &This::_OnPlayDelayedAudioButtonPressed);
     _AddUIParameter(_playDelayedAudioParam);
     
+    _AddUI(_lowFilter.GetUiPanel());
+    _AddUI(_midFilter.GetUiPanel());
+    _AddUI(_highFilter.GetUiPanel());
+    
     _resetDownbeatParam.setName("Tap Downbeat");
     _AddUIParameter(_resetDownbeatParam);
     _resetMeasureParam.setName("Tap Measure 1");
@@ -99,19 +89,6 @@ SrAudio::_InitUI()
     _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
     _beatGui.add(_fftSumSlider.setup("Calibrated FFT", 0, 0, 1)); // XXX Not really part of 'beat'
     _AddUI(&_beatGui);
-    
-    _onsetGui.setup("Onset");
-    _onsetGui.add(_gotOnsetSlider.setup("onset", 0, 0, 1.0));
-    _onsetGui.add(_onsetThresholdSlider.setup("threshold", 0, 0, 2));
-    _onsetGui.add(_onsetNoveltySlider.setup(
-                                            "onset novelty", 0, 0, 10000));
-    _onsetGui.add(_onsetThresholdedNoveltySlider.setup(
-                                                       "thr. novelty", 0, -1000, 1000));
-    _AddUI(&_onsetGui);
-    
-    // Set a default value for the slider (assignment op overloaded)
-    _onsetThresholdSlider =
-    GetLowOnsetHistory().GetThreshold()[0];
     
     /*
      _bandsGui.setup("SrAudioMelBends");
@@ -126,17 +103,7 @@ SrAudio::_InitUI()
 
 SrAudio::~SrAudio()
 {
-    delete _bandPass;
-    
-    essentia::shutdown();
-    
     // XXX delete / exit aubio stuff?
-}
-
-const SrOnsetHistory &
-SrAudio::GetLowOnsetHistory() const
-{
-    return _lowOnsetHistory;
 }
 
 const SrBeatHistory &
@@ -152,9 +119,21 @@ SrAudio::GetFfts() const
 }
 
 const SrFloatBuffer &
-SrAudio::GetLowRMS() const
+SrAudio::GetLows() const
 {
-    return _lowRMS;
+    return _lowFilter.GetOutput();
+}
+
+const SrFloatBuffer &
+SrAudio::GetMids() const
+{
+    return _midFilter.GetOutput();
+}
+
+const SrFloatBuffer &
+SrAudio::GetHighs() const
+{
+    return _highFilter.GetOutput();
 }
 
 std::vector<float>
@@ -209,23 +188,19 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
         _inputBuffer[i] = input[i * nChannels];
     }
     
-    _lowOnsetHistory.AudioIn(&_bandPassBuffer[0],
-                            bufferSize, nChannels);
-    
     _beatHistory.AudioIn(input, bufferSize, nChannels);
     
     _bands.audioIn(input, bufferSize, nChannels);
     
     // Run audio analysis
-    _bandPass->compute();
-    _rmsLow->compute();
+    _lowFilter.Compute();
+    _midFilter.Compute();
+    _highFilter.Compute();
     
     float *energies = _bands.energies;
     for (size_t i = 0; i < _ffts.size(); i++) {
         _ffts[i].Push(energies[i]);
     }
-    
-    _lowRMS.Push(_rmsOutput);
     
     float fftSum = GetCurrentFftSum();
     if (_fftSumMax < fftSum) {
@@ -259,7 +234,6 @@ void
 SrAudio::AudioOutDelayed(float * output, int bufferSize, int nChannels,
                          float delayInSeconds) const
 {
-    
     if ( ! _outputDelayed ){
         return;
     }
@@ -291,10 +265,6 @@ SrAudio::ResetMeasure()
 void
 SrAudio::UpdateUI()
 {
-    const SrOnsetHistory & onset = GetLowOnsetHistory();
-    
-    bool isRecentOnset = (onset.GetSecondsSinceLastEvent()[0] < 0.05);
-    
     if ((bool) _resetDownbeatParam) {
         ResetDownbeat();
         _resetDownbeatParam = false;
@@ -305,15 +275,10 @@ SrAudio::UpdateUI()
         _resetMeasureParam = false;
     }
     
-    _gotOnsetSlider = (float) isRecentOnset;
-    _onsetNoveltySlider = onset.GetNovelty()[0];
-    _onsetThresholdedNoveltySlider = onset.GetThresholdedNovelty()[0];
     _bpmSlider = GetBeatHistory().GetBpm()[0];
     _beatIndexSlider = GetBeatHistory().GetBeatIndex()[0];
     _measureIndexSlider = GetBeatHistory().GetMeasureIndex()[0];
     _fftSumSlider = GetCalibratedFftSum();
-    
-    // XXX should set onset threshold here from slider..
 }
 
 void

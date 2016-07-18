@@ -18,7 +18,7 @@ SrPattern::SrPattern(const std::string & name,
     _model(model),
     _audio(audio),
     _enabledBuffer(model),
-    _enabledParam(true)
+    _enabledParam(false)
 {
     SrDebug("constructed pattern %s\n", name.c_str());
     _enabledToggle.setup(_enabledParam);
