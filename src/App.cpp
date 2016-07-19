@@ -23,6 +23,7 @@
 #include "VideoPattern.hpp"
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
+#include "BigTrailsPattern.hpp"
 
 #include "Preset.hpp"
 
@@ -122,10 +123,14 @@ SrApp::SrApp() :
     SrRmsPattern *rmsPattern =
         new SrRmsPattern("RMS", &_model, &_audio);
     _AddPattern(rmsPattern);
+
+    SrBigTrailsPattern *bigTrailsPattern =
+    new SrBigTrailsPattern("Big Trails", &_model, &_audio);
+    _AddPattern(bigTrailsPattern);
     
     // Enable the patterns we want on by default.
     triggerPattern->SetEnabled(true);
-    rmsPattern->SetEnabled(true);
+    bigTrailsPattern->SetEnabled(true);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
