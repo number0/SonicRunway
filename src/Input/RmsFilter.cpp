@@ -84,7 +84,7 @@ SrRmsFilter::Compute()
         _maxValue = _minMaxValue;
     }
     
-    printf("_maxValue %f\n", _maxValue);
+    //printf("_maxValue %f\n", _maxValue);
     
     _bandPass->compute();
     _rms->compute();
