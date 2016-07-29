@@ -28,6 +28,9 @@ public:
     void UpdateLights();
     
 private:
+    void _BroadcastToGate(size_t gateIdx);
+    
+private:
     SrModel * _model;
     ofParameter<bool> _enabledParam;
     ofxToggle _enabledToggle;
@@ -35,6 +38,8 @@ private:
     ofxArtnet _artnet;
     ofImage _testImage;
     ofFbo _fbo;
+    
+    std::vector<std::string> _ipAddresses;
 };
 
 #endif
