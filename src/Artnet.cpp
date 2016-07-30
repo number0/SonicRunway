@@ -22,6 +22,12 @@ SrArtnet::SrArtnet(const std::string & name,
     _enabledToggle.setup(_enabledParam);
     _enabledParam.setName("Enabled");
     _AddUIParameter(_enabledParam);
+    
+    // XXX would be better to read this from a file, so we can hack the
+    // file to change IP addresses without having to recompile.
+    _ipAddresses.resize(_model->GetNumGates());
+    _ipAddresses[0] = std::string("192.168.3.202");
+    _ipAddresses[20] = std::string("192.168.3.42");
 }
 
 void
@@ -41,6 +47,25 @@ SrArtnet::UpdateLights()
         return;
     }
     
+    for(size_t i=0; i < _model->GetNumGates(); i++) {
+        _BroadcastToGate(i);
+    }
+}
+
+void
+SrArtnet::_BroadcastToGate(size_t gateIdx)
+{
+    if (gateIdx >= _ipAddresses.size()) {
+        SrError("IP address %zu out of range\n", gateIdx);
+        return;
+    }
+   
+    const std::string & ipAddress = _ipAddresses[gateIdx];
+    if (ipAddress.empty()) {
+        // XXX fail silently so we don't spew.
+        return;
+    }
+    
     std::vector<unsigned char> data(512 * 3);
     
     const ofFloatPixels & pixels = _model->GetFloatPixels();
@@ -49,8 +74,9 @@ SrArtnet::UpdateLights()
         return;
     }
     
+    // XXX probably a memcpy way to do this faster..
     for (int i=0; i < _model->GetLightsPerGate(); i++) {
-        ofFloatColor color = pixels.getColor(0, i);
+        ofFloatColor color = pixels.getColor(gateIdx, i);
       
         // TMP
         //color = ofFloatColor::white;
@@ -66,12 +92,7 @@ SrArtnet::UpdateLights()
         data[i*3 + 2] = color[2] * 255;
     }
     
-    //_artnet.sendDmx("192.168.0.50", &data[0], 512);
-    _artnet.sendDmx("192.168.3.202", &data[0], 512);
-    
-    //_artnet.sendDmx("192.168.0.51", &data[0], 512);
-    //_artnet.sendDmx("192.168.3.202", 0 /* subnet */, 0 /* universe */, &data[0], 512);
-    
+    _artnet.sendDmx(ipAddress, &data[0], 512);
 }
 
 SrArtnet::~SrArtnet()
