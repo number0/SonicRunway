@@ -15,10 +15,10 @@
 #include "Model.hpp"
 #include "Artnet.hpp"
 #include "Previs.hpp"
+#include "Switcher.hpp"
 #include "ofxOscParameterSync.h"
 
 class SrPattern;
-class SrPreset;
 
 //
 // Main app.
@@ -36,22 +36,19 @@ public:
     
 private:
     void _AddPattern(SrPattern * pattern);
-    void _AddPreset(SrPreset * preset);
     
 private:
     SrModel _model;
     SrAudio _audio;
     SrPrevis _previs;
     SrArtnet _artnet;
+    SrSwitcher _switcher;
     
     std::vector<SrPattern *> _patterns;
     ofParameterGroup _patternsParameterGroup;
     
-    std::vector<SrPreset *> _presets;
-    
     ofxPanel _globalPanel;
     ofxPanel _patternPanel;
-    ofxPanel _presetPanel;
     ofxOscParameterSync _oscParameterSync;
     float _uiColumnWidth;
     float _uiMargin;

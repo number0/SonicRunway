@@ -21,11 +21,12 @@
 #include "TrailsPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
+#include "AnimPattern.hpp"
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
 #include "BigTrailsPattern.hpp"
 
-#include "Preset.hpp"
+#include "Switcher.hpp"
 
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
@@ -35,6 +36,7 @@ SrApp::SrApp() :
     _audio("Audio", &_model),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
+    _switcher("Switcher", &_model, &_audio),
     _uiColumnWidth(220),
     _uiMargin(10)
 {
@@ -51,12 +53,10 @@ SrApp::SrApp() :
     _patternPanel.setup("PatternsUI");
     _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
-    _presetPanel.setup("Presets");
-    _presetPanel.setPosition(_uiMargin, 600);
-    
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
+    _globalPanel.add(_switcher.GetUiPanel());
     
     _patternsParameterGroup.setName("Patterns");
     _model.GetParameterGroup().add(_patternsParameterGroup);
@@ -99,13 +99,15 @@ SrApp::SrApp() :
     new SrTrailsPattern("Trails", &_model, &_audio);
     _AddPattern(trailsPattern);
     
-    /*
      // Disabled b/c it seems like it might be slow.
      //
     SrVideoPattern *videoPattern =
         new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
     _AddPattern(videoPattern);
-     */
+    
+    SrAnimPattern *animPattern =
+        new SrAnimPattern("Anim", "lightning", 82, false, &_model, &_audio);
+    _AddPattern(animPattern);
     
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio);
@@ -118,7 +120,6 @@ SrApp::SrApp() :
     SrDiagnosticPattern *diagnosticPattern =
         new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
     _AddPattern(diagnosticPattern);
-    diagnosticPattern->SetEnabled(false);
     
     SrRmsPattern *rmsPattern =
         new SrRmsPattern("RMS", &_model, &_audio);
@@ -129,17 +130,17 @@ SrApp::SrApp() :
     _AddPattern(bigTrailsPattern);
     
     // Enable the patterns we want on by default.
-    triggerPattern->SetEnabled(true);
-    bigTrailsPattern->SetEnabled(true);
+    //triggerPattern->SetEnabled(true);
+    //diagnosticPattern->SetEnabled(true);
+    fftPattern->SetEnabled(true);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
-    SrPreset *testPreset = new SrPreset("Test Preset", &_model,
-                                        "/tmp/test.preset");
-    _AddPreset(testPreset);
+    stripesPattern->GetUiPanel()->minimizeAll();
+    
 }
 
 SrApp::~SrApp()
@@ -163,13 +164,6 @@ SrApp::_AddPattern(SrPattern * pattern)
 }
 
 void
-SrApp::_AddPreset(SrPreset * preset)
-{
-    _presets.push_back(preset);
-    _presetPanel.add(preset->GetUiPanel());
-}
-
-void
 SrApp::AudioIn(float * input, int bufferSize, int nChannels)
 {
     _audio.AudioIn(input, bufferSize, nChannels);
@@ -185,6 +179,8 @@ void
 SrApp::Update()
 {
     _oscParameterSync.update();
+    
+    _switcher.Update();
     
     for(auto iter = _patterns.begin(); iter != _patterns.end(); iter++) {
         SrPattern *pattern = *iter;
@@ -222,7 +218,6 @@ SrApp::Draw()
     
     _globalPanel.draw();
     _patternPanel.draw();
-    _presetPanel.draw();
     
     _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
                  1280, 720);

@@ -25,9 +25,28 @@ SrArtnet::SrArtnet(const std::string & name,
     
     // XXX would be better to read this from a file, so we can hack the
     // file to change IP addresses without having to recompile.
+    //_ipAddresses.resize(_model->GetNumGates());
+   
+    _ipAddresses.push_back(std::string("192.168.3.23"));
+    _ipAddresses.push_back(std::string("192.168.3.39"));
+    _ipAddresses.push_back(std::string("192.168.3.24"));
+    _ipAddresses.push_back(std::string("192.168.3.29"));
+    _ipAddresses.push_back(std::string("192.168.3.26"));
+    _ipAddresses.push_back(std::string("192.168.3.36"));
+    _ipAddresses.push_back(std::string("192.168.3.40"));
+    _ipAddresses.push_back(std::string("192.168.3.19"));
+    _ipAddresses.push_back(std::string("192.168.3.13"));
+    _ipAddresses.push_back(std::string("192.168.3.20"));
+    _ipAddresses.push_back(std::string("192.168.3.11"));
+    _ipAddresses.push_back(std::string("192.168.3.16"));
+    _ipAddresses.push_back(std::string("192.168.3.27"));
+    _ipAddresses.push_back(std::string("192.168.3.21"));
+    _ipAddresses.push_back(std::string("192.168.3.32"));
+    _ipAddresses.push_back(std::string("192.168.3.12"));
+    _ipAddresses.push_back(std::string("192.168.3.22"));
+    
+    // Make sure the array is big enough..
     _ipAddresses.resize(_model->GetNumGates());
-    _ipAddresses[0] = std::string("192.168.3.202");
-    _ipAddresses[20] = std::string("192.168.3.42");
 }
 
 void
