@@ -48,7 +48,7 @@ private:
     ofParameterGroup _patternsParameterGroup;
     
     ofxPanel _globalPanel;
-    ofxPanel _patternPanel;
+    std::vector<ofxPanel *> _patternPanels;
     ofxOscParameterSync _oscParameterSync;
     float _uiColumnWidth;
     float _uiMargin;

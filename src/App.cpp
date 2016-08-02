@@ -31,6 +31,8 @@
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
+static const size_t PATTERNS_PER_COLUMN = 10;
+
 SrApp::SrApp() :
     _model(),
     _audio("Audio", &_model),
@@ -49,9 +51,6 @@ SrApp::SrApp() :
     
     _globalPanel.setup("Global");
     _globalPanel.setPosition(_uiMargin,_uiMargin);
-    
-    _patternPanel.setup("PatternsUI");
-    _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
@@ -159,7 +158,20 @@ void
 SrApp::_AddPattern(SrPattern * pattern)
 {
     _patterns.push_back(pattern);
-    _patternPanel.add(pattern->GetUiPanel());
+    
+    // Figure out which panel it should be in
+    // Allocate another patternPanel (column) if we need it
+    size_t panelIdx = _patterns.size() / PATTERNS_PER_COLUMN;
+    if (panelIdx >= _patternPanels.size()) {
+        ofxPanel * newPanel = new ofxPanel();
+        newPanel->setup("Patterns");
+        newPanel->setPosition(_uiMargin + _uiColumnWidth * (1 + panelIdx), _uiMargin);
+        _patternPanels.push_back(newPanel);
+    }
+    
+    // Add the Ui
+    _patternPanels[panelIdx]->add(pattern->GetUiPanel());
+    
     _patternsParameterGroup.add(pattern->GetParameterGroup());
 }
 
@@ -213,14 +225,16 @@ SrApp::Draw()
     
     ofBackground(40,40,40);
     
-    _model.RenderFrameBuffer(_uiMargin + _uiColumnWidth * 2, _uiMargin,
-                             _uiColumnWidth * 2, 75);
+    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 1);
+    _model.RenderFrameBuffer(previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     
     _globalPanel.draw();
-    _patternPanel.draw();
     
-    _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
-                 1280, 720);
+    for(size_t i = 0; i < _patternPanels.size(); i++) {
+        _patternPanels[i]->draw();
+    }
+    
+    _previs.Draw(previsXCoord, 100, 1280, 720);
     
     _artnet.UpdateLights();
 }
