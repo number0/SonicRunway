@@ -11,26 +11,27 @@
 
 #include "UiMixin.hpp"
 
-class SrModel;
-class SrAudio;
+class SrApp;
 class SrPreset;
 
 class SrSwitcher : public SrUiMixin {
     typedef SrSwitcher This;
     
 public:
-    SrSwitcher(const std::string & name, SrModel * model, SrAudio * audio);
+    SrSwitcher(const std::string & name, SrApp * app);
     virtual ~SrSwitcher();
     
     void Update();
     
+    void OnPresetApplyClicked(SrPreset * preset);
+    
 private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;
+    void _ApplyPreset(SrPreset * preset);
     
 private:
-    SrModel * _model;
-    SrAudio * _audio;
+    SrApp * _app;
     
     ofParameter<bool> _cycleAutomatically;
     ofParameter<float> _secondsBetweenPresets;

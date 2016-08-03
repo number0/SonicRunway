@@ -15,11 +15,12 @@
 #include "UiMixin.hpp"
 
 class SrModel;
+class SrSwitcher;
 
 //
 // A group of parameter settings that can be applied
 // to the app.  When 'saved', a preset writes out the
-// model's current parameter values (hierarchically) to
+// parameter values for the enabled patterns to
 // the given file.  When 'applied', it sets the values.
 //
 // The intent here is to provide a way to configure the
@@ -32,7 +33,8 @@ class SrPreset : public SrUiMixin {
 public:
     SrPreset(const std::string & name,
              SrModel * model,
-             const std::string & fileName);
+             const std::string & fileName,
+             SrSwitcher * switcher);
     ~SrPreset();
     
     void Apply() const;
@@ -43,12 +45,15 @@ private:
     void _OnSavePressed();
     
     void _WriteParamRecurse(const ofAbstractParameter & param,
+                            ofParameterGroup & rootGroup,
                             const std::string & parentPath,
                             FILE *fp);
     
 private:
     SrModel * _model;
     std::string _fileName;
+    SrSwitcher * _switcher;
+    
     ofxButton _applyButton;
     ofxButton _saveButton;
     

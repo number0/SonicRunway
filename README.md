@@ -80,14 +80,14 @@ http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a
 
 - Improve FFT visualization.
 
-- Improve RMS detection, include multiple frequency ranges.
+- Allow playback of band-pass filters
 
 - Make ArtNet broadcast to 2 universes to cover all LEDs
 
 - Add ability to create, name and delete presets.  
   Store them with the src?
 
-- Design master pattern controller to switch between presets.
+- Improve switcher:  choose audio / non-audio patterns
 
 - Fix up gamma correction -- look at other libraries to implement 
   mapping to LED color space.

@@ -31,4 +31,10 @@ ofAbstractParameter *
 SrUtil_FindParameter(ofParameterGroup & parameterGroup,
                      const std::string & path);
 
+// Return true if the given path represents a pattern that is
+// enabled.
+bool
+SrUtil_IsPathToEnabledPattern(const std::string & path,
+                              ofParameterGroup & parameterGroup);
+
 #endif /* Util_hpp */

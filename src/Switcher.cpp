@@ -8,14 +8,15 @@
 
 #include "Switcher.hpp"
 #include "Preset.hpp"
+#include "App.hpp"
 #include "Model.hpp"
+#include "Pattern.hpp"
+#include "Debug.hpp"
 
 SrSwitcher::SrSwitcher(const std::string & name,
-                       SrModel * model,
-                       SrAudio * audio) :
+                       SrApp * app) :
     SrUiMixin(name),
-    _model(model),
-    _audio(audio),
+    _app(app),
     _cycleAutomatically(false),
     _secondsBetweenPresets(3.0),
     _secondsToNextPreset((float) _secondsBetweenPresets)
@@ -42,7 +43,8 @@ SrSwitcher::SrSwitcher(const std::string & name,
         asprintf(&name, "Test %zu", i);
         asprintf(&fileName, "/tmp/test.%zu.preset", i);
         
-        SrPreset * testPreset = new SrPreset(name, model, fileName);
+        SrModel * model = _app->GetModel();
+        SrPreset * testPreset = new SrPreset(name, model, fileName, this);
         _AddPreset(testPreset);
         
         free(name);
@@ -71,13 +73,14 @@ SrSwitcher::Update()
         return;
     }
     
-    float secondsPerFrame = 1.0 / _model->ComputeFramesPerSecond();
+    float fps = _app->GetModel()->ComputeFramesPerSecond();
+    float secondsPerFrame = 1.0 / fps;
     _secondsToNextPreset = (float) _secondsToNextPreset - secondsPerFrame;
     
     if (_secondsToNextPreset <= 0.0) {
         SrPreset * preset = _GetRandomPreset();
         if (preset) {
-            preset->Apply();
+            _ApplyPreset(preset);
         }
         _secondsToNextPreset = (float) _secondsBetweenPresets;
     }
@@ -88,4 +91,29 @@ SrSwitcher::_GetRandomPreset() const
 {
     size_t idx = rand() % _presets.size();
     return _presets[idx];
+}
+
+void
+SrSwitcher::OnPresetApplyClicked(SrPreset * preset)
+{
+    _ApplyPreset(preset);
+}
+
+void
+SrSwitcher::_ApplyPreset(SrPreset * preset)
+{
+    if (not preset) {
+        SrError("Null preset");
+        return;
+    }
+    
+    // First, disable all patterns.  This way we end up with only
+    // the ones explicitly enabled in the preset.
+    const std::vector<SrPattern *> & patterns = _app->GetPatterns();
+    for (size_t i = 0; i < patterns.size(); i++) {
+        patterns[i]->SetEnabled(false);
+    }
+    
+    // Now apply the new preset.
+    preset->Apply();
 }

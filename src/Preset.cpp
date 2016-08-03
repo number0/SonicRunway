@@ -10,13 +10,16 @@
 #include "Model.hpp"
 #include "Util.hpp"
 #include "Debug.hpp"
+#include "Switcher.hpp"
 
 SrPreset::SrPreset(const std::string & name,
                    SrModel * model,
-                   const std::string & fileName) :
+                   const std::string & fileName,
+                   SrSwitcher * switcher) :
     SrUiMixin(name),
     _model(model),
-    _fileName(fileName)
+    _fileName(fileName),
+    _switcher(switcher)
 {
     SrDebug("constructed preset\n");
     
@@ -86,13 +89,15 @@ SrPreset::Save()
     }
     
     std::string path;
-    _WriteParamRecurse(_model->GetParameterGroup(), path, fp);
+    _WriteParamRecurse(_model->GetParameterGroup(),
+                       _model->GetParameterGroup(), path, fp);
    
     fclose(fp);
 }
 
 void
 SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
+                             ofParameterGroup & rootGroup,
                              const std::string & parentPath,
                              FILE * fp)
                 
@@ -107,19 +112,21 @@ SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
             std::string path = parentPath;
             path += "/" + group->getName();
             
-            _WriteParamRecurse(*childParam, path, fp);
+            _WriteParamRecurse(*childParam, rootGroup, path, fp);
         }
     } else {
-        fprintf(fp, "%s/%s: %s\n", parentPath.c_str(),
-                param.getName().c_str(),
-                param.toString().c_str());
+        if (SrUtil_IsPathToEnabledPattern(parentPath, rootGroup)) {
+            fprintf(fp, "%s/%s: %s\n", parentPath.c_str(),
+                    param.getName().c_str(),
+                    param.toString().c_str());
+        }
     }
 }
 
 void
 SrPreset::_OnApplyPressed()
 {
-    Apply();
+    _switcher->OnPresetApplyClicked(this);
 }
 
 void

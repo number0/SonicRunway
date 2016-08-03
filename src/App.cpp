@@ -38,7 +38,7 @@ SrApp::SrApp() :
     _audio("Audio", &_model),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
-    _switcher("Switcher", &_model, &_audio),
+    _switcher("Switcher", this),
     _uiColumnWidth(220),
     _uiMargin(10)
 {
@@ -173,6 +173,24 @@ SrApp::_AddPattern(SrPattern * pattern)
     _patternPanels[panelIdx]->add(pattern->GetUiPanel());
     
     _patternsParameterGroup.add(pattern->GetParameterGroup());
+}
+
+const std::vector<SrPattern *> &
+SrApp::GetPatterns() const
+{
+    return _patterns;
+}
+
+SrModel *
+SrApp::GetModel()
+{
+    return &_model;
+}
+
+SrAudio *
+SrApp::GetAudio()
+{
+    return &_audio;
 }
 
 void

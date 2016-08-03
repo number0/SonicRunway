@@ -142,3 +142,22 @@ SrUtil_FindParameter(ofParameterGroup & parameterGroup,
     // the parameter group.  XXX would be nice to verify this...
     return _FindParameterRecurse(parameterGroup, pathVec, 2);
 }
+
+bool
+SrUtil_IsPathToEnabledPattern(const std::string & path,
+                              ofParameterGroup & parameterGroup)
+{
+    std::string enabledPath = path + "/Enabled";
+    ofAbstractParameter * param =
+        SrUtil_FindParameter(parameterGroup, enabledPath);
+    if (not param) {
+        return false;
+    }
+    
+    ofParameter<bool> * boolParam = dynamic_cast<ofParameter<bool> * >(param);
+    if (not boolParam) {
+        SrError("Enabled param is not a bool\n");
+    }
+   
+    return (bool) (*boolParam);
+}

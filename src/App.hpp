@@ -34,6 +34,10 @@ public:
     void AudioIn(float * input, int bufferSize, int nChannels);
     void AudioOut(float * output, int buferSize, int nChannels);
     
+    const std::vector<SrPattern *> & GetPatterns() const;
+    SrModel * GetModel();
+    SrAudio * GetAudio();
+    
 private:
     void _AddPattern(SrPattern * pattern);
     
