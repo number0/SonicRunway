@@ -18,7 +18,8 @@ SrPattern::SrPattern(const std::string & name,
     _model(model),
     _audio(audio),
     _enabledBuffer(model),
-    _enabledParam(false)
+    _enabledParam(false),
+    _opacityBuffer(model)
 {
     SrDebug("constructed pattern %s\n", name.c_str());
     _enabledToggle.setup(_enabledParam);
@@ -50,22 +51,56 @@ SrPattern::SetEnabled(bool enabled)
 }
 
 const SrFloatSimpleBuffer &
-SrPattern::GetEnabled() const
+SrPattern::GetOpacity() const
 {
-    return _enabledBuffer;
+    return _opacityBuffer;
 }
 
 bool
-SrPattern::IsEnabled() const
+SrPattern::IsOnAtAnyGate() const
 {
-    return _enabledParam;
+    for(size_t i = 0; i < _opacityBuffer.size(); i++) {
+        if (_opacityBuffer[i] > 0.0) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 void
 SrPattern::Update()
 {
-    bool value = (bool) _enabledToggle;
-    _enabledBuffer.Push((float) value);
+    bool enabled = (bool) _enabledToggle;
+    _enabledBuffer.Push((float) enabled);
+    
+    float lastOpacity = _opacityBuffer[0];
+    float thisOpacity = lastOpacity;
+    
+    if (lastOpacity != (float) enabled) {
+        float fadeDurationSeconds = 1.0;
+        float fadeDurationFrames = fadeDurationSeconds * _model->ComputeFramesPerSecond();
+        
+        float delta = 1.0 / fadeDurationFrames;
+       
+        // Nudge value
+        thisOpacity = lastOpacity;
+        if (enabled) {
+            thisOpacity += delta;
+        } else {
+            thisOpacity -= delta;
+        }
+        
+        // Clamp
+        if (thisOpacity > 1.0) {
+            thisOpacity = 1.0;
+        }
+        if (thisOpacity < 0.0) {
+            thisOpacity = 0.0;
+        }
+    }
+    
+    _opacityBuffer.Push(thisOpacity);
     
     // Call subclass update
     _Update();

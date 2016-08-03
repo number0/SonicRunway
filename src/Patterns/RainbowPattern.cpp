@@ -49,7 +49,7 @@ SrRainbowPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
-    if(IsEnabled()) {
+    if (IsOnAtAnyGate()) {
         if (!_manualControlParam) {
             _hueBiasParam += _hueBiasChange;
             if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {

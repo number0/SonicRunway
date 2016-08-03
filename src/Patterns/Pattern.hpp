@@ -44,15 +44,18 @@ public:
     // light buffer.  Subclasses should implement _Draw()
     void Draw();
     
-    // Get a buffer that contains the history of the
-    // 'enabled' parameter (the checkbox that turns it on/off)
-    const SrFloatSimpleBuffer & GetEnabled() const;
-    
     // Set the current value of 'enabled'.  This will be
     // buffered across time.
     void SetEnabled(bool enabled);
     
-    bool IsEnabled() const;
+    // Return true if the pattern is 'on' at any gate see GetOpacity
+    // This lets patterns skip computation if they are off everywhere.
+    bool IsOnAtAnyGate() const;
+    
+    // Get a buffer with per-gate opacity information.
+    // Opacity is 1 if the pattern is enabled, 0 if disabled.
+    // The value is ramped after the pattern is explicitly enabled/disabled.
+    const SrFloatSimpleBuffer & GetOpacity() const;
     
 protected:
     
@@ -81,6 +84,9 @@ private:
     SrAudio *_audio;
     SrFloatSimpleBuffer _enabledBuffer;
     ofParameter<bool> _enabledParam;
+    
+    SrFloatSimpleBuffer _opacityBuffer;
+    ofParameter<bool> _opacity;
     
     ofxToggle _enabledToggle;
 };

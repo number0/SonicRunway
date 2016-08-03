@@ -34,19 +34,26 @@ SrScrollingPattern::_Update()
         _index = (int) _image.getWidth() - 1;
     }
     
+    if (not IsOnAtAnyGate()) {
+        return;
+    }
+    
     // Draw the current gate into a buffer
     std::vector<ofColor> currentColors(GetModel()->GetLightsPerGate());
     for(int i = 0; i < GetModel()->GetLightsPerGate(); i++) {
         currentColors[i] = ofColor::black;
     }
     
-    if (GetEnabled()[0]) {
-        _DrawCurrentGate(&currentColors);
-    }
+    _DrawCurrentGate(&currentColors);
     
     // Copy the colors to our pixel cache
     for(int i = 0; i < GetModel()->GetLightsPerGate(); i++) {
-        const ofColor & color = currentColors[i];
+        ofColor color = currentColors[i];
+       
+        float opacity = GetOpacity()[0];
+        
+        color *= opacity;
+        
         _image.setColor(_index, i, color);
     }
     
@@ -56,6 +63,10 @@ SrScrollingPattern::_Update()
 void
 SrScrollingPattern::_Draw() const
 {
+    if (not IsOnAtAnyGate()) {
+        return;
+    }
+    
     ofSetColor(ofColor::white);
     _image.draw(-_index,0);
     _image.draw(-_index + GetModel()->GetNumGates(),0);

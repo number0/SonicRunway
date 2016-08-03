@@ -60,6 +60,5 @@ SrVideo::Reset()
 void
 SrVideo::Draw() const
 {
-    ofSetColor(ofColor::white);
     _player.draw(0,0);
 }

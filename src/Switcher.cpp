@@ -16,7 +16,7 @@ SrSwitcher::SrSwitcher(const std::string & name,
     SrUiMixin(name),
     _model(model),
     _audio(audio),
-    _cycleAutomatically(true),
+    _cycleAutomatically(false),
     _secondsBetweenPresets(3.0),
     _secondsToNextPreset((float) _secondsBetweenPresets)
 {

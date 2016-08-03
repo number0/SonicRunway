@@ -52,6 +52,9 @@ public:
     // will crash.
     T operator[](size_t idx) const;
     
+    // Return the size of the buffer
+    size_t size() const;
+    
 private:
     SrModel *_model;
     std::vector<T> _values;
@@ -102,5 +105,13 @@ SrSimpleBuffer<T>::GetValueAtGate(size_t gateIdx) const
 {
     return (*this)[gateIdx * _model->GetFramesPerGate()];
 }
+
+template <class T>
+size_t
+SrSimpleBuffer<T>::size() const
+{
+    return _values.size();
+}
+
 
 #endif

@@ -41,9 +41,13 @@ SrVideoPattern::_Update()
 void
 SrVideoPattern::_Draw() const
 {
-    if (not GetEnabled()[0]) {
+    float opacity = GetOpacity()[0];
+    if (opacity <= 0.0) {
         return;
     }
+    
+    // Set a greyscale color according to 'opacity' to multiply the image
+    ofSetColor(ofFloatColor(opacity, opacity, opacity));
     
     ofPushMatrix();
     ofTranslate(_gateIndex, 0);

@@ -48,12 +48,15 @@ SrAnimPattern::_Update()
 void
 SrAnimPattern::_Draw() const
 {
-    if (not GetEnabled()[0]) {
+    // For this pattern, we just use the opacity at the 0th gate.
+    float opacity = GetOpacity()[0];
+    if (opacity <= 0.0) {
         return;
     }
     
     const ofImage & img = _imageSequence.GetImage(_currentFrame);
-    printf("img size %f %f\n", img.getWidth(), img.getHeight());
+    
+    ofSetColor(ofFloatColor(opacity, opacity, opacity));
     
     img.draw(_gateIndex, 0, img.getWidth(), GetModel()->GetLightsPerGate());
     img.draw(_gateIndex - GetModel()->GetNumGates(), 0);
