@@ -14,6 +14,18 @@
 class SrApp;
 class SrPreset;
 
+//
+// SrSwitcher - owns a set of presets and controls switching between them.
+//
+// Preset values are stored in a "presets.txt" file, which is read at startup.
+// Presets can be stored and applied, reconfiguring the parameters of patterns.
+//
+// The presets file can be written out to a temp file, then copied
+// over the installed version.
+//
+// The switcher can also automatically switch between presets, choosing
+// a new one randomly from the group at a specified interval.
+//
 class SrSwitcher : public SrUiMixin {
     typedef SrSwitcher This;
     
