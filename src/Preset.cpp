@@ -14,11 +14,9 @@
 
 SrPreset::SrPreset(const std::string & name,
                    SrModel * model,
-                   const std::string & fileName,
                    SrSwitcher * switcher) :
     SrUiMixin(name),
     _model(model),
-    _fileName(fileName),
     _switcher(switcher)
 {
     SrDebug("constructed preset\n");
@@ -26,11 +24,11 @@ SrPreset::SrPreset(const std::string & name,
     _applyButton.setup("Apply", 40, 40);
     _AddUI(&_applyButton);
     
-    _saveButton.setup("Save", 40, 40);
-    _AddUI(&_saveButton);
+    _storeButton.setup("Store", 40, 40);
+    _AddUI(&_storeButton);
     
     _applyButton.addListener(this, &This::_OnApplyPressed);
-    _saveButton.addListener(this, &This::_OnSavePressed);
+    _storeButton.addListener(this, &This::_OnStorePressed);
 }
 
 SrPreset::~SrPreset()
@@ -46,15 +44,9 @@ SrPreset::Apply() const
     ofParameterGroup & parameterGroup =
         _model->GetParameterGroup();
     
-    
-    std::ifstream ifs(_fileName, std::ifstream::in);
-    if (not ifs) {
-        SrError("error opening file %s\n", _fileName.c_str());
-        return;
-    }
-    
-    std::string str;
-    while (std::getline(ifs, str)) {
+    for(size_t i = 0; i < _strings.size(); i++) {
+        const std::string str = _strings[i];
+        
         std::vector<std::string> strVec =
             SrUtil_SplitString(str, ':');
         if (strVec.size() != 2) {
@@ -79,28 +71,21 @@ SrPreset::Apply() const
 }
 
 void
-SrPreset::Save()
+SrPreset::Store()
 {
-    SrDebug("saving preset\n");
-    FILE *fp = fopen(_fileName.c_str(), "w");
-    if (not fp) {
-        SrError("error opening file %s\n", _fileName.c_str());
-        return;
-    }
+    SrDebug("storing preset\n");
+    
+    _strings.clear();
     
     std::string path;
     _WriteParamRecurse(_model->GetParameterGroup(),
-                       _model->GetParameterGroup(), path, fp);
-   
-    fclose(fp);
+                       _model->GetParameterGroup(), path);
 }
 
 void
 SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
                              ofParameterGroup & rootGroup,
-                             const std::string & parentPath,
-                             FILE * fp)
-                
+                             const std::string & parentPath)
 {
     const ofParameterGroup * group =
         dynamic_cast<const ofParameterGroup *>(&param);
@@ -112,13 +97,19 @@ SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
             std::string path = parentPath;
             path += "/" + group->getName();
             
-            _WriteParamRecurse(*childParam, rootGroup, path, fp);
+            _WriteParamRecurse(*childParam, rootGroup, path);
         }
     } else {
         if (SrUtil_IsPathToEnabledPattern(parentPath, rootGroup)) {
-            fprintf(fp, "%s/%s: %s\n", parentPath.c_str(),
-                    param.getName().c_str(),
-                    param.toString().c_str());
+            char *str;
+            asprintf(&str, "%s/%s: %s\n",
+                     parentPath.c_str(),
+                     param.getName().c_str(),
+                     param.toString().c_str());
+            
+            _strings.push_back(std::string(str));
+            
+            free(str);
         }
     }
 }
@@ -130,7 +121,19 @@ SrPreset::_OnApplyPressed()
 }
 
 void
-SrPreset::_OnSavePressed()
+SrPreset::_OnStorePressed()
 {
-    Save();
+    Store();
+}
+
+const std::vector<std::string> &
+SrPreset::Pickle() const
+{
+    return _strings;
+}
+
+void
+SrPreset::Unpickle(const std::vector<std::string> & strings)
+{
+    _strings = strings;
 }

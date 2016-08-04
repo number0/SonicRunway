@@ -12,10 +12,13 @@
 #include "Model.hpp"
 #include "Pattern.hpp"
 #include "Debug.hpp"
+#include "Util.hpp"
 
 SrSwitcher::SrSwitcher(const std::string & name,
+                       const std::string & fileName,
                        SrApp * app) :
     SrUiMixin(name),
+    _fileName(fileName),
     _app(app),
     _cycleAutomatically(false),
     _secondsBetweenPresets(3.0),
@@ -38,22 +41,58 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _newButton.addListener(this, &This::_OnNewButtonPressed);
     _AddUI(&_newButton);
     
+    _saveButton.setup("Save", 40, 40);
+    _saveButton.addListener(this, &This::_OnSaveButtonPressed);
+    _AddUI(&_saveButton);
+    
     _presetPanel.setup("Presets");
     _AddUI(&_presetPanel);
     
-    // Make a few presets for testing..
-    for(size_t i = 0; i < 3; i++) {
-        char * name;
-        char * fileName;
-        asprintf(&name, "Test %zu", i);
-        asprintf(&fileName, "/tmp/test.%zu.preset", i);
+    _ReadPresets();
+}
+
+void
+SrSwitcher::_ReadPresets()
+{
+    std::string installedFileName =
+        SrUtil_GetAbsolutePathForResource(_fileName);
+    std::ifstream ifs(installedFileName, std::ifstream::in);
+    if (not ifs) {
+        SrError("ReadPresets: error opening file %s\n",
+                installedFileName.c_str());
+        return;
+    }
+    
+    // XXX note:  not deleting existing presets!  This only works
+    // when called at initialization for now.
+    
+    // Read strings into a map
+    std::map<std::string, std::vector<std::string> > _presetMap;
+    
+    std::string str;
+    while (std::getline(ifs, str)) {
+        std::vector<std::string> strVec = SrUtil_SplitString(str, '|');
+        if (strVec.size() != 2) {
+            SrError("error parsing line: %s\n", str.c_str());
+            continue;
+        }
         
-        SrModel * model = _app->GetModel();
-        SrPreset * testPreset = new SrPreset(name, model, fileName, this);
-        _AddPreset(testPreset);
+        const std::string & presetName = strVec[0];
+        std::string presetStr = strVec[1];
+        presetStr += std::string("\n");
         
-        free(name);
-        free(fileName);
+        _presetMap[presetName].push_back(presetStr);
+    }
+    
+    for(auto iter = _presetMap.begin(); iter != _presetMap.end(); iter++) {
+        const std::string name = iter->first;
+        const std::vector<std::string> & strings = iter->second;
+        
+        SrPreset * newPreset = new SrPreset(name, _app->GetModel(), this);
+        newPreset->Unpickle(strings);
+        
+        _AddPreset(newPreset);
+        
     }
     
 }
@@ -69,7 +108,30 @@ SrSwitcher::_OnNewButtonPressed()
 {
     std::string name =
         ofSystemTextBoxDialog("New Preset Name:", "NewPreset");
-    printf("name: %s\n", name.c_str());
+    SrPreset * newPreset = new SrPreset(name, _app->GetModel(), this);
+    newPreset->Store();
+    _AddPreset(newPreset);
+}
+
+void
+SrSwitcher::_OnSaveButtonPressed()
+{
+    std::string tmpFileName = std::string("/tmp/") + _fileName;
+    FILE *fp = fopen(tmpFileName.c_str(), "w");
+    if (not fp) {
+        SrError("Error opening file");
+        return;
+    }
+    
+    for (int i = 0; i < _presets.size(); i++) {
+        SrPreset * preset = _presets[i];
+        const std::vector<std::string> & strings = preset->Pickle();
+        for(int j = 0; j < strings.size(); j++) {
+            fprintf(fp, "%s|%s", preset->GetName().c_str(), strings[j].c_str());
+        }
+    }
+    
+    fclose(fp);
 }
 
 void

@@ -38,7 +38,7 @@ SrApp::SrApp() :
     _audio("Audio", &_model),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
-    _switcher("Switcher", this),
+    _switcher("Switcher", "presets.txt", this),
     _uiColumnWidth(220),
     _uiMargin(10)
 {

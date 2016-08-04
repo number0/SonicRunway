@@ -30,8 +30,6 @@ SrFftPattern::~SrFftPattern()
 void
 SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    printf("fft opacity %f\n", GetOpacity()[0]);
-    
     const SrModel * model = GetModel();
     int numLights = model->GetLightsPerGate();
     

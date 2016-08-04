@@ -19,9 +19,9 @@ class SrSwitcher;
 
 //
 // A group of parameter settings that can be applied
-// to the app.  When 'saved', a preset writes out the
-// parameter values for the enabled patterns to
-// the given file.  When 'applied', it sets the values.
+// to the app.  When 'stored', a preset stores the settings
+// of the current patterns. When 'applied', it sets the
+// values.
 //
 // The intent here is to provide a way to configure the
 // runway across a variety of patterns and settings, and
@@ -33,32 +33,33 @@ class SrPreset : public SrUiMixin {
 public:
     SrPreset(const std::string & name,
              SrModel * model,
-             const std::string & fileName,
              SrSwitcher * switcher);
     ~SrPreset();
     
     void Apply() const;
-    void Save();
+    void Store();
+    
+    const std::vector<std::string> & Pickle() const;
+    void Unpickle(const std::vector<std::string> & strings);
     
 private:
     void _OnApplyPressed();
-    void _OnSavePressed();
+    void _OnStorePressed();
     
     void _WriteParamRecurse(const ofAbstractParameter & param,
                             ofParameterGroup & rootGroup,
-                            const std::string & parentPath,
-                            FILE *fp);
+                            const std::string & parentPath);
     
 private:
     SrModel * _model;
-    std::string _fileName;
+    std::vector<std::string> _strings;
     SrSwitcher * _switcher;
     
     ofxButton _applyButton;
-    ofxButton _saveButton;
+    ofxButton _storeButton;
     
     ofParameter<bool> _applyParam;
-    ofParameter<bool> _saveParam;
+    ofParameter<bool> _storeParam;
 };
 
 #endif /* Preset_hpp */

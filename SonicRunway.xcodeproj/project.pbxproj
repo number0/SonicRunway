@@ -33,6 +33,7 @@
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
+		302626681D52F6270016DAF3 /* presets.txt in Resources */ = {isa = PBXBuildFile; fileRef = 302626671D52F6270016DAF3 /* presets.txt */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
@@ -254,6 +255,7 @@
 		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
 		30216C3F1D31976300D2B07F /* Preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preset.cpp; sourceTree = "<group>"; };
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
+		302626671D52F6270016DAF3 /* presets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = presets.txt; path = Resources/presets.txt; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
 		302F35941C93CA39001D5E51 /* OnsetHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OnsetHistory.hpp; path = Input/OnsetHistory.hpp; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 		3068B2411CB576550092949A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				302626671D52F6270016DAF3 /* presets.txt */,
 				303E6FF81D4CFE9A009BC38A /* lightning */,
 				7AD9994B1D2A118F002BD0F3 /* shaderFrag.glsl */,
 				7AD9994C1D2A118F002BD0F3 /* shaderGeom.glsl */,
@@ -941,8 +944,8 @@
 				308CEE5B1C48598D007C124A /* Artnet.cpp */,
 				308CEE5C1C48598D007C124A /* Artnet.hpp */,
 				302695351C8FEE1D007F749C /* Buffer.hpp */,
-				30C2F4591D3AE647003F4910 /* Debug.cpp */,
 				30C2F45A1D3AE647003F4910 /* Debug.hpp */,
+				30C2F4591D3AE647003F4910 /* Debug.cpp */,
 				30C844371C42D110006452BE /* Model.cpp */,
 				30C844381C42D110006452BE /* Model.hpp */,
 				30216C3F1D31976300D2B07F /* Preset.cpp */,
@@ -1082,6 +1085,7 @@
 				303E70911D4CFEBF009BC38A /* lightning71.png in Resources */,
 				303E70831D4CFEBF009BC38A /* lightning57.png in Resources */,
 				303E707D1D4CFEBF009BC38A /* lightning51.png in Resources */,
+				302626681D52F6270016DAF3 /* presets.txt in Resources */,
 				303E70591D4CFEBF009BC38A /* lightning15.png in Resources */,
 				7AD999491D29E652002BD0F3 /* light.png in Resources */,
 				303E70731D4CFEBF009BC38A /* lightning41.png in Resources */,

@@ -18,7 +18,9 @@ class SrSwitcher : public SrUiMixin {
     typedef SrSwitcher This;
     
 public:
-    SrSwitcher(const std::string & name, SrApp * app);
+    SrSwitcher(const std::string & name,
+               const std::string & fileName,
+               SrApp * app);
     virtual ~SrSwitcher();
     
     void Update();
@@ -29,9 +31,13 @@ private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;
     void _ApplyPreset(SrPreset * preset);
+    void _ReadPresets();
+    
     void _OnNewButtonPressed();
+    void _OnSaveButtonPressed();
     
 private:
+    std::string _fileName;
     SrApp * _app;
     
     ofParameter<bool> _cycleAutomatically;
@@ -39,6 +45,7 @@ private:
     ofParameter<float> _secondsToNextPreset;
     
     ofxButton _newButton;
+    ofxButton _saveButton;
     
     ofxPanel _presetPanel;
     std::vector<SrPreset *> _presets;

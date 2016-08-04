@@ -27,7 +27,6 @@ SrImageSequence::SrImageSequence(const std::string & baseFileName,
             asprintf(&str, "%s%zu.png", prefix.c_str(), i + 1);
         }
         
-        printf("loading image %s\n", str);
         _images[i].load(str);
         
         free(str);

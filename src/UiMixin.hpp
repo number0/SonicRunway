@@ -31,6 +31,8 @@ public:
     ofxPanel * GetUiPanel() const;
     ofParameterGroup & GetParameterGroup();
     
+    const std::string & GetName() const;
+    
 protected:
     // Subclasses call this from their constructor to
     // Add UI elements to the panel for this pattern.
@@ -43,6 +45,7 @@ protected:
     }
     
 private:
+    std::string _name;
     ofxPanel * _panel;
     ofParameterGroup _parameterGroup;
 };
