@@ -34,6 +34,11 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _secondsToNextPreset.setMax(10.0);
     _AddUIParameter(_secondsToNextPreset);
     
+    _newButton.setup("New", 40, 40);
+    _newButton.addListener(this, &This::_OnNewButtonPressed);
+    _AddUI(&_newButton);
+    
+    _presetPanel.setup("Presets");
     _AddUI(&_presetPanel);
     
     // Make a few presets for testing..
@@ -57,6 +62,14 @@ SrSwitcher::~SrSwitcher()
 {
     // XXX Should delete presets here...
     
+}
+
+void
+SrSwitcher::_OnNewButtonPressed()
+{
+    std::string name =
+        ofSystemTextBoxDialog("New Preset Name:", "NewPreset");
+    printf("name: %s\n", name.c_str());
 }
 
 void

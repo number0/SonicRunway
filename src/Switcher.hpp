@@ -29,6 +29,7 @@ private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;
     void _ApplyPreset(SrPreset * preset);
+    void _OnNewButtonPressed();
     
 private:
     SrApp * _app;
@@ -36,6 +37,8 @@ private:
     ofParameter<bool> _cycleAutomatically;
     ofParameter<float> _secondsBetweenPresets;
     ofParameter<float> _secondsToNextPreset;
+    
+    ofxButton _newButton;
     
     ofxPanel _presetPanel;
     std::vector<SrPreset *> _presets;

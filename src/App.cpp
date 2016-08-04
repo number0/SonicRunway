@@ -55,7 +55,8 @@ SrApp::SrApp() :
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
-    _globalPanel.add(_switcher.GetUiPanel());
+    
+    _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
     _patternsParameterGroup.setName("Patterns");
     _model.GetParameterGroup().add(_patternsParameterGroup);
@@ -165,7 +166,7 @@ SrApp::_AddPattern(SrPattern * pattern)
     if (panelIdx >= _patternPanels.size()) {
         ofxPanel * newPanel = new ofxPanel();
         newPanel->setup("Patterns");
-        newPanel->setPosition(_uiMargin + _uiColumnWidth * (1 + panelIdx), _uiMargin);
+        newPanel->setPosition(_uiMargin + _uiColumnWidth * (2 + panelIdx), _uiMargin);
         _patternPanels.push_back(newPanel);
     }
     
@@ -243,10 +244,11 @@ SrApp::Draw()
     
     ofBackground(40,40,40);
     
-    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 1);
+    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
     _model.RenderFrameBuffer(previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     
     _globalPanel.draw();
+    _switcher.GetUiPanel()->draw();
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
