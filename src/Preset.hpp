@@ -11,8 +11,9 @@
 
 #include <stdio.h>
 #include <string>
-
-#include "UiMixin.hpp"
+#include <vector>
+#include "ofMain.h"
+#include "ofxGui.h"
 
 class SrModel;
 class SrSwitcher;
@@ -27,14 +28,22 @@ class SrSwitcher;
 // runway across a variety of patterns and settings, and
 // return to that state with a single button.
 //
-class SrPreset : public SrUiMixin {
+class SrPreset {
     typedef SrPreset This;
     
 public:
     SrPreset(const std::string & name,
              SrModel * model,
              SrSwitcher * switcher);
-    ~SrPreset();
+    virtual ~SrPreset();
+    
+    const std::string & GetName() const;
+    
+    // Access UI so we can stick it in the panel
+    ofxToggle * GetToggle();
+    
+    bool IsCurrentPreset() const;
+    void SetIsCurrentPreset(bool isCurrentPreset);
     
     void Apply() const;
     void Store();
@@ -43,23 +52,20 @@ public:
     void Unpickle(const std::vector<std::string> & strings);
     
 private:
-    void _OnApplyPressed();
-    void _OnStorePressed();
-    
     void _WriteParamRecurse(const ofAbstractParameter & param,
                             ofParameterGroup & rootGroup,
                             const std::string & parentPath);
     
+    void _OnTogglePressed(bool & value);
+    
 private:
+    std::string _name;
     SrModel * _model;
     std::vector<std::string> _strings;
     SrSwitcher * _switcher;
     
-    ofxButton _applyButton;
-    ofxButton _storeButton;
-    
-    ofParameter<bool> _applyParam;
-    ofParameter<bool> _storeParam;
+    ofParameter<bool> _isCurrentPreset;
+    ofxToggle _toggle;
 };
 
 #endif /* Preset_hpp */

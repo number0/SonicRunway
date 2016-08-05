@@ -15,26 +15,44 @@
 SrPreset::SrPreset(const std::string & name,
                    SrModel * model,
                    SrSwitcher * switcher) :
-    SrUiMixin(name),
+    _name(name),
     _model(model),
-    _switcher(switcher)
+    _switcher(switcher),
+    _isCurrentPreset(false)
 {
-    SrDebug("constructed preset\n");
-    
-    _applyButton.setup("Apply", 40, 40);
-    _AddUI(&_applyButton);
-    
-    _storeButton.setup("Store", 40, 40);
-    _AddUI(&_storeButton);
-    
-    _applyButton.addListener(this, &This::_OnApplyPressed);
-    _storeButton.addListener(this, &This::_OnStorePressed);
+    _toggle.setup(_isCurrentPreset);
+    _toggle.setName(name);
+    _toggle.addListener(this, &This::_OnTogglePressed);
 }
 
 SrPreset::~SrPreset()
 {
     SrDebug("destroyed preset\n");
     
+}
+
+const std::string &
+SrPreset::GetName() const
+{
+    return _name;
+}
+
+ofxToggle *
+SrPreset::GetToggle()
+{
+    return &_toggle;
+}
+
+bool
+SrPreset::IsCurrentPreset() const
+{
+    return (bool) _isCurrentPreset;
+}
+
+void
+SrPreset::SetIsCurrentPreset(bool isCurrentPreset)
+{
+    _isCurrentPreset = isCurrentPreset;
 }
 
 void
@@ -114,18 +132,6 @@ SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
     }
 }
 
-void
-SrPreset::_OnApplyPressed()
-{
-    _switcher->OnPresetApplyClicked(this);
-}
-
-void
-SrPreset::_OnStorePressed()
-{
-    Store();
-}
-
 const std::vector<std::string> &
 SrPreset::Pickle() const
 {
@@ -136,4 +142,12 @@ void
 SrPreset::Unpickle(const std::vector<std::string> & strings)
 {
     _strings = strings;
+}
+
+void
+SrPreset::_OnTogglePressed(bool & value)
+{
+    if (value) {
+        _switcher->OnPresetTogglePressed(this);
+    }
 }

@@ -1,11 +1,13 @@
-A|/Runway/Patterns/Phrase/Enabled: 1
-A|/Runway/Patterns/Diagnostic/Enabled: 1
-B|/Runway/Patterns/Video/Enabled: 1
-B|/Runway/Patterns/Video/Scroll: 0
-B|/Runway/Patterns/Anim/Enabled: 1
-B|/Runway/Patterns/Anim/Scroll: 0
-Lots of Stars|/Runway/Patterns/Fft/Enabled: 1
-Lots of Stars|/Runway/Patterns/Fft/Hue: 0
-Lots of Stars|/Runway/Patterns/Star/Enabled: 1
-Lots of Stars|/Runway/Patterns/Star/Number: 13
-Lots of Stars|/Runway/Patterns/Star/Threshold: 0.0102041
+DiagnosticBeat|/Runway/Patterns/Phrase/Enabled: 1
+DiagnosticBeat|/Runway/Patterns/Diagnostic/Enabled: 1
+VideoAnim|/Runway/Patterns/Video/Enabled: 1
+VideoAnim|/Runway/Patterns/Video/Scroll: 0
+VideoAnim|/Runway/Patterns/Anim/Enabled: 1
+VideoAnim|/Runway/Patterns/Anim/Scroll: 0
+PurpleSwirl|/Runway/Patterns/Stripes/Enabled: 1
+PurpleSwirl|/Runway/Patterns/Stripes/Hue: 0.693878
+PurpleSwirl|/Runway/Patterns/Stripes/NumStripes: 6
+PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
+PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
+PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
+PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20

@@ -26,6 +26,8 @@ class SrPreset;
 // The switcher can also automatically switch between presets, choosing
 // a new one randomly from the group at a specified interval.
 //
+// Presets must be uniquely named, and not contain a '|', '/', or ':'
+//
 class SrSwitcher : public SrUiMixin {
     typedef SrSwitcher This;
     
@@ -37,7 +39,7 @@ public:
     
     void Update();
     
-    void OnPresetApplyClicked(SrPreset * preset);
+    void OnPresetTogglePressed(SrPreset *preset);
     
 private:
     void _AddPreset(SrPreset * preset);
@@ -51,6 +53,7 @@ private:
 private:
     std::string _fileName;
     SrApp * _app;
+    SrPreset * _currentPreset;
     
     ofParameter<bool> _cycleAutomatically;
     ofParameter<float> _secondsBetweenPresets;

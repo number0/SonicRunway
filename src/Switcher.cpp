@@ -20,6 +20,7 @@ SrSwitcher::SrSwitcher(const std::string & name,
     SrUiMixin(name),
     _fileName(fileName),
     _app(app),
+    _currentPreset(NULL),
     _cycleAutomatically(false),
     _secondsBetweenPresets(3.0),
     _secondsToNextPreset((float) _secondsBetweenPresets)
@@ -41,7 +42,7 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _newButton.addListener(this, &This::_OnNewButtonPressed);
     _AddUI(&_newButton);
     
-    _saveButton.setup("Save", 40, 40);
+    _saveButton.setup("Write /tmp/presets", 40, 40);
     _saveButton.addListener(this, &This::_OnSaveButtonPressed);
     _AddUI(&_saveButton);
     
@@ -111,6 +112,7 @@ SrSwitcher::_OnNewButtonPressed()
     SrPreset * newPreset = new SrPreset(name, _app->GetModel(), this);
     newPreset->Store();
     _AddPreset(newPreset);
+    _ApplyPreset(newPreset);
 }
 
 void
@@ -138,7 +140,7 @@ void
 SrSwitcher::_AddPreset(SrPreset * preset)
 {
     _presets.push_back(preset);
-    _presetPanel.add(preset->GetUiPanel());
+    _presetPanel.add(preset->GetToggle());
 }
 
 void
@@ -169,12 +171,6 @@ SrSwitcher::_GetRandomPreset() const
 }
 
 void
-SrSwitcher::OnPresetApplyClicked(SrPreset * preset)
-{
-    _ApplyPreset(preset);
-}
-
-void
 SrSwitcher::_ApplyPreset(SrPreset * preset)
 {
     if (not preset) {
@@ -182,7 +178,15 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
         return;
     }
     
-    // First, disable all patterns.  This way we end up with only
+    _currentPreset = preset;
+    
+    // Sync the preset buttons with the current state.
+    for (size_t i = 0; i < _presets.size(); i++) {
+        _presets[i]->SetIsCurrentPreset(false);
+    }
+    preset->SetIsCurrentPreset(true);
+    
+    // Disable all patterns.  This way we end up with only
     // the ones explicitly enabled in the preset.
     const std::vector<SrPattern *> & patterns = _app->GetPatterns();
     for (size_t i = 0; i < patterns.size(); i++) {
@@ -191,4 +195,12 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
     
     // Now apply the new preset.
     preset->Apply();
+}
+
+void
+SrSwitcher::OnPresetTogglePressed(SrPreset * preset)
+{
+    if (preset != _currentPreset) {
+        _ApplyPreset(preset);
+    }
 }
