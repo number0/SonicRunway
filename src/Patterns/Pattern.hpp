@@ -48,7 +48,7 @@ public:
     // buffered across time.
     void SetEnabled(bool enabled);
     
-    // Return true if the pattern is 'on' at any gate see GetOpacity
+    // Return true if the pattern is 'on' at any gate.
     // This lets patterns skip computation if they are off everywhere.
     bool IsOnAtAnyGate() const;
     
