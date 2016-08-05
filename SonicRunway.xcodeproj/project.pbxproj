@@ -163,6 +163,11 @@
 		30E57E2C1CE194730031D5AF /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57E1D1CE194730031D5AF /* OscPrintReceivedElements.cpp */; };
 		30E57E2D1CE194730031D5AF /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57E1F1CE194730031D5AF /* OscReceivedElements.cpp */; };
 		30E57E2E1CE194730031D5AF /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E57E211CE194730031D5AF /* OscTypes.cpp */; };
+		30EB8EE81D55239F004EF979 /* Instructions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 30EB8EDC1D55239F004EF979 /* Instructions.txt */; };
+		30EB8EE91D55239F004EF979 /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30EB8EE01D55239F004EF979 /* ofxTCPClient.cpp */; };
+		30EB8EEA1D55239F004EF979 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30EB8EE21D55239F004EF979 /* ofxTCPManager.cpp */; };
+		30EB8EEB1D55239F004EF979 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30EB8EE41D55239F004EF979 /* ofxTCPServer.cpp */; };
+		30EB8EEC1D55239F004EF979 /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30EB8EE61D55239F004EF979 /* ofxUDPManager.cpp */; };
 		30FDB28D1C8A65350079CE93 /* FftPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FDB28B1C8A65350079CE93 /* FftPattern.cpp */; };
 		479DCA850DD8BB469A777AD4 /* ofxAubioBeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96B8F6D2ECF14F9304EBD6C /* ofxAubioBeat.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
@@ -442,6 +447,17 @@
 		30E57E201CE194730031D5AF /* OscReceivedElements.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscReceivedElements.h; sourceTree = "<group>"; };
 		30E57E211CE194730031D5AF /* OscTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
 		30E57E221CE194730031D5AF /* OscTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
+		30EB8EDC1D55239F004EF979 /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
+		30EB8EDE1D55239F004EF979 /* ofxNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetwork.h; sourceTree = "<group>"; };
+		30EB8EDF1D55239F004EF979 /* ofxNetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetworkUtils.h; sourceTree = "<group>"; };
+		30EB8EE01D55239F004EF979 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPClient.cpp; sourceTree = "<group>"; };
+		30EB8EE11D55239F004EF979 /* ofxTCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPClient.h; sourceTree = "<group>"; };
+		30EB8EE21D55239F004EF979 /* ofxTCPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPManager.cpp; sourceTree = "<group>"; };
+		30EB8EE31D55239F004EF979 /* ofxTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPManager.h; sourceTree = "<group>"; };
+		30EB8EE41D55239F004EF979 /* ofxTCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPServer.cpp; sourceTree = "<group>"; };
+		30EB8EE51D55239F004EF979 /* ofxTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPServer.h; sourceTree = "<group>"; };
+		30EB8EE61D55239F004EF979 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUDPManager.cpp; sourceTree = "<group>"; };
+		30EB8EE71D55239F004EF979 /* ofxUDPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
 		30FDB28B1C8A65350079CE93 /* FftPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FftPattern.cpp; path = Patterns/FftPattern.cpp; sourceTree = "<group>"; };
 		30FDB28C1C8A65350079CE93 /* FftPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FftPattern.hpp; path = Patterns/FftPattern.hpp; sourceTree = "<group>"; };
 		3B6AFA97F893CE28547CFCDC /* ofxAubio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubio.h; path = ../../../addons/ofxAubio/src/ofxAubio.h; sourceTree = SOURCE_ROOT; };
@@ -840,6 +856,41 @@
 			path = osc;
 			sourceTree = "<group>";
 		};
+		30EB8EDA1D55239F004EF979 /* ofxNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				30EB8EDB1D55239F004EF979 /* docs */,
+				30EB8EDD1D55239F004EF979 /* src */,
+			);
+			name = ofxNetwork;
+			path = ../../../addons/ofxNetwork;
+			sourceTree = "<group>";
+		};
+		30EB8EDB1D55239F004EF979 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				30EB8EDC1D55239F004EF979 /* Instructions.txt */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		30EB8EDD1D55239F004EF979 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				30EB8EDE1D55239F004EF979 /* ofxNetwork.h */,
+				30EB8EDF1D55239F004EF979 /* ofxNetworkUtils.h */,
+				30EB8EE01D55239F004EF979 /* ofxTCPClient.cpp */,
+				30EB8EE11D55239F004EF979 /* ofxTCPClient.h */,
+				30EB8EE21D55239F004EF979 /* ofxTCPManager.cpp */,
+				30EB8EE31D55239F004EF979 /* ofxTCPManager.h */,
+				30EB8EE41D55239F004EF979 /* ofxTCPServer.cpp */,
+				30EB8EE51D55239F004EF979 /* ofxTCPServer.h */,
+				30EB8EE61D55239F004EF979 /* ofxUDPManager.cpp */,
+				30EB8EE71D55239F004EF979 /* ofxUDPManager.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		480A780D8D0308AE4A368801 /* ofxGui */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +941,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				30EB8EDA1D55239F004EF979 /* ofxNetwork */,
 				93621CC75EED5D310C6ADC19 /* ofxAubio */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				30E57DF81CE194730031D5AF /* ofxOsc */,
@@ -1105,6 +1157,7 @@
 				303E70841D4CFEBF009BC38A /* lightning58.png in Resources */,
 				303E70691D4CFEBF009BC38A /* lightning31.png in Resources */,
 				303E70721D4CFEBF009BC38A /* lightning40.png in Resources */,
+				30EB8EE81D55239F004EF979 /* Instructions.txt in Resources */,
 				303E70621D4CFEBF009BC38A /* lightning24.png in Resources */,
 				303E708F1D4CFEBF009BC38A /* lightning69.png in Resources */,
 				303E708A1D4CFEBF009BC38A /* lightning64.png in Resources */,
@@ -1165,6 +1218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30E3602E1D37BC5D0046FA70 /* DiagnosticPattern.cpp in Sources */,
+				30EB8EEA1D55239F004EF979 /* ofxTCPManager.cpp in Sources */,
 				308CEE591C48593A007C124A /* tod.c in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
@@ -1172,11 +1226,14 @@
 				30C2F45B1D3AE647003F4910 /* Debug.cpp in Sources */,
 				479DCA850DD8BB469A777AD4 /* ofxAubioBeat.cpp in Sources */,
 				C60077973A257D8F44947E2E /* ofxAubioBlock.cpp in Sources */,
+				30EB8EEC1D55239F004EF979 /* ofxUDPManager.cpp in Sources */,
 				67383740F5CC47ED5F955A76 /* ofxAubioMelBands.cpp in Sources */,
+				30EB8EEB1D55239F004EF979 /* ofxTCPServer.cpp in Sources */,
 				9C7B8B4D99CDFC508E76CC3A /* ofxAubioOnset.cpp in Sources */,
 				30515D671D513B4300021280 /* Switcher.cpp in Sources */,
 				30E57E2C1CE194730031D5AF /* OscPrintReceivedElements.cpp in Sources */,
 				30AEA5981C4052A80034C794 /* README.md in Sources */,
+				30EB8EE91D55239F004EF979 /* ofxTCPClient.cpp in Sources */,
 				30E360311D37CA880046FA70 /* RmsPattern.cpp in Sources */,
 				302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */,
 				303A0CD41D31516F005D4636 /* PhrasePattern.cpp in Sources */,
