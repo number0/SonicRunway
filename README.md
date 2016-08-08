@@ -74,7 +74,12 @@ TODO:
 
 - Get quicktimes to loop and play at correct frame rate.
 
-- Improve FFT visualization.
+- Improve FFT visualization:
+    - see if we can increase the number of FFT buckets
+    - blend between the bucket regions to avoid segmenting
+
+- Debug crash -- maybe in 'BigTrails' when rotation and jitter
+  have high values?
 
 - Allow playback of band-pass filters
 
@@ -82,6 +87,10 @@ TODO:
 
 - Design TouchOSC layout -- possibly add some 'master' parameters that all
   patterns can key off.
+
+- Add some mechanism for basic patterns to have slowly changing
+  parameters.  Maybe this is a default property of the 'master'
+  parameters?
 
 - Fix up gamma correction -- look at other libraries to implement 
   mapping to LED color space.  -- maybe it's good enough as is?
