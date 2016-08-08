@@ -13,6 +13,7 @@
 		295D34481D3C0E0C009CDC91 /* ArcPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D34461D3C0E0C009CDC91 /* ArcPattern.cpp */; };
 		295D34501D3C48B8009CDC91 /* PhasorPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D344E1D3C48B8009CDC91 /* PhasorPattern.cpp */; };
 		295D34541D3C5A14009CDC91 /* TrailsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295D34521D3C5A14009CDC91 /* TrailsPattern.cpp */; };
+		295E8F2D1D5591930054DB40 /* NetworkInputPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295E8F2B1D5591920054DB40 /* NetworkInputPattern.cpp */; };
 		29D2205D1D3ABE380040B22B /* StarPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205B1D3ABE380040B22B /* StarPattern.cpp */; };
 		29D220601D3AC50E0040B22B /* RainbowPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */; };
 		3002E85E1C88F9C900689E57 /* Previs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3002E85C1C88F9C900689E57 /* Previs.cpp */; };
@@ -234,6 +235,8 @@
 		295D344F1D3C48B8009CDC91 /* PhasorPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PhasorPattern.hpp; path = Patterns/PhasorPattern.hpp; sourceTree = "<group>"; };
 		295D34521D3C5A14009CDC91 /* TrailsPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TrailsPattern.cpp; path = Patterns/TrailsPattern.cpp; sourceTree = "<group>"; };
 		295D34531D3C5A14009CDC91 /* TrailsPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TrailsPattern.hpp; path = Patterns/TrailsPattern.hpp; sourceTree = "<group>"; };
+		295E8F2B1D5591920054DB40 /* NetworkInputPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkInputPattern.cpp; path = Patterns/NetworkInputPattern.cpp; sourceTree = "<group>"; };
+		295E8F2C1D5591920054DB40 /* NetworkInputPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NetworkInputPattern.hpp; path = Patterns/NetworkInputPattern.hpp; sourceTree = "<group>"; };
 		29D2205B1D3ABE380040B22B /* StarPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StarPattern.cpp; path = Patterns/StarPattern.cpp; sourceTree = "<group>"; };
 		29D2205C1D3ABE380040B22B /* StarPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StarPattern.hpp; path = Patterns/StarPattern.hpp; sourceTree = "<group>"; };
 		29D2205E1D3AC50E0040B22B /* RainbowPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RainbowPattern.cpp; path = Patterns/RainbowPattern.cpp; sourceTree = "<group>"; };
@@ -734,6 +737,8 @@
 				2935D9491D3DD2C2007F45E1 /* BigTrailsPattern.hpp */,
 				303E6E611D4CE00C009BC38A /* AnimPattern.cpp */,
 				303E6E621D4CE00C009BC38A /* AnimPattern.hpp */,
+				295E8F2B1D5591920054DB40 /* NetworkInputPattern.cpp */,
+				295E8F2C1D5591920054DB40 /* NetworkInputPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -1278,6 +1283,7 @@
 				30E57E291CE194730031D5AF /* NetworkingUtils.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				308CEE551C48593A007C124A /* artnet.c in Sources */,
+				295E8F2D1D5591930054DB40 /* NetworkInputPattern.cpp in Sources */,
 				30216C411D31976300D2B07F /* Preset.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				30E16C2E1CDEF76C008729E7 /* BeatPattern.cpp in Sources */,

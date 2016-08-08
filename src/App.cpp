@@ -25,6 +25,7 @@
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
 #include "BigTrailsPattern.hpp"
+#include "NetworkInputPattern.hpp"
 
 #include "Switcher.hpp"
 
@@ -128,7 +129,11 @@ SrApp::SrApp() :
     SrBigTrailsPattern *bigTrailsPattern =
     new SrBigTrailsPattern("Big Trails", &_model, &_audio);
     _AddPattern(bigTrailsPattern);
-    
+
+    SrNetworkInputPattern *networkInputPattern =
+    new SrNetworkInputPattern("Network Input", &_model, &_audio);
+    _AddPattern(networkInputPattern);
+
     // Enable the patterns we want on by default.
     //triggerPattern->SetEnabled(true);
     //diagnosticPattern->SetEnabled(true);
