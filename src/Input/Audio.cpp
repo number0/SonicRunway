@@ -29,9 +29,10 @@ SrAudio::SrAudio(const std::string & name,
     _beatHistory(model),
     _outputDelayed(false),
     _fullAudioBufferIndex(0),
-    _playDelayedAudioParam(false),
+    _playDelayedAudioParam(true),
     _resetDownbeatParam(false),
-    _resetMeasureParam(false)
+    _resetMeasureParam(false),
+    _fftSumMax(0.1)
 {
     _InitAlgorithms();
     _InitUI();
@@ -62,8 +63,6 @@ SrAudio::_InitAlgorithms()
     int hopSize = bufferSize / 2;
     
     _bands.setup("default", bufferSize, hopSize, sampleRate);
-    
-    _fftSumMax = 0.1;
 }
 
 void
@@ -87,7 +86,12 @@ SrAudio::_InitUI()
     _beatGui.add(_bpmSlider.setup("bpm", 0, 0, 250));
     _beatGui.add(_beatIndexSlider.setup("index", 0, 0, 4));
     _beatGui.add(_measureIndexSlider.setup("index", 0, 0, 8));
-    _beatGui.add(_fftSumSlider.setup("Calibrated FFT", 0, 0, 1)); // XXX Not really part of 'beat'
+    
+    // Commenting this out because the value of calibrated
+    // FFT is occasionally nan, which [I think] is causing a crash
+    // in the drawing code.  More debugging to follow...
+    //
+    //_beatGui.add(_fftSumSlider.setup("Calibrated FFT", 0, 0, 1)); // XXX Not really part of 'beat'
     _AddUI(&_beatGui);
     
     /*

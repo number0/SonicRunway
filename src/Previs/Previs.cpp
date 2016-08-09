@@ -15,6 +15,7 @@ SrPrevis::SrPrevis(SrModel * model, SrAudio * audio) :
     SrUiMixin("Previs"),
     _model(model),
     _audio(audio),
+    _drawPrevisParam(true),
     _reverseAngleParam(false),
     _geomShaderDrawing(true),
     _animatedCameraIndex(-1)
@@ -31,6 +32,9 @@ SrPrevis::SrPrevis(SrModel * model, SrAudio * audio) :
     _camera.setPosition(0,1018,5.8);
     
     _SetupLights();
+    
+    _drawPrevisParam.setName("Show Previs");
+    _AddUIParameter(_drawPrevisParam);
     
     _reverseAngleParam.setName("Reverse Angle");
     _AddUIParameter(_reverseAngleParam);
@@ -55,6 +59,10 @@ SrPrevis::~SrPrevis()
 void
 SrPrevis::Draw(float x, float y, float width, float height)
 {
+    if (not (bool) _drawPrevisParam) {
+        return;
+    }
+    
     ofPushStyle();
     
     // Background
