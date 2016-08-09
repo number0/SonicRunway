@@ -18,14 +18,17 @@ class SrAudio;
 // SrGlobalParameters -- a few global knobs and dials that are intended
 // to control values across many patterns at once.  These include:
 //
-//   - cycles that vary periodically, along with the beat.
+//   - cycles that vary periodically, along with the beat.  These cycle from
+//     [0,1) unless 'cycleAutomatically' is off.
 //
 //   - a few manual knobs/dials intended to be surfaced as TouchOSC controls
 //
 // Patterns should use these use these values to modify the style of their
 // display, such as color, speed, decay, etc..
 //
-// Note:  parameters are called 'Dial' even though they show up as sliders
+// See SrExamplePattern for an example of how to make use of global parameters.
+//
+// Note:  some parameters are called 'Dial' even though they show up as sliders
 // in the default UI.  We intend to represent them as dials through TouchOSC
 //
 // So far:
