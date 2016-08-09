@@ -44,6 +44,12 @@ SrPattern::GetAudio() const
     return _audio;
 }
 
+SrGlobalParameters *
+SrPattern::GetGlobalParameters() const
+{
+    return _model->GetGlobalParameters();
+}
+
 void
 SrPattern::SetEnabled(bool enabled)
 {

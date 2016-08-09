@@ -26,6 +26,7 @@
 #include "RmsPattern.hpp"
 #include "BigTrailsPattern.hpp"
 #include "NetworkInputPattern.hpp"
+#include "GlobalParameters.hpp"
 
 #include "Switcher.hpp"
 
@@ -41,7 +42,8 @@ SrApp::SrApp() :
     _previs(&_model, &_audio),
     _switcher("Switcher", "presets.txt", this),
     _uiColumnWidth(220),
-    _uiMargin(10)
+    _uiMargin(10),
+    _previsXCoord(0)
 {
     ofSetFrameRate(_model.ComputeFramesPerSecond());
     
@@ -56,6 +58,7 @@ SrApp::SrApp() :
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
+    _globalPanel.add(_model.GetGlobalParameters()->GetUiPanel());
     
     _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
@@ -65,7 +68,7 @@ SrApp::SrApp() :
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
-        new SrExamplePattern("Example", &_model, &_audio);
+    new SrExamplePattern("Example", &_model, &_audio);
     _AddPattern(examplePattern);
     
     SrBeatPattern * beatPattern =
@@ -144,8 +147,8 @@ SrApp::SrApp() :
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
-    stripesPattern->GetUiPanel()->minimizeAll();
-    
+    // Calculate X position of the previs
+    _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
 }
 
 SrApp::~SrApp()
@@ -214,6 +217,8 @@ SrApp::AudioOut(float *output, int bufferSize, int nChannels)
 void
 SrApp::Update()
 {
+    _model.Update();
+    
     _oscParameterSync.update();
     
     _switcher.Update();
@@ -249,17 +254,17 @@ SrApp::Draw()
     
     ofBackground(40,40,40);
     
-    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
-    _model.RenderFrameBuffer(previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
+    _model.RenderFrameBuffer(_previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     
     _globalPanel.draw();
+    
     _switcher.GetUiPanel()->draw();
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
     }
     
-    _previs.Draw(previsXCoord, 100, 1280, 720);
+    _previs.Draw(_previsXCoord, 100, 1280, 720);
     
     _artnet.UpdateLights();
 }

@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <vector>
 
-#include "Model.hpp"
 #include "Types.hpp"
+#include "Model.hpp"
 
 //
 // SrSimpleBuffer is a templated class that implements a circular buffer.

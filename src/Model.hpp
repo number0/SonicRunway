@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "ofMain.h"
 
+class SrGlobalParameters;
+
 //
 // Model class for the app.  Holds global settings and
 // the main frame buffer that store the color of all the lights.
@@ -60,6 +62,8 @@ public:
     
     ofParameterGroup & GetParameterGroup();
     
+    SrGlobalParameters * GetGlobalParameters();
+    
 private:
     int _sampleRate;
     int _bufferSize;
@@ -72,6 +76,8 @@ private:
     float _speedOfSound;
     float _archLength;
     int _framesPerGate;
+    SrGlobalParameters * _globalParameters;
+    
     ofParameterGroup _parameterGroup;
     
     ofFbo _frameBuffer;

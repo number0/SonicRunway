@@ -7,6 +7,7 @@
 //
 
 #include "ExamplePattern.hpp"
+#include "GlobalParameters.hpp"
 #include <algorithm>
 
 SrExamplePattern::SrExamplePattern(const std::string & name,
@@ -34,7 +35,9 @@ SrExamplePattern::~SrExamplePattern()
 void
 SrExamplePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hue = _hueParam;
+    float hue = _hueParam + GetGlobalParameters()->GetDial1();
+    hue = fmod(hue, 1.0);
+    
     float angle = _angleParam;
     
     float t = angle / 270; // degrees

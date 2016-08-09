@@ -9,6 +9,7 @@
 #include "FftPattern.hpp"
 #include "Audio.hpp"
 #include "Model.hpp"
+#include "GlobalParameters.hpp"
 
 SrFftPattern::SrFftPattern(const std::string & name,
                            SrModel * model, SrAudio * audio) :
@@ -39,7 +40,8 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         return;
     }
     
-    float hueShift = (float) _hueShiftParam;
+    float hueShift = (float) _hueShiftParam +
+        GetGlobalParameters()->GetDial1();
     
     for(int i = 0; i < numLights; i++) {
         float t = (float) i / numLights;
@@ -57,7 +59,7 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         ofFloatColor c;
         float baseColor = 0.15 + hueShift;
         float hue = baseColor - 0.4 * (1.0 - fftValue);
-        if (hue < 0.0) {
+        while (hue < 0.0) {
             hue += 1.0;
         }
 

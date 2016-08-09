@@ -18,6 +18,7 @@
 
 class SrModel;
 class SrAudio;
+class SrGlobalParameters;
 
 //
 // Base class for patterns that draw themselves to the array
@@ -33,7 +34,8 @@ class SrAudio;
 //
 class SrPattern : public SrUiMixin {
 public:
-    SrPattern(const std::string & name, SrModel * model, SrAudio * audio);
+    SrPattern(const std::string & name,
+              SrModel * model, SrAudio * audio);
     virtual ~SrPattern();
     
     // Called by the main app to update state.
@@ -78,6 +80,7 @@ protected:
     
     SrModel * GetModel() const;
     SrAudio * GetAudio() const;
+    SrGlobalParameters * GetGlobalParameters() const;
     
 private:
     SrModel *_model;

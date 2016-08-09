@@ -56,6 +56,7 @@ private:
     ofxOscParameterSync _oscParameterSync;
     float _uiColumnWidth;
     float _uiMargin;
+    float _previsXCoord;
     
 };
 

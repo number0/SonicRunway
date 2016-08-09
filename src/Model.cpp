@@ -7,6 +7,7 @@
 //
 
 #include "Model.hpp"
+#include "GlobalParameters.hpp"
 
 SrModel::SrModel() :
     _sampleRate(44100), // samples per second
@@ -18,7 +19,8 @@ SrModel::SrModel() :
     _distanceBetweenGates(32.0), // feet
     _speedOfSound(1126.0), // feet per second
     _archLength(31.0),     // feet
-    _framesPerGate(1)
+    _framesPerGate(1),
+    _globalParameters(new SrGlobalParameters("Global Params", this))
 {
     _parameterGroup.setName("Runway");
     _frameBuffer.allocate(_numGates, _lightsPerGate, GL_RGBA);
@@ -26,6 +28,7 @@ SrModel::SrModel() :
 
 SrModel::~SrModel()
 {
+    delete _globalParameters;
 }
 
 int
@@ -94,6 +97,12 @@ SrModel::ComputeFramesPerSecond() const
     return round((float) _framesPerGate / ComputeDelayPerGate());
 }
 
+SrGlobalParameters *
+SrModel::GetGlobalParameters()
+{
+    return _globalParameters;
+}
+
 const ofFloatPixels &
 SrModel::GetFloatPixels() const
 {
@@ -159,4 +168,10 @@ ofParameterGroup &
 SrModel::GetParameterGroup()
 {
     return _parameterGroup;
+}
+
+void
+SrModel::Update()
+{
+    _globalParameters->Update();
 }

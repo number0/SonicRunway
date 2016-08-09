@@ -135,6 +135,7 @@
 		306914881D3CA3B500256D3E /* RmsFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306914861D3CA3B500256D3E /* RmsFilter.cpp */; };
 		306DFD3F1C80100200AB9225 /* ofxArtnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306DFD3D1C80100200AB9225 /* ofxArtnet.cpp */; };
 		3074F8D11C874AF2008BD5EF /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3074F8CF1C874AF2008BD5EF /* Pattern.cpp */; };
+		308594BB1D599F740027A9A1 /* GlobalParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308594B91D599F740027A9A1 /* GlobalParameters.cpp */; };
 		308CEE551C48593A007C124A /* artnet.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE481C48593A007C124A /* artnet.c */; };
 		308CEE561C48593A007C124A /* misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE4C1C48593A007C124A /* misc.c */; };
 		308CEE571C48593A007C124A /* network.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE4E1C48593A007C124A /* network.c */; };
@@ -381,6 +382,8 @@
 		306DFD3E1C80100200AB9225 /* ofxArtnet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ofxArtnet.hpp; sourceTree = "<group>"; };
 		3074F8CF1C874AF2008BD5EF /* Pattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pattern.cpp; path = Patterns/Pattern.cpp; sourceTree = "<group>"; };
 		3074F8D01C874AF2008BD5EF /* Pattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Pattern.hpp; path = Patterns/Pattern.hpp; sourceTree = "<group>"; };
+		308594B91D599F740027A9A1 /* GlobalParameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlobalParameters.cpp; path = Input/GlobalParameters.cpp; sourceTree = "<group>"; };
+		308594BA1D599F740027A9A1 /* GlobalParameters.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GlobalParameters.hpp; path = Input/GlobalParameters.hpp; sourceTree = "<group>"; };
 		308CEE481C48593A007C124A /* artnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = artnet.c; sourceTree = "<group>"; };
 		308CEE491C48593A007C124A /* artnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = artnet.h; sourceTree = "<group>"; };
 		308CEE4A1C48593A007C124A /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
@@ -760,6 +763,8 @@
 				30511CBA1D05233000372B44 /* Video.hpp */,
 				303E6D951D4CD8F1009BC38A /* ImageSequence.cpp */,
 				303E6D961D4CD8F1009BC38A /* ImageSequence.hpp */,
+				308594B91D599F740027A9A1 /* GlobalParameters.cpp */,
+				308594BA1D599F740027A9A1 /* GlobalParameters.hpp */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -1240,6 +1245,7 @@
 				30AEA5981C4052A80034C794 /* README.md in Sources */,
 				30EB8EE91D55239F004EF979 /* ofxTCPClient.cpp in Sources */,
 				30E360311D37CA880046FA70 /* RmsPattern.cpp in Sources */,
+				308594BB1D599F740027A9A1 /* GlobalParameters.cpp in Sources */,
 				302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */,
 				303A0CD41D31516F005D4636 /* PhrasePattern.cpp in Sources */,
 				306565A31C472E7C00917ADB /* App.cpp in Sources */,
