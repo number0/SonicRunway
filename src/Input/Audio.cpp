@@ -29,7 +29,7 @@ SrAudio::SrAudio(const std::string & name,
     _beatHistory(model),
     _outputDelayed(false),
     _fullAudioBufferIndex(0),
-    _playDelayedAudioParam(false),
+    _playDelayedAudioParam(true),
     _resetDownbeatParam(false),
     _resetMeasureParam(false),
     _fftSumMax(0.1)
