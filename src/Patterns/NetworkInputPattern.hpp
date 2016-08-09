@@ -19,7 +19,8 @@ class SrNetworkInputPattern : public SrPattern {
 public:
     SrNetworkInputPattern(const std::string & name,
                           SrModel * model,
-                          SrAudio * audio);
+                          SrAudio * audio,
+                          SrGlobalParameters * globalParameters);
     virtual ~SrNetworkInputPattern();
     
 protected:

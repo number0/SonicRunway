@@ -8,13 +8,21 @@
 
 #include "GlobalParameters.hpp"
 #include "Model.hpp"
+#include "Audio.hpp"
+#include "BeatHistory.hpp"
 
 SrGlobalParameters::SrGlobalParameters(const std::string & name,
-                                       SrModel * model) :
+                                       SrModel * model,
+                                       SrAudio * audio) :
     SrUiMixin(name),
     _model(model),
-    _cycleAutomatically(false),
-    _secondsPerCycle(2),
+    _audio(audio),
+    _cycleAutomatically(true),
+    _twoBeatCycle(0.0),
+    _measureCycle(0.0),
+    _phraseCycle(0.0),
+    _slowCycle(0.0),
+    _verySlowCycle(0.0),
     _dial1Parameter(0.5),
     _dial2Parameter(0.5),
     _slider1Parameter(0.5),
@@ -22,9 +30,25 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
 {
     _cycleAutomatically.setName("Auto Cycle");
     
-    _secondsPerCycle.setName("Sec / Cycle");
-    _secondsPerCycle.setMin(0.1);
-    _secondsPerCycle.setMax(60.0);
+    _twoBeatCycle.setName("Two Beat");
+    _twoBeatCycle.setMin(0.0);
+    _twoBeatCycle.setMax(1.0);
+    
+    _measureCycle.setName("Measure");
+    _measureCycle.setMin(0.0);
+    _measureCycle.setMax(1.0);
+    
+    _phraseCycle.setName("Phrase");
+    _phraseCycle.setMin(0.0);
+    _phraseCycle.setMax(1.0);
+    
+    _slowCycle.setName("Slow Cycle");
+    _slowCycle.setMin(0.0);
+    _slowCycle.setMax(1.0);
+    
+    _verySlowCycle.setName("Very Slow");
+    _verySlowCycle.setMin(0.0);
+    _verySlowCycle.setMax(1.0);
     
     _dial1Parameter.setName("Dial 1");
     _dial1Parameter.setMin(0.0);
@@ -43,7 +67,13 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _slider2Parameter.setMax(1.0);
     
     _AddUIParameter(_cycleAutomatically);
-    _AddUIParameter(_secondsPerCycle);
+    
+    _AddUIParameter(_twoBeatCycle);
+    _AddUIParameter(_measureCycle);
+    _AddUIParameter(_phraseCycle);
+    _AddUIParameter(_slowCycle);
+    _AddUIParameter(_verySlowCycle);
+    
     _AddUIParameter(_dial1Parameter);
     _AddUIParameter(_dial2Parameter);
     _AddUIParameter(_slider1Parameter);
@@ -54,6 +84,36 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
 SrGlobalParameters::~SrGlobalParameters()
 {
     
+}
+
+float
+SrGlobalParameters::GetTwoBeatCycle() const
+{
+    return (float) _twoBeatCycle;
+}
+
+float
+SrGlobalParameters::GetMeasureCycle() const
+{
+    return (float) _measureCycle;
+}
+
+float
+SrGlobalParameters::GetPhraseCycle() const
+{
+    return (float) _phraseCycle;
+}
+
+float
+SrGlobalParameters::GetSlowCycle() const
+{
+    return (float) _slowCycle;
+}
+
+float
+SrGlobalParameters::GetVerySlowCycle() const
+{
+    return (float) _verySlowCycle;
 }
 
 float
@@ -80,15 +140,63 @@ SrGlobalParameters::GetSlider2() const
     return (float) _slider2Parameter;
 }
 
+float
+SrGlobalParameters::_ComputeUpdate(float value, int beatsPerCycle) const
+{
+    float bpm = _audio->GetBeatHistory().GetBpm()[0];
+    
+    // Clamp in case BPM is unreasonable
+    if (bpm < 50.0) {
+        bpm = 50.0;
+    }
+    if (bpm > 200.0) {
+        bpm = 200.0;
+    }
+    
+    float beatsPerSecond = bpm / 60.0;
+    float secondsPerCycle = beatsPerCycle / beatsPerSecond;
+    
+    value += 1.0 / (secondsPerCycle * _model->ComputeFramesPerSecond());
+    
+    return fmod(value, 1.0);
+}
+
 void
 SrGlobalParameters::Update()
 {
-    if (not (bool) _cycleAutomatically) {
-        return;
+    if ((bool) _cycleAutomatically) {
+        _twoBeatCycle = _ComputeUpdate((float) _twoBeatCycle, 2);
+        _measureCycle = _ComputeUpdate((float) _measureCycle, 4);
+        _phraseCycle = _ComputeUpdate((float) _phraseCycle, 16);
+        _slowCycle = _ComputeUpdate((float) _slowCycle, 64);
+        _verySlowCycle = _ComputeUpdate((float) _verySlowCycle, 256);
+    } else {
+        float fadeDurationSeconds = 0.5;
+        float fadeDurationFrames = fadeDurationSeconds * _model->ComputeFramesPerSecond();
+        float delta = 1.0 / fadeDurationFrames;
+        
+        _twoBeatCycle -= delta;
+        if ((float) _twoBeatCycle < 0.0) {
+            _twoBeatCycle = 0.0;
+        }
+        
+        _measureCycle -= delta;
+        if ((float) _measureCycle < 0.0) {
+            _measureCycle = 0.0;
+        }
+        _phraseCycle -= delta;
+        if ((float) _phraseCycle < 0.0) {
+            _phraseCycle = 0.0;
+        }
+        
+        _slowCycle -= delta;
+        if ((float) _slowCycle < 0.0) {
+            _slowCycle = 0.0;
+        }
+        
+        _verySlowCycle -= delta;
+        if ((float) _verySlowCycle < 0.0) {
+            _verySlowCycle = 0.0;
+        }
     }
-   
-    float delta = 1.0 / (_secondsPerCycle * _model->ComputeFramesPerSecond());
-    
-    _dial1Parameter += delta;
-    _dial1Parameter = fmod((float) _dial1Parameter, 1.0);
 }

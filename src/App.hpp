@@ -13,6 +13,7 @@
 
 #include "Audio.hpp"
 #include "Model.hpp"
+#include "GlobalParameters.hpp"
 #include "Artnet.hpp"
 #include "Previs.hpp"
 #include "Switcher.hpp"
@@ -44,6 +45,7 @@ private:
 private:
     SrModel _model;
     SrAudio _audio;
+    SrGlobalParameters _globalParameters;
     SrPrevis _previs;
     SrArtnet _artnet;
     SrSwitcher _switcher;

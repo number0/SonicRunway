@@ -8,11 +8,13 @@
 
 #include "ExamplePattern.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 #include <algorithm>
 
 SrExamplePattern::SrExamplePattern(const std::string & name,
-                                 SrModel * model, SrAudio * audio) :
-    SrScrollingPattern(name, model, audio),
+                                   SrModel * model, SrAudio * audio,
+                                   SrGlobalParameters * globalParameters) :
+    SrScrollingPattern(name, model, audio, globalParameters),
     _hueParam(0.0),
     _angleParam(135.0)
 {
@@ -35,8 +37,10 @@ SrExamplePattern::~SrExamplePattern()
 void
 SrExamplePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hue = _hueParam + GetGlobalParameters()->GetDial1();
-    hue = fmod(hue, 1.0);
+    float hue = _hueParam + GetGlobalParameters()->GetTwoBeatCycle() +
+                GetGlobalParameters()->GetDial1();
+    
+    hue = SrUtil_ClampCycle(0.0, 1.0, hue);
     
     float angle = _angleParam;
     

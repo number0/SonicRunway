@@ -24,8 +24,6 @@ public:
     SrModel();
     ~SrModel();
     
-    void Update();
-    
     int GetSampleRate() const;
     int GetBufferSize() const;
     int GetNumChannels() const;
@@ -62,8 +60,6 @@ public:
     
     ofParameterGroup & GetParameterGroup();
     
-    SrGlobalParameters * GetGlobalParameters();
-    
 private:
     int _sampleRate;
     int _bufferSize;
@@ -76,7 +72,6 @@ private:
     float _speedOfSound;
     float _archLength;
     int _framesPerGate;
-    SrGlobalParameters * _globalParameters;
     
     ofParameterGroup _parameterGroup;
     

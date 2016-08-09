@@ -20,7 +20,8 @@ public:
     SrVideoPattern(const std::string & name,
                    const std::string & videoFileName,
                    SrModel * model,
-                   SrAudio * audio);
+                   SrAudio * audio,
+                   SrGlobalParameters * globalParameters);
     virtual ~SrVideoPattern();
     
 protected:

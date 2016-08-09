@@ -10,8 +10,9 @@
 
 SrNetworkInputPattern::SrNetworkInputPattern(const std::string & name,
                                              SrModel * model,
-                                             SrAudio * audio) :
-SrPattern(name, model, audio),
+                                             SrAudio * audio,
+                                             SrGlobalParameters * globalParameters) :
+SrPattern(name, model, audio, globalParameters),
 _host("127.0.0.1"),
 _port(11123),
 _minConnectAttemptPeriod(1000),

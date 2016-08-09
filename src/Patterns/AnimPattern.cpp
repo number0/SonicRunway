@@ -13,8 +13,9 @@ SrAnimPattern::SrAnimPattern(const std::string & name,
                              size_t numFrames,
                              bool padFrameNumbers,
                              SrModel * model,
-                             SrAudio * audio) :
-    SrPattern(name, model, audio),
+                             SrAudio * audio,
+                             SrGlobalParameters * globalParameters) :
+    SrPattern(name, model, audio, globalParameters),
     _imageSequence(baseFileName, numFrames, padFrameNumbers),
     _currentFrame(0),
     _gateIndex(0),

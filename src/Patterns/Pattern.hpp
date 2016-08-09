@@ -18,7 +18,6 @@
 
 class SrModel;
 class SrAudio;
-class SrGlobalParameters;
 
 //
 // Base class for patterns that draw themselves to the array
@@ -35,7 +34,8 @@ class SrGlobalParameters;
 class SrPattern : public SrUiMixin {
 public:
     SrPattern(const std::string & name,
-              SrModel * model, SrAudio * audio);
+              SrModel * model, SrAudio * audio,
+              SrGlobalParameters * globalParameters);
     virtual ~SrPattern();
     
     // Called by the main app to update state.
@@ -85,6 +85,7 @@ protected:
 private:
     SrModel *_model;
     SrAudio *_audio;
+    SrGlobalParameters *_globalParameters;
     SrFloatSimpleBuffer _enabledBuffer;
     ofParameter<bool> _enabledParam;
     

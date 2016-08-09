@@ -18,7 +18,8 @@
 class SrRmsPattern : public SrScrollingPattern {
 public:
     SrRmsPattern(const std::string & name,
-                 SrModel * model, SrAudio * audio);
+                 SrModel * model, SrAudio * audio,
+                 SrGlobalParameters * globalParameters);
     virtual ~SrRmsPattern();
     
 protected:

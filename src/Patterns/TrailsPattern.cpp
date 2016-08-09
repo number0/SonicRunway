@@ -10,8 +10,9 @@
 #include "Audio.hpp"
 
 SrTrailsPattern::SrTrailsPattern(const std::string & name,
-                                 SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
+                                 SrModel * model, SrAudio * audio,
+                                 SrGlobalParameters * globalParameters) :
+SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.75),
 _jitterParam(20.0)
 {

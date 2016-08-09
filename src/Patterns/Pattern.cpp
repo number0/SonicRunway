@@ -13,10 +13,12 @@
 
 SrPattern::SrPattern(const std::string & name,
                      SrModel * model,
-                     SrAudio * audio) :
+                     SrAudio * audio,
+                     SrGlobalParameters * globalParameters) :
     SrUiMixin(name),
     _model(model),
     _audio(audio),
+    _globalParameters(globalParameters),
     _enabledBuffer(model),
     _enabledParam(false),
     _opacityBuffer(model)
@@ -47,7 +49,7 @@ SrPattern::GetAudio() const
 SrGlobalParameters *
 SrPattern::GetGlobalParameters() const
 {
-    return _model->GetGlobalParameters();
+    return _globalParameters;
 }
 
 void

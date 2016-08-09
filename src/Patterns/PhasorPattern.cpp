@@ -10,8 +10,9 @@
 #include "Audio.hpp"
 
 SrPhasorPattern::SrPhasorPattern(const std::string & name,
-                           SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
+                           SrModel * model, SrAudio * audio,
+                                 SrGlobalParameters * globalParameters) :
+SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.75),
 _thresholdParam(0.22),
 _trailParam(90)

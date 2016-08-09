@@ -11,8 +11,9 @@
 SrVideoPattern::SrVideoPattern(const std::string & name,
                                const std::string & videoFileName,
                                SrModel * model,
-                               SrAudio * audio) :
-    SrPattern(name, model, audio),
+                               SrAudio * audio,
+                               SrGlobalParameters * globalParameters) :
+    SrPattern(name, model, audio, globalParameters),
     _video(videoFileName, OF_LOOP_NORMAL),
     _gateIndex(0),
     _scroll(false)

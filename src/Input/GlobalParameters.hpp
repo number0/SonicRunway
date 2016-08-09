@@ -10,14 +10,17 @@
 #define SR_GLOBAL_PARAMETERS_HPP
 
 class SrModel;
+class SrAudio;
 
 #include "UiMixin.hpp"
 
 //
 // SrGlobalParameters -- a few global knobs and dials that are intended
-// to control values across many patterns at once.  These will be surfaced
-// as values to play with through touchOSC.  They may also vary programmatically
-// to automate patterns changing slowly across time.
+// to control values across many patterns at once.  These include:
+//
+//   - cycles that vary periodically, along with the beat.
+//
+//   - a few manual knobs/dials intended to be surfaced as TouchOSC controls
 //
 // Patterns should use these use these values to modify the style of their
 // display, such as color, speed, decay, etc..
@@ -33,10 +36,16 @@ class SrGlobalParameters : public SrUiMixin {
     
 public:
     SrGlobalParameters(const std::string & name,
-                       SrModel * model);
+                       SrModel * model, SrAudio * audio);
     virtual ~SrGlobalParameters();
     
     void Update();
+    
+    float GetTwoBeatCycle() const;
+    float GetMeasureCycle() const;
+    float GetPhraseCycle() const;
+    float GetSlowCycle() const;
+    float GetVerySlowCycle() const;
     
     float GetDial1() const;
     float GetDial2() const;
@@ -44,10 +53,19 @@ public:
     float GetSlider2() const;
     
 private:
+    float _ComputeUpdate(float value, int beatsPerCycle) const;
+    
+private:
     SrModel * _model;
+    SrAudio * _audio;
     
     ofParameter<bool> _cycleAutomatically;
-    ofParameter<float> _secondsPerCycle;
+    
+    ofParameter<float> _twoBeatCycle;
+    ofParameter<float> _measureCycle;
+    ofParameter<float> _phraseCycle;
+    ofParameter<float> _slowCycle;
+    ofParameter<float> _verySlowCycle;
     
     ofParameter<float> _dial1Parameter;
     ofParameter<float> _dial2Parameter;

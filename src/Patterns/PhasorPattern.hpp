@@ -17,7 +17,8 @@
 class SrPhasorPattern : public SrScrollingPattern {
 public:
     SrPhasorPattern(const std::string & name,
-                 SrModel * model, SrAudio * audio);
+                 SrModel * model, SrAudio * audio,
+                    SrGlobalParameters * globalParameters);
     virtual ~SrPhasorPattern();
     
 protected:

@@ -10,12 +10,13 @@
 #include "Audio.hpp"
 
 SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
-                                 SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
-_hueParam(1.0),
-_jitterParam(20.0),
-_rotationParam(12.0),
-_average(0.0)
+                                 SrModel * model, SrAudio * audio,
+                                       SrGlobalParameters * globalParameters) :
+    SrScrollingPattern(name, model, audio, globalParameters),
+    _hueParam(1.0),
+    _jitterParam(20.0),
+    _rotationParam(12.0),
+    _average(0.0)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);

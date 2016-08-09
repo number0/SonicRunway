@@ -11,8 +11,9 @@
 SrDiagnosticPattern::SrDiagnosticPattern(
         const std::string & name,
         SrModel * model,
-        SrAudio * audio) :
-    SrPattern(name, model, audio)
+        SrAudio * audio,
+        SrGlobalParameters * globalParameters) :
+    SrPattern(name, model, audio, globalParameters)
 {
     
 }

@@ -17,7 +17,8 @@
 class SrStarPattern : public SrScrollingPattern {
 public:
     SrStarPattern(const std::string & name,
-                  SrModel * model, SrAudio * audio);
+                  SrModel * model, SrAudio * audio,
+                  SrGlobalParameters * globalParameters);
     virtual ~SrStarPattern();
     
 protected:

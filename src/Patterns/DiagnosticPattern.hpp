@@ -25,7 +25,8 @@ class SrDiagnosticPattern : public SrPattern {
 public:
     SrDiagnosticPattern(const std::string & name,
                         SrModel * model,
-                        SrAudio * audio);
+                        SrAudio * audio,
+                        SrGlobalParameters * globalParameters);
     virtual ~SrDiagnosticPattern();
     
 protected:
