@@ -11,49 +11,61 @@
 
 #include <stdio.h>
 #include <string>
-
-#include "UiMixin.hpp"
+#include <vector>
+#include "ofMain.h"
+#include "ofxGui.h"
 
 class SrModel;
+class SrSwitcher;
 
 //
 // A group of parameter settings that can be applied
-// to the app.  When 'saved', a preset writes out the
-// model's current parameter values (hierarchically) to
-// the given file.  When 'applied', it sets the values.
+// to the app.  When 'stored', a preset stores the settings
+// of the current patterns. When 'applied', it sets the
+// values.
 //
 // The intent here is to provide a way to configure the
 // runway across a variety of patterns and settings, and
 // return to that state with a single button.
 //
-class SrPreset : public SrUiMixin {
+class SrPreset {
     typedef SrPreset This;
     
 public:
     SrPreset(const std::string & name,
              SrModel * model,
-             const std::string & fileName);
-    ~SrPreset();
+             SrSwitcher * switcher);
+    virtual ~SrPreset();
+    
+    const std::string & GetName() const;
+    
+    // Access UI so we can stick it in the panel
+    ofxToggle * GetToggle();
+    
+    bool IsCurrentPreset() const;
+    void SetIsCurrentPreset(bool isCurrentPreset);
     
     void Apply() const;
-    void Save();
+    void Store();
+    
+    const std::vector<std::string> & Pickle() const;
+    void Unpickle(const std::vector<std::string> & strings);
     
 private:
-    void _OnApplyPressed();
-    void _OnSavePressed();
-    
     void _WriteParamRecurse(const ofAbstractParameter & param,
-                            const std::string & parentPath,
-                            FILE *fp);
+                            ofParameterGroup & rootGroup,
+                            const std::string & parentPath);
+    
+    void _OnTogglePressed(bool & value);
     
 private:
+    std::string _name;
     SrModel * _model;
-    std::string _fileName;
-    ofxButton _applyButton;
-    ofxButton _saveButton;
+    std::vector<std::string> _strings;
+    SrSwitcher * _switcher;
     
-    ofParameter<bool> _applyParam;
-    ofParameter<bool> _saveParam;
+    ofParameter<bool> _isCurrentPreset;
+    ofxToggle _toggle;
 };
 
 #endif /* Preset_hpp */

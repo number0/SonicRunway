@@ -15,10 +15,10 @@
 #include "Model.hpp"
 #include "Artnet.hpp"
 #include "Previs.hpp"
+#include "Switcher.hpp"
 #include "ofxOscParameterSync.h"
 
 class SrPattern;
-class SrPreset;
 
 //
 // Main app.
@@ -34,24 +34,25 @@ public:
     void AudioIn(float * input, int bufferSize, int nChannels);
     void AudioOut(float * output, int buferSize, int nChannels);
     
+    const std::vector<SrPattern *> & GetPatterns() const;
+    SrModel * GetModel();
+    SrAudio * GetAudio();
+    
 private:
     void _AddPattern(SrPattern * pattern);
-    void _AddPreset(SrPreset * preset);
     
 private:
     SrModel _model;
     SrAudio _audio;
     SrPrevis _previs;
     SrArtnet _artnet;
+    SrSwitcher _switcher;
     
     std::vector<SrPattern *> _patterns;
     ofParameterGroup _patternsParameterGroup;
     
-    std::vector<SrPreset *> _presets;
-    
     ofxPanel _globalPanel;
-    ofxPanel _patternPanel;
-    ofxPanel _presetPanel;
+    std::vector<ofxPanel *> _patternPanels;
     ofxOscParameterSync _oscParameterSync;
     float _uiColumnWidth;
     float _uiMargin;

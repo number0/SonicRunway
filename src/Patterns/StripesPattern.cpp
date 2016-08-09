@@ -51,11 +51,6 @@ SrStripesPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     const SrModel * model = GetModel();
     
     // Extract the values for each parameter for this gate
-    float enabled = GetEnabled()[0];
-    if (not (bool) enabled) {
-        return;
-    }
-    
     float hue = (float) _hueParam;
     
     float t = fmod(_angle, 360.0) / 360.0;

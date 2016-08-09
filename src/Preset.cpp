@@ -10,30 +10,49 @@
 #include "Model.hpp"
 #include "Util.hpp"
 #include "Debug.hpp"
+#include "Switcher.hpp"
 
 SrPreset::SrPreset(const std::string & name,
                    SrModel * model,
-                   const std::string & fileName) :
-    SrUiMixin(name),
+                   SrSwitcher * switcher) :
+    _name(name),
     _model(model),
-    _fileName(fileName)
+    _switcher(switcher),
+    _isCurrentPreset(false)
 {
-    SrDebug("constructed preset\n");
-    
-    _applyButton.setup("Apply", 40, 40);
-    _AddUI(&_applyButton);
-    
-    _saveButton.setup("Save", 40, 40);
-    _AddUI(&_saveButton);
-    
-    _applyButton.addListener(this, &This::_OnApplyPressed);
-    _saveButton.addListener(this, &This::_OnSavePressed);
+    _toggle.setup(_isCurrentPreset);
+    _toggle.setName(name);
+    _toggle.addListener(this, &This::_OnTogglePressed);
 }
 
 SrPreset::~SrPreset()
 {
     SrDebug("destroyed preset\n");
     
+}
+
+const std::string &
+SrPreset::GetName() const
+{
+    return _name;
+}
+
+ofxToggle *
+SrPreset::GetToggle()
+{
+    return &_toggle;
+}
+
+bool
+SrPreset::IsCurrentPreset() const
+{
+    return (bool) _isCurrentPreset;
+}
+
+void
+SrPreset::SetIsCurrentPreset(bool isCurrentPreset)
+{
+    _isCurrentPreset = isCurrentPreset;
 }
 
 void
@@ -43,15 +62,9 @@ SrPreset::Apply() const
     ofParameterGroup & parameterGroup =
         _model->GetParameterGroup();
     
-    
-    std::ifstream ifs(_fileName, std::ifstream::in);
-    if (not ifs) {
-        SrError("error opening file %s\n", _fileName.c_str());
-        return;
-    }
-    
-    std::string str;
-    while (std::getline(ifs, str)) {
+    for(size_t i = 0; i < _strings.size(); i++) {
+        const std::string str = _strings[i];
+        
         std::vector<std::string> strVec =
             SrUtil_SplitString(str, ':');
         if (strVec.size() != 2) {
@@ -76,26 +89,21 @@ SrPreset::Apply() const
 }
 
 void
-SrPreset::Save()
+SrPreset::Store()
 {
-    SrDebug("saving preset\n");
-    FILE *fp = fopen(_fileName.c_str(), "w");
-    if (not fp) {
-        SrError("error opening file %s\n", _fileName.c_str());
-        return;
-    }
+    SrDebug("storing preset\n");
+    
+    _strings.clear();
     
     std::string path;
-    _WriteParamRecurse(_model->GetParameterGroup(), path, fp);
-   
-    fclose(fp);
+    _WriteParamRecurse(_model->GetParameterGroup(),
+                       _model->GetParameterGroup(), path);
 }
 
 void
 SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
-                             const std::string & parentPath,
-                             FILE * fp)
-                
+                             ofParameterGroup & rootGroup,
+                             const std::string & parentPath)
 {
     const ofParameterGroup * group =
         dynamic_cast<const ofParameterGroup *>(&param);
@@ -107,23 +115,39 @@ SrPreset::_WriteParamRecurse(const ofAbstractParameter & param,
             std::string path = parentPath;
             path += "/" + group->getName();
             
-            _WriteParamRecurse(*childParam, path, fp);
+            _WriteParamRecurse(*childParam, rootGroup, path);
         }
     } else {
-        fprintf(fp, "%s/%s: %s\n", parentPath.c_str(),
-                param.getName().c_str(),
-                param.toString().c_str());
+        if (SrUtil_IsPathToEnabledPattern(parentPath, rootGroup)) {
+            char *str;
+            asprintf(&str, "%s/%s: %s\n",
+                     parentPath.c_str(),
+                     param.getName().c_str(),
+                     param.toString().c_str());
+            
+            _strings.push_back(std::string(str));
+            
+            free(str);
+        }
     }
 }
 
-void
-SrPreset::_OnApplyPressed()
+const std::vector<std::string> &
+SrPreset::Pickle() const
 {
-    Apply();
+    return _strings;
 }
 
 void
-SrPreset::_OnSavePressed()
+SrPreset::Unpickle(const std::vector<std::string> & strings)
 {
-    Save();
+    _strings = strings;
+}
+
+void
+SrPreset::_OnTogglePressed(bool & value)
+{
+    if (value) {
+        _switcher->OnPresetTogglePressed(this);
+    }
 }

@@ -30,10 +30,6 @@ SrFftPattern::~SrFftPattern()
 void
 SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    if (not GetEnabled()[0]) {
-        return;
-    }
-    
     const SrModel * model = GetModel();
     int numLights = model->GetLightsPerGate();
     
@@ -43,7 +39,6 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         return;
     }
     
-    float enabled = GetEnabled()[0];
     float hueShift = (float) _hueShiftParam;
     
     for(int i = 0; i < numLights; i++) {

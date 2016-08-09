@@ -31,6 +31,10 @@ SrDiagnosticPattern::_Update()
 void
 SrDiagnosticPattern::_Draw() const
 {
+    if (not IsOnAtAnyGate()) {
+        return;
+    }
+    
     int numGates = GetModel()->GetNumGates();
     int lightsPerGate = GetModel()->GetLightsPerGate();
  
@@ -43,22 +47,30 @@ SrDiagnosticPattern::_Draw() const
     
     for(int x = 0; x < numGates; x++) {
         for(int y = 0; y < lightsPerGate; y++) {
-            if (not GetEnabled()[x]) {
+            float opacity = GetOpacity()[x];
+            if (opacity <= 0.0) {
                 continue;
             }
+            
+            ofColor c;
+            
             if (y == 0) {
-                ofSetColor(red);
+                c = red;
             } else if (y == lightsPerGate - 1) {
-                ofSetColor(green);
+                c = green;
             } else if (y == x) {
-                ofSetColor(white);
+                c = white;
             } else if (y < x and y % 5 == 0) {
-                ofSetColor(cyan);
+                c = cyan;
             } else if (y == (int) lightsPerGate / 2) {
-                ofSetColor(yellow);
+                c = yellow;
             } else {
-                ofSetColor(blue);
+                c = blue;
             }
+            
+            c *= opacity;
+            ofSetColor(c);
+            
             ofDrawRectangle(x,y,1,1);
         }
     }

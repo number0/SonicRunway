@@ -8,7 +8,8 @@
 
 #include "UIMixin.hpp"
 
-SrUiMixin::SrUiMixin(const std::string & name)
+SrUiMixin::SrUiMixin(const std::string & name) :
+    _name(name)
 {
     _panel = new ofxPanel();
     _panel->setup(name);
@@ -20,6 +21,12 @@ SrUiMixin::~SrUiMixin()
     // XXX should delete, but need to figure out how
     // to cleanly unwind the ui structures.
     //delete _panel;
+}
+
+const std::string &
+SrUiMixin::GetName() const
+{
+    return _name;
 }
 
 ofxPanel *

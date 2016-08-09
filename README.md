@@ -72,23 +72,32 @@ TODO:
 
 - Expand library of patterns.
 
+- Get quicktimes to loop and play at correct frame rate.
+
+- Improve FFT visualization:
+    - see if we can increase the number of FFT buckets
+    - blend between the bucket regions to avoid segmenting
+
+- Debug crash -- maybe in 'BigTrails' when rotation and jitter
+  have high values?
+
+- Allow playback of band-pass filters
+
+- Improve switcher:  choose audio / non-audio patterns
+
+- Design TouchOSC layout -- possibly add some 'master' parameters that all
+  patterns can key off.
+
+- Add some mechanism for basic patterns to have slowly changing
+  parameters.  Maybe this is a default property of the 'master'
+  parameters?
+
+- Fix up gamma correction -- look at other libraries to implement 
+  mapping to LED color space.  -- maybe it's good enough as is?
+
 - Figure out how to build standalone app.  Product->Archive does this mostly,
   but dependencies on dylibs causes problems.  This means either figuring out
   how to bundle dylibs with the app, or compiling them statically.  Some info:
 
-http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
-
-- Improve FFT visualization.
-
-- Improve RMS detection, include multiple frequency ranges.
-
-- Make ArtNet broadcast to 2 universes to cover all LEDs
-
-- Add ability to create, name and delete presets.  
-  Store them with the src?
-
-- Design master pattern controller to switch between presets.
-
-- Fix up gamma correction -- look at other libraries to implement 
-  mapping to LED color space.
+ttp://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
 

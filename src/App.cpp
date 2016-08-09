@@ -21,20 +21,25 @@
 #include "TrailsPattern.hpp"
 #include "TriggerPattern.hpp"
 #include "VideoPattern.hpp"
+#include "AnimPattern.hpp"
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
 #include "BigTrailsPattern.hpp"
+#include "NetworkInputPattern.hpp"
 
-#include "Preset.hpp"
+#include "Switcher.hpp"
 
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
+
+static const size_t PATTERNS_PER_COLUMN = 10;
 
 SrApp::SrApp() :
     _model(),
     _audio("Audio", &_model),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
+    _switcher("Switcher", "presets.txt", this),
     _uiColumnWidth(220),
     _uiMargin(10)
 {
@@ -48,15 +53,11 @@ SrApp::SrApp() :
     _globalPanel.setup("Global");
     _globalPanel.setPosition(_uiMargin,_uiMargin);
     
-    _patternPanel.setup("PatternsUI");
-    _patternPanel.setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
-    
-    _presetPanel.setup("Presets");
-    _presetPanel.setPosition(_uiMargin, 600);
-    
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
+    
+    _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
     _patternsParameterGroup.setName("Patterns");
     _model.GetParameterGroup().add(_patternsParameterGroup);
@@ -99,13 +100,15 @@ SrApp::SrApp() :
     new SrTrailsPattern("Trails", &_model, &_audio);
     _AddPattern(trailsPattern);
     
-    /*
      // Disabled b/c it seems like it might be slow.
      //
     SrVideoPattern *videoPattern =
         new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
     _AddPattern(videoPattern);
-     */
+    
+    SrAnimPattern *animPattern =
+        new SrAnimPattern("Anim", "lightning", 82, false, &_model, &_audio);
+    _AddPattern(animPattern);
     
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio);
@@ -118,7 +121,6 @@ SrApp::SrApp() :
     SrDiagnosticPattern *diagnosticPattern =
         new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
     _AddPattern(diagnosticPattern);
-    diagnosticPattern->SetEnabled(false);
     
     SrRmsPattern *rmsPattern =
         new SrRmsPattern("RMS", &_model, &_audio);
@@ -127,19 +129,23 @@ SrApp::SrApp() :
     SrBigTrailsPattern *bigTrailsPattern =
     new SrBigTrailsPattern("Big Trails", &_model, &_audio);
     _AddPattern(bigTrailsPattern);
-    
+
+    SrNetworkInputPattern *networkInputPattern =
+    new SrNetworkInputPattern("Network Input", &_model, &_audio);
+    _AddPattern(networkInputPattern);
+
     // Enable the patterns we want on by default.
-    triggerPattern->SetEnabled(true);
-    bigTrailsPattern->SetEnabled(true);
+    //triggerPattern->SetEnabled(true);
+    //diagnosticPattern->SetEnabled(true);
+    fftPattern->SetEnabled(true);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
-    SrPreset *testPreset = new SrPreset("Test Preset", &_model,
-                                        "/tmp/test.preset");
-    _AddPreset(testPreset);
+    stripesPattern->GetUiPanel()->minimizeAll();
+    
 }
 
 SrApp::~SrApp()
@@ -158,15 +164,39 @@ void
 SrApp::_AddPattern(SrPattern * pattern)
 {
     _patterns.push_back(pattern);
-    _patternPanel.add(pattern->GetUiPanel());
+    
+    // Figure out which panel it should be in
+    // Allocate another patternPanel (column) if we need it
+    size_t panelIdx = _patterns.size() / PATTERNS_PER_COLUMN;
+    if (panelIdx >= _patternPanels.size()) {
+        ofxPanel * newPanel = new ofxPanel();
+        newPanel->setup("Patterns");
+        newPanel->setPosition(_uiMargin + _uiColumnWidth * (2 + panelIdx), _uiMargin);
+        _patternPanels.push_back(newPanel);
+    }
+    
+    // Add the Ui
+    _patternPanels[panelIdx]->add(pattern->GetUiPanel());
+    
     _patternsParameterGroup.add(pattern->GetParameterGroup());
 }
 
-void
-SrApp::_AddPreset(SrPreset * preset)
+const std::vector<SrPattern *> &
+SrApp::GetPatterns() const
 {
-    _presets.push_back(preset);
-    _presetPanel.add(preset->GetUiPanel());
+    return _patterns;
+}
+
+SrModel *
+SrApp::GetModel()
+{
+    return &_model;
+}
+
+SrAudio *
+SrApp::GetAudio()
+{
+    return &_audio;
 }
 
 void
@@ -185,6 +215,8 @@ void
 SrApp::Update()
 {
     _oscParameterSync.update();
+    
+    _switcher.Update();
     
     for(auto iter = _patterns.begin(); iter != _patterns.end(); iter++) {
         SrPattern *pattern = *iter;
@@ -217,15 +249,17 @@ SrApp::Draw()
     
     ofBackground(40,40,40);
     
-    _model.RenderFrameBuffer(_uiMargin + _uiColumnWidth * 2, _uiMargin,
-                             _uiColumnWidth * 2, 75);
+    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
+    _model.RenderFrameBuffer(previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     
     _globalPanel.draw();
-    _patternPanel.draw();
-    _presetPanel.draw();
+    _switcher.GetUiPanel()->draw();
     
-    _previs.Draw(_uiMargin + _uiColumnWidth * 2, 100,
-                 1280, 720);
+    for(size_t i = 0; i < _patternPanels.size(); i++) {
+        _patternPanels[i]->draw();
+    }
+    
+    _previs.Draw(previsXCoord, 100, 1280, 720);
     
     _artnet.UpdateLights();
 }
