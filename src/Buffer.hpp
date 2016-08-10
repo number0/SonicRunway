@@ -146,9 +146,12 @@ SrBuffer<T>::ComputeValue(float age, float filterWidthInSeconds) const
         minIdx = 0;
     }
     
+    int numVals = maxIdx - minIdx;
+    std::cout << numVals << std::endl;
+    
     T sum = 0;
     for(int i = minIdx; i <= maxIdx; i++) {
-        sum += (*this)[i];
+        sum += (*this)[i] * (1.0f - ((float)i/(numVals+1))); // falling sawtooth filter
     }
     
     return sum / (maxIdx - minIdx + 1);

@@ -14,6 +14,7 @@
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
+#include "DoubleRainbowPattern.hpp"
 #include "StarPattern.hpp"
 #include "RainbowPattern.hpp"
 #include "ArcPattern.hpp"
@@ -83,6 +84,10 @@ SrApp::SrApp() :
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio, &_globalParameters);
     _AddPattern(stripesPattern);
+
+    SrDoubleRainbowPattern *DoubleRainbowPattern =
+    new SrDoubleRainbowPattern("DoubleRainbow", &_model, &_audio, &_globalParameters);
+    _AddPattern(DoubleRainbowPattern);
     
     SrStarPattern *starPattern =
         new SrStarPattern("Star", &_model, &_audio, &_globalParameters);
