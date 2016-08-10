@@ -18,7 +18,8 @@
 class SrDoubleRainbowPattern : public SrScrollingPattern {
 public:
     SrDoubleRainbowPattern(const std::string & name,
-                     SrModel * model, SrAudio * audio);
+                     SrModel * model, SrAudio * audio,
+                     SrGlobalParameters * globalParameters);
     virtual ~SrDoubleRainbowPattern();
     
 protected:

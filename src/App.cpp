@@ -86,7 +86,7 @@ SrApp::SrApp() :
     _AddPattern(stripesPattern);
 
     SrDoubleRainbowPattern *DoubleRainbowPattern =
-    new SrDoubleRainbowPattern("DoubleRainbow", &_model, &_audio);
+    new SrDoubleRainbowPattern("DoubleRainbow", &_model, &_audio, &_globalParameters);
     _AddPattern(DoubleRainbowPattern);
     
     SrStarPattern *starPattern =
