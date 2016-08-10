@@ -42,7 +42,27 @@ public:
     ~SrAudio();
     
     const SrBeatHistory & GetBeatHistory() const;
-    const vector<SrFloatBuffer> & GetFfts() const;
+    
+    // Get a vector of buffers containing raw FFT values over time.
+    // Note: these are not filtered  or normalized, so they may not
+    // be as useful for pattern generation.
+    const vector<SrFloatBuffer> & GetRawFfts() const;
+    
+    // Get a buffer containing FFT values that have been smoothed
+    // and normalized.  The value range should be roughly between
+    // zero and 1, although spikes may occasionally exceed 1.0
+    // The values are normalized given the current overall volume
+    // level, which adjusts on the fly to keep things in a reasonable
+    // range.
+    const vector<SrFloatBuffer> & GetSmoothFfts() const;
+    
+    // Convenience for getting a vector of just the current fft
+    // values.  See GetRawFfts above.
+    std::vector<float> GetCurrentRawFftValues() const;
+    
+    // Convenience for getting a vctor of just the current smoothed
+    // fft values.  See GetSmoothFfts above.
+    std::vector<float> GetCurrentSmoothFftValues() const;
     
     const SrFloatBuffer & GetLows() const;
     const SrFloatBuffer & GetMids() const;
@@ -64,9 +84,10 @@ public:
     typedef vector<vector<float> > AudioVecBuffer;
     const AudioVecBuffer & GetFullAudioBuffer(float delayInSeconds) const;
     
-    std::vector<float> GetCurrentFftValues() const;
     float GetCurrentFftSum() const;
     float GetCalibratedFftSum() const;
+    
+    void DrawFftBands(float x, float y, float width, float height) const;
     
     void UpdateUI();
     
@@ -88,7 +109,8 @@ private:
     SrRmsFilter _highFilter;
     
     SrBeatHistory _beatHistory;
-    vector<SrFloatBuffer> _ffts;
+    vector<SrFloatBuffer> _rawFfts;
+    vector<SrFloatBuffer> _smoothFfts;
     int _fullAudioBufferIndex;
     
     bool _outputDelayed;
@@ -96,6 +118,8 @@ private:
     ofxAubioMelBands _bands;
     
     float _fftSumMax;
+    
+    float _currentFftValueRange;
     
     // UI ------------------
     ofxPanel _beatGui;

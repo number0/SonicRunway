@@ -38,7 +38,7 @@ SrArcPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
-    vector<float> fftValues = GetAudio()->GetCurrentFftValues();
+    vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     int fftSize = fftValues.size();
 
     // Protection

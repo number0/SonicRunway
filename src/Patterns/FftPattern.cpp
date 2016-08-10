@@ -36,7 +36,7 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     const SrModel * model = GetModel();
     int numLights = model->GetLightsPerGate();
     
-    std::vector<float> ffts = GetAudio()->GetCurrentFftValues();
+    std::vector<float> ffts = GetAudio()->GetCurrentSmoothFftValues();
     
     if (ffts.empty()) {
         return;
@@ -65,7 +65,7 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         
         hue = SrUtil_ClampCycle(0.0, 1.0, hue);
         
-        c.setHsb(hue, 1.0, fftValue * 2.0);
+        c.setHsb(hue, 1.0, fftValue * 1.5);
         
         (*buffer)[i] += c;
         

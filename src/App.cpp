@@ -104,10 +104,8 @@ SrApp::SrApp() :
     new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
-     // Disabled b/c it seems like it might be slow.
-     //
     SrVideoPattern *videoPattern =
-        new SrVideoPattern("Video", "fireplace2.mov",
+        new SrVideoPattern("Fireplace", "fireplace2.mov",
                            &_model, &_audio, &_globalParameters);
     _AddPattern(videoPattern);
     
@@ -141,7 +139,6 @@ SrApp::SrApp() :
     _AddPattern(networkInputPattern);
 
     // Enable the patterns we want on by default.
-    //triggerPattern->SetEnabled(true);
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     
@@ -262,6 +259,8 @@ SrApp::Draw()
     _globalPanel.draw();
     
     _switcher.GetUiPanel()->draw();
+    
+    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
