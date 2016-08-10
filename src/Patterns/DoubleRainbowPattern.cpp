@@ -102,11 +102,20 @@ SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float doubleRainbows = (float) _doubleRainbowsParam;
     float trippelRainbows = (float) _trippelRainbowsParam;
     
+    float amplitude = GetAudio()->GetCalibratedFftSum();
+    
     for(int i = 0; i < buffer->size(); i++) {
+        
+        float brightness = amplitude;
+        
+        // Use this instead to trigger off the beat detection
+        /*
         float brightness = 1.0f;
         if ( rainbowTheta == 1.0f) {
             brightness = 0.0f;
         }
+         */
+        
         float gatePhase = float(i) / buffer->size();
         float gateHue = rainbowTheta;
         

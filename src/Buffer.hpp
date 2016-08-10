@@ -137,8 +137,7 @@ SrBuffer<T>::ComputeValue(float age, float filterWidthInSeconds) const
         return (1.0 - t) * a + t * b;
     }
     
-    // Otherwise, average the samples inside the filter region.
-    // XXX this should really do some kind of gaussian filter...
+    // Otherwise, filter the samples inside the filter region.
     int minIdx = (int) floatIdx - windowSize / 2;
     int maxIdx = (int) floatIdx + windowSize / 2;
     
@@ -147,7 +146,6 @@ SrBuffer<T>::ComputeValue(float age, float filterWidthInSeconds) const
     }
     
     int numVals = maxIdx - minIdx;
-    std::cout << numVals << std::endl;
     
     T sum = 0;
     for(int i = minIdx; i <= maxIdx; i++) {
