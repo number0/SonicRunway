@@ -73,6 +73,8 @@ TODO:
 - Improve FFT visualization:
     - blend between the bucket regions to avoid segmenting (RJ)
 
+- Figure out why videos go white sometimes.
+
 - Expand library of patterns. (Everyone!)
 
 - Make 'video' pattern smoothly cycle between many videos.
