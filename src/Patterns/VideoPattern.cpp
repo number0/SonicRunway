@@ -36,6 +36,11 @@ SrVideoPattern::IsAudioReactive() const
 void
 SrVideoPattern::_Update()
 {
+    // Don't bother updating if it's not visible.
+    if (GetOpacity()[0] <= 0.0) {
+        return;
+    }
+    
     _video.GoToNextFrame();
     if (_scroll) {
         _gateIndex++;
