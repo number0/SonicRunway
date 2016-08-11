@@ -8,6 +8,8 @@
 
 #include "App.hpp"
 #include "ofApp.h"
+#include "Util.hpp"
+#include "Debug.hpp"
 
 #include "BeatPattern.hpp"
 #include "FftPattern.hpp"
@@ -142,6 +144,8 @@ SrApp::SrApp() :
     SrNetworkInputPattern *networkInputPattern =
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
+    
+    _MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
@@ -169,6 +173,32 @@ SrApp::~SrApp()
         delete *iter;
     }
      */
+}
+
+void
+SrApp::_MakeVideoPatterns()
+{
+    std::string videoFolder = SrUtil_GetAbsolutePathForResource("");
+    
+    ofDirectory dir(videoFolder);
+    dir.allowExt("mov");
+    dir.listDir();
+    
+    for(size_t i = 0; i < dir.size(); i++) {
+        std::string fname = dir.getName(i);
+        if (fname.compare(0,5, "Auto_") != 0) {
+            continue;
+        }
+        
+        SrDebug("found auto movie %s\n", dir.getPath(i).c_str());
+        
+        std::string patternName = fname.substr(5, fname.size() - 9);
+        
+        SrVideoPattern *videoPattern =
+            new SrVideoPattern(patternName, fname,
+                               &_model, &_audio, &_globalParameters);
+        _AddPattern(videoPattern);
+    }
 }
 
 void

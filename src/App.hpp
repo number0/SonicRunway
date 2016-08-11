@@ -43,6 +43,8 @@ public:
 private:
     void _AddPattern(SrPattern * pattern);
     
+    void _MakeVideoPatterns();
+    
 private:
     SrModel _model;
     SrAudio _audio;

@@ -54,6 +54,7 @@ SrStripesPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     const SrModel * model = GetModel();
     
     // Extract the values for each parameter for this gate
+    
     float hue = (float) _hueParam + GetGlobalParameters()->GetDial1() +
                 GetGlobalParameters()->GetSlowCycle();
     hue = SrUtil_ClampCycle(0.0, 1.0, hue);
