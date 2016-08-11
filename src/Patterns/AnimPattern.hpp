@@ -26,6 +26,8 @@ public:
                   SrGlobalParameters * globalParameters);
     virtual ~SrAnimPattern();
     
+    virtual bool IsAudioReactive() const;
+    
 protected:
     virtual void _Update();
     virtual void _Draw() const;

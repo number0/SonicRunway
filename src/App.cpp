@@ -154,6 +154,9 @@ SrApp::SrApp() :
     
     // Calculate X position of the previs
     _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
+    
+    // This must happen after patterns are initialized.
+    _switcher.ReadPresets();
 }
 
 SrApp::~SrApp()

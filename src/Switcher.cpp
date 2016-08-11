@@ -48,12 +48,10 @@ SrSwitcher::SrSwitcher(const std::string & name,
     
     _presetPanel.setup("Presets");
     _AddUI(&_presetPanel);
-    
-    _ReadPresets();
 }
 
 void
-SrSwitcher::_ReadPresets()
+SrSwitcher::ReadPresets()
 {
     std::string installedFileName =
         SrUtil_GetAbsolutePathForResource(_fileName);
@@ -203,4 +201,18 @@ SrSwitcher::OnPresetTogglePressed(SrPreset * preset)
     if (preset != _currentPreset) {
         _ApplyPreset(preset);
     }
+}
+
+SrPattern *
+SrSwitcher::FindPatternByName(const std::string & name) const
+{
+    const std::vector<SrPattern *> & patterns = _app->GetPatterns();
+    
+    for(size_t i = 0; i < patterns.size(); i++) {
+        if (patterns[i]->GetName() == name) {
+            return patterns[i];
+        }
+    }
+    
+    return NULL;
 }

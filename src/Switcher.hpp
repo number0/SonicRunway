@@ -13,6 +13,7 @@
 
 class SrApp;
 class SrPreset;
+class SrPattern;
 
 //
 // SrSwitcher - owns a set of presets and controls switching between them.
@@ -41,11 +42,14 @@ public:
     
     void OnPresetTogglePressed(SrPreset *preset);
     
+    SrPattern * FindPatternByName(const std::string & name) const;
+    
+    void ReadPresets();
+    
 private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;
     void _ApplyPreset(SrPreset * preset);
-    void _ReadPresets();
     
     void _OnNewButtonPressed();
     void _OnSaveButtonPressed();

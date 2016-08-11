@@ -34,6 +34,12 @@ SrExamplePattern::~SrExamplePattern()
     
 }
 
+bool
+SrExamplePattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrExamplePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {

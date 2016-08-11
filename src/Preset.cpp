@@ -11,6 +11,7 @@
 #include "Util.hpp"
 #include "Debug.hpp"
 #include "Switcher.hpp"
+#include "Pattern.hpp"
 
 SrPreset::SrPreset(const std::string & name,
                    SrModel * model,
@@ -63,7 +64,7 @@ SrPreset::Apply() const
         _model->GetParameterGroup();
     
     for(size_t i = 0; i < _strings.size(); i++) {
-        const std::string str = _strings[i];
+        const std::string & str = _strings[i];
         
         std::vector<std::string> strVec =
             SrUtil_SplitString(str, ':');
@@ -85,6 +86,32 @@ SrPreset::Apply() const
         
         SrDebug("found parameter %s!\n", pathStr.c_str());
         param->fromString(valStr);
+    }
+}
+
+SrPattern *
+SrPreset::_FindPattern(const std::string & str) const
+{
+    std::vector<std::string> splitStr = SrUtil_SplitString(str, '/');
+    if (splitStr.size() < 4) {
+        return NULL;
+    }
+    
+    // XXX making some lazy assumptions about the pattern string
+    return _switcher->FindPatternByName(splitStr[3]);
+}
+
+bool
+SrPreset::IsAudioReactive() const
+{
+    for(size_t i = 0; i < _strings.size(); i++) {
+        const std::string & str = _strings[i];
+        
+        SrPattern * pattern = _FindPattern(_strings[i]);
+        
+        if (pattern and pattern->IsAudioReactive()) {
+            return true;
+        }
     }
 }
 
@@ -142,6 +169,12 @@ void
 SrPreset::Unpickle(const std::vector<std::string> & strings)
 {
     _strings = strings;
+    
+    if (IsAudioReactive()) {
+        _toggle.setName(_name + " (A)");
+    } else {
+        _toggle.setName(_name + " ( )");
+    }
 }
 
 void

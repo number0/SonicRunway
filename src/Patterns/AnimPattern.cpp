@@ -30,6 +30,12 @@ SrAnimPattern::~SrAnimPattern()
     
 }
 
+bool
+SrAnimPattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrAnimPattern::_Update()
 {

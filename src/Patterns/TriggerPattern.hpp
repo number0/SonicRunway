@@ -22,6 +22,8 @@ public:
                      SrGlobalParameters * globalParameters);
     virtual ~SrTriggerPattern();
     
+    virtual bool IsAudioReactive() const;
+    
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     

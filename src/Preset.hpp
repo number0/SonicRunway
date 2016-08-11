@@ -17,6 +17,7 @@
 
 class SrModel;
 class SrSwitcher;
+class SrPattern;
 
 //
 // A group of parameter settings that can be applied
@@ -45,6 +46,10 @@ public:
     bool IsCurrentPreset() const;
     void SetIsCurrentPreset(bool isCurrentPreset);
     
+    // Returns true if any of the patterns that are enabled by
+    // this preset are audio reactive.
+    bool IsAudioReactive() const;
+    
     void Apply() const;
     void Store();
     
@@ -57,6 +62,8 @@ private:
                             const std::string & parentPath);
     
     void _OnTogglePressed(bool & value);
+    
+    SrPattern * _FindPattern(const std::string & str) const;
     
 private:
     std::string _name;

@@ -121,3 +121,9 @@ SrPattern::Draw()
     // Call subclass draw
     _Draw();
 }
+
+bool
+SrPattern::IsAudioReactive() const
+{
+    return true;
+}

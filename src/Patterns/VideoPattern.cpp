@@ -27,6 +27,12 @@ SrVideoPattern::~SrVideoPattern()
     
 }
 
+bool
+SrVideoPattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrVideoPattern::_Update()
 {

@@ -23,6 +23,8 @@ public:
                           SrGlobalParameters * globalParameters);
     virtual ~SrNetworkInputPattern();
     
+    virtual bool IsAudioReactive() const;
+    
 protected:
     virtual void _Update();
     virtual void _Draw() const;
