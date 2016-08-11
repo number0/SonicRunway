@@ -70,8 +70,6 @@ problematic we can use ofMutex to make it thread safe.
 
 TODO:
 
-- Improve switcher:  choose audio / non-audio presets (RJ)
-
 - Improve FFT visualization:
     - blend between the bucket regions to avoid segmenting (RJ)
 
