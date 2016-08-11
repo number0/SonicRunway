@@ -91,6 +91,8 @@ public:
     
     void UpdateUI();
     
+    float ComputeSecondsSinceAudioSignal() const;
+    
 private:
     void _InitAlgorithms();
     void _InitUI();
@@ -120,6 +122,8 @@ private:
     float _fftSumMax;
     
     float _currentFftValueRange;
+    
+    float _timeAtLastAudioInput;
     
     // UI ------------------
     ofxPanel _beatGui;

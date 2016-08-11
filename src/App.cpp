@@ -210,6 +210,12 @@ SrApp::GetAudio()
     return &_audio;
 }
 
+SrGlobalParameters *
+SrApp::GetGlobalParameters()
+{
+    return &_globalParameters;
+}
+
 void
 SrApp::AudioIn(float * input, int bufferSize, int nChannels)
 {

@@ -50,19 +50,29 @@ public:
     float GetSlowCycle() const;
     float GetVerySlowCycle() const;
     
+    float GetFadeDuration() const;
+    
     float GetDial1() const;
     float GetDial2() const;
     float GetSlider1() const;
     float GetSlider2() const;
     
+    float ComputeSecondsSinceManualInput() const;
+    void OnReceivedManualInput();
+    
 private:
     float _ComputeUpdate(float value, int beatsPerCycle) const;
+    
+    void _OnParameterChanged(float & value);
+    void _OnCycleAutomaticallyChanged(bool & value);
     
 private:
     SrModel * _model;
     SrAudio * _audio;
+    float _timeOfLastManualParameterChange;
     
     ofParameter<bool> _cycleAutomatically;
+    ofParameter<float> _delayBeforeAutomaticMode;
     
     ofParameter<float> _twoBeatCycle;
     ofParameter<float> _measureCycle;
@@ -70,11 +80,12 @@ private:
     ofParameter<float> _slowCycle;
     ofParameter<float> _verySlowCycle;
     
+    ofParameter<float> _fadeDuration;
+    
     ofParameter<float> _dial1Parameter;
     ofParameter<float> _dial2Parameter;
     ofParameter<float> _slider1Parameter;
     ofParameter<float> _slider2Parameter;
-    
     
 };
 

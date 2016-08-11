@@ -7,8 +7,8 @@ PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
 PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
 PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20
-VideoAnim|/Runway/Patterns/Video/Enabled: 1
-VideoAnim|/Runway/Patterns/Video/Scroll: 0
+VideoAnim|/Runway/Patterns/Fireplace/Enabled: 1
+VideoAnim|/Runway/Patterns/Fireplace/Scroll: 0
 VideoAnim|/Runway/Patterns/Anim/Enabled: 1
 VideoAnim|/Runway/Patterns/Anim/Scroll: 0
 TrailsAndStars|/Runway/Patterns/Star/Enabled: 1

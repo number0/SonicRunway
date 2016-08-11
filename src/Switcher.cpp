@@ -21,12 +21,20 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _fileName(fileName),
     _app(app),
     _currentPreset(NULL),
-    _cycleAutomatically(false),
+    _cyclePresets(false),
+    _delayBeforeAutomatic(5.0),
     _secondsBetweenPresets(3.0),
-    _secondsToNextPreset((float) _secondsBetweenPresets)
+    _secondsToNextPreset((float) _secondsBetweenPresets),
+    _secondsBeforeSwitchingToNonAudioPresets(5),
+    _isChoosingAudioReactivePresets(false)
 {
-    _cycleAutomatically.setName("Cycle Automatically");
-    _AddUIParameter(_cycleAutomatically);
+    _cyclePresets.setName("Cycle Presets");
+    _AddUIParameter(_cyclePresets);
+    
+    _delayBeforeAutomatic.setName("Delay b4 auto");
+    _delayBeforeAutomatic.setMin(1.0);
+    _delayBeforeAutomatic.setMax(60.0);
+    _AddUIParameter(_delayBeforeAutomatic);
     
     _secondsBetweenPresets.setName("Time between presets");
     _secondsBetweenPresets.setMin(0.0);
@@ -45,6 +53,14 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _saveButton.setup("Write /tmp/presets", 40, 40);
     _saveButton.addListener(this, &This::_OnSaveButtonPressed);
     _AddUI(&_saveButton);
+    
+    _secondsBeforeSwitchingToNonAudioPresets.setName("Delay b4 non-audio");
+    _secondsBeforeSwitchingToNonAudioPresets.setMin(0.0);
+    _secondsBeforeSwitchingToNonAudioPresets.setMax(45.0);
+    _AddUIParameter(_secondsBeforeSwitchingToNonAudioPresets);
+    
+    _isChoosingAudioReactivePresets.setName("Audio Reactive");
+    _AddUIParameter(_isChoosingAudioReactivePresets);
     
     _presetPanel.setup("Presets");
     _AddUI(&_presetPanel);
@@ -139,20 +155,47 @@ SrSwitcher::_AddPreset(SrPreset * preset)
 {
     _presets.push_back(preset);
     _presetPanel.add(preset->GetToggle());
+    
+    if (preset->IsAudioReactive()) {
+        _audioReactivePresets.push_back(preset);
+    } else {
+        _nonAudioReactivePresets.push_back(preset);
+    }
 }
 
 void
 SrSwitcher::Update()
 {
-    if (not (bool) _cycleAutomatically) {
+    // If it's been a while since we poked any buttons, turn
+    // automatic preset cycling back on.
+    if (_app->GetGlobalParameters()->ComputeSecondsSinceManualInput() >
+        (float) _delayBeforeAutomatic) {
+        _cyclePresets = true;
+    }
+    
+    bool wasChoosingAudioReactivePresets = _isChoosingAudioReactivePresets;
+    
+    if (_app->GetAudio()->ComputeSecondsSinceAudioSignal() >
+        (float) _secondsBeforeSwitchingToNonAudioPresets) {
+        _isChoosingAudioReactivePresets = false;
+    } else {
+        _isChoosingAudioReactivePresets = true;
+    }
+    
+    if (not (bool) _cyclePresets) {
         return;
     }
+    
+    // See if we *just* got some new audio after a period of
+    // silence.  In that case, force a pattern switch immediately.
+    bool justGotNewAudio = not wasChoosingAudioReactivePresets and
+                         (bool) _isChoosingAudioReactivePresets;
     
     float fps = _app->GetModel()->ComputeFramesPerSecond();
     float secondsPerFrame = 1.0 / fps;
     _secondsToNextPreset = (float) _secondsToNextPreset - secondsPerFrame;
     
-    if (_secondsToNextPreset <= 0.0) {
+    if (_secondsToNextPreset <= 0.0 or justGotNewAudio) {
         SrPreset * preset = _GetRandomPreset();
         if (preset) {
             _ApplyPreset(preset);
@@ -164,8 +207,12 @@ SrSwitcher::Update()
 SrPreset *
 SrSwitcher::_GetRandomPreset() const
 {
-    size_t idx = rand() % _presets.size();
-    return _presets[idx];
+    const std::vector<SrPreset *> & presets =
+        (bool) _isChoosingAudioReactivePresets ?
+        _audioReactivePresets : _nonAudioReactivePresets;
+
+    size_t idx = rand() % presets.size();
+    return presets[idx];
 }
 
 void
@@ -201,6 +248,9 @@ SrSwitcher::OnPresetTogglePressed(SrPreset * preset)
     if (preset != _currentPreset) {
         _ApplyPreset(preset);
     }
+    
+    // Tell the global parameters that we poked a button.
+    _app->GetGlobalParameters()->OnReceivedManualInput();
 }
 
 SrPattern *

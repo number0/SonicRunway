@@ -25,6 +25,10 @@ static const int NUM_MEL_BANDS = 40;
 // the more we boost low-level signals when normalizing the FFT.
 static const float FFT_VALUE_RANGE_MINIMUM = 0.1;
 
+// This controls the level at which we consider there to have been
+// a significant audio signal.
+static const float AUDIO_THRESHOLD = 0.1;
+
 SrAudio::SrAudio(const std::string & name,
                  SrModel * model) :
     SrUiMixin(name),
@@ -40,7 +44,8 @@ SrAudio::SrAudio(const std::string & name,
     _resetDownbeatParam(false),
     _resetMeasureParam(false),
     _fftSumMax(0.1),
-    _currentFftValueRange(0.5)
+    _currentFftValueRange(0.5),
+    _timeAtLastAudioInput(0.0)
 {
     _InitAlgorithms();
     _InitUI();
@@ -264,6 +269,16 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
         // if audio levels go down max will slowly adjust.
         _fftSumMax -= 0.001;
     }
+    
+    if (fftSum > AUDIO_THRESHOLD) {
+        _timeAtLastAudioInput = ofGetElapsedTimef();
+    }
+}
+
+float
+SrAudio::ComputeSecondsSinceAudioSignal() const
+{
+    return ofGetElapsedTimef() - _timeAtLastAudioInput;
 }
 
 /*

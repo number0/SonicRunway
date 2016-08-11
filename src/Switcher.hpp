@@ -59,15 +59,21 @@ private:
     SrApp * _app;
     SrPreset * _currentPreset;
     
-    ofParameter<bool> _cycleAutomatically;
+    ofParameter<bool> _cyclePresets;
+    ofParameter<float> _delayBeforeAutomatic;
     ofParameter<float> _secondsBetweenPresets;
     ofParameter<float> _secondsToNextPreset;
+    
+    ofParameter<float> _secondsBeforeSwitchingToNonAudioPresets;
+    ofParameter<bool> _isChoosingAudioReactivePresets;
     
     ofxButton _newButton;
     ofxButton _saveButton;
     
     ofxPanel _presetPanel;
     std::vector<SrPreset *> _presets;
+    std::vector<SrPreset *> _audioReactivePresets;
+    std::vector<SrPreset *> _nonAudioReactivePresets;
 };
 
 #endif

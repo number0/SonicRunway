@@ -10,6 +10,7 @@
 #include "Model.hpp"
 #include "Audio.hpp"
 #include "Debug.hpp"
+#include "GlobalParameters.hpp"
 
 SrPattern::SrPattern(const std::string & name,
                      SrModel * model,
@@ -86,7 +87,7 @@ SrPattern::Update()
     float thisOpacity = lastOpacity;
     
     if (lastOpacity != (float) enabled) {
-        float fadeDurationSeconds = 1.0;
+        float fadeDurationSeconds = _globalParameters->GetFadeDuration();
         float fadeDurationFrames = fadeDurationSeconds * _model->ComputeFramesPerSecond();
         
         float delta = 1.0 / fadeDurationFrames;
