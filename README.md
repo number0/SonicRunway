@@ -77,10 +77,6 @@ TODO:
 
 - Expand library of patterns. (Everyone!)
 
-- Make 'video' pattern smoothly cycle between many videos.
-  Maybe it searches a subdirectory of 'Resources' to find available
-  quicktimes? 
-
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
 
