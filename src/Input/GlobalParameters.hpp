@@ -34,6 +34,11 @@ class SrAudio;
 // So far:
 //   - Dial1 : generally used to shift hues in a relative way.  Range [0,1]
 //
+// Global parameters are accessible through OSC with the paths like this:
+//
+// /Runway/GlobalParams/Dial1
+// /Runway/GlobalParams/Dial2
+//
 class SrGlobalParameters : public SrUiMixin {
     typedef SrGlobalParameters This;
     

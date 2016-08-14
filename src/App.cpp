@@ -41,7 +41,7 @@ static const size_t PATTERNS_PER_COLUMN = 10;
 SrApp::SrApp() :
     _model(),
     _audio("Audio", &_model),
-    _globalParameters("Global Params", &_model, &_audio),
+    _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
     _switcher("Switcher", "presets.txt", this),
@@ -151,8 +151,14 @@ SrApp::SrApp() :
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     
+    // Add global parameters to the model so they will be accessible
+    // from osc
+    _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
+    
+    // Set up syncing between ofParameters and OSC
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
+    // Set up sound stream.
     ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
                        _model.GetSampleRate(), _model.GetBufferSize(), 4);
     

@@ -270,6 +270,7 @@
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
 		302626671D52F6270016DAF3 /* presets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = presets.txt; path = Resources/presets.txt; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
+		302EA7D31D60382900F82B57 /* OscTest.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = OscTest.touchosc; path = Resources/OscTest.touchosc; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
 		302F35941C93CA39001D5E51 /* OnsetHistory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OnsetHistory.hpp; path = Input/OnsetHistory.hpp; sourceTree = "<group>"; };
 		302F35961C972BE2001D5E51 /* BeatHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BeatHistory.cpp; path = Input/BeatHistory.cpp; sourceTree = "<group>"; };
@@ -651,6 +652,7 @@
 				7AD9994C1D2A118F002BD0F3 /* shaderGeom.glsl */,
 				7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */,
 				7AD999481D29E652002BD0F3 /* light.png */,
+				302EA7D31D60382900F82B57 /* OscTest.touchosc */,
 				3068B2421CB576BF0092949A /* previsCameraData.txt */,
 				30B8DCEA1CB58C3A00164558 /* skyTexture.png */,
 				300802101CB723AD0031DAF2 /* burner1.png */,

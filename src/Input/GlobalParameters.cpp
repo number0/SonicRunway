@@ -57,23 +57,23 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _verySlowCycle.setMin(0.0);
     _verySlowCycle.setMax(1.0);
     
-    _fadeDuration.setName("Fade Duration");
+    _fadeDuration.setName("FadeDuration");
     _fadeDuration.setMin(0.01);
     _fadeDuration.setMax(10.0);
     
-    _dial1Parameter.setName("Dial 1");
+    _dial1Parameter.setName("Dial1");
     _dial1Parameter.setMin(0.0);
     _dial1Parameter.setMax(1.0);
     
-    _dial2Parameter.setName("Dial 2");
+    _dial2Parameter.setName("Dial2");
     _dial2Parameter.setMin(0.0);
     _dial2Parameter.setMax(1.0);
     
-    _slider1Parameter.setName("Slider 1");
+    _slider1Parameter.setName("Slider1");
     _slider1Parameter.setMin(0.0);
     _slider1Parameter.setMax(1.0);
     
-    _slider2Parameter.setName("Slider 2");
+    _slider2Parameter.setName("Slider2");
     _slider2Parameter.setMin(0.0);
     _slider2Parameter.setMax(1.0);
     
