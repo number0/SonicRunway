@@ -38,9 +38,12 @@ public:
     const std::vector<SrPattern *> & GetPatterns() const;
     SrModel * GetModel();
     SrAudio * GetAudio();
+    SrGlobalParameters * GetGlobalParameters();
     
 private:
     void _AddPattern(SrPattern * pattern);
+    
+    void _MakeVideoPatterns();
     
 private:
     SrModel _model;

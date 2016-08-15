@@ -23,6 +23,12 @@ SrDiagnosticPattern::~SrDiagnosticPattern()
     
 }
 
+bool
+SrDiagnosticPattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrDiagnosticPattern::_Update()
 {

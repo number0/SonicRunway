@@ -25,6 +25,12 @@ SrTriggerPattern::~SrTriggerPattern()
     
 }
 
+bool
+SrTriggerPattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrTriggerPattern::_Update()
 {

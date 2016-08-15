@@ -52,7 +52,7 @@ SrPhasorPattern::_Update()
         }
     }
     
-    vector<float> fftValues = GetAudio()->GetCurrentFftValues();
+    vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     for (int i = 0; i < segments; ++i) {
         if (fftValues.at(i) > threshold) {
             _segmentCountdown[i] = 100;

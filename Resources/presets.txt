@@ -7,10 +7,6 @@ PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
 PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
 PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20
-VideoAnim|/Runway/Patterns/Video/Enabled: 1
-VideoAnim|/Runway/Patterns/Video/Scroll: 0
-VideoAnim|/Runway/Patterns/Anim/Enabled: 1
-VideoAnim|/Runway/Patterns/Anim/Scroll: 0
 TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
 TrailsAndStars|/Runway/Patterns/Star/Number: 26.0204
 TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
@@ -18,3 +14,11 @@ TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
 TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
 TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
 TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
+VideoAnim|/Runway/Patterns/Fireplace/Enabled: 1
+VideoAnim|/Runway/Patterns/Fireplace/Scroll: 0
+VideoAnim|/Runway/Patterns/Anim/Enabled: 1
+VideoAnim|/Runway/Patterns/Anim/Scroll: 0
+ShiftingPains|/Runway/Patterns/ShiftingPains/Enabled: 1
+ShiftingPains|/Runway/Patterns/ShiftingPains/Scroll: 0
+WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Enabled: 1
+WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Scroll: 0

@@ -8,12 +8,15 @@
 
 #include "App.hpp"
 #include "ofApp.h"
+#include "Util.hpp"
+#include "Debug.hpp"
 
 #include "BeatPattern.hpp"
 #include "FftPattern.hpp"
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
+#include "DoubleRainbowPattern.hpp"
 #include "StarPattern.hpp"
 #include "RainbowPattern.hpp"
 #include "ArcPattern.hpp"
@@ -38,7 +41,7 @@ static const size_t PATTERNS_PER_COLUMN = 10;
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
     _audio("Audio", &_model),
-    _globalParameters("Global Params", &_model, &_audio),
+    _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
     _switcher("Switcher", "presets.txt", this),
@@ -83,6 +86,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio, &_globalParameters);
     _AddPattern(stripesPattern);
+
+    SrDoubleRainbowPattern *DoubleRainbowPattern =
+    new SrDoubleRainbowPattern("DoubleRainbow", &_model, &_audio, &_globalParameters);
+    _AddPattern(DoubleRainbowPattern);
     
     SrStarPattern *starPattern =
         new SrStarPattern("Star", &_model, &_audio, &_globalParameters);
@@ -104,10 +111,8 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
-     // Disabled b/c it seems like it might be slow.
-     //
     SrVideoPattern *videoPattern =
-        new SrVideoPattern("Video", "fireplace2.mov",
+        new SrVideoPattern("Fireplace", "fireplace2.mov",
                            &_model, &_audio, &_globalParameters);
     _AddPattern(videoPattern);
     
@@ -139,12 +144,18 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     SrNetworkInputPattern *networkInputPattern =
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
+    
+    _MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
-    //triggerPattern->SetEnabled(true);
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     
+    // Add global parameters to the model so they will be accessible
+    // from osc
+    _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
+    
+    // Set up syncing between ofParameters and OSC
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamListDevices();
@@ -164,6 +175,9 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     
     // Calculate X position of the previs
     _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
+    
+    // This must happen after patterns are initialized.
+    _switcher.ReadPresets();
 }
 
 SrApp::~SrApp()
@@ -176,6 +190,32 @@ SrApp::~SrApp()
         delete *iter;
     }
      */
+}
+
+void
+SrApp::_MakeVideoPatterns()
+{
+    std::string videoFolder = SrUtil_GetAbsolutePathForResource("");
+    
+    ofDirectory dir(videoFolder);
+    dir.allowExt("mov");
+    dir.listDir();
+    
+    for(size_t i = 0; i < dir.size(); i++) {
+        std::string fname = dir.getName(i);
+        if (fname.compare(0,5, "Auto_") != 0) {
+            continue;
+        }
+        
+        SrDebug("found auto movie %s\n", dir.getPath(i).c_str());
+        
+        std::string patternName = fname.substr(5, fname.size() - 9);
+        
+        SrVideoPattern *videoPattern =
+            new SrVideoPattern(patternName, fname,
+                               &_model, &_audio, &_globalParameters);
+        _AddPattern(videoPattern);
+    }
 }
 
 void
@@ -215,6 +255,12 @@ SrAudio *
 SrApp::GetAudio()
 {
     return &_audio;
+}
+
+SrGlobalParameters *
+SrApp::GetGlobalParameters()
+{
+    return &_globalParameters;
 }
 
 void
@@ -274,6 +320,8 @@ SrApp::Draw()
     _globalPanel.draw();
     
     _switcher.GetUiPanel()->draw();
+    
+    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();

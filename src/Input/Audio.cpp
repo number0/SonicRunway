@@ -18,6 +18,17 @@
 using namespace essentia;
 using namespace standard;
 
+// do not change -- this is hard coded in aubio
+static const int NUM_MEL_BANDS = 40;
+
+// This sets how low the fft sensitivity goes.  The lower the value,
+// the more we boost low-level signals when normalizing the FFT.
+static const float FFT_VALUE_RANGE_MINIMUM = 0.1;
+
+// This controls the level at which we consider there to have been
+// a significant audio signal.
+static const float AUDIO_THRESHOLD = 0.1;
+
 SrAudio::SrAudio(const std::string & name,
                  SrModel * model) :
     SrUiMixin(name),
@@ -29,10 +40,12 @@ SrAudio::SrAudio(const std::string & name,
     _beatHistory(model),
     _outputDelayed(false),
     _fullAudioBufferIndex(0),
-    _playDelayedAudioParam(true),
+    _playDelayedAudioParam(false),
     _resetDownbeatParam(false),
     _resetMeasureParam(false),
-    _fftSumMax(0.1)
+    _fftSumMax(0.1),
+    _currentFftValueRange(0.5),
+    _timeAtLastAudioInput(0.0)
 {
     _InitAlgorithms();
     _InitUI();
@@ -42,8 +55,10 @@ void
 SrAudio::_InitAlgorithms()
 {
     // Allocate one float buffer for each FFT band
-    for (size_t i = 0; i < 40; i++) {
-        _ffts.push_back(
+    for (size_t i = 0; i < NUM_MEL_BANDS; i++) {
+        _rawFfts.push_back(
+            SrFloatBuffer(_model, SrFrequencyOncePerAudioIn));
+        _smoothFfts.push_back(
             SrFloatBuffer(_model, SrFrequencyOncePerAudioIn));
     }
     
@@ -94,15 +109,6 @@ SrAudio::_InitUI()
     //_beatGui.add(_fftSumSlider.setup("Calibrated FFT", 0, 0, 1)); // XXX Not really part of 'beat'
     _AddUI(&_beatGui);
     
-    /*
-     _bandsGui.setup("SrAudioMelBends");
-     for (int i = 0; i < 40; i++) {
-     _bandPlot.addVertex(50 + i * 650 / 40.,
-     240 - 100 *
-     _audio->GetCurrentFftValues()[i]);
-     }
-     */
-    
 }
 
 SrAudio::~SrAudio()
@@ -117,9 +123,15 @@ SrAudio::GetBeatHistory() const
 }
 
 const vector<SrFloatBuffer> &
-SrAudio::GetFfts() const
+SrAudio::GetRawFfts() const
 {
-    return _ffts;
+    return _rawFfts;
+}
+
+const vector<SrFloatBuffer> &
+SrAudio::GetSmoothFfts() const
+{
+    return _smoothFfts;
 }
 
 const SrFloatBuffer &
@@ -141,11 +153,22 @@ SrAudio::GetHighs() const
 }
 
 std::vector<float>
-SrAudio::GetCurrentFftValues() const
+SrAudio::GetCurrentRawFftValues() const
 {
-    std::vector<float> ret;
-    for(size_t i=0; i < _ffts.size(); i++) {
-        ret.push_back(_ffts[i][0]);
+    std::vector<float> ret(_rawFfts.size());
+    for(size_t i=0; i < _rawFfts.size(); i++) {
+        ret[i] = _rawFfts[i][0];
+    }
+    
+    return ret;
+}
+
+std::vector<float>
+SrAudio::GetCurrentSmoothFftValues() const
+{
+    std::vector<float> ret(_smoothFfts.size());
+    for(size_t i=0; i < _smoothFfts.size(); i++) {
+        ret[i] = _smoothFfts[i][0];
     }
     
     return ret;
@@ -154,7 +177,7 @@ SrAudio::GetCurrentFftValues() const
 float
 SrAudio::GetCurrentFftSum() const
 {
-    std::vector<float> fftValues = GetCurrentFftValues();
+    std::vector<float> fftValues = GetCurrentRawFftValues();
     return std::accumulate(fftValues.begin(), fftValues.end(), 0.0);;
 }
 
@@ -201,9 +224,41 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
     _midFilter.Compute();
     _highFilter.Compute();
     
+    float maxFftValue = 0;
+    
     float *energies = _bands.energies;
-    for (size_t i = 0; i < _ffts.size(); i++) {
-        _ffts[i].Push(energies[i]);
+    for (size_t i = 0; i < _rawFfts.size(); i++) {
+        _rawFfts[i].Push(energies[i]);
+        maxFftValue = std::max(maxFftValue, energies[i]);
+        
+        // XXX Would be better with JD's triangle filter...
+        float smoothFftNumerator = 0;
+        float smoothFftDenomenator = 0;
+        for (size_t j = 0; j < 10; j++) {
+            float weight = 10 - j;
+            smoothFftNumerator += _rawFfts[i][j] * weight;
+            smoothFftDenomenator += weight;
+        }
+        
+        float smoothValue = smoothFftNumerator / smoothFftDenomenator;
+        //maxSmoothedValue = std::max(maxSmoothedValue, smoothValue);
+        
+        // If raw value is higher, us it.  This way we don't lose sharp
+        // attacks.
+        smoothValue = std::max(smoothValue, _rawFfts[i][0]);
+        
+        // normalize it
+        smoothValue *= 1.0 / _currentFftValueRange;
+        
+        _smoothFfts[i].Push(smoothValue);
+    }
+    
+    if (maxFftValue > _currentFftValueRange) {
+        _currentFftValueRange = maxFftValue;
+    }
+    _currentFftValueRange *= 0.999;
+    if (_currentFftValueRange < FFT_VALUE_RANGE_MINIMUM) {
+        _currentFftValueRange = FFT_VALUE_RANGE_MINIMUM;
     }
     
     float fftSum = GetCurrentFftSum();
@@ -214,6 +269,16 @@ SrAudio::AudioIn(float *input, int bufferSize, int nChannels)
         // if audio levels go down max will slowly adjust.
         _fftSumMax -= 0.001;
     }
+    
+    if (fftSum > AUDIO_THRESHOLD) {
+        _timeAtLastAudioInput = ofGetElapsedTimef();
+    }
+}
+
+float
+SrAudio::ComputeSecondsSinceAudioSignal() const
+{
+    return ofGetElapsedTimef() - _timeAtLastAudioInput;
 }
 
 /*
@@ -264,6 +329,36 @@ void
 SrAudio::ResetMeasure()
 {
     _beatHistory.ResetMeasure();
+}
+
+void
+SrAudio::DrawFftBands(float x, float y, float width, float height) const
+{
+    ofSetColor(ofFloatColor(0.1,0.1,0.1));
+    ofDrawRectangle(x, y, width, height);
+    
+    std::vector<float> rawValues = GetCurrentRawFftValues();
+    std::vector<float> smoothValues = GetCurrentSmoothFftValues();
+    
+    ofSetColor(ofFloatColor(0.7,0.7,0.7));
+    
+    float w = width / smoothValues.size();
+    for(size_t i = 0; i < smoothValues.size(); i++) {
+        float length = height * smoothValues[i];
+        ofDrawRectangle(x + i * w, y + height - length, w, length);
+    }
+    
+    ofSetColor(ofFloatColor(0.3,0.3,0.3));
+    
+    for(size_t i = 0; i < rawValues.size(); i++) {
+        float length = height * rawValues[i];
+        ofDrawRectangle(x + i * w, y + height - length, w, 3);
+    }
+    
+    ofSetColor(ofColor::yellow);
+    float length = height * _currentFftValueRange;
+    ofDrawRectangle(x, y + height - length, 3, 3);
+    
 }
 
 void

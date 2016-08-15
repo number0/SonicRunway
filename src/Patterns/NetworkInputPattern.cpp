@@ -37,6 +37,12 @@ SrNetworkInputPattern::~SrNetworkInputPattern()
     delete _buffer;
 }
 
+bool
+SrNetworkInputPattern::IsAudioReactive() const
+{
+    return false;
+}
+
 void
 SrNetworkInputPattern::_Update()
 {

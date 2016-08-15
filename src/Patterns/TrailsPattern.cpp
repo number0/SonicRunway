@@ -38,7 +38,7 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hueParam = (float) _hueParam;
     float jitterParam = (float) _jitterParam;
     int pixels = buffer->size();
-    vector<float> fftValues = GetAudio()->GetCurrentFftValues();
+    vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     
     // Protection
     if (segments > pixels) {

@@ -18,17 +18,24 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _model(model),
     _audio(audio),
     _cycleAutomatically(true),
+    _delayBeforeAutomaticMode(5.0), // seconds
     _twoBeatCycle(0.0),
     _measureCycle(0.0),
     _phraseCycle(0.0),
     _slowCycle(0.0),
     _verySlowCycle(0.0),
+    _fadeDuration(1.0),
     _dial1Parameter(0.5),
     _dial2Parameter(0.5),
     _slider1Parameter(0.5),
     _slider2Parameter(0.5)
 {
     _cycleAutomatically.setName("Auto Cycle");
+    _cycleAutomatically.addListener(this, &This::_OnCycleAutomaticallyChanged);
+    
+    _delayBeforeAutomaticMode.setName("Delay b4 auto");
+    _delayBeforeAutomaticMode.setMin(0.0);
+    _delayBeforeAutomaticMode.setMax(20.0);
     
     _twoBeatCycle.setName("Two Beat");
     _twoBeatCycle.setMin(0.0);
@@ -50,23 +57,34 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _verySlowCycle.setMin(0.0);
     _verySlowCycle.setMax(1.0);
     
-    _dial1Parameter.setName("Dial 1");
+    _fadeDuration.setName("FadeDuration");
+    _fadeDuration.setMin(0.01);
+    _fadeDuration.setMax(10.0);
+    
+    _dial1Parameter.setName("Dial1");
     _dial1Parameter.setMin(0.0);
     _dial1Parameter.setMax(1.0);
     
-    _dial2Parameter.setName("Dial 2");
+    _dial2Parameter.setName("Dial2");
     _dial2Parameter.setMin(0.0);
     _dial2Parameter.setMax(1.0);
     
-    _slider1Parameter.setName("Slider 1");
+    _slider1Parameter.setName("Slider1");
     _slider1Parameter.setMin(0.0);
     _slider1Parameter.setMax(1.0);
     
-    _slider2Parameter.setName("Slider 2");
+    _slider2Parameter.setName("Slider2");
     _slider2Parameter.setMin(0.0);
     _slider2Parameter.setMax(1.0);
     
     _AddUIParameter(_cycleAutomatically);
+    _AddUIParameter(_delayBeforeAutomaticMode);
+    
+    _AddUIParameter(_fadeDuration);
+    _AddUIParameter(_dial1Parameter);
+    _AddUIParameter(_dial2Parameter);
+    _AddUIParameter(_slider1Parameter);
+    _AddUIParameter(_slider2Parameter);
     
     _AddUIParameter(_twoBeatCycle);
     _AddUIParameter(_measureCycle);
@@ -74,11 +92,10 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _AddUIParameter(_slowCycle);
     _AddUIParameter(_verySlowCycle);
     
-    _AddUIParameter(_dial1Parameter);
-    _AddUIParameter(_dial2Parameter);
-    _AddUIParameter(_slider1Parameter);
-    _AddUIParameter(_slider2Parameter);
-    
+    _dial1Parameter.addListener(this, &This::_OnParameterChanged);
+    _dial2Parameter.addListener(this, &This::_OnParameterChanged);
+    _slider1Parameter.addListener(this, &This::_OnParameterChanged);
+    _slider2Parameter.addListener(this, &This::_OnParameterChanged);
 }
 
 SrGlobalParameters::~SrGlobalParameters()
@@ -114,6 +131,12 @@ float
 SrGlobalParameters::GetVerySlowCycle() const
 {
     return (float) _verySlowCycle;
+}
+
+float
+SrGlobalParameters::GetFadeDuration() const
+{
+    return (float) _fadeDuration;
 }
 
 float
@@ -164,6 +187,13 @@ SrGlobalParameters::_ComputeUpdate(float value, int beatsPerCycle) const
 void
 SrGlobalParameters::Update()
 {
+    // If we haven't touched anything for a while, turn the
+    // cycles back on.
+    if (not _cycleAutomatically and
+        ComputeSecondsSinceManualInput() > _delayBeforeAutomaticMode) {
+        _cycleAutomatically = true;
+    }
+    
     if ((bool) _cycleAutomatically) {
         _twoBeatCycle = _ComputeUpdate((float) _twoBeatCycle, 2);
         _measureCycle = _ComputeUpdate((float) _measureCycle, 4);
@@ -199,4 +229,31 @@ SrGlobalParameters::Update()
             _verySlowCycle = 0.0;
         }
     }
+}
+
+void
+SrGlobalParameters::OnReceivedManualInput()
+{
+    _timeOfLastManualParameterChange = ofGetElapsedTimef();
+}
+
+void
+SrGlobalParameters::_OnParameterChanged(float & value)
+{
+    OnReceivedManualInput();
+}
+
+void
+SrGlobalParameters::_OnCycleAutomaticallyChanged(bool & value)
+{
+    // Turning off cycling counts as manual input.
+    if (not value) {
+        OnReceivedManualInput();
+    }
+}
+
+float
+SrGlobalParameters::ComputeSecondsSinceManualInput() const
+{
+    return ofGetElapsedTimef() - _timeOfLastManualParameterChange;
 }
