@@ -86,7 +86,17 @@ TODO:
 - Add parameters to fiddle the gain on the LEDs so we can color 
   correct them.  (RJ)
 
+- Add a parameter to delay so first physical gate is #2
+
 - Make sure we can automatically run the software on startup. (RJ)
+
+- Run speed tests to make sure frame rate keeps up.
+
+- Change 'rainbow' pattern so it doesn't go all white
+
+- Add a subtle pattern going the other way.
+
+- Add pattern that makes a stripe that wanders based on RMS
 
 - (low priority) Figure out how to build standalone app.  
   Product->Archive does this mostly,
