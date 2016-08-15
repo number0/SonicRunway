@@ -35,7 +35,7 @@ extern "C" void CGSDeferredUpdates(int);
 
 static const size_t PATTERNS_PER_COLUMN = 10;
 
-SrApp::SrApp() :
+SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
     _audio("Audio", &_model),
     _globalParameters("Global Params", &_model, &_audio),
@@ -147,8 +147,20 @@ SrApp::SrApp() :
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
-    ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
-                       _model.GetSampleRate(), _model.GetBufferSize(), 4);
+    ofSoundStreamListDevices();
+    
+    _soundStream.setup(ofApp,_model.GetNumChannels(), _model.GetNumChannels(),
+                      _model.GetSampleRate(), _model.GetBufferSize(), 4);
+    
+    std::vector<ofSoundDevice> loopbackDevices =
+        _soundStream.getMatchingDevices("Loopback Audio");
+    printf("number of matching loopback devices %zu\n", loopbackDevices.size());
+    if (not loopbackDevices.empty()) {
+        int loopbackDeviceID = loopbackDevices[0].deviceID;
+        printf("setting loopback device %d\n", loopbackDeviceID);
+        _soundStream.setDeviceID(loopbackDeviceID);
+    }
+    
     
     // Calculate X position of the previs
     _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);

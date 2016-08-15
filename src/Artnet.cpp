@@ -30,8 +30,8 @@ SrArtnet::SrArtnet(const std::string & name,
     
     _ipAddresses.resize(_model->GetNumGates());
     
-    // There is no station 0
-    //_ipAddresses[0] = std::string("192.168.3.32");
+    // There is no station 0.  adding address of spare 1
+    _ipAddresses[0] = std::string("192.168.3.24");
     
     /*  ACTUAL ADDRESSES OF THE BOXES
      */

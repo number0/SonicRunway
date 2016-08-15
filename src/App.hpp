@@ -27,7 +27,7 @@ class SrPattern;
 //
 class SrApp {
 public:
-    SrApp();
+    SrApp(ofBaseApp *ofApp);
     ~SrApp();
     
     void Update();
@@ -49,6 +49,8 @@ private:
     SrPrevis _previs;
     SrArtnet _artnet;
     SrSwitcher _switcher;
+    
+    ofSoundStream _soundStream;
     
     std::vector<SrPattern *> _patterns;
     ofParameterGroup _patternsParameterGroup;
