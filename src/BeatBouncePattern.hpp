@@ -17,7 +17,8 @@
 class SrBeatBouncePattern : public SrScrollingPattern {
 public:
     SrBeatBouncePattern(const std::string & name,
-                  SrModel * model, SrAudio * audio);
+                  SrModel * model, SrAudio * audio,
+                  SrGlobalParameters * globalParameters);
     virtual ~SrBeatBouncePattern();
     
 protected:

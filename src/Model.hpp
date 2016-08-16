@@ -26,8 +26,7 @@ public:
     
     int GetSampleRate() const;
     int GetBufferSize() const;
-    int GetNumInputChannels() const;
-    int GetNumOutputChannels() const;
+    int GetNumChannels() const;
     float GetBuffersPerSecond() const;
     
     // XXX Gate 0 is assumed to be at the sound source, though it
@@ -64,8 +63,7 @@ public:
 private:
     int _sampleRate;
     int _bufferSize;
-    int _numInputChannels;
-    int _numOutputChannels;
+    int _numChannels;
     float _buffersPerSecond;
     
     int _numGates;

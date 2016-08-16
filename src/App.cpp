@@ -154,7 +154,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     fftPattern->SetEnabled(true);
     
     SrBeatBouncePattern *beatBouncePattern =
-    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio);
+    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
     _AddPattern(beatBouncePattern);
     beatBouncePattern->SetEnabled(false);
     

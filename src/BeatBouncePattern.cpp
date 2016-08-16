@@ -11,8 +11,9 @@
 #include "BeatHistory.hpp"
 
 SrBeatBouncePattern::SrBeatBouncePattern(const std::string & name,
-                             SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
+                             SrModel * model, SrAudio * audio,
+                             SrGlobalParameters * globalParameters) :
+SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.5),
 _decayTimeParam(0.25),
 _spinSpeedParam(0.25),

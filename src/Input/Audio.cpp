@@ -315,8 +315,7 @@ SrAudio::AudioOutDelayed(float * output, int bufferSize, int nChannels,
     
     // XXX memcpy for speed?
     for(int i=0; i < bufferSize; i++) {
-        output[(i*nChannels)] = thisBuffer[i];
-        output[(i*nChannels)+1] = thisBuffer[i];
+        output[i*nChannels] = thisBuffer[i];
     }
 }
 
