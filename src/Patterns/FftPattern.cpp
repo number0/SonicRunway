@@ -16,11 +16,13 @@ SrFftPattern::SrFftPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
-    _exponent(1.0),
-    _multiplier(1.0),
-    _hueShiftParam(0.0),
+    _exponent(2.0),
+    _multiplier(2.0),
+    _spreadExponent(0.37),
+    _hueOffset(0.0),
+    _hueShift(0.3),
     _mirror(true),
-    _scale(0.7),
+    _scale(0.5),
     _blendBuckets(true),
     _spinSlowly(false),
     _cycleHues(true)
@@ -35,10 +37,20 @@ SrFftPattern::SrFftPattern(const std::string & name,
     _multiplier.setMax(4.0);
     _AddUIParameter(_multiplier);
     
-    _hueShiftParam.setName("Hue");
-    _hueShiftParam.setMin(0.0);
-    _hueShiftParam.setMax(1.0);
-    _AddUIParameter(_hueShiftParam);
+    _spreadExponent.setName("Spread Exponent");
+    _spreadExponent.setMin(0.1);
+    _spreadExponent.setMax(1.0);
+    _AddUIParameter(_spreadExponent);
+    
+    _hueOffset.setName("Hue Offset");
+    _hueOffset.setMin(0.0);
+    _hueOffset.setMax(1.0);
+    _AddUIParameter(_hueOffset);
+    
+    _hueShift.setName("Hue Shift");
+    _hueShift.setMin(0.0);
+    _hueShift.setMax(2.0);
+    _AddUIParameter(_hueShift);
     
     _mirror.setName("Mirror");
     _AddUIParameter(_mirror);
@@ -63,12 +75,12 @@ SrFftPattern::~SrFftPattern()
     
 }
 
-static ofFloatColor
-_ComputeColor(float fftValue, float hueShift)
+ofFloatColor
+SrFftPattern::_ComputeColor(float fftValue, float hueOffset) const
 {
     ofFloatColor c;
-    float baseColor = 0.15 + hueShift;
-    float hue = baseColor - 0.4 * (1.0 - fftValue);
+    float baseColor = 0.15 + hueOffset;
+    float hue = baseColor - (float) _hueShift * (1.0 - fftValue);
     
     hue = SrUtil_ClampCycle(0.0, 1.0, hue);
     
@@ -95,8 +107,8 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         return;
     }
     
-    float hueShift = (float) _hueShiftParam +
-        (bool) _cycleHues * GetGlobalParameters()->GetPhraseCycle() +
+    float hueOffset = (float) _hueOffset +
+        (bool) _cycleHues * GetGlobalParameters()->GetSlowCycle() +
         GetGlobalParameters()->GetDial1();
     
     for(int fftIdx = 0; fftIdx < ffts.size(); fftIdx++) {
@@ -107,6 +119,9 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         
         float beginT = (float) fftIdx / ffts.size();
         float endT = (float) (fftIdx + 1) / ffts.size();
+        
+        beginT = pow(beginT, (float) _spreadExponent);
+        endT = pow(endT, (float) _spreadExponent);
         
         float beginAngle = baseAngle + angleSpan * beginT;
         float endAngle = baseAngle + angleSpan * endT;
@@ -122,8 +137,8 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         
         float nextFftValue = _ComputeValue(ffts[nextIdx]);
         
-        ofFloatColor c0 = _ComputeColor(fftValue, hueShift);
-        ofFloatColor c1 = _ComputeColor(nextFftValue, hueShift);
+        ofFloatColor c0 = _ComputeColor(fftValue, hueOffset);
+        ofFloatColor c1 = _ComputeColor(nextFftValue, hueOffset);
 
         for(int lightIdx = beginLight; lightIdx < endLight; lightIdx++) {
             
@@ -185,7 +200,7 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         float fftValue = ffts[band];
 
         ofFloatColor c;
-        float baseColor = 0.15 + hueShift;
+        float baseColor = 0.15 + hueOffset;
         float hue = baseColor - 0.4 * (1.0 - fftValue);
         
         hue = SrUtil_ClampCycle(0.0, 1.0, hue);
