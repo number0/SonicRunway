@@ -113,10 +113,12 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
+    /*
     SrVideoPattern *videoPattern =
         new SrVideoPattern("Fireplace", "fireplace2.mov",
                            &_model, &_audio, &_globalParameters);
     _AddPattern(videoPattern);
+     */
     
     SrAnimPattern *animPattern =
         new SrAnimPattern("Anim", "lightning", 82, false,
@@ -147,7 +149,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
     
-    _MakeVideoPatterns();
+    //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
