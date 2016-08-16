@@ -110,6 +110,7 @@ SrPrevis::_SetupLights()
     }
     
      // Setup Lights Shader
+    
     _dotLight.load(SrUtil_GetAbsolutePathForResource("light.png"));
     
     // Points come into geometry shader, tris come out
@@ -128,7 +129,7 @@ SrPrevis::_DrawLights(){
     // Draw with billboard geometry shader
     if ( _geomShaderDrawing )
     {
-    
+        
         // Bind a texture of the current gate pixel colors
         _textureForShader.setFromPixels(_model->GetFloatPixels());
     
@@ -143,6 +144,7 @@ SrPrevis::_DrawLights(){
     
         // Unbind the shader
         _lightShader.end();
+        
     }
     
     // Legacy DrawCircle draw mode
@@ -234,7 +236,8 @@ SrPrevis::Update()
         
         if (_reverseAngleParam) {
             _camera.lookAt(ofVec3f(0,-60,0),ofVec3f(0,0,1));
-            _camera.setPosition(0,1018,5.8);
+            float length = ((_model->GetNumGates() - 1) * _model->GetDistanceBetweenGates());
+            _camera.setPosition(0,length + 18.0,5.8);
         } else {
             _camera.lookAt(ofVec3f(0,60,0),ofVec3f(0,0,1));
             _camera.setPosition(0,-18,5.8);

@@ -30,6 +30,9 @@ public:
     // Buffer containing the current measure in the phrase [1-8]
     const SrIntBuffer & GetMeasureIndex() const;
     
+    // A beat counter over the entire run
+    const SrIntBuffer & GetGlobalBeat() const;
+    
     // Make it so the next beat will be 1.
     void ResetDownbeat();
     
@@ -43,11 +46,13 @@ private:
     SrFloatBuffer _bpm;
     SrIntBuffer _beatIndex;
     SrIntBuffer _measureIndex;
-    
+    SrIntBuffer _globalBeatIndex;
+
     bool _gotBeat;
     
     int _currentBeatIndex;
     int _currentMeasureIndex;
+    int _globalBeat;
     
     bool _resetBeat;
     bool _resetMeasure;

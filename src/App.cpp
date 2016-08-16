@@ -10,6 +10,7 @@
 #include "ofApp.h"
 
 #include "BeatPattern.hpp"
+#include "BeatBouncePattern.hpp"
 #include "FftPattern.hpp"
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
@@ -70,11 +71,12 @@ SrApp::SrApp() :
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio);
     _AddPattern(beatPattern);
+    beatPattern->SetEnabled(false);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio);
     _AddPattern(fftPattern);
-    
+
     SrStripesPattern *stripesPattern =
         new SrStripesPattern("Stripes", &_model, &_audio);
     _AddPattern(stripesPattern);
@@ -133,6 +135,11 @@ SrApp::SrApp() :
     //triggerPattern->SetEnabled(true);
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
+    
+    SrBeatBouncePattern *beatBouncePattern =
+    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio);
+    _AddPattern(beatBouncePattern);
+    beatBouncePattern->SetEnabled(false);
     
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
