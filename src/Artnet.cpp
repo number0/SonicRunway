@@ -14,7 +14,7 @@ SrArtnet::SrArtnet(const std::string & name,
                    SrModel * model) :
     SrUiMixin(name),
     _model(model),
-    _enabledParam(false)
+    _enabledParam(true)
 {
     _artnet.setup("192.168.0.1");
     _artnet.verbose = false;
@@ -27,26 +27,46 @@ SrArtnet::SrArtnet(const std::string & name,
     // file to change IP addresses without having to recompile.
     //_ipAddresses.resize(_model->GetNumGates());
    
-    _ipAddresses.push_back(std::string("192.168.3.23"));
-    _ipAddresses.push_back(std::string("192.168.3.39"));
-    _ipAddresses.push_back(std::string("192.168.3.24"));
-    _ipAddresses.push_back(std::string("192.168.3.29"));
-    _ipAddresses.push_back(std::string("192.168.3.26"));
-    _ipAddresses.push_back(std::string("192.168.3.36"));
-    _ipAddresses.push_back(std::string("192.168.3.40"));
-    _ipAddresses.push_back(std::string("192.168.3.19"));
-    _ipAddresses.push_back(std::string("192.168.3.13"));
-    _ipAddresses.push_back(std::string("192.168.3.20"));
-    _ipAddresses.push_back(std::string("192.168.3.11"));
-    _ipAddresses.push_back(std::string("192.168.3.16"));
-    _ipAddresses.push_back(std::string("192.168.3.27"));
-    _ipAddresses.push_back(std::string("192.168.3.21"));
-    _ipAddresses.push_back(std::string("192.168.3.32"));
-    _ipAddresses.push_back(std::string("192.168.3.12"));
-    _ipAddresses.push_back(std::string("192.168.3.22"));
     
-    // Make sure the array is big enough..
     _ipAddresses.resize(_model->GetNumGates());
+    
+    // There is no station 0.  adding address of spare 1
+    _ipAddresses[0] = std::string("192.168.3.24");
+    
+    /*  ACTUAL ADDRESSES OF THE BOXES
+     */
+    _ipAddresses[1] = std::string("192.168.3.32");
+    _ipAddresses[2] = std::string("192.168.3.11");
+    _ipAddresses[3] = std::string("192.168.3.12");
+    _ipAddresses[4] = std::string("192.168.3.28");
+    _ipAddresses[5] = std::string("192.168.3.16");
+    _ipAddresses[6] = std::string("192.168.3.202");
+    _ipAddresses[7] = std::string("192.168.3.17");
+    _ipAddresses[8] = std::string("192.168.3.29");
+    _ipAddresses[9] = std::string("192.168.3.18");
+    _ipAddresses[10] = std::string("192.168.3.27");
+    _ipAddresses[11] = std::string("192.168.3.26");
+    _ipAddresses[12] = std::string("192.168.3.14");
+    _ipAddresses[13] = std::string("192.168.3.25");
+    _ipAddresses[14] = std::string("192.168.3.10");
+    _ipAddresses[15] = std::string("192.168.3.22");
+    _ipAddresses[16] = std::string("192.168.3.21");
+    _ipAddresses[17] = std::string("192.168.3.20");
+    _ipAddresses[18] = std::string("192.168.3.15");
+    _ipAddresses[19] = std::string("192.168.3.31");
+    _ipAddresses[20] = std::string("192.168.3.35");
+    _ipAddresses[21] = std::string("192.168.3.36");
+    _ipAddresses[22] = std::string("192.168.3.37");
+    _ipAddresses[23] = std::string("192.168.3.38");
+    _ipAddresses[24] = std::string("192.168.3.19");
+    _ipAddresses[25] = std::string("192.168.3.33");
+    _ipAddresses[26] = std::string("192.168.3.23");
+    _ipAddresses[27] = std::string("192.168.3.34");
+    _ipAddresses[28] = std::string("192.168.3.39");
+    _ipAddresses[29] = std::string("192.168.3.40");
+    _ipAddresses[30] = std::string("192.168.3.41");
+    _ipAddresses[31] = std::string("192.168.3.42");
+    _ipAddresses[32] = std::string("192.168.3.44");
 }
 
 void

@@ -10,8 +10,9 @@
 #include "Audio.hpp"
 
 SrTrailsPattern::SrTrailsPattern(const std::string & name,
-                                 SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
+                                 SrModel * model, SrAudio * audio,
+                                 SrGlobalParameters * globalParameters) :
+SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.75),
 _jitterParam(20.0)
 {
@@ -37,7 +38,7 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hueParam = (float) _hueParam;
     float jitterParam = (float) _jitterParam;
     int pixels = buffer->size();
-    vector<float> fftValues = GetAudio()->GetCurrentFftValues();
+    vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     
     // Protection
     if (segments > pixels) {

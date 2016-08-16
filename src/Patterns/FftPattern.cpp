@@ -9,10 +9,13 @@
 #include "FftPattern.hpp"
 #include "Audio.hpp"
 #include "Model.hpp"
+#include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrFftPattern::SrFftPattern(const std::string & name,
-                           SrModel * model, SrAudio * audio) :
-    SrScrollingPattern(name, model, audio),
+                           SrModel * model, SrAudio * audio,
+                           SrGlobalParameters * globalParameters) :
+    SrScrollingPattern(name, model, audio, globalParameters),
     _hueShiftParam(0.0)
 {
     _hueShiftParam.setName("Hue");
@@ -33,13 +36,15 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     const SrModel * model = GetModel();
     int numLights = model->GetLightsPerGate();
     
-    std::vector<float> ffts = GetAudio()->GetCurrentFftValues();
+    std::vector<float> ffts = GetAudio()->GetCurrentSmoothFftValues();
     
     if (ffts.empty()) {
         return;
     }
     
-    float hueShift = (float) _hueShiftParam;
+    float hueShift = (float) _hueShiftParam +
+        GetGlobalParameters()->GetPhraseCycle() +
+        GetGlobalParameters()->GetDial1();
     
     for(int i = 0; i < numLights; i++) {
         float t = (float) i / numLights;
@@ -57,12 +62,10 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         ofFloatColor c;
         float baseColor = 0.15 + hueShift;
         float hue = baseColor - 0.4 * (1.0 - fftValue);
-        if (hue < 0.0) {
-            hue += 1.0;
-        }
-
-        hue = fmod(hue, 1.0);
-        c.setHsb(hue, 1.0, fftValue * 2.0);
+        
+        hue = SrUtil_ClampCycle(0.0, 1.0, hue);
+        
+        c.setHsb(hue, 1.0, fftValue * 1.5);
         
         (*buffer)[i] += c;
         

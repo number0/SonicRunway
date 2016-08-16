@@ -22,7 +22,8 @@
 class SrScrollingPattern : public SrPattern {
 public:
     SrScrollingPattern(const std::string & name,
-                       SrModel * model, SrAudio * audio);
+                       SrModel * model, SrAudio * audio,
+                       SrGlobalParameters * globalParameters);
     ~SrScrollingPattern();
     
 protected:

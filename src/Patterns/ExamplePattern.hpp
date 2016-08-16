@@ -19,8 +19,11 @@
 class SrExamplePattern : public SrScrollingPattern {
 public:
     SrExamplePattern(const std::string & name,
-                    SrModel * model, SrAudio * audio);
+                     SrModel * model, SrAudio * audio,
+                     SrGlobalParameters * globalParameters);
     virtual ~SrExamplePattern();
+    
+    virtual bool IsAudioReactive() const;
     
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;

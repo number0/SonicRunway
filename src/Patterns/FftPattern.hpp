@@ -19,7 +19,8 @@
 class SrFftPattern : public SrScrollingPattern {
 public:
     SrFftPattern(const std::string & name,
-                 SrModel * model, SrAudio * audio);
+                 SrModel * model, SrAudio * audio,
+                 SrGlobalParameters * globalParameters);
     virtual ~SrFftPattern();
     
 protected:

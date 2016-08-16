@@ -17,7 +17,8 @@
 class SrStripesPattern : public SrScrollingPattern {
 public:
     SrStripesPattern(const std::string & name,
-                     SrModel * model, SrAudio * audio);
+                     SrModel * model, SrAudio * audio,
+                     SrGlobalParameters * globalParameters);
     virtual ~SrStripesPattern();
     
 protected:

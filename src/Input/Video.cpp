@@ -41,7 +41,8 @@ int
 SrVideo::GoToNextFrame()
 {
     _player.nextFrame();
-    if (_player.getCurrentFrame() >= _player.getTotalNumFrames()) {
+    // current frame starts at 0
+    if (_player.getCurrentFrame() >= _player.getTotalNumFrames()-1) {
         Reset();
     } else {
         _player.update();

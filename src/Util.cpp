@@ -161,3 +161,20 @@ SrUtil_IsPathToEnabledPattern(const std::string & path,
    
     return (bool) (*boolParam);
 }
+
+float
+SrUtil_ClampCycle(float min, float max, float value)
+{
+    float length = max - min;
+    if (value > max) {
+        float remainder = value - max;
+        return min + fmod(remainder, length);
+    }
+    
+    if (value < min) {
+        float remainder = min - value;
+        return max - fmod(remainder, length);
+    }
+    
+    return value;
+}

@@ -17,7 +17,8 @@
 class SrBigTrailsPattern : public SrScrollingPattern {
 public:
     SrBigTrailsPattern(const std::string & name,
-                    SrModel * model, SrAudio * audio);
+                    SrModel * model, SrAudio * audio,
+                       SrGlobalParameters * globalParameters);
     virtual ~SrBigTrailsPattern();
     
 protected:

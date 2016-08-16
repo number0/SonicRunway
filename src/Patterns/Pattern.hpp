@@ -33,7 +33,9 @@ class SrAudio;
 //
 class SrPattern : public SrUiMixin {
 public:
-    SrPattern(const std::string & name, SrModel * model, SrAudio * audio);
+    SrPattern(const std::string & name,
+              SrModel * model, SrAudio * audio,
+              SrGlobalParameters * globalParameters);
     virtual ~SrPattern();
     
     // Called by the main app to update state.
@@ -51,6 +53,10 @@ public:
     // Return true if the pattern is 'on' at any gate.
     // This lets patterns skip computation if they are off everywhere.
     bool IsOnAtAnyGate() const;
+    
+    // Return 'true' if the pattern reacts to the audio signal.
+    // Default returns true.
+    virtual bool IsAudioReactive() const;
     
     // Get a buffer with per-gate opacity information.
     // Opacity is 1 if the pattern is enabled, 0 if disabled.
@@ -78,10 +84,12 @@ protected:
     
     SrModel * GetModel() const;
     SrAudio * GetAudio() const;
+    SrGlobalParameters * GetGlobalParameters() const;
     
 private:
     SrModel *_model;
     SrAudio *_audio;
+    SrGlobalParameters *_globalParameters;
     SrFloatSimpleBuffer _enabledBuffer;
     ofParameter<bool> _enabledParam;
     

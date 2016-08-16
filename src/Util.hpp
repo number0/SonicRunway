@@ -37,4 +37,7 @@ bool
 SrUtil_IsPathToEnabledPattern(const std::string & path,
                               ofParameterGroup & parameterGroup);
 
+float
+SrUtil_ClampCycle(float min, float max, float value);
+
 #endif /* Util_hpp */

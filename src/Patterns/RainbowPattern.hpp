@@ -17,7 +17,8 @@
 class SrRainbowPattern : public SrScrollingPattern {
 public:
     SrRainbowPattern(const std::string & name,
-                  SrModel * model, SrAudio * audio);
+                  SrModel * model, SrAudio * audio,
+                     SrGlobalParameters * globalParameters);
     virtual ~SrRainbowPattern();
     
 protected:

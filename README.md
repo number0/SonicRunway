@@ -70,25 +70,38 @@ problematic we can use ofMutex to make it thread safe.
 
 TODO:
 
-- Expand library of patterns.
+- Improve FFT visualization:
+    - blend between the bucket regions to avoid segmenting (RJ)
 
-- Get quicktimes to loop and play at correct frame rate.
+- Figure out why videos go white sometimes.
 
-- Improve FFT visualization.
+- Expand library of patterns. (Everyone!)
 
-- Allow playback of band-pass filters
+- Debug crash -- maybe in 'BigTrails' when rotation and jitter
+  have high values?  (Paul?)
 
-- Improve switcher:  choose audio / non-audio patterns
+- Design TouchOSC layout - include master parameter sliders and 
+  buttons for presets (?)
 
-- Design TouchOSC layout -- possibly add some 'master' parameters that all
-  patterns can key off.
+- Add parameters to fiddle the gain on the LEDs so we can color 
+  correct them.  (RJ)
 
-- Fix up gamma correction -- look at other libraries to implement 
-  mapping to LED color space.  -- maybe it's good enough as is?
+- Add a parameter to delay so first physical gate is #2
 
-- Figure out how to build standalone app.  Product->Archive does this mostly,
+- Make sure we can automatically run the software on startup. (RJ)
+
+- Run speed tests to make sure frame rate keeps up.
+
+- Change 'rainbow' pattern so it doesn't go all white
+
+- Add a subtle pattern going the other way.
+
+- Add pattern that makes a stripe that wanders based on RMS
+
+- (low priority) Figure out how to build standalone app.  
+  Product->Archive does this mostly,
   but dependencies on dylibs causes problems.  This means either figuring out
   how to bundle dylibs with the app, or compiling them statically.  Some info:
 
-ttp://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
+http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
 

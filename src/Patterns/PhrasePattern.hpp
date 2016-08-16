@@ -17,7 +17,8 @@
 class SrPhrasePattern : public SrScrollingPattern {
 public:
     SrPhrasePattern(const std::string & name,
-                    SrModel * model, SrAudio * audio);
+                    SrModel * model, SrAudio * audio,
+                    SrGlobalParameters * globalParameters);
     virtual ~SrPhrasePattern();
     
 protected:
@@ -28,7 +29,5 @@ protected:
 private:
     
 };
-
-
 
 #endif 

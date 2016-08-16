@@ -10,13 +10,16 @@
 #include "Model.hpp"
 #include "Audio.hpp"
 #include "Debug.hpp"
+#include "GlobalParameters.hpp"
 
 SrPattern::SrPattern(const std::string & name,
                      SrModel * model,
-                     SrAudio * audio) :
+                     SrAudio * audio,
+                     SrGlobalParameters * globalParameters) :
     SrUiMixin(name),
     _model(model),
     _audio(audio),
+    _globalParameters(globalParameters),
     _enabledBuffer(model),
     _enabledParam(false),
     _opacityBuffer(model)
@@ -42,6 +45,12 @@ SrAudio *
 SrPattern::GetAudio() const
 {
     return _audio;
+}
+
+SrGlobalParameters *
+SrPattern::GetGlobalParameters() const
+{
+    return _globalParameters;
 }
 
 void
@@ -78,7 +87,7 @@ SrPattern::Update()
     float thisOpacity = lastOpacity;
     
     if (lastOpacity != (float) enabled) {
-        float fadeDurationSeconds = 1.0;
+        float fadeDurationSeconds = _globalParameters->GetFadeDuration();
         float fadeDurationFrames = fadeDurationSeconds * _model->ComputeFramesPerSecond();
         
         float delta = 1.0 / fadeDurationFrames;
@@ -112,4 +121,10 @@ SrPattern::Draw()
     
     // Call subclass draw
     _Draw();
+}
+
+bool
+SrPattern::IsAudioReactive() const
+{
+    return true;
 }

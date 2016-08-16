@@ -12,8 +12,9 @@
 
 SrPhrasePattern::SrPhrasePattern(const std::string & name,
                                  SrModel * model,
-                                 SrAudio * audio) :
-    SrScrollingPattern(name, model, audio)
+                                 SrAudio * audio,
+                                 SrGlobalParameters * globalParameters) :
+    SrScrollingPattern(name, model, audio, globalParameters)
 {
     
 }

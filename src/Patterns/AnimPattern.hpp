@@ -22,8 +22,11 @@ public:
                   size_t numFrames,
                   bool padFrameNumbers,
                   SrModel * model,
-                  SrAudio * audio);
+                  SrAudio * audio,
+                  SrGlobalParameters * globalParameters);
     virtual ~SrAnimPattern();
+    
+    virtual bool IsAudioReactive() const;
     
 protected:
     virtual void _Update();

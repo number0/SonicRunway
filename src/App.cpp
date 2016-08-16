@@ -8,6 +8,8 @@
 
 #include "App.hpp"
 #include "ofApp.h"
+#include "Util.hpp"
+#include "Debug.hpp"
 
 #include "BeatPattern.hpp"
 #include "BeatBouncePattern.hpp"
@@ -15,6 +17,7 @@
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
 #include "StripesPattern.hpp"
+#include "DoubleRainbowPattern.hpp"
 #include "StarPattern.hpp"
 #include "RainbowPattern.hpp"
 #include "ArcPattern.hpp"
@@ -26,6 +29,8 @@
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
 #include "BigTrailsPattern.hpp"
+#include "NetworkInputPattern.hpp"
+#include "GlobalParameters.hpp"
 
 #include "Switcher.hpp"
 
@@ -34,14 +39,16 @@ extern "C" void CGSDeferredUpdates(int);
 
 static const size_t PATTERNS_PER_COLUMN = 10;
 
-SrApp::SrApp() :
+SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
     _audio("Audio", &_model),
+    _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio),
     _switcher("Switcher", "presets.txt", this),
     _uiColumnWidth(220),
-    _uiMargin(10)
+    _uiMargin(10),
+    _previsXCoord(0)
 {
     ofSetFrameRate(_model.ComputeFramesPerSecond());
     
@@ -56,6 +63,7 @@ SrApp::SrApp() :
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
+    _globalPanel.add(_globalParameters.GetUiPanel());
     
     _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
@@ -65,74 +73,83 @@ SrApp::SrApp() :
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
-        new SrExamplePattern("Example", &_model, &_audio);
+    new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
     _AddPattern(examplePattern);
     
     SrBeatPattern * beatPattern =
-        new SrBeatPattern("Beat", &_model, &_audio);
+        new SrBeatPattern("Beat", &_model, &_audio, &_globalParameters);
     _AddPattern(beatPattern);
     beatPattern->SetEnabled(false);
     
     SrFftPattern *fftPattern =
-        new SrFftPattern("Fft", &_model, &_audio);
+        new SrFftPattern("Fft", &_model, &_audio, &_globalParameters);
     _AddPattern(fftPattern);
 
     SrStripesPattern *stripesPattern =
-        new SrStripesPattern("Stripes", &_model, &_audio);
+        new SrStripesPattern("Stripes", &_model, &_audio, &_globalParameters);
     _AddPattern(stripesPattern);
+
+    SrDoubleRainbowPattern *DoubleRainbowPattern =
+    new SrDoubleRainbowPattern("DoubleRainbow", &_model, &_audio, &_globalParameters);
+    _AddPattern(DoubleRainbowPattern);
     
     SrStarPattern *starPattern =
-        new SrStarPattern("Star", &_model, &_audio);
+        new SrStarPattern("Star", &_model, &_audio, &_globalParameters);
     _AddPattern(starPattern);
     
     SrRainbowPattern *rainbowPattern =
-    new SrRainbowPattern("Rainbow", &_model, &_audio);
+    new SrRainbowPattern("Rainbow", &_model, &_audio, &_globalParameters);
     _AddPattern(rainbowPattern);
     
     SrArcPattern *arcPattern =
-    new SrArcPattern("Arc", &_model, &_audio);
+    new SrArcPattern("Arc", &_model, &_audio, &_globalParameters);
     _AddPattern(arcPattern);
     
     SrPhasorPattern *phasorPattern =
-    new SrPhasorPattern("Phasor", &_model, &_audio);
+    new SrPhasorPattern("Phasor", &_model, &_audio, &_globalParameters);
     _AddPattern(phasorPattern);
     
     SrTrailsPattern *trailsPattern =
-    new SrTrailsPattern("Trails", &_model, &_audio);
+    new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
-     // Disabled b/c it seems like it might be slow.
-     //
     SrVideoPattern *videoPattern =
-        new SrVideoPattern("Video", "fireplace2.mov", &_model, &_audio);
+        new SrVideoPattern("Fireplace", "fireplace2.mov",
+                           &_model, &_audio, &_globalParameters);
     _AddPattern(videoPattern);
     
     SrAnimPattern *animPattern =
-        new SrAnimPattern("Anim", "lightning", 82, false, &_model, &_audio);
+        new SrAnimPattern("Anim", "lightning", 82, false,
+                          &_model, &_audio, &_globalParameters);
     _AddPattern(animPattern);
     
     SrTriggerPattern *triggerPattern =
-        new SrTriggerPattern("Trigger", &_model, &_audio);
+        new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
     _AddPattern(triggerPattern);
     
     SrPhrasePattern *phrasePattern =
-        new SrPhrasePattern("Phrase", &_model, &_audio);
+        new SrPhrasePattern("Phrase", &_model, &_audio, &_globalParameters);
     _AddPattern(phrasePattern);
     
     SrDiagnosticPattern *diagnosticPattern =
-        new SrDiagnosticPattern("Diagnostic", &_model, &_audio);
+        new SrDiagnosticPattern("Diagnostic", &_model, &_audio, &_globalParameters);
     _AddPattern(diagnosticPattern);
     
     SrRmsPattern *rmsPattern =
-        new SrRmsPattern("RMS", &_model, &_audio);
+        new SrRmsPattern("RMS", &_model, &_audio, &_globalParameters);
     _AddPattern(rmsPattern);
 
     SrBigTrailsPattern *bigTrailsPattern =
-    new SrBigTrailsPattern("Big Trails", &_model, &_audio);
+    new SrBigTrailsPattern("Big Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(bigTrailsPattern);
+
+    SrNetworkInputPattern *networkInputPattern =
+    new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
+    _AddPattern(networkInputPattern);
     
+    _MakeVideoPatterns();
+
     // Enable the patterns we want on by default.
-    //triggerPattern->SetEnabled(true);
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     
@@ -141,13 +158,33 @@ SrApp::SrApp() :
     _AddPattern(beatBouncePattern);
     beatBouncePattern->SetEnabled(false);
     
+    // Add global parameters to the model so they will be accessible
+    // from osc
+    _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
+    
+    // Set up syncing between ofParameters and OSC
     _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
-    ofSoundStreamSetup(_model.GetNumChannels(), _model.GetNumChannels(),
-                       _model.GetSampleRate(), _model.GetBufferSize(), 4);
+    ofSoundStreamListDevices();
     
-    stripesPattern->GetUiPanel()->minimizeAll();
+    _soundStream.setup(ofApp,_model.GetNumChannels(), _model.GetNumChannels(),
+                      _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
+    std::vector<ofSoundDevice> loopbackDevices =
+        _soundStream.getMatchingDevices("Loopback Audio");
+    printf("number of matching loopback devices %zu\n", loopbackDevices.size());
+    if (not loopbackDevices.empty()) {
+        int loopbackDeviceID = loopbackDevices[0].deviceID;
+        printf("setting loopback device %d\n", loopbackDeviceID);
+        _soundStream.setDeviceID(loopbackDeviceID);
+    }
+    
+    
+    // Calculate X position of the previs
+    _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
+    
+    // This must happen after patterns are initialized.
+    _switcher.ReadPresets();
 }
 
 SrApp::~SrApp()
@@ -160,6 +197,32 @@ SrApp::~SrApp()
         delete *iter;
     }
      */
+}
+
+void
+SrApp::_MakeVideoPatterns()
+{
+    std::string videoFolder = SrUtil_GetAbsolutePathForResource("");
+    
+    ofDirectory dir(videoFolder);
+    dir.allowExt("mov");
+    dir.listDir();
+    
+    for(size_t i = 0; i < dir.size(); i++) {
+        std::string fname = dir.getName(i);
+        if (fname.compare(0,5, "Auto_") != 0) {
+            continue;
+        }
+        
+        SrDebug("found auto movie %s\n", dir.getPath(i).c_str());
+        
+        std::string patternName = fname.substr(5, fname.size() - 9);
+        
+        SrVideoPattern *videoPattern =
+            new SrVideoPattern(patternName, fname,
+                               &_model, &_audio, &_globalParameters);
+        _AddPattern(videoPattern);
+    }
 }
 
 void
@@ -201,6 +264,12 @@ SrApp::GetAudio()
     return &_audio;
 }
 
+SrGlobalParameters *
+SrApp::GetGlobalParameters()
+{
+    return &_globalParameters;
+}
+
 void
 SrApp::AudioIn(float * input, int bufferSize, int nChannels)
 {
@@ -216,6 +285,8 @@ SrApp::AudioOut(float *output, int bufferSize, int nChannels)
 void
 SrApp::Update()
 {
+    _globalParameters.Update();
+    
     _oscParameterSync.update();
     
     _switcher.Update();
@@ -251,17 +322,19 @@ SrApp::Draw()
     
     ofBackground(40,40,40);
     
-    int previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
-    _model.RenderFrameBuffer(previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
+    _model.RenderFrameBuffer(_previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     
     _globalPanel.draw();
+    
     _switcher.GetUiPanel()->draw();
+    
+    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
     }
     
-    _previs.Draw(previsXCoord, 100, 1280, 720);
+    _previs.Draw(_previsXCoord, 100, 1280, 720);
     
     _artnet.UpdateLights();
 }

@@ -10,8 +10,9 @@
 #include "Audio.hpp"
 
 SrArcPattern::SrArcPattern(const std::string & name,
-                             SrModel * model, SrAudio * audio) :
-SrScrollingPattern(name, model, audio),
+                             SrModel * model, SrAudio * audio,
+                           SrGlobalParameters * globalParameters) :
+SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.2),
 _thresholdParam(0.5)
 {
@@ -37,7 +38,7 @@ SrArcPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
-    vector<float> fftValues = GetAudio()->GetCurrentFftValues();
+    vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     int fftSize = fftValues.size();
 
     // Protection

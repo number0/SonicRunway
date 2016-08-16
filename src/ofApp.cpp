@@ -8,7 +8,7 @@ void ofApp::setup(){
     
     essentia::init();
     
-    _app = new SrApp();
+    _app = new SrApp(this);
     
     // set the size of the window
     ofSetWindowShape(1800, 900);

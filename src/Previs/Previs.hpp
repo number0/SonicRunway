@@ -48,8 +48,9 @@ private:
     ofImage _textureForShader;
     ofImage _dotLight;
     
-    ofParameter<bool>_reverseAngleParam;
-    ofParameter<bool>_geomShaderDrawing;
+    ofParameter<bool> _drawPrevisParam;
+    ofParameter<bool> _reverseAngleParam;
+    ofParameter<bool> _geomShaderDrawing;
     int _animatedCameraIndex;
     
     std::vector<ofVec3f> _animatedCameraPositions;

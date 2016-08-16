@@ -9,8 +9,9 @@
 #include "ScrollingPattern.hpp"
 
 SrScrollingPattern::SrScrollingPattern(const std::string & name,
-                                   SrModel * model, SrAudio * audio) :
-    SrPattern(name, model, audio),
+                                       SrModel * model, SrAudio * audio,
+                                       SrGlobalParameters * globalParameters) :
+    SrPattern(name, model, audio, globalParameters),
     _index(0)
 {
     int width = model->GetNumGates() * model->GetFramesPerGate();

@@ -10,8 +10,9 @@
 #include "Audio.hpp"
 
 SrTriggerPattern::SrTriggerPattern(const std::string & name,
-                             SrModel * model, SrAudio * audio) :
-    SrScrollingPattern(name, model, audio),
+                                   SrModel * model, SrAudio * audio,
+                                   SrGlobalParameters * globalParameters) :
+    SrScrollingPattern(name, model, audio, globalParameters),
     _triggerParam(false),
     _triggerWasPressed(false)
 {
@@ -22,6 +23,12 @@ SrTriggerPattern::SrTriggerPattern(const std::string & name,
 SrTriggerPattern::~SrTriggerPattern()
 {
     
+}
+
+bool
+SrTriggerPattern::IsAudioReactive() const
+{
+    return false;
 }
 
 void
