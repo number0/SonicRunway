@@ -3,8 +3,14 @@
 
 #include "App.hpp"
 
-//--------------------------------------------------------------
-void ofApp::setup(){
+ofApp::ofApp() :
+    _isSetupComplete(false)
+{
+    
+}
+
+void ofApp::setup()
+{
     
     essentia::init();
     
@@ -12,6 +18,8 @@ void ofApp::setup(){
     
     // set the size of the window
     ofSetWindowShape(1800, 900);
+    
+    _isSetupComplete = true;
 }
 
 void ofApp::exit(){
@@ -24,10 +32,20 @@ void ofApp::exit(){
 }
 
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
+    // If setup isn't complete, our audio class is not yet allocated.
+    if (not _isSetupComplete) {
+        return;
+    }
+    
     _app->AudioIn(input, bufferSize, nChannels);
 }
 
 void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
+    // If setup isn't complete, our audio class is not yet allocated.
+    if (not _isSetupComplete) {
+        return;
+    }
+    
     _app->AudioOut(output, bufferSize, nChannels);
 }
 

@@ -16,6 +16,8 @@ class SrApp;
 class ofApp : public ofBaseApp{
 
 public:
+    ofApp();
+    
     void setup();
     void exit();
 
@@ -41,4 +43,5 @@ public:
 
 private:
     SrApp *_app;
+    bool _isSetupComplete;
 };
