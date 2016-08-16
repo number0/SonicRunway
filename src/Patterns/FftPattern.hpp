@@ -28,6 +28,11 @@ protected:
     
 private:
     ofParameter<float> _hueShiftParam;
+    ofParameter<bool> _mirror;
+    ofParameter<float> _scale;
+    ofParameter<bool> _blendBuckets;
+    ofParameter<bool> _spinSlowly;
+    ofParameter<bool> _cycleHues;
 };
 
 #endif
