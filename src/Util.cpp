@@ -178,3 +178,11 @@ SrUtil_ClampCycle(float min, float max, float value)
     
     return value;
 }
+
+ofFloatColor
+SrUtil_LerpColors(const ofFloatColor & c0, const ofFloatColor & c1, float t)
+{
+    // Color space nerds:  feel free to improve this :)
+    return c0 * (1.0 - t) + c1 * t;
+}
+

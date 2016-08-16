@@ -27,6 +27,11 @@ protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     
 private:
+    float _ComputeValue(float fftValue) const;
+    
+private:
+    ofParameter<float> _exponent;
+    ofParameter<float> _multiplier;
     ofParameter<float> _hueShiftParam;
     ofParameter<bool> _mirror;
     ofParameter<float> _scale;

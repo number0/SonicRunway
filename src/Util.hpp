@@ -40,4 +40,10 @@ SrUtil_IsPathToEnabledPattern(const std::string & path,
 float
 SrUtil_ClampCycle(float min, float max, float value);
 
+// Return a color that linearly interpolates between the two
+// colors.  
+ofFloatColor
+SrUtil_LerpColors(const ofFloatColor & c0, const ofFloatColor & c1,
+                  float t);
+
 #endif /* Util_hpp */

@@ -16,6 +16,8 @@ SrFftPattern::SrFftPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
+    _exponent(1.0),
+    _multiplier(1.0),
     _hueShiftParam(0.0),
     _mirror(true),
     _scale(0.7),
@@ -23,6 +25,16 @@ SrFftPattern::SrFftPattern(const std::string & name,
     _spinSlowly(false),
     _cycleHues(true)
 {
+    _exponent.setName("Exponent");
+    _exponent.setMin(0.5);
+    _exponent.setMax(4.0);
+    _AddUIParameter(_exponent);
+    
+    _multiplier.setName("Multiplier");
+    _multiplier.setMin(0.5);
+    _multiplier.setMax(4.0);
+    _AddUIParameter(_multiplier);
+    
     _hueShiftParam.setName("Hue");
     _hueShiftParam.setMin(0.0);
     _hueShiftParam.setMax(1.0);
@@ -49,6 +61,26 @@ SrFftPattern::SrFftPattern(const std::string & name,
 SrFftPattern::~SrFftPattern()
 {
     
+}
+
+static ofFloatColor
+_ComputeColor(float fftValue, float hueShift)
+{
+    ofFloatColor c;
+    float baseColor = 0.15 + hueShift;
+    float hue = baseColor - 0.4 * (1.0 - fftValue);
+    
+    hue = SrUtil_ClampCycle(0.0, 1.0, hue);
+    
+    c.setHsb(hue, 1.0, fftValue * 2.0);
+    
+    return c;
+}
+
+float
+SrFftPattern::_ComputeValue(float value) const
+{
+    return pow(value * (float) _multiplier, (float) _exponent);
 }
 
 void
@@ -82,19 +114,24 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         int beginLight = beginAngle * numLights;
         int endLight = endAngle * numLights;
         
-        float fftValue = ffts[fftIdx];
+        float fftValue = _ComputeValue(ffts[fftIdx]);
+        int nextIdx = fftIdx + 1;
+        if (nextIdx >= ffts.size()) {
+            nextIdx = fftIdx;
+        }
+        
+        float nextFftValue = _ComputeValue(ffts[nextIdx]);
+        
+        ofFloatColor c0 = _ComputeColor(fftValue, hueShift);
+        ofFloatColor c1 = _ComputeColor(nextFftValue, hueShift);
 
-        ofFloatColor c;
-        float baseColor = 0.15 + hueShift;
-        float hue = baseColor - 0.4 * (1.0 - fftValue);
-        
-        hue = SrUtil_ClampCycle(0.0, 1.0, hue);
-        
-        c.setHsb(hue, 1.0, fftValue * 2.0);
-        
         for(int lightIdx = beginLight; lightIdx < endLight; lightIdx++) {
+            
+            float t = (float) (lightIdx - beginLight) / (endLight - beginLight);
            
             int idx = lightIdx % numLights;
+            
+            ofFloatColor c = SrUtil_LerpColors(c0, c1, t);
             
             (*buffer)[idx] += c;
             if ((bool) _mirror) {
