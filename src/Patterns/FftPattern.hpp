@@ -38,7 +38,7 @@ private:
     ofParameter<float> _hueShift;
     ofParameter<bool> _mirror;
     ofParameter<float> _scale;
-    ofParameter<bool> _blendBuckets;
+    ofParameter<bool> _scaleRegions;
     ofParameter<bool> _spinSlowly;
     ofParameter<bool> _cycleHues;
 };

@@ -22,9 +22,9 @@ SrFftPattern::SrFftPattern(const std::string & name,
     _hueOffset(0.0),
     _hueShift(0.3),
     _mirror(true),
-    _scale(0.5),
-    _blendBuckets(true),
-    _spinSlowly(false),
+    _scale(1.0),
+    _scaleRegions(true),
+    _spinSlowly(true),
     _cycleHues(true)
 {
     _exponent.setName("Exponent");
@@ -60,8 +60,8 @@ SrFftPattern::SrFftPattern(const std::string & name,
     _scale.setMax(1.5);
     _AddUIParameter(_scale);
     
-    _blendBuckets.setName("Blend Buckets");
-    _AddUIParameter(_blendBuckets);
+    _scaleRegions.setName("Scale Regions");
+    _AddUIParameter(_scaleRegions);
     
     _spinSlowly.setName("Spin Slowly");
     _AddUIParameter(_spinSlowly);
@@ -78,13 +78,21 @@ SrFftPattern::~SrFftPattern()
 ofFloatColor
 SrFftPattern::_ComputeColor(float fftValue, float hueOffset) const
 {
+    // Cut-off low end.
+    if (fftValue < 0.1) {
+        return ofFloatColor::black;
+    }
+    
     ofFloatColor c;
+    
     float baseColor = 0.15 + hueOffset;
     float hue = baseColor - (float) _hueShift * (1.0 - fftValue);
     
     hue = SrUtil_ClampCycle(0.0, 1.0, hue);
     
-    c.setHsb(hue, 1.0, fftValue * 2.0);
+    float value = (bool) _scaleRegions ?
+                        1.0 : fftValue * 2.0;
+    c.setHsb(hue, 1.0, value);
     
     return c;
 }
@@ -143,6 +151,10 @@ SrFftPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         for(int lightIdx = beginLight; lightIdx < endLight; lightIdx++) {
             
             float t = (float) (lightIdx - beginLight) / (endLight - beginLight);
+            
+            if ((bool) _scaleRegions and t > fftValue) {
+                continue;
+            }
            
             int idx = lightIdx % numLights;
             
