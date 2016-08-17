@@ -49,6 +49,7 @@ public:
     
     void Update();
     
+    float GetCycleAutomatically() const;
     float GetTwoBeatCycle() const;
     float GetMeasureCycle() const;
     float GetPhraseCycle() const;
@@ -59,6 +60,7 @@ public:
     
     float GetDial1() const;
     float GetDial2() const;
+    float GetDial3() const;
     float GetSlider1() const;
     float GetSlider2() const;
     
@@ -89,6 +91,7 @@ private:
     
     ofParameter<float> _dial1Parameter;
     ofParameter<float> _dial2Parameter;
+    ofParameter<float> _dial3Parameter;
     ofParameter<float> _slider1Parameter;
     ofParameter<float> _slider2Parameter;
     
