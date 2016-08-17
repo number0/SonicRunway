@@ -111,6 +111,9 @@ SrWhompPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     }
     
     float heightInLights = numLights * low * _scale;
+    if (heightInLights >= buffer->size()) {
+        heightInLights = buffer->size() - 1;
+    }
     
     float hue = _hueOffset +
         _cycleHues * GetGlobalParameters()->GetVerySlowCycle() +
