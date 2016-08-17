@@ -31,6 +31,8 @@ protected:
     virtual void _Update();
     virtual void _Draw() const;
     
+    virtual bool _FlipLeftRight() const;
+    
     // Subclasses implement this to draw the current gate.
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const = 0;
     

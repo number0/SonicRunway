@@ -46,4 +46,7 @@ ofFloatColor
 SrUtil_LerpColors(const ofFloatColor & c0, const ofFloatColor & c1,
                   float t);
 
+float
+SrUtil_Lerp(float a, float b, float t);
+
 #endif /* Util_hpp */

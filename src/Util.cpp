@@ -186,3 +186,9 @@ SrUtil_LerpColors(const ofFloatColor & c0, const ofFloatColor & c1, float t)
     return c0 * (1.0 - t) + c1 * t;
 }
 
+float
+SrUtil_Lerp(float a, float b, float t)
+{
+    return a * (1.0 - t) + b * t;
+}
+

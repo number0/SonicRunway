@@ -28,6 +28,7 @@
 #include "AnimPattern.hpp"
 #include "DiagnosticPattern.hpp"
 #include "RmsPattern.hpp"
+#include "WhompPattern.hpp"
 #include "BigTrailsPattern.hpp"
 #include "NetworkInputPattern.hpp"
 #include "GlobalParameters.hpp"
@@ -149,16 +150,20 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
     
+    SrBeatBouncePattern *beatBouncePattern =
+    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
+    _AddPattern(beatBouncePattern);
+    
+    SrWhompPattern *whompPattern =
+    new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
+    _AddPattern(whompPattern);
+    
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
-    
-    SrBeatBouncePattern *beatBouncePattern =
-    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
-    _AddPattern(beatBouncePattern);
-    beatBouncePattern->SetEnabled(false);
+    whompPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
