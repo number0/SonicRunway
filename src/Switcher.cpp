@@ -170,7 +170,8 @@ SrSwitcher::Update()
     // automatic preset cycling back on.
     if (_app->GetGlobalParameters()->ComputeSecondsSinceManualInput() >
         (float) _delayBeforeAutomatic) {
-        _cyclePresets = true;
+        //mtf : This is making debugging difficult
+        //_cyclePresets = true;
     }
     
     bool wasChoosingAudioReactivePresets = _isChoosingAudioReactivePresets;
@@ -211,7 +212,16 @@ SrSwitcher::_GetRandomPreset() const
         (bool) _isChoosingAudioReactivePresets ?
         _audioReactivePresets : _nonAudioReactivePresets;
 
-    size_t idx = rand() % presets.size();
+    int r = rand();
+    int s = presets.size();
+    
+    // Handle no presets of that type
+    if ( s == 0 ){
+        return nullptr;
+    }
+    
+    size_t idx = r % s;
+    
     return presets[idx];
 }
 
