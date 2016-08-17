@@ -8,21 +8,16 @@
 
 #include "BigTrailsPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
                                        SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
-    _hueParam(1.0),
     _jitterParam(20.0),
     _rotationParam(12.0),
     _average(0.0)
 {
-    _hueParam.setName("Hue");
-    _hueParam.setMin(0.0);
-    _hueParam.setMax(1.0);
-    _AddUIParameter(_hueParam);
-    
     _jitterParam.setName("Jitter");
     _jitterParam.setMin(0.0);
     _jitterParam.setMax(100.0);
@@ -63,7 +58,6 @@ SrBigTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
     int bufferSize = buffer->size();
     float jitterParam = (float) _jitterParam;
-    float hueParam = (float) _hueParam;
     float rotationParam = (float) _rotationParam;
     
     float low = GetAudio()->GetLows()[0];
@@ -80,8 +74,15 @@ SrBigTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     int index2 = bufferSize * 0.5 + mid - _average + manualAdjustment;
     int index3 = bufferSize * 0.81 + high - _average + manualAdjustment;
     
+    float hue;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        hue = GetGlobalParameters()->GetVerySlowCycle();
+    } else {
+        GetGlobalParameters()->GetSlider1();
+    }
+        
     ofFloatColor color;
-    color.setHsb(hueParam, 0.9, 0.7);
+    color.setHsb(hue, 0.9, 0.7);
     
     int width = bufferSize * .05;
     for (int i = 0; i < width; ++i) {
