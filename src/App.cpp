@@ -162,8 +162,8 @@ SrApp::SrApp(ofBaseApp * ofApp) :
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(true);
-    whompPattern->SetEnabled(true);
+    //fftPattern->SetEnabled(true);
+    //whompPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc

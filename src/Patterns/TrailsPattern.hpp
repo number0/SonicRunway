@@ -25,9 +25,6 @@ protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     
 private:
-    ofParameter<float> _hueParam;
-    ofParameter<float> _jitterParam;
-    
     int segments = 20;
 };
 

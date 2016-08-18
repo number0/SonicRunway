@@ -23,10 +23,6 @@ public:
     
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
-    
-private:
-    ofParameter<float> _numberParam;
-    ofParameter<float> _thresholdParam;
 };
 
 

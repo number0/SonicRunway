@@ -26,10 +26,6 @@ protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     
 private:
-    ofParameter<float> _hueParam;
-    ofParameter<float> _thresholdParam;
-    ofParameter<float> _trailParam;
-    
     int segments = 40;
     float _segmentTreshold[40] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int _segmentCountdown[40] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

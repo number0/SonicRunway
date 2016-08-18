@@ -8,35 +8,36 @@
 
 #include "ArcPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrArcPattern::SrArcPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters),
-_hueParam(0.2),
-_thresholdParam(0.5)
+SrScrollingPattern(name, model, audio, globalParameters)
 {
-    _hueParam.setName("Hue");
-    _hueParam.setMin(0.0);
-    _hueParam.setMax(1.0);
-    _AddUIParameter(_hueParam);
-    
-    _thresholdParam.setName("Threshold");
-    _thresholdParam.setMin(0.0);
-    _thresholdParam.setMax(1.0);
-    _AddUIParameter(_thresholdParam);
     
 }
 
 SrArcPattern::~SrArcPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue
+    // Dial2 - Threshold
+    // Slider1 - Saturation
+    // Slider2 - Brightness
 }
 
 void
 SrArcPattern::_Update()
 {
     SrScrollingPattern::_Update();
+    
+    float threshold;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        threshold = 0.05;
+    } else {
+        threshold = GetGlobalParameters()->GetDial2();
+    }
     
     vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
     int fftSize = fftValues.size();
@@ -61,7 +62,7 @@ SrArcPattern::_Update()
     
     // Do some slow auto calibration of each segments threashold
     for (int segmentI = 0; segmentI < segments; ++segmentI) {
-        if (_fftSumBySegment[segmentI] > _segmentTreshold[segmentI] - _thresholdParam) {
+        if (_fftSumBySegment[segmentI] > _segmentTreshold[segmentI] - threshold) {
             _segmentTreshold[segmentI] = _segmentTreshold[segmentI] + 0.01;
         } else {
             _segmentTreshold[segmentI] = _segmentTreshold[segmentI] - 0.01;
@@ -72,7 +73,18 @@ SrArcPattern::_Update()
 void
 SrArcPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hue = (float) _hueParam;
+    float hue;
+    float saturation;
+    float brightness;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        hue = GetGlobalParameters()->GetSlowCycle();
+        saturation = 0.8;
+        brightness = 0.8;
+    } else {
+        hue = GetGlobalParameters()->GetDial1();
+        saturation = GetGlobalParameters()->GetSlider1();
+        brightness = GetGlobalParameters()->GetSlider2();
+    }
     
     int pixels = buffer->size();
     if (segments > pixels) {
@@ -84,7 +96,7 @@ SrArcPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         // If the segment meets the treshhold draw the segment
         if (_fftSumBySegment[segmentI] > _segmentTreshold[segmentI]) {
             ofFloatColor color;
-            color.setHsb(hue, 0.8, 0.8);
+            color.setHsb(hue, saturation, brightness);
             for (int pixelI = 0; pixelI < pixelsPerSegment; ++pixelI) {
                 int pixel = pixelI + (pixelsPerSegment * segmentI);
                 // Clamp to buffer size just to be safe
