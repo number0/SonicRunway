@@ -72,6 +72,7 @@ Notes on setting up a Sonic Runway server:
 - Install runway software (above)
 
 - Install Loopback (with license)
+    - enter loopback licence info
     - configure 'Loopback Audio' device:
        - Left:  MOTU Microbook II: 3 / MOTU Microbook II: Left (1)
        - Rigut: MOTU Microbook II: 4 / MOTU Microbook II: Right (2)
@@ -88,11 +89,12 @@ Notes on setting up a Sonic Runway server:
         Shut down computer when UPS battery is below 5%
 
 - Configure network settings:
-   - Manual IP:  192.168.0.1
-   - Subnet mask:  255.255.0.0
-
-- Wifi settings:
-   - TBD
+   Ethernet:
+      - Manual IP:  192.168.0.1
+      - Subnet mask:  255.255.0.0
+   Wifi:
+      - sonic
+      - Manual IP:  192.168.1.3
 
 
 TODO:
