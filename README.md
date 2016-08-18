@@ -67,15 +67,39 @@ thread safe because the various buffers are all statically
 allocated. So, we may see some visual tearing.  If this becomes 
 problematic we can use ofMutex to make it thread safe.
 
+Notes on setting up a Sonic Runway server:
+
+- Install runway software (above)
+
+- Install Loopback (with license)
+    - configure 'Loopback Audio' device:
+       - Left:  MOTU Microbook II: 3 / MOTU Microbook II: Left (1)
+       - Rigut: MOTU Microbook II: 4 / MOTU Microbook II: Right (2)
+
+- Build a 'product' version of software and add it to login items
+
+- 'Energy saver' settings:
+    - Computer sleep / display sleep -> Never
+    - Start up automatically after a power failure
+    - UPS - don't let computer or display sleep
+    - UPS, Shutdown options...:
+        Shut down after using UPS battery for 15 mins
+        Shut down computer when time remaining on UPS is 2 mins
+        Shut down computer when UPS battery is below 5%
+
+- Configure network settings:
+   - Manual IP:  192.168.0.1
+   - Subnet mask:  255.255.0.0
+
+- Wifi settings:
+   - TBD
+
 
 TODO:
 
-- Improve FFT visualization:
-    - blend between the bucket regions to avoid segmenting (RJ)
-
-- Figure out why videos go white sometimes.
-
 - Expand library of patterns. (Everyone!)
+
+- Make sure we can automatically run the software on startup. (RJ)
 
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
@@ -87,8 +111,6 @@ TODO:
   correct them.  (RJ)
 
 - Add a parameter to delay so first physical gate is #2
-
-- Make sure we can automatically run the software on startup. (RJ)
 
 - Run speed tests to make sure frame rate keeps up.
 

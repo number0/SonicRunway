@@ -31,6 +31,7 @@
 #include "WhompPattern.hpp"
 #include "BigTrailsPattern.hpp"
 #include "NetworkInputPattern.hpp"
+#include "SpinTrailsPattern.hpp"
 #include "GlobalParameters.hpp"
 
 #include "Switcher.hpp"
@@ -158,12 +159,17 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
     _AddPattern(whompPattern);
     
+    SrSpinTrailsPattern *spinTrailsPattern =
+    new SrSpinTrailsPattern("SpinTrails", &_model, &_audio, &_globalParameters);
+    _AddPattern(spinTrailsPattern);
+    
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     whompPattern->SetEnabled(true);
+    //spinTrailsPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
@@ -335,7 +341,7 @@ SrApp::Draw()
     
     _switcher.GetUiPanel()->draw();
     
-    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
+    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 600, _uiColumnWidth, _uiColumnWidth);
     
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
