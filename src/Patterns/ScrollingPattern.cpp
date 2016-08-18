@@ -61,6 +61,12 @@ SrScrollingPattern::_Update()
     _image.update();
 }
 
+bool
+SrScrollingPattern::_FlipLeftRight() const
+{
+    return false;
+}
+
 void
 SrScrollingPattern::_Draw() const
 {
@@ -68,7 +74,16 @@ SrScrollingPattern::_Draw() const
         return;
     }
     
+    ofPushMatrix();
+    
+    if (_FlipLeftRight()) {
+        ofScale(1,-1);
+        ofTranslate(0, -GetModel()->GetLightsPerGate());
+    }
+    
     ofSetColor(ofColor::white);
     _image.draw(-_index,0);
     _image.draw(-_index + GetModel()->GetNumGates(),0);
+    
+    ofPopMatrix();
 }

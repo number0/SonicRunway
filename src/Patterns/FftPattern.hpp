@@ -27,7 +27,20 @@ protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     
 private:
-    ofParameter<float> _hueShiftParam;
+    float _ComputeValue(float fftValue) const;
+    ofFloatColor _ComputeColor(float fftValue, float hueOffset) const;
+    
+private:
+    ofParameter<float> _exponent;
+    ofParameter<float> _spreadExponent;
+    ofParameter<float> _multiplier;
+    ofParameter<float> _hueOffset;
+    ofParameter<float> _hueShift;
+    ofParameter<bool> _mirror;
+    ofParameter<float> _scale;
+    ofParameter<bool> _scaleRegions;
+    ofParameter<bool> _spinSlowly;
+    ofParameter<bool> _cycleHues;
 };
 
 #endif

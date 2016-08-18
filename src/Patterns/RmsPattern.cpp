@@ -8,18 +8,24 @@
 
 #include "RmsPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrRmsPattern::SrRmsPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters)
 {
-    
+ 
 }
 
 SrRmsPattern::~SrRmsPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue 1
+    // Dial2 - Hue 2
+    // Dial3 - Hue 3
+    // Slider1 - Saturation
+    // Slider2 - Brightness
 }
 
 void
@@ -29,9 +35,18 @@ SrRmsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float mid = GetAudio()->GetMids()[0];
     float high = GetAudio()->GetHighs()[0];
     
-    ofFloatColor lowColor(1.0, 0.0, 0.0);
-    ofFloatColor midColor(0.0, 1.0, 0.0);
-    ofFloatColor highColor(0.0, 0.0, 1.0);
+    ofFloatColor lowColor;
+    ofFloatColor midColor;
+    ofFloatColor highColor;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        lowColor.setHsb(GetGlobalParameters()->GetPhraseCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+        midColor.setHsb(GetGlobalParameters()->GetSlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+        highColor.setHsb(GetGlobalParameters()->GetVerySlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+    } else {
+        lowColor.setHsb(GetGlobalParameters()->GetDial1(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+        midColor.setHsb(GetGlobalParameters()->GetDial2(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+        highColor.setHsb(GetGlobalParameters()->GetDial3(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+    }
     
     // Square the values to accentuate the peaks
     low *= low;

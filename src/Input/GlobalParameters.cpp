@@ -18,15 +18,16 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _model(model),
     _audio(audio),
     _cycleAutomatically(true),
-    _delayBeforeAutomaticMode(5.0), // seconds
+    _delayBeforeAutomaticMode(60.0), // seconds
     _twoBeatCycle(0.0),
     _measureCycle(0.0),
     _phraseCycle(0.0),
     _slowCycle(0.0),
     _verySlowCycle(0.0),
     _fadeDuration(1.0),
-    _dial1Parameter(0.5),
+    _dial1Parameter(0.25),
     _dial2Parameter(0.5),
+    _dial3Parameter(0.75),
     _slider1Parameter(0.5),
     _slider2Parameter(0.5)
 {
@@ -35,7 +36,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     
     _delayBeforeAutomaticMode.setName("Delay b4 auto");
     _delayBeforeAutomaticMode.setMin(0.0);
-    _delayBeforeAutomaticMode.setMax(20.0);
+    _delayBeforeAutomaticMode.setMax(100.0);
     
     _twoBeatCycle.setName("Two Beat");
     _twoBeatCycle.setMin(0.0);
@@ -69,6 +70,10 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _dial2Parameter.setMin(0.0);
     _dial2Parameter.setMax(1.0);
     
+    _dial3Parameter.setName("Dial3");
+    _dial3Parameter.setMin(0.0);
+    _dial3Parameter.setMax(1.0);
+    
     _slider1Parameter.setName("Slider1");
     _slider1Parameter.setMin(0.0);
     _slider1Parameter.setMax(1.0);
@@ -83,6 +88,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _AddUIParameter(_fadeDuration);
     _AddUIParameter(_dial1Parameter);
     _AddUIParameter(_dial2Parameter);
+    _AddUIParameter(_dial3Parameter);
     _AddUIParameter(_slider1Parameter);
     _AddUIParameter(_slider2Parameter);
     
@@ -101,6 +107,12 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
 SrGlobalParameters::~SrGlobalParameters()
 {
     
+}
+
+float
+SrGlobalParameters::GetCycleAutomatically() const
+{
+    return (float) _cycleAutomatically;
 }
 
 float
@@ -149,6 +161,12 @@ float
 SrGlobalParameters::GetDial2() const
 {
     return (float) _dial2Parameter;
+}
+
+float
+SrGlobalParameters::GetDial3() const
+{
+    return (float) _dial3Parameter;
 }
 
 float

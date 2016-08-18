@@ -144,6 +144,7 @@
 		308CEE5A1C48593A007C124A /* transmit.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE541C48593A007C124A /* transmit.c */; };
 		308CEE5D1C48598D007C124A /* Artnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE5B1C48598D007C124A /* Artnet.cpp */; };
 		30AEA5981C4052A80034C794 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 30AEA5971C4052A80034C794 /* README.md */; };
+		30B1F96D1D63B7BB00916EBA /* WhompPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */; };
 		30B8DCE91CB589AC00164558 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B8DCE71CB589AC00164558 /* Environment.cpp */; };
 		30B8DCEB1CB58C3A00164558 /* skyTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B8DCEA1CB58C3A00164558 /* skyTexture.png */; };
 		30C2F45B1D3AE647003F4910 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C2F4591D3AE647003F4910 /* Debug.cpp */; };
@@ -406,6 +407,8 @@
 		308CEE5F1C486177007C124A /* artnet_COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = artnet_COPYING; sourceTree = "<group>"; };
 		30AC5FEA1C448C7600B793E9 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		30AEA5971C4052A80034C794 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WhompPattern.cpp; path = Patterns/WhompPattern.cpp; sourceTree = "<group>"; };
+		30B1F96C1D63B7BB00916EBA /* WhompPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WhompPattern.hpp; path = Patterns/WhompPattern.hpp; sourceTree = "<group>"; };
 		30B8DCE71CB589AC00164558 /* Environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Environment.cpp; path = Previs/Environment.cpp; sourceTree = "<group>"; };
 		30B8DCE81CB589AC00164558 /* Environment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Environment.hpp; path = Previs/Environment.hpp; sourceTree = "<group>"; };
 		30B8DCEA1CB58C3A00164558 /* skyTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skyTexture.png; path = Resources/skyTexture.png; sourceTree = "<group>"; };
@@ -754,6 +757,8 @@
 				7AD999551D2D4F79002BD0F3 /* BeatBouncePattern.hpp */,
 				295E8F2B1D5591920054DB40 /* NetworkInputPattern.cpp */,
 				295E8F2C1D5591920054DB40 /* NetworkInputPattern.hpp */,
+				30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */,
+				30B1F96C1D63B7BB00916EBA /* WhompPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -1275,6 +1280,7 @@
 				30E57E231CE194730031D5AF /* ofxOscBundle.cpp in Sources */,
 				308CEE561C48593A007C124A /* misc.c in Sources */,
 				30E57E271CE194730031D5AF /* ofxOscSender.cpp in Sources */,
+				30B1F96D1D63B7BB00916EBA /* WhompPattern.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				30E57E2D1CE194730031D5AF /* OscReceivedElements.cpp in Sources */,
 				30E57E251CE194730031D5AF /* ofxOscParameterSync.cpp in Sources */,
