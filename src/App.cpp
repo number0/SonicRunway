@@ -155,12 +155,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
     
-    _MakeVideoPatterns();
-
-    // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(false);
-    
     SrBeatBouncePattern *beatBouncePattern =
     new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
     _AddPattern(beatBouncePattern);
@@ -179,7 +173,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(true);
     whompPattern->SetEnabled(true);
-    //spinTrailsPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
