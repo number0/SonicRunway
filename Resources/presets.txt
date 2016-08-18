@@ -16,8 +16,8 @@ TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
 TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
 VideoAnim|/Runway/Patterns/Fireplace/Enabled: 1
 VideoAnim|/Runway/Patterns/Fireplace/Scroll: 0
-VideoAnim|/Runway/Patterns/Anim/Enabled: 1
-VideoAnim|/Runway/Patterns/Anim/Scroll: 0
+VideoAnim|/Runway/Patterns/Lightning/Enabled: 1
+VideoAnim|/Runway/Patterns/Lightning/Scroll: 0
 ShiftingPains|/Runway/Patterns/ShiftingPains/Enabled: 1
 ShiftingPains|/Runway/Patterns/ShiftingPains/Scroll: 0
 WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Enabled: 1

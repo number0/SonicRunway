@@ -44,11 +44,15 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _audio("Audio", &_model),
     _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
-    _previs(&_model, &_audio),
+    _previs(&_model, &_audio, this),
     _switcher("Switcher", "presets.txt", this),
     _uiColumnWidth(220),
     _uiMargin(10),
-    _previsXCoord(0)
+    _previsXCoord(0),
+    _previsWidth(1280),
+    _previsHeight(720),
+    _leftAlignScale(.7),
+    _leftAlignPrevis(true)
 {
     ofSetFrameRate(_model.ComputeFramesPerSecond());
     
@@ -119,10 +123,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _AddPattern(videoPattern);
     
     SrAnimPattern *animPattern =
-        new SrAnimPattern("Anim", "lightning", 82, false,
+        new SrAnimPattern("Lightning", "lightning", 82, false,
                           &_model, &_audio, &_globalParameters);
     _AddPattern(animPattern);
-    
+     
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
     _AddPattern(triggerPattern);
@@ -151,7 +155,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(true);
+    fftPattern->SetEnabled(false);
     
     SrBeatBouncePattern *beatBouncePattern =
     new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
@@ -179,12 +183,13 @@ SrApp::SrApp(ofBaseApp * ofApp) :
         _soundStream.setDeviceID(loopbackDeviceID);
     }
     
-    
     // Calculate X position of the previs
     _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
     
     // This must happen after patterns are initialized.
     _switcher.ReadPresets();
+    
+    LeftAlignPrevis(_leftAlignPrevis);
 }
 
 SrApp::~SrApp()
@@ -214,7 +219,7 @@ SrApp::_MakeVideoPatterns()
             continue;
         }
         
-        SrDebug("found auto movie %s\n", dir.getPath(i).c_str());
+        SrDebug("Found auto movie %s\n", dir.getPath(i).c_str());
         
         std::string patternName = fname.substr(5, fname.size() - 9);
         
@@ -222,6 +227,38 @@ SrApp::_MakeVideoPatterns()
             new SrVideoPattern(patternName, fname,
                                &_model, &_audio, &_globalParameters);
         _AddPattern(videoPattern);
+    }
+}
+
+void
+SrApp::LeftAlignPrevis(bool &on)
+{
+    _leftAlignPrevis = on;
+    
+    if( on ) {
+        _globalPanel.setPosition(_uiMargin + _previsWidth *_leftAlignScale + _uiMargin,_uiMargin);
+    }
+    else {
+        _globalPanel.setPosition(_uiMargin,_uiMargin);
+    }
+    
+    if (on) {
+        _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth + _previsWidth *_leftAlignScale + _uiMargin, _uiMargin);
+    }
+    else {
+        _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
+    }
+    
+    int idx = 0;
+    for(auto iter = _patternPanels.begin(); iter != _patternPanels.end(); iter++) {
+        ofxPanel *panel = *iter;
+        if (on) {
+            panel->setPosition(_uiMargin + _uiColumnWidth * (2 + idx) + _previsWidth *_leftAlignScale + _uiMargin, _uiMargin);
+        }
+        else {
+            panel->setPosition(_uiMargin + _uiColumnWidth * (2 + idx), _uiMargin);
+        }
+        idx++;
     }
 }
 
@@ -304,7 +341,6 @@ SrApp::Update()
             + " / " + ofToString(ofGetFrameRate(), 2);
     ofSetWindowTitle(fpsStr);
     
-    
 }
 
 void
@@ -315,26 +351,43 @@ SrApp::Draw()
     
     for(auto iter = _patterns.begin(); iter != _patterns.end(); iter++) {
         SrPattern *pattern = *iter;
-        pattern->Draw();
+        if( pattern -> GetEnabled() ) {
+            pattern->Draw();
+        }
     }
     
     _model.EndDrawing();
     
     ofBackground(40,40,40);
     
-    _model.RenderFrameBuffer(_previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
-    
+    if ( _leftAlignPrevis ){
+        _model.RenderFrameBuffer(_uiMargin, _uiMargin, _uiColumnWidth * 2, 75);
+    }
+    else {
+        _model.RenderFrameBuffer(_previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
+    }
+        
     _globalPanel.draw();
     
     _switcher.GetUiPanel()->draw();
     
-    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
-    
+    if ( _leftAlignPrevis ){
+        _audio.DrawFftBands(_uiColumnWidth + _uiMargin + _previsWidth*_leftAlignScale, 400, _uiColumnWidth, _uiColumnWidth);
+    }
+    else {
+        _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
+    }
+        
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
     }
     
-    _previs.Draw(_previsXCoord, 100, 1280, 720);
+    if( _leftAlignPrevis ) {
+        _previs.Draw(_uiMargin, 100, _previsWidth*_leftAlignScale, _previsHeight*_leftAlignScale);
+    }
+    else {
+        _previs.Draw(_previsXCoord, 100, _previsWidth, _previsHeight);
+    }
     
     _artnet.UpdateLights();
 }

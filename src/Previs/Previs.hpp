@@ -16,6 +16,7 @@
 
 class SrModel;
 class SrAudio;
+class SrApp;
 
 //
 // A 3d respresntation of the tunnel of lights.
@@ -24,7 +25,7 @@ class SrPrevis : public SrUiMixin {
     typedef SrPrevis This;
     
 public:
-    SrPrevis(SrModel * model, SrAudio * audio);
+    SrPrevis(SrModel * model, SrAudio * audio, SrApp * app);
     ~SrPrevis();
     
     void Update();
@@ -38,16 +39,20 @@ private:
     void _DrawLights();
     void _ReadAnimatedCameraData(std::string fileName);
     void _OnStartAnimatedCameraButtonPressed(bool &on);
+    void _OnLeftAlignPrevisPressed(bool &on);
     
 private:
     SrModel *_model;
     SrAudio *_audio;
+    SrApp *_app;
+    
     ofMesh _lightsMesh;
     
     ofShader _lightShader;
     ofImage _textureForShader;
     ofImage _dotLight;
     
+    ofParameter<bool> _leftAlignPrevisParam;
     ofParameter<bool> _drawPrevisParam;
     ofParameter<bool> _reverseAngleParam;
     ofParameter<bool> _geomShaderDrawing;

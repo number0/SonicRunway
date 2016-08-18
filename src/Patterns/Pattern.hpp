@@ -49,6 +49,7 @@ public:
     // Set the current value of 'enabled'.  This will be
     // buffered across time.
     void SetEnabled(bool enabled);
+    bool GetEnabled();
     
     // Return true if the pattern is 'on' at any gate.
     // This lets patterns skip computation if they are off everywhere.

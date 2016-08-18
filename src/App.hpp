@@ -34,6 +34,7 @@ public:
     void Draw();
     void AudioIn(float * input, int bufferSize, int nChannels);
     void AudioOut(float * output, int buferSize, int nChannels);
+    void LeftAlignPrevis(bool &on);
     
     const std::vector<SrPattern *> & GetPatterns() const;
     SrModel * GetModel();
@@ -64,6 +65,12 @@ private:
     float _uiColumnWidth;
     float _uiMargin;
     float _previsXCoord;
+    
+    float _previsWidth;
+    float _previsHeight;
+    float _leftAlignScale;
+    
+    bool _leftAlignPrevis;
     
 };
 
