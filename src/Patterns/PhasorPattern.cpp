@@ -8,35 +8,23 @@
 
 #include "PhasorPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrPhasorPattern::SrPhasorPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                                  SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters),
-_hueParam(0.75),
-_thresholdParam(0.22),
-_trailParam(90)
+SrScrollingPattern(name, model, audio, globalParameters)
 {
-    _hueParam.setName("Hue");
-    _hueParam.setMin(0.0);
-    _hueParam.setMax(1.0);
-    _AddUIParameter(_hueParam);
-    
-    _thresholdParam.setName("Threshold");
-    _thresholdParam.setMin(0.0);
-    _thresholdParam.setMax(0.5);
-    _AddUIParameter(_thresholdParam);
-    
-    _trailParam.setName("Trail");
-    _trailParam.setMin(0.0);
-    _trailParam.setMax(100.0);
-    _AddUIParameter(_trailParam);
     
 }
 
 SrPhasorPattern::~SrPhasorPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue
+    // Dial2 - Threshold
+    // Dial3 - Trail (Dial3 * 100)
+    // Slider1 - Saturation
 }
 
 void
@@ -44,7 +32,12 @@ SrPhasorPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
-    float threshold = (float) _thresholdParam;
+    float threshold;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        threshold = 0.05;
+    } else {
+        threshold = GetGlobalParameters()->GetDial2();
+    }
 
     for (int i = 0; i < segments; ++i) {
         if (_segmentCountdown[i] > 0) {
@@ -58,7 +51,7 @@ SrPhasorPattern::_Update()
             _segmentCountdown[i] = 100;
             _segmentTreshold[i] = _segmentTreshold[i] - 0.01;
         } else {
-            if (_segmentTreshold[i] > _segmentTreshold[i] - _thresholdParam) {
+            if (_segmentTreshold[i] > _segmentTreshold[i] - threshold) {
                 _segmentTreshold[i] = _segmentTreshold[i] + 0.01;
             }
         }
@@ -68,9 +61,20 @@ SrPhasorPattern::_Update()
 void
 SrPhasorPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hueParam = (float) _hueParam;
-    float trailParam = (float) _trailParam;
     int pixels = buffer->size();
+    
+    float hue;
+    float saturation;
+    float trail;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        hue = GetGlobalParameters()->GetSlowCycle();
+        saturation = 0.7;
+        trail = 75.0;
+    } else {
+        hue = GetGlobalParameters()->GetDial1();
+        saturation = GetGlobalParameters()->GetSlider1();
+        trail = GetGlobalParameters()->GetDial2() * 100;
+    }
     
     // Protection
     if (segments > pixels) {
@@ -83,8 +87,8 @@ SrPhasorPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         if (_segmentCountdown[segmentI] > 0) {
             int rotatedSegment = (segmentI + 18) % segments;
             ofFloatColor color;
-            float trail = (float) _segmentCountdown[segmentI] / trailParam;
-            color.setHsb(hueParam, 0.7, trail);
+            float trail = (float) _segmentCountdown[segmentI] / trail;
+            color.setHsb(hue, saturation, trail);
             for (int pixelI = 0; pixelI < pixelsPerSegment; ++pixelI) {
                 int pixel = pixelI + (pixelsPerSegment * rotatedSegment);
                 // Clamp to buffer size just to be safe

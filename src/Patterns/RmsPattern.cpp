@@ -20,7 +20,12 @@ SrRmsPattern::SrRmsPattern(const std::string & name,
 
 SrRmsPattern::~SrRmsPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue 1
+    // Dial2 - Hue 2
+    // Dial3 - Hue 3
+    // Slider1 - Saturation
+    // Slider2 - Brightness
 }
 
 void

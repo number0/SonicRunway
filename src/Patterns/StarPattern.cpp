@@ -8,36 +8,49 @@
 
 #include "StarPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrStarPattern::SrStarPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                              SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters),
-_numberParam(12.0),
-_thresholdParam(0.4)
+SrScrollingPattern(name, model, audio, globalParameters)
 {
-    _numberParam.setName("Number");
-    _numberParam.setMin(0.0);
-    _numberParam.setMax(30.0);
-    _AddUIParameter(_numberParam);
-    
-    _thresholdParam.setName("Threshold");
-    _thresholdParam.setMin(0.0);
-    _thresholdParam.setMax(1.0);
-    _AddUIParameter(_thresholdParam);
+
 }
 
 SrStarPattern::~SrStarPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue 1
+    // Dial2 - Number (Dial2 * 100)
+    // Dial3 - Threshold
+    // Slider1 - Saturation;
+    // Slider2 - Brightness;
 }
 
 void
 SrStarPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    int number = static_cast<int>(_numberParam);
-    float threshold = _thresholdParam;
     float fftSum = GetAudio()->GetCalibratedFftSum();
+    
+    float hue;
+    float saturation;
+    float brightness;
+    float number;
+    float threshold;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        hue = 1.0;
+        saturation = 0.0;
+        brightness = 0.8;
+        number = 12;
+        threshold = 0.4;
+    } else {
+        hue = GetGlobalParameters()->GetDial1();
+        number = GetGlobalParameters()->GetDial2() * 100;
+        threshold = GetGlobalParameters()->GetDial3();
+        saturation = GetGlobalParameters()->GetSlider1();
+        brightness = GetGlobalParameters()->GetSlider2();
+    }
     
     if (fftSum < threshold) {
         return;
@@ -50,7 +63,7 @@ SrStarPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         index = std::min(index, (int) buffer->size() - 1);
         
         ofFloatColor c;
-        c.setHsb(number, 0.0, 0.8);
+        c.setHsb(hue, saturation, brightness);
         
         (*buffer)[index] = c;
     }

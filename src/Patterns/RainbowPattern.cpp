@@ -8,6 +8,7 @@
 
 #include "RainbowPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrRainbowPattern::SrRainbowPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
@@ -21,37 +22,24 @@ _hueBiasChange(0.001),
 _saturationChange(-0.00075),
 _brightnessChange(0.0015)
 {
-    _manualControlParam.setName("Manual Control");
-    _AddUIParameter(_manualControlParam);
-    
-    _hueBiasParam.setName("Hue Bias");
-    _hueBiasParam.setMin(-0.5);
-    _hueBiasParam.setMax(1);
-    _AddUIParameter(_hueBiasParam);
-    
-    _saturationParam.setName("Saturation");
-    _saturationParam.setMin(-0.1);
-    _saturationParam.setMax(1.0);
-    _AddUIParameter(_saturationParam);
-    
-    _brightnessParam.setName("Brigtness");
-    _brightnessParam.setMin(-0.1);
-    _brightnessParam.setMax(1.0);
-    _AddUIParameter(_brightnessParam);
+
 }
 
 SrRainbowPattern::~SrRainbowPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue Bias
+    // Slider1 - Saturation
+    // Slider2 - Brightness
 }
 
 void
 SrRainbowPattern::_Update()
 {
     SrScrollingPattern::_Update();
-    
+
     if (IsOnAtAnyGate()) {
-        if (!_manualControlParam) {
+        if (GetGlobalParameters()->GetCycleAutomatically()) {
             _hueBiasParam += _hueBiasChange;
             if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {
                 _hueBiasChange = -_hueBiasChange;
@@ -66,6 +54,10 @@ SrRainbowPattern::_Update()
             if (_brightnessParam >= 0.9 || _brightnessParam <= 0.0) {
                 _brightnessChange = -_brightnessChange;
             }
+        } else {
+            _hueBiasParam = GetGlobalParameters()->GetDial1();
+            _saturationParam = GetGlobalParameters()->GetSlider1();
+            _brightnessParam = GetGlobalParameters()->GetSlider2();
         }
     }
 }
