@@ -59,6 +59,12 @@ SrPattern::SetEnabled(bool enabled)
     _enabledParam = enabled;
 }
 
+bool
+SrPattern::GetEnabled()
+{
+    return (bool)_enabledParam;
+}
+
 const SrFloatSimpleBuffer &
 SrPattern::GetOpacity() const
 {

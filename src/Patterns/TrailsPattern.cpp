@@ -8,37 +8,46 @@
 
 #include "TrailsPattern.hpp"
 #include "Audio.hpp"
+#include "GlobalParameters.hpp"
 
 SrTrailsPattern::SrTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
                                  SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters),
-_hueParam(0.75),
-_jitterParam(20.0)
+SrScrollingPattern(name, model, audio, globalParameters)
 {
-    _hueParam.setName("Hue");
-    _hueParam.setMin(0.0);
-    _hueParam.setMax(1.0);
-    _AddUIParameter(_hueParam);
-    
-    _jitterParam.setName("Jitter");
-    _jitterParam.setMin(0.0);
-    _jitterParam.setMax(100.0);
-    _AddUIParameter(_jitterParam);
+
 }
 
 SrTrailsPattern::~SrTrailsPattern()
 {
-    
+    // Uses GlobalParams like so:
+    // Dial1 - Hue
+    // Dial2 - Jitter (Dial2 * 100)
+    // Slider1 - Saturation
+    // Slider2 - Brightness
 }
 
 void
 SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hueParam = (float) _hueParam;
-    float jitterParam = (float) _jitterParam;
     int pixels = buffer->size();
     vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
+    
+    float hue;
+    float jitter;
+    float saturation;
+    float brightness;
+    if (GetGlobalParameters()->GetCycleAutomatically()) {
+        hue = GetGlobalParameters()->GetSlowCycle();
+        jitter = 50.0;
+        saturation = 0.7;
+        brightness = 0.8;
+    } else {
+        hue = GetGlobalParameters()->GetDial1();
+        jitter = GetGlobalParameters()->GetDial2() * 100;
+        saturation = GetGlobalParameters()->GetSlider1();
+        brightness = GetGlobalParameters()->GetSlider2();
+    }
     
     // Protection
     if (segments > pixels) {
@@ -48,10 +57,10 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     
     for (int i = 0; i < segments; ++i) {
         ofFloatColor color;
-        color.setHsb(hueParam, 0.7, 0.8);
+        color.setHsb(hue, saturation, brightness);
         
         int pixel = pixelsPerSegment * i;
-        int pixelJitter = pixel + fftValues.at(i) * jitterParam;
+        int pixelJitter = pixel + fftValues.at(i) * jitter;
         
         // Clamp to buffer size just to be safe
         int index = std::min(pixelJitter, (int) buffer->size() - 1);

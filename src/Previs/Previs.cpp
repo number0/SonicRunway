@@ -9,12 +9,15 @@
 #include "Previs.hpp"
 #include "Model.hpp"
 #include "Audio.hpp"
+#include "App.hpp"
 #include "Util.hpp"
 
-SrPrevis::SrPrevis(SrModel * model, SrAudio * audio) :
+SrPrevis::SrPrevis(SrModel * model, SrAudio * audio, SrApp * app) :
     SrUiMixin("Previs"),
     _model(model),
     _audio(audio),
+    _app(app),
+    _leftAlignPrevisParam(true),
     _drawPrevisParam(true),
     _reverseAngleParam(false),
     _geomShaderDrawing(true),
@@ -33,7 +36,13 @@ SrPrevis::SrPrevis(SrModel * model, SrAudio * audio) :
     
     _SetupLights();
     
+    _leftAlignPrevisParam.setName("Left Align Previs");
+    
     _drawPrevisParam.setName("Show Previs");
+    _leftAlignPrevisParam.addListener(this,
+                                      &This::_OnLeftAlignPrevisPressed);
+    _AddUIParameter(_leftAlignPrevisParam);
+
     _AddUIParameter(_drawPrevisParam);
     
     _reverseAngleParam.setName("Reverse Angle");
@@ -211,6 +220,14 @@ SrPrevis::_ReadAnimatedCameraData(std::string fileName)
     }
     
     printf("imported %zu camera frames\n", _animatedCameraPositions.size());
+}
+
+void
+SrPrevis::_OnLeftAlignPrevisPressed(bool &on)
+{
+    if(_app){
+        _app -> LeftAlignPrevis(on);
+    }
 }
 
 void

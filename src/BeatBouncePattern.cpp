@@ -279,8 +279,6 @@ SrBeatBouncePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     std::vector<ofFloatColor> pal;
     pal = _RandomPalette();
     
-    cout<< buffer->size()<<"\n";
-    
     for(int lightIndex = 0; lightIndex < buffer->size(); lightIndex++) {
         
         float normalizedIndex = (float)lightIndex / (buffer->size()-1);
@@ -308,8 +306,6 @@ SrBeatBouncePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         int colorIndex = floor(normalizedIndex * pal.size());
         ofFloatColor palc = pal[colorIndex];
         float o = onsetAmount / 2.0;
-        
-        cout<<onsetAmount<<"\n";
         
         (*buffer)[lightIndex] = palc;
   

@@ -18,7 +18,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _model(model),
     _audio(audio),
     _cycleAutomatically(true),
-    _delayBeforeAutomaticMode(5.0), // seconds
+    _delayBeforeAutomaticMode(60.0), // seconds
     _twoBeatCycle(0.0),
     _measureCycle(0.0),
     _phraseCycle(0.0),
@@ -36,7 +36,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     
     _delayBeforeAutomaticMode.setName("Delay b4 auto");
     _delayBeforeAutomaticMode.setMin(0.0);
-    _delayBeforeAutomaticMode.setMax(20.0);
+    _delayBeforeAutomaticMode.setMax(100.0);
     
     _twoBeatCycle.setName("Two Beat");
     _twoBeatCycle.setMin(0.0);

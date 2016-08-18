@@ -143,9 +143,6 @@
 		308CEE591C48593A007C124A /* tod.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE521C48593A007C124A /* tod.c */; };
 		308CEE5A1C48593A007C124A /* transmit.c in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE541C48593A007C124A /* transmit.c */; };
 		308CEE5D1C48598D007C124A /* Artnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE5B1C48598D007C124A /* Artnet.cpp */; };
-		309D54841D5D3CF9007954B7 /* AUTHORS.txt in Resources */ = {isa = PBXBuildFile; fileRef = 309D54811D5D3CF9007954B7 /* AUTHORS.txt */; };
-		309D54851D5D3CF9007954B7 /* Auto_ShiftingPains.mov in Resources */ = {isa = PBXBuildFile; fileRef = 309D54821D5D3CF9007954B7 /* Auto_ShiftingPains.mov */; };
-		309D54861D5D3CF9007954B7 /* Auto_WarmNeonBirth.mov in Resources */ = {isa = PBXBuildFile; fileRef = 309D54831D5D3CF9007954B7 /* Auto_WarmNeonBirth.mov */; };
 		30AEA5981C4052A80034C794 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 30AEA5971C4052A80034C794 /* README.md */; };
 		30B1F96D1D63B7BB00916EBA /* WhompPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */; };
 		30B1F9701D65D73500916EBA /* SpinTrailsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B1F96E1D65D73500916EBA /* SpinTrailsPattern.cpp */; };
@@ -409,9 +406,6 @@
 		308CEE5C1C48598D007C124A /* Artnet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Artnet.hpp; sourceTree = "<group>"; };
 		308CEE5E1C486171007C124A /* artnet_AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = artnet_AUTHORS; sourceTree = "<group>"; };
 		308CEE5F1C486177007C124A /* artnet_COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = artnet_COPYING; sourceTree = "<group>"; };
-		309D54811D5D3CF9007954B7 /* AUTHORS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AUTHORS.txt; path = Resources/BeepleCrapVideos/AUTHORS.txt; sourceTree = SOURCE_ROOT; };
-		309D54821D5D3CF9007954B7 /* Auto_ShiftingPains.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Auto_ShiftingPains.mov; path = Resources/BeepleCrapVideos/Auto_ShiftingPains.mov; sourceTree = SOURCE_ROOT; };
-		309D54831D5D3CF9007954B7 /* Auto_WarmNeonBirth.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Auto_WarmNeonBirth.mov; path = Resources/BeepleCrapVideos/Auto_WarmNeonBirth.mov; sourceTree = SOURCE_ROOT; };
 		30AC5FEA1C448C7600B793E9 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		30AEA5971C4052A80034C794 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WhompPattern.cpp; path = Patterns/WhompPattern.cpp; sourceTree = "<group>"; };
@@ -654,7 +648,6 @@
 		3068B2411CB576550092949A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				309D547A1D5D3764007954B7 /* BeepleCrapVideos */,
 				302626671D52F6270016DAF3 /* presets.txt */,
 				303E6FF81D4CFE9A009BC38A /* lightning */,
 				7AD9994B1D2A118F002BD0F3 /* shaderFrag.glsl */,
@@ -720,17 +713,6 @@
 				308CEE541C48593A007C124A /* transmit.c */,
 			);
 			path = artnet;
-			sourceTree = "<group>";
-		};
-		309D547A1D5D3764007954B7 /* BeepleCrapVideos */ = {
-			isa = PBXGroup;
-			children = (
-				309D54811D5D3CF9007954B7 /* AUTHORS.txt */,
-				309D54821D5D3CF9007954B7 /* Auto_ShiftingPains.mov */,
-				309D54831D5D3CF9007954B7 /* Auto_WarmNeonBirth.mov */,
-			);
-			name = BeepleCrapVideos;
-			path = Resources/Videos;
 			sourceTree = "<group>";
 		};
 		30B88B7F1C9745D80068F4C1 /* Patterns */ = {
@@ -1205,7 +1187,6 @@
 				303E70991D4CFEBF009BC38A /* lightning79.png in Resources */,
 				303E70651D4CFEBF009BC38A /* lightning27.png in Resources */,
 				303E70841D4CFEBF009BC38A /* lightning58.png in Resources */,
-				309D54851D5D3CF9007954B7 /* Auto_ShiftingPains.mov in Resources */,
 				303E70691D4CFEBF009BC38A /* lightning31.png in Resources */,
 				303E70721D4CFEBF009BC38A /* lightning40.png in Resources */,
 				30EB8EE81D55239F004EF979 /* Instructions.txt in Resources */,
@@ -1224,9 +1205,7 @@
 				303E70561D4CFEBF009BC38A /* lightning12.png in Resources */,
 				303E70571D4CFEBF009BC38A /* lightning13.png in Resources */,
 				303E707F1D4CFEBF009BC38A /* lightning53.png in Resources */,
-				309D54841D5D3CF9007954B7 /* AUTHORS.txt in Resources */,
 				303E706F1D4CFEBF009BC38A /* lightning37.png in Resources */,
-				309D54861D5D3CF9007954B7 /* Auto_WarmNeonBirth.mov in Resources */,
 				303E70851D4CFEBF009BC38A /* lightning59.png in Resources */,
 				7AD999501D2A118F002BD0F3 /* shaderVert.glsl in Resources */,
 				303E709B1D4CFEBF009BC38A /* lightning81.png in Resources */,
