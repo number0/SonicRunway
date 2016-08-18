@@ -390,8 +390,13 @@ SrApp::Draw()
     
     _switcher.GetUiPanel()->draw();
     
-    _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 600, _uiColumnWidth, _uiColumnWidth);
-    
+    if ( _leftAlignPrevis ){
+        _audio.DrawFftBands(_uiColumnWidth + _uiMargin + _previsWidth*_leftAlignScale, 400, _uiColumnWidth, _uiColumnWidth);
+    }
+    else {
+        _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
+    }
+        
     for(size_t i = 0; i < _patternPanels.size(); i++) {
         _patternPanels[i]->draw();
     }
