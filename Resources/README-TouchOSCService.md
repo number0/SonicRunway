@@ -15,7 +15,9 @@ java -jar touchoscservice1.0.1-jar-with-dependencies.jar "Sonic Runway iPad H.to
 ```
 
 **Note:** This uses Apple's mDNS implementation under the hood, so probably
-only works on OS X.
+only works on OS X. Also, this program depends on a native library,
+libjdns_sd.jnilib that must be in the current working directory when running
+the program.
 
 # What it does
 
