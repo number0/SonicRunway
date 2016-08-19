@@ -11,7 +11,7 @@ file to serve.
 To run and serve, for example, the file, *Sonic Runway iPad H.touchosc*:
 
 ```
-java -jar touchoscservice1.0.1-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc"
+java -jar touchoscservice1.0.2-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc"
 ```
 
 **Note:** This uses Apple's mDNS implementation under the hood, so probably
