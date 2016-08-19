@@ -11,8 +11,11 @@ file to serve.
 To run and serve, for example, the file, *MyFile.touchosc*:
 
 ```
-java -jar touchoscservice1.0.0-jar-with-dependencies.jar MyFile.touchosc
+java -jar touchoscservice1.0.1-jar-with-dependencies.jar MyFile.touchosc
 ```
+
+**Note:** This uses Apple's mDNS implementation under the hood, so probably
+only works on OS X.
 
 # What it does
 
