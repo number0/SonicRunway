@@ -8,10 +8,10 @@ TouchOSC connections and layout files.
 The program is an executable JAR file and takes one argument, the .touchosc
 file to serve. 
 
-To run and serve, for example, the file, *MyFile.touchosc*:
+To run and serve, for example, the file, *Sonic Runway iPad H.touchosc*:
 
 ```
-java -jar touchoscservice1.0.1-jar-with-dependencies.jar MyFile.touchosc
+java -jar touchoscservice1.0.1-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc"
 ```
 
 **Note:** This uses Apple's mDNS implementation under the hood, so probably
