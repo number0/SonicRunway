@@ -23,6 +23,14 @@ public:
     
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
+    
+private:
+    ofParameter<float> _hueParam;
+    ofParameter<float> _numberParam;
+    ofParameter<float> _thresholdParam;
+    ofParameter<float> _saturationParam;
+    ofParameter<float> _brightnessParam;
+    
 };
 
 

@@ -13,9 +13,37 @@
 SrRmsPattern::SrRmsPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
-    SrScrollingPattern(name, model, audio, globalParameters)
+    SrScrollingPattern(name, model, audio, globalParameters),
+    _hue1Param(0.2),
+    _hue2Param(0.5),
+    _hue3Param(0.8),
+    _saturationParam(0.8),
+    _brightnessParam(0.8)
 {
- 
+    _hue1Param.setName("Hue 1");
+    _hue1Param.setMin(0.0);
+    _hue1Param.setMax(1.0);
+    _AddUIParameter(_hue1Param);
+    
+    _hue2Param.setName("Hue 2");
+    _hue2Param.setMin(0.0);
+    _hue2Param.setMax(1.0);
+    _AddUIParameter(_hue2Param);
+    
+    _hue3Param.setName("Hue 3");
+    _hue3Param.setMin(0.0);
+    _hue3Param.setMax(1.0);
+    _AddUIParameter(_hue3Param);
+    
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
 }
 
 SrRmsPattern::~SrRmsPattern()
@@ -38,7 +66,11 @@ SrRmsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     ofFloatColor lowColor;
     ofFloatColor midColor;
     ofFloatColor highColor;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        lowColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
+        midColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
+        highColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         lowColor.setHsb(GetGlobalParameters()->GetPhraseCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
         midColor.setHsb(GetGlobalParameters()->GetSlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
         highColor.setHsb(GetGlobalParameters()->GetVerySlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
