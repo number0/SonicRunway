@@ -18,6 +18,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _model(model),
     _audio(audio),
     _cycleAutomatically(true),
+    _lockToLocalParams(false),
     _delayBeforeAutomaticMode(60.0), // seconds
     _twoBeatCycle(0.0),
     _measureCycle(0.0),
@@ -33,6 +34,8 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
 {
     _cycleAutomatically.setName("Auto Cycle");
     _cycleAutomatically.addListener(this, &This::_OnCycleAutomaticallyChanged);
+    
+    _lockToLocalParams.setName("Lock To Local Params");
     
     _delayBeforeAutomaticMode.setName("Delay b4 auto");
     _delayBeforeAutomaticMode.setMin(0.0);
@@ -83,6 +86,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _slider2Parameter.setMax(1.0);
     
     _AddUIParameter(_cycleAutomatically);
+    _AddUIParameter(_lockToLocalParams);
     _AddUIParameter(_delayBeforeAutomaticMode);
     
     _AddUIParameter(_fadeDuration);
@@ -100,6 +104,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     
     _dial1Parameter.addListener(this, &This::_OnParameterChanged);
     _dial2Parameter.addListener(this, &This::_OnParameterChanged);
+    _dial3Parameter.addListener(this, &This::_OnParameterChanged);
     _slider1Parameter.addListener(this, &This::_OnParameterChanged);
     _slider2Parameter.addListener(this, &This::_OnParameterChanged);
 }
@@ -209,6 +214,12 @@ SrGlobalParameters::Update()
     // cycles back on.
     if (not _cycleAutomatically and
         ComputeSecondsSinceManualInput() > _delayBeforeAutomaticMode) {
+        // If we are going back to auto cycle transfer some values down from dials
+        // so that the transition is smooth for the patterns that use both
+        _phraseCycle = _dial1Parameter;
+        _slowCycle = _dial2Parameter;
+        _verySlowCycle = _dial3Parameter;
+        _lockToLocalParams = false;
         _cycleAutomatically = true;
     }
     
@@ -249,9 +260,23 @@ SrGlobalParameters::Update()
     }
 }
 
+bool
+SrGlobalParameters::UseLocalParams() const
+{
+    return _lockToLocalParams ||
+      _timeOfLastPresetParameterChange > _timeOfLastManualParameterChange;
+}
+
+void
+SrGlobalParameters::OnReceivedPresetInput()
+{
+    _timeOfLastPresetParameterChange = ofGetElapsedTimef();
+}
+
 void
 SrGlobalParameters::OnReceivedManualInput()
 {
+    _cycleAutomatically = false;
     _timeOfLastManualParameterChange = ofGetElapsedTimef();
 }
 

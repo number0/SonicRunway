@@ -14,9 +14,37 @@ SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
                                        SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
-    _average(0.0)
+    _average(0.0),
+    _hueParam(0.2),
+    _saturationParam(0.8),
+    _brightnessParam(0.8),
+    _jitterParam(30.0),
+    _rotationParam(12.0)
 {
-
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
+    
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
+    
+    _jitterParam.setName("Jitter");
+    _jitterParam.setMin(0.0);
+    _jitterParam.setMax(1.0);
+    _AddUIParameter(_jitterParam);
+    
+    _rotationParam.setName("Rotation");
+    _rotationParam.setMin(0.0);
+    _rotationParam.setMax(1.0);
+    _AddUIParameter(_rotationParam);
 }
 
 SrBigTrailsPattern::~SrBigTrailsPattern()
@@ -39,7 +67,9 @@ SrBigTrailsPattern::_Update()
     float high = GetAudio()->GetHighs()[0];
     
     float jitter;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        jitter = _jitterParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         jitter = 20;
     } else {
         jitter = GetGlobalParameters()->GetDial2() * 100;
@@ -63,7 +93,13 @@ SrBigTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float brigthness;
     float rotation;
     float jitter;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        hue = _hueParam;
+        saturation = _saturationParam;
+        brigthness = _brightnessParam;
+        rotation = _rotationParam;
+        jitter = _jitterParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         hue = GetGlobalParameters()->GetVerySlowCycle();
         saturation = 0.9;
         brigthness = 0.7;

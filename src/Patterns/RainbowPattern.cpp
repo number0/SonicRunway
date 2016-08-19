@@ -22,7 +22,20 @@ _hueBiasChange(0.001),
 _saturationChange(-0.00075),
 _brightnessChange(0.0015)
 {
-
+    _hueBiasParam.setName("Hue Bias");
+    _hueBiasParam.setMin(0.0);
+    _hueBiasParam.setMax(1.0);
+    _AddUIParameter(_hueBiasParam);
+    
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
 }
 
 SrRainbowPattern::~SrRainbowPattern()
@@ -39,7 +52,9 @@ SrRainbowPattern::_Update()
     SrScrollingPattern::_Update();
 
     if (IsOnAtAnyGate()) {
-        if (GetGlobalParameters()->GetCycleAutomatically()) {
+        if (GetGlobalParameters()->UseLocalParams()) {
+            // Just dont walk params let them be as the user set.
+        } else if (GetGlobalParameters()->GetCycleAutomatically()) {
             _hueBiasParam += _hueBiasChange;
             if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {
                 _hueBiasChange = -_hueBiasChange;
