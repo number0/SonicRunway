@@ -129,6 +129,8 @@ TODO:
 
 - Expand library of patterns. (Everyone!)
 
+- Fix fade-out when disabled.
+
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
 

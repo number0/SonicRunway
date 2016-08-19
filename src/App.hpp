@@ -54,6 +54,12 @@ private:
     SrArtnet _artnet;
     SrSwitcher _switcher;
     
+    ofxPanel _uiTogglesPanel;
+    ofParameter<bool> _showGlobals;
+    ofParameter<bool> _showFft;
+    ofParameter<bool> _showPatternParameters;
+    ofParameter<bool> _showPrevis;
+    
     ofSoundStream _soundStream;
     
     std::vector<SrPattern *> _patterns;

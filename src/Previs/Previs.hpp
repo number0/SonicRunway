@@ -53,7 +53,6 @@ private:
     ofImage _dotLight;
     
     ofParameter<bool> _leftAlignPrevisParam;
-    ofParameter<bool> _drawPrevisParam;
     ofParameter<bool> _reverseAngleParam;
     ofParameter<bool> _geomShaderDrawing;
     int _animatedCameraIndex;
