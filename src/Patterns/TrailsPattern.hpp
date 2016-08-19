@@ -26,6 +26,11 @@ protected:
     
 private:
     int segments = 20;
+    
+    ofParameter<float> _hueParam;
+    ofParameter<float> _jitterParam;
+    ofParameter<float> _saturationParam;
+    ofParameter<float> _brightnessParam;
 };
 
 

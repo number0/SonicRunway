@@ -29,6 +29,11 @@ private:
     int segments = 40;
     float _segmentTreshold[40] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int _segmentCountdown[40] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    
+    ofParameter<float> _hueParam;
+    ofParameter<float> _saturationParam;
+    ofParameter<float> _trailParam;
+    ofParameter<float> _thresholdParam;
 };
 
 

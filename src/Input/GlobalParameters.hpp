@@ -49,6 +49,7 @@ public:
     
     void Update();
     
+    bool UseLocalParams() const;
     float GetCycleAutomatically() const;
     float GetTwoBeatCycle() const;
     float GetMeasureCycle() const;
@@ -66,6 +67,7 @@ public:
     
     float ComputeSecondsSinceManualInput() const;
     void OnReceivedManualInput();
+    void OnReceivedPresetInput();
     
 private:
     float _ComputeUpdate(float value, int beatsPerCycle) const;
@@ -77,8 +79,10 @@ private:
     SrModel * _model;
     SrAudio * _audio;
     float _timeOfLastManualParameterChange;
+    float _timeOfLastPresetParameterChange;
     
     ofParameter<bool> _cycleAutomatically;
+    ofParameter<bool> _lockToLocalParams;
     ofParameter<float> _delayBeforeAutomaticMode;
     
     ofParameter<float> _twoBeatCycle;

@@ -29,6 +29,11 @@ private:
     int segments = 10;
     float _segmentTreshold[10] = {0,0,0,0,0,0,0,0,0,0};
     float _fftSumBySegment[10] = {0,0,0,0,0,0,0,0,0,0};
+    
+    ofParameter<float> _hueParam;
+    ofParameter<float> _saturationParam;
+    ofParameter<float> _brightnessParam;
+    ofParameter<float> _thresholdParam;
 };
 
 

@@ -12,5 +12,5 @@ The program is an executable JAR file and has two required options:
 To run, for example using 34 gates and 277 pixels per gate:
 
 ```
-java -jar pixelpusherrelay-1.0.1-jar-with-dependencies.jar --gates=34 --pixels_per_gate=277
+java -jar pixelpusherrelay-1.0.2-jar-with-dependencies.jar --gates=34 --pixels_per_gate=277
 ```
