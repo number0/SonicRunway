@@ -4,6 +4,7 @@ Software control for Sonic Runway art installation, a visualization of the
 speed of sound.  
 
 See http://sonicrunway.net
+See http://facebook.com/sonicrunway
 
 Mac install instructions:
 
@@ -60,7 +61,17 @@ samples of a parameter value.  It can then be queried per station.
 This provides the history necessary to make patterns that ripple
 down the runway at the speed of sound.  
 
-It's important to note that the audio processing and render/draw
+To simplify things, there is also a 'ScrollingPattern' that handles
+propagating the lights down the corridor.  Subclasses can draw a single
+gate per frame (the one at the sound source) and the base class takes
+care of the rest.
+
+To get started developing patterns for the runway: 
+  - Copy the Example pattern to your own class.  
+  - Instantiate it in SrApp.cpp
+  - Modify the draw function do draw something different!
+
+Note: the audio processing and render/draw
 functions are called from different threads and at different 
 intervals.  So far, I haven't bothered making things truly 
 thread safe because the various buffers are all statically 
@@ -88,29 +99,27 @@ Notes on setting up a Sonic Runway server:
         Shut down computer when time remaining on UPS is 2 mins
         Shut down computer when UPS battery is below 5%
 
+- Enable screen sharing.
+
 - Configure network settings:
+   Create a new location, "Runway"
    Ethernet:
       - Manual IP:  192.168.0.1
       - Subnet mask:  255.255.0.0
    Wifi:
       - sonic
       - Manual IP:  192.168.1.3
-
+      - make 'sonic' the top preferred network.
 
 TODO:
 
 - Expand library of patterns. (Everyone!)
 
-- Make sure we can automatically run the software on startup. (RJ)
-
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
 
 - Design TouchOSC layout - include master parameter sliders and 
-  buttons for presets (?)
-
-- Add parameters to fiddle the gain on the LEDs so we can color 
-  correct them.  (RJ)
+  buttons for presets (Shawn)
 
 - Add a parameter to delay so first physical gate is #2
 
@@ -128,4 +137,8 @@ TODO:
   how to bundle dylibs with the app, or compiling them statically.  Some info:
 
 http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a-dylib-library
+
+- Add parameters to fiddle the gain on the LEDs so we can color 
+  correct them.  (time permitting)
+
 
