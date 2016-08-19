@@ -13,9 +13,31 @@
 SrArcPattern::SrArcPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters)
+SrScrollingPattern(name, model, audio, globalParameters),
+_hueParam(0.2),
+_saturationParam(0.8),
+_brightnessParam(0.8),
+_thresholdParam(0.5)
 {
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
     
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
+    
+    _thresholdParam.setName("Threshold");
+    _thresholdParam.setMin(0.0);
+    _thresholdParam.setMax(1.0);
+    _AddUIParameter(_thresholdParam);
 }
 
 SrArcPattern::~SrArcPattern()
@@ -33,7 +55,9 @@ SrArcPattern::_Update()
     SrScrollingPattern::_Update();
     
     float threshold;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        threshold = _thresholdParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         threshold = 0.05;
     } else {
         threshold = GetGlobalParameters()->GetDial2();
@@ -76,7 +100,11 @@ SrArcPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue;
     float saturation;
     float brightness;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        hue = _hueParam;
+        saturation = _saturationParam;
+        brightness = _brightnessParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         hue = GetGlobalParameters()->GetSlowCycle();
         saturation = 0.8;
         brightness = 0.8;

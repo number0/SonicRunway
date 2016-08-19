@@ -13,9 +13,31 @@
 SrPhasorPattern::SrPhasorPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
                                  SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters)
+SrScrollingPattern(name, model, audio, globalParameters),
+_hueParam(0.75),
+_saturationParam(0.8),
+_trailParam(90.0),
+_thresholdParam(0.04)
 {
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
     
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _trailParam.setName("Trail");
+    _trailParam.setMin(0.0);
+    _trailParam.setMax(1.0);
+    _AddUIParameter(_trailParam);
+    
+    _thresholdParam.setName("Threshold");
+    _thresholdParam.setMin(0.0);
+    _thresholdParam.setMax(1.0);
+    _AddUIParameter(_thresholdParam);
 }
 
 SrPhasorPattern::~SrPhasorPattern()
@@ -33,7 +55,9 @@ SrPhasorPattern::_Update()
     SrScrollingPattern::_Update();
     
     float threshold;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        threshold = _thresholdParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         threshold = 0.05;
     } else {
         threshold = GetGlobalParameters()->GetDial2();
@@ -66,7 +90,11 @@ SrPhasorPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue;
     float saturation;
     float trail;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
+    if (GetGlobalParameters()->UseLocalParams()) {
+        hue = _hueParam;
+        saturation = _saturationParam;
+        trail = _trailParam;
+    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
         hue = GetGlobalParameters()->GetSlowCycle();
         saturation = 0.7;
         trail = 75.0;

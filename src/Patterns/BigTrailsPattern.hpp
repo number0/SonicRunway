@@ -27,6 +27,12 @@ protected:
     
 private:
     float _average;
+    
+    ofParameter<float> _hueParam;
+    ofParameter<float> _saturationParam;
+    ofParameter<float> _brightnessParam;
+    ofParameter<float> _jitterParam;
+    ofParameter<float> _rotationParam;
 };
 
 
