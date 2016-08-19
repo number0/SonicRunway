@@ -215,7 +215,7 @@ SrSpinTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
             int idxL = lightIndex + j;
             int idxR = lightIndex - j;
             
-            float dist = (1.0 - (float) j / width);
+            float dist = (1.0 - (float) j / width) * widthMult;
             
             ofFloatColor c;
             float hue = _hues[i] + dist * _hueShift;

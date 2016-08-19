@@ -78,9 +78,11 @@ thread safe because the various buffers are all statically
 allocated. So, we may see some visual tearing.  If this becomes 
 problematic we can use ofMutex to make it thread safe.
 
-Notes on setting up a Sonic Runway server:
+Notes on setting up a Sonic Runway server (not necessary to run the software):
 
 - Install runway software (above)
+
+- Install motu audio installer 
 
 - Install Loopback (with license)
     - enter loopback licence info
@@ -89,6 +91,8 @@ Notes on setting up a Sonic Runway server:
        - Rigut: MOTU Microbook II: 4 / MOTU Microbook II: Right (2)
 
 - Build a 'product' version of software and add it to login items
+
+- Configure automatic login
 
 - 'Energy saver' settings:
     - Computer sleep / display sleep -> Never
@@ -110,6 +114,10 @@ Notes on setting up a Sonic Runway server:
       - sonic
       - Manual IP:  192.168.1.3
       - make 'sonic' the top preferred network.
+
+Notes on getting into wifi:
+   - reset to 'automatic' network settings
+   - www.routerlogin.net
 
 TODO:
 
