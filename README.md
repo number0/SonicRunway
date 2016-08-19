@@ -103,6 +103,10 @@ Notes on setting up a Sonic Runway server (not necessary to run the software):
         Shut down computer when time remaining on UPS is 2 mins
         Shut down computer when UPS battery is below 5%
 
+- Screen saver:  never
+
+- Don't require password after sleep/screen saver (under security)
+
 - Enable screen sharing.
 
 - Configure network settings:
@@ -114,6 +118,8 @@ Notes on setting up a Sonic Runway server (not necessary to run the software):
       - sonic
       - Manual IP:  192.168.1.3
       - make 'sonic' the top preferred network.
+
+- Java stuff..
 
 Notes on getting into wifi:
    - reset to 'automatic' network settings
