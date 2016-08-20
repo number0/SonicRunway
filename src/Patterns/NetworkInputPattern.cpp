@@ -93,21 +93,34 @@ SrNetworkInputPattern::_Update()
         return;
     }
     int32_t height = pack4Chars(_buffer);
-    int32_t pixels = width * height;
     
-    if (pixels != _image.getWidth() * _image.getHeight()) {
-        skipFully(_buffer, _bufferSize, pixels * 3);
+    // If width doesn't match then skip
+    if (width != _image.getWidth()) {
+        skipFully(_buffer, _bufferSize, width * height * 3);
         return;
     }
     
-    // Read the pixels
-    if (!readFully(_buffer, pixels * 3)) {
-        _tcpClient.close();
-        return;
+    // If height doesn't match, then copy what we can
+    if (height > _image.getHeight()) {
+        if (!readFully(_buffer, width * _image.getHeight() * 3)) {
+            _tcpClient.close();
+            return;
+        }
+        
+        // Fill the image and skip the remainder
+        _image.setFromPixels((unsigned char *) _buffer, width, _image.getHeight(), OF_IMAGE_COLOR);
+        skipFully(_buffer, _bufferSize, width * (height - _image.getHeight()) * 3);
+    } else {
+        if (!readFully(_buffer, width * height * 3)) {
+            _tcpClient.close();
+            return;
+        }
+        _image.setFromPixels((unsigned char *) _buffer, width, height, OF_IMAGE_COLOR);
     }
-    
-    _image.setFromPixels((unsigned char *)_buffer, width, height, OF_IMAGE_COLOR);
-    _image.mirror((bool) _flipV, (bool) !_flipH); // Currently, the preview image is flipped compared to the gates
+
+    // Flip the image appropriately
+    // Note that we're using !_flipH because the preview image is flipped compared to the gates
+    _image.mirror((bool) _flipV, (bool) !_flipH);
 }
 
 bool SrNetworkInputPattern::readFully(char *buf, const int32_t count) {
