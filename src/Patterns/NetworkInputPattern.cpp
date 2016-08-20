@@ -119,8 +119,8 @@ SrNetworkInputPattern::_Update()
     }
 
     // Flip the image appropriately
-    // Note that we're using !_flipH because the preview image is flipped compared to the gates
-    _image.mirror((bool) _flipV, (bool) !_flipH);
+    // Note: use !_flipH instead if LED[0] is on the right
+    _image.mirror((bool) _flipV, (bool) _flipH);
 }
 
 bool SrNetworkInputPattern::readFully(char *buf, const int32_t count) {
