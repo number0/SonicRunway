@@ -16,7 +16,9 @@ SrPattern(name, model, audio, globalParameters),
 _host("127.0.0.1"),
 _port(11123),
 _minConnectAttemptPeriod(1000),
-_lastConnectAttemptTime(0)
+_lastConnectAttemptTime(0),
+_flipH(false),
+_flipV(false)
 {
     // Image setup
     int width = model->GetLightsPerGate();
@@ -30,6 +32,12 @@ _lastConnectAttemptTime(0)
         _bufferSize = 4;
     }
     _buffer = new char[_bufferSize];
+    
+    // Parameters
+    _flipH.setName("Flip Horizontal");
+    _AddUIParameter(_flipH);
+    _flipV.setName("Flip Vertical");
+    _AddUIParameter(_flipV);
 }
 
 SrNetworkInputPattern::~SrNetworkInputPattern()
@@ -92,6 +100,7 @@ SrNetworkInputPattern::_Update()
     }
     
     _image.setFromPixels((unsigned char *)_buffer, _image.getWidth(), _image.getHeight(), OF_IMAGE_COLOR);
+    _image.mirror((bool) _flipV, (bool) _flipH);
 }
 
 bool SrNetworkInputPattern::readFully(char *buf, const int32_t count) {
