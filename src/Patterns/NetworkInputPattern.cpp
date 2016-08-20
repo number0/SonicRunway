@@ -119,8 +119,8 @@ SrNetworkInputPattern::_Update()
     }
 
     // Flip the image appropriately
-    // Note: use !_flipH instead if LED[0] is on the right
-    _image.mirror((bool) _flipV, (bool) _flipH);
+    // Note: Use !_flipH if LED[0] is on the right and _flipH if LED[0] is on the left
+    _image.mirror((bool) _flipV, (bool) !_flipH);
 }
 
 bool SrNetworkInputPattern::readFully(char *buf, const int32_t count) {
