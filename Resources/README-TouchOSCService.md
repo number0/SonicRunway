@@ -11,8 +11,10 @@ file to serve.
 To run and serve, for example, the file, *Sonic Runway iPad H.touchosc*:
 
 ```
-java -jar touchoscservice1.0.2-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc"
+java -jar touchoscservice1.1.0-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc"
 ```
+
+To print out all the OSC messages sent to the machine, add the `--print_osc_messages` flag.
 
 **Note:** This uses Apple's mDNS implementation under the hood, so probably
 only works on OS X. Also, this program depends on a native library,
