@@ -46,6 +46,8 @@ public:
     
     void ReadPresets();
     
+    void ApplyPresetAtIndex(size_t index);
+    
 private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;

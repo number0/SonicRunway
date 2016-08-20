@@ -48,6 +48,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio, this),
     _switcher("Switcher", "presets.txt", this),
+    _oscSync(&_model, &_switcher, 8000, "", 9000),
     _showGlobals(true),
     _showFft(true),
     _showPatternParameters(true),
@@ -91,6 +92,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_patternsParameterGroup);
     _model.GetParameterGroup().add(_audio.GetParameterGroup());
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
+    _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
@@ -191,9 +193,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     // Add global parameters to the model so they will be accessible
     // from osc
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
-    
-    // Set up syncing between ofParameters and OSC
-    _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamListDevices();
     
@@ -350,7 +349,7 @@ SrApp::Update()
 {
     _globalParameters.Update();
     
-    _oscParameterSync.update();
+    _oscSync.Update();
     
     _switcher.Update();
     
