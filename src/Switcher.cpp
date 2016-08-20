@@ -278,3 +278,14 @@ SrSwitcher::FindPatternByName(const std::string & name) const
     
     return NULL;
 }
+
+void
+SrSwitcher::ApplyPresetAtIndex(size_t index)
+{
+    if (index >= _presets.size()) {
+        SrError("Unknown preset with index %zu\n", index);
+        return;
+    }
+    
+    _ApplyPreset(_presets[index]);
+}

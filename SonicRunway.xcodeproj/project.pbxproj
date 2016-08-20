@@ -34,6 +34,7 @@
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
+		30229D991D68A40200AB4A3E /* OscSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30229D971D68A40200AB4A3E /* OscSync.cpp */; };
 		302626681D52F6270016DAF3 /* presets.txt in Resources */ = {isa = PBXBuildFile; fileRef = 302626671D52F6270016DAF3 /* presets.txt */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
@@ -268,6 +269,8 @@
 		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
 		30216C3F1D31976300D2B07F /* Preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preset.cpp; sourceTree = "<group>"; };
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
+		30229D971D68A40200AB4A3E /* OscSync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscSync.cpp; path = Input/OscSync.cpp; sourceTree = "<group>"; };
+		30229D981D68A40200AB4A3E /* OscSync.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OscSync.hpp; path = Input/OscSync.hpp; sourceTree = "<group>"; };
 		302626671D52F6270016DAF3 /* presets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = presets.txt; path = Resources/presets.txt; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302EA7D31D60382900F82B57 /* OscTest.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = OscTest.touchosc; path = Resources/OscTest.touchosc; sourceTree = "<group>"; };
@@ -787,6 +790,8 @@
 				303E6D961D4CD8F1009BC38A /* ImageSequence.hpp */,
 				308594B91D599F740027A9A1 /* GlobalParameters.cpp */,
 				308594BA1D599F740027A9A1 /* GlobalParameters.hpp */,
+				30229D971D68A40200AB4A3E /* OscSync.cpp */,
+				30229D981D68A40200AB4A3E /* OscSync.hpp */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -1280,6 +1285,7 @@
 				302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				305892A41C9921240030F338 /* UiMixin.cpp in Sources */,
+				30229D991D68A40200AB4A3E /* OscSync.cpp in Sources */,
 				295D34481D3C0E0C009CDC91 /* ArcPattern.cpp in Sources */,
 				30E57E241CE194730031D5AF /* ofxOscMessage.cpp in Sources */,
 				30E57E231CE194730031D5AF /* ofxOscBundle.cpp in Sources */,

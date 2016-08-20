@@ -17,7 +17,7 @@
 #include "Artnet.hpp"
 #include "Previs.hpp"
 #include "Switcher.hpp"
-#include "ofxOscParameterSync.h"
+#include "OscSync.hpp"
 
 class SrPattern;
 
@@ -67,7 +67,7 @@ private:
     
     ofxPanel _globalPanel;
     std::vector<ofxPanel *> _patternPanels;
-    ofxOscParameterSync _oscParameterSync;
+    SrOscSync _oscSync;
     float _uiColumnWidth;
     float _uiMargin;
     float _previsXCoord;
