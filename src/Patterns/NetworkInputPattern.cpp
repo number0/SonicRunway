@@ -87,7 +87,14 @@ SrNetworkInputPattern::_Update()
         _tcpClient.close();
         return;
     }
-    int32_t pixels = pack4Chars(_buffer);
+    int32_t width = pack4Chars(_buffer);
+    if (!readFully(_buffer, 4)) {
+        _tcpClient.close();
+        return;
+    }
+    int32_t height = pack4Chars(_buffer);
+    int32_t pixels = width * height;
+    
     if (pixels != _image.getWidth() * _image.getHeight()) {
         skipFully(_buffer, _bufferSize, pixels * 3);
         return;
@@ -99,8 +106,8 @@ SrNetworkInputPattern::_Update()
         return;
     }
     
-    _image.setFromPixels((unsigned char *)_buffer, _image.getWidth(), _image.getHeight(), OF_IMAGE_COLOR);
-    _image.mirror((bool) _flipV, (bool) _flipH);
+    _image.setFromPixels((unsigned char *)_buffer, width, height, OF_IMAGE_COLOR);
+    _image.mirror((bool) _flipV, (bool) !_flipH); // Currently, the preview image is flipped compared to the gates
 }
 
 bool SrNetworkInputPattern::readFully(char *buf, const int32_t count) {
