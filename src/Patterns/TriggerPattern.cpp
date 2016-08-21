@@ -37,7 +37,9 @@ SrTriggerPattern::_Update()
     SrScrollingPattern::_Update();
     
     _triggerWasPressed = (bool) _triggerParam;
-    _triggerParam = false;
+    if (_triggerParam) {
+        _triggerParam = false;
+    }
 }
 
 void

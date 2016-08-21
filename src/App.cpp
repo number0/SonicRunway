@@ -48,7 +48,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio, this),
     _switcher("Switcher", "presets.txt", this),
-    _oscSync(&_model, &_switcher, 8000, "", 9000),
+    _oscSync(&_model, &_audio, &_switcher, 8000, "", 9000),
     _showGlobals(true),
     _showFft(true),
     _showPatternParameters(true),
@@ -84,7 +84,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
-    _globalPanel.add(_globalParameters.GetUiPanel());
     
     _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
@@ -260,11 +259,17 @@ SrApp::LeftAlignPrevis(bool &on)
 {
     _leftAlignPrevis = on;
     
+    float globalParamsY = 560;
+    
     if( on ) {
-        _globalPanel.setPosition(_uiMargin + _previsWidth *_leftAlignScale + _uiMargin,_uiMargin);
+        float x = _uiMargin + _previsWidth * _leftAlignScale + _uiMargin;
+        _globalPanel.setPosition(x, _uiMargin);
+        _globalParameters.GetUiPanel()->setPosition(x, _uiMargin + globalParamsY);
     }
     else {
         _globalPanel.setPosition(_uiMargin,_uiMargin + 100);
+        _globalParameters.GetUiPanel()->setPosition(
+                        _uiMargin, _uiMargin + 100 + globalParamsY);
     }
     
     if (on) {
@@ -397,6 +402,7 @@ SrApp::Draw()
     
     if (_showGlobals) {
         _globalPanel.draw();
+        _globalParameters.GetUiPanel()->draw();
         _switcher.GetUiPanel()->draw();
     }
     

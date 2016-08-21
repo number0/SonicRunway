@@ -500,6 +500,7 @@
 		93CAC8A94359FD331BAD8CFA /* ofxAubioPitch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAubioPitch.cpp; path = ../../../addons/ofxAubio/src/ofxAubioPitch.cpp; sourceTree = SOURCE_ROOT; };
 		9604B925D32EE39065747725 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBaseGui.cpp; path = ../../../addons/ofxGui/src/ofxBaseGui.cpp; sourceTree = SOURCE_ROOT; };
 		9D2C29B96659EBB7A0C5672F /* ofxAubioPitch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubioPitch.h; path = ../../../addons/ofxAubio/src/ofxAubioPitch.h; sourceTree = SOURCE_ROOT; };
+		A3AF33231D69796200ED87FC /* Sonic Runway iPad H.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sonic Runway iPad H.touchosc"; path = "Resources/Sonic Runway iPad H.touchosc"; sourceTree = "<group>"; };
 		A96B8F6D2ECF14F9304EBD6C /* ofxAubioBeat.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAubioBeat.cpp; path = ../../../addons/ofxAubio/src/ofxAubioBeat.cpp; sourceTree = SOURCE_ROOT; };
 		B87C60311EC1FE841C1ECD89 /* ofxLabel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLabel.h; path = ../../../addons/ofxGui/src/ofxLabel.h; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
@@ -658,6 +659,7 @@
 				7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */,
 				7AD999481D29E652002BD0F3 /* light.png */,
 				302EA7D31D60382900F82B57 /* OscTest.touchosc */,
+				A3AF33231D69796200ED87FC /* Sonic Runway iPad H.touchosc */,
 				3068B2421CB576BF0092949A /* previsCameraData.txt */,
 				30B8DCEA1CB58C3A00164558 /* skyTexture.png */,
 				300802101CB723AD0031DAF2 /* burner1.png */,

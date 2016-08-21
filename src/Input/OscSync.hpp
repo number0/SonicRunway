@@ -17,11 +17,12 @@
 #include "ofParameterGroup.h"
 
 class SrModel;
+class SrAudio;
 class SrSwitcher;
 
 class SrOscSync {
 public:
-    SrOscSync(SrModel * model, SrSwitcher * switcher, int localPort,
+    SrOscSync(SrModel * model, SrAudio * audio, SrSwitcher * switcher, int localPort,
               const std::string & remoteHost, int remotePort);
     ~SrOscSync();
     
@@ -30,9 +31,13 @@ public:
 private:
     void _OnParameterChanged( ofAbstractParameter & parameter );
     void _SyncParameterToMessage(ofAbstractParameter *p, ofxOscMessage & msg);
+    void _BroadcastAudioValues();
+    
+    void _SendFloatMessage(const std::string & path, float value);
     
 private:
     SrModel * _model;
+    SrAudio * _audio;
     SrSwitcher * _switcher;
     
     ofxOscSender _sender;

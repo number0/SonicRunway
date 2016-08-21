@@ -8,6 +8,7 @@
 
 #include "OscSync.hpp"
 #include "Model.hpp"
+#include "Audio.hpp"
 #include "Util.hpp"
 #include "Debug.hpp"
 #include "Switcher.hpp"
@@ -16,10 +17,12 @@ static const std::string _presetPrefix = std::string("/presets/preset.multitoggl
 static const int _presetGridWidth = 5;
 static const int _presetGridHeight = 6;
 
-SrOscSync::SrOscSync(SrModel * model, SrSwitcher * switcher,
+SrOscSync::SrOscSync(SrModel * model, SrAudio * audio,
+                     SrSwitcher * switcher,
                      int localPort,
                      const std::string& remoteHost, int remotePort) :
     _model(model),
+    _audio(audio),
     _switcher(switcher),
     _updatingParameter(false),
     _syncGroup(model->GetParameterGroup()),
@@ -95,6 +98,26 @@ SrOscSync::Update()
         
         // XXX Handle other params here..
     }
+    
+    _BroadcastAudioValues();
+}
+
+void
+SrOscSync::_SendFloatMessage(const std::string & path, float value)
+{
+    ofxOscMessage m;
+    m.setAddress("/Runway/Audio/LowRMS");
+    m.addFloatArg(value);
+    _sender.sendMessage(m);
+}
+
+void
+SrOscSync::_BroadcastAudioValues()
+{
+    printf("low %f\n", _audio->GetLows()[0]);
+    _SendFloatMessage("/Runway/Audio/Lows", _audio->GetLows()[0]);
+    _SendFloatMessage("/Runway/Audio/Mids", _audio->GetMids()[0]);
+    _SendFloatMessage("/Runway/Audio/Highs", _audio->GetHighs()[0]);
 }
 
 void
@@ -104,13 +127,29 @@ SrOscSync::_OnParameterChanged(ofAbstractParameter & parameter)
         return;
     }
     
+    /*
+    _sender.setup(_remoteHost, 9000);
+    _sender.enableBroadcast();
     _sender.sendParameter(parameter);
+     */
+    
+    std::string path = SrUtil_GetParameterPath(parameter);
+    
+    ofxOscMessage m;
+    m.setAddress(path);
+    
+    if (parameter.type()==typeid(ofParameter<float>).name()) {
+        m.addFloatArg(parameter.cast<float>());
+    }
+    
+    _sender.sendMessage(m);
 }
 
 // Copied from ofxOscParameterSync
 void
 SrOscSync::_SyncParameterToMessage(ofAbstractParameter *p, ofxOscMessage & msg)
 {
+    _updatingParameter = true;
     std::vector<std::string> address = ofSplitString(msg.getAddress(),"/",true);
     for(unsigned int i=0;i<address.size();i++){
         if(p) {
@@ -140,4 +179,5 @@ SrOscSync::_SyncParameterToMessage(ofAbstractParameter *p, ofxOscMessage & msg)
             }
         }
     }
+    _updatingParameter = false;
 }
