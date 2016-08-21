@@ -283,7 +283,9 @@ SrGlobalParameters::_OnCycleAutomaticallyChanged(bool & value)
 float
 SrGlobalParameters::ComputeSecondsSinceManualInput() const
 {
-    return ofGetElapsedTimef() - _timeOfLastManualParameterChange;
+    // elapsed time starts at 0.0, so add in the _delay parameter so we don't get phantom
+    // "manual inputs" in the first minute of runtime.
+    return (ofGetElapsedTimef()+_delayBeforeAutomaticMode) - _timeOfLastManualParameterChange;
 }
 
 bool
