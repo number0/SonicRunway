@@ -151,7 +151,9 @@ SrModel::RenderFrameBuffer(float x, float y, float width, float height)
     
     ofTranslate(x, y);
     //ofScale(width / _numGates, height / _lightsPerGate);
-    _frameBuffer.draw(0, 0, width, height);
+    // Start at Y=height rather than Y=0 so we can flip vertically
+    // This causes the LEDs on the right to match the pixels on the bottom 
+    _frameBuffer.draw(0, height, width, -height);
     
     ofPopMatrix();
     ofPopStyle();

@@ -119,7 +119,7 @@ SrNetworkInputPattern::_Update()
     }
 
     // Flip the image appropriately
-    // Note that we're using !_flipH because the preview image is flipped compared to the gates
+    // Note: Use !_flipH if LED[0] is on the right and _flipH if LED[0] is on the left
     _image.mirror((bool) _flipV, (bool) !_flipH);
 }
 
