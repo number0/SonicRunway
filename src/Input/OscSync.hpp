@@ -39,6 +39,9 @@ private:
     ofxOscReceiver _receiver;
     ofParameterGroup _syncGroup;
     bool _updatingParameter;
+    int _localPort;
+    std::string _remoteHost;
+    int _remotePort;
 };
 
 #endif 

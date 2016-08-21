@@ -18,15 +18,18 @@ static const int _presetGridHeight = 6;
 
 SrOscSync::SrOscSync(SrModel * model, SrSwitcher * switcher,
                      int localPort,
-                     const std::string& host, int remotePort) :
+                     const std::string& remoteHost, int remotePort) :
     _model(model),
     _switcher(switcher),
     _updatingParameter(false),
-    _syncGroup(model->GetParameterGroup())
+    _syncGroup(model->GetParameterGroup()),
+    _localPort(localPort),
+    _remoteHost(remoteHost),
+    _remotePort(remotePort)
 {
     ofAddListener(_syncGroup.parameterChangedE(), this,
                   &SrOscSync::_OnParameterChanged);
-    _sender.setup(host,remotePort);
+    _sender.setup(remoteHost,remotePort);
     _receiver.setup(localPort);
     
 }
@@ -63,6 +66,12 @@ SrOscSync::Update()
     ofxOscMessage m;
     
     while (_receiver.getNextMessage(m)) {
+        if (m.getRemoteIp() != _remoteHost) {
+            _remoteHost = m.getRemoteIp();
+            _sender.setup(_remoteHost, _remotePort);
+        }
+        
+        // If the path corresponds to one of our parameters, sync the value
         ofAbstractParameter *parameter =
         SrUtil_FindParameter(_model->GetParameterGroup(), m.getAddress());
         if (parameter) {
@@ -70,6 +79,7 @@ SrOscSync::Update()
             continue;
         }
         
+        // If it's from the special grid of 'presets', apply the preset
         if (m.getAddress().compare(0, _presetPrefix.size(), _presetPrefix) == 0) {
             if (m.getArgType(0) != OFXOSC_TYPE_FLOAT) {
                 SrError("OSC preset not a float");
