@@ -250,6 +250,8 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
     
     // Now apply the new preset.
     preset->Apply();
+    
+    _app->GetOscSync()->BroadcastPresetInfo(preset);
 }
 
 void

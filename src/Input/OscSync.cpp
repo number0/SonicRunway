@@ -12,6 +12,7 @@
 #include "Util.hpp"
 #include "Debug.hpp"
 #include "Switcher.hpp"
+#include "Preset.hpp"
 
 static const std::string _presetPrefix = std::string("/presets/preset.multitoggle/");
 static const int _presetGridWidth = 5;
@@ -106,18 +107,33 @@ void
 SrOscSync::_SendFloatMessage(const std::string & path, float value)
 {
     ofxOscMessage m;
-    m.setAddress("/Runway/Audio/LowRMS");
+    m.setAddress(path);
     m.addFloatArg(value);
+    _sender.sendMessage(m);
+}
+
+void
+SrOscSync::_SendStringMessage(const std::string & path, const std::string & value)
+{
+    ofxOscMessage m;
+    m.setAddress(path);
+    m.addStringArg(value);
     _sender.sendMessage(m);
 }
 
 void
 SrOscSync::_BroadcastAudioValues()
 {
-    printf("low %f\n", _audio->GetLows()[0]);
     _SendFloatMessage("/Runway/Audio/Lows", _audio->GetLows()[0]);
     _SendFloatMessage("/Runway/Audio/Mids", _audio->GetMids()[0]);
     _SendFloatMessage("/Runway/Audio/Highs", _audio->GetHighs()[0]);
+}
+
+void
+SrOscSync::BroadcastPresetInfo(SrPreset * preset)
+{
+    printf("Broadcast preset sync\n");
+    _SendStringMessage("/Runway/CurrentPresetName", preset->GetName());
 }
 
 void

@@ -19,6 +19,7 @@
 class SrModel;
 class SrAudio;
 class SrSwitcher;
+class SrPreset;
 
 class SrOscSync {
 public:
@@ -28,12 +29,15 @@ public:
     
     void Update();
     
+    void BroadcastPresetInfo(SrPreset * preset);
+    
 private:
     void _OnParameterChanged( ofAbstractParameter & parameter );
     void _SyncParameterToMessage(ofAbstractParameter *p, ofxOscMessage & msg);
     void _BroadcastAudioValues();
     
     void _SendFloatMessage(const std::string & path, float value);
+    void _SendStringMessage(const std::string & path, const std::string & value);
     
 private:
     SrModel * _model;

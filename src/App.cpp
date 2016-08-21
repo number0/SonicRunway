@@ -331,6 +331,12 @@ SrApp::GetAudio()
     return &_audio;
 }
 
+SrOscSync *
+SrApp::GetOscSync()
+{
+    return &_oscSync;
+}
+
 SrGlobalParameters *
 SrApp::GetGlobalParameters()
 {
