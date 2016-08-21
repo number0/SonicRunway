@@ -71,6 +71,12 @@ SrPattern::GetOpacity() const
     return _opacityBuffer;
 }
 
+std::string
+SrPattern::GetGlobalParameterLabel(const std::string & name) const
+{
+    return std::string();
+}
+
 bool
 SrPattern::IsOnAtAnyGate() const
 {

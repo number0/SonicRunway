@@ -13,6 +13,7 @@
 #include "Debug.hpp"
 #include "Switcher.hpp"
 #include "Preset.hpp"
+#include "Pattern.hpp"
 
 static const std::string _presetPrefix = std::string("/presets/preset.multitoggle/");
 static const int _presetGridWidth = 5;
@@ -130,10 +131,41 @@ SrOscSync::_BroadcastAudioValues()
 }
 
 void
+SrOscSync::_BroadcastGlobalParameterLabel(SrPreset * preset,
+                                         const std::string & name)
+{
+    if (not preset) {
+        return;
+    }
+    
+    std::string path("/Runway/GlobalParams/");
+    path += name;
+    path += "/Label";
+    
+    std::string value;
+    std::set<SrPattern *> patterns = preset->GetPatterns();
+    
+    for(auto iter = patterns.begin(); iter != patterns.end(); iter++) {
+        std::string thisLabel = (*iter)->GetGlobalParameterLabel(name);
+        if (not thisLabel.empty()) {
+            value += thisLabel;
+        }
+    }
+    
+    _SendStringMessage(path, value);
+}
+
+void
 SrOscSync::BroadcastPresetInfo(SrPreset * preset)
 {
-    printf("Broadcast preset sync\n");
     _SendStringMessage("/Runway/CurrentPresetName", preset->GetName());
+    _SendFloatMessage("/Runway/IsPresetAudioReactive", (float) preset->IsAudioReactive());
+    
+    _BroadcastGlobalParameterLabel(preset, "Dial1");
+    _BroadcastGlobalParameterLabel(preset, "Dial2");
+    _BroadcastGlobalParameterLabel(preset, "Dial3");
+    _BroadcastGlobalParameterLabel(preset, "Slider1");
+    _BroadcastGlobalParameterLabel(preset, "Slider2");
 }
 
 void

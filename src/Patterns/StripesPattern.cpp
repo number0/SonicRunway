@@ -40,6 +40,16 @@ SrStripesPattern::~SrStripesPattern()
     
 }
 
+std::string
+SrStripesPattern::GetGlobalParameterLabel(const std::string & name) const
+{
+    if (name == "Dial1") {
+        return "Hue";
+    }
+    
+    return std::string();
+}
+
 void
 SrStripesPattern::_Update()
 {

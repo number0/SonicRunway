@@ -21,6 +21,8 @@ public:
                      SrGlobalParameters * globalParameters);
     virtual ~SrStripesPattern();
     
+    virtual std::string GetGlobalParameterLabel(const std::string & name) const;
+    
 protected:
     virtual void _Update();
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;

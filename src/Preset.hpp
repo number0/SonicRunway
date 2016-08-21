@@ -56,6 +56,8 @@ public:
     const std::vector<std::string> & Pickle() const;
     void Unpickle(const std::vector<std::string> & strings);
     
+    std::set<SrPattern *> GetPatterns() const;
+    
 private:
     void _WriteParamRecurse(const ofAbstractParameter & param,
                             ofParameterGroup & rootGroup,

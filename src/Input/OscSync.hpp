@@ -36,6 +36,9 @@ private:
     void _SyncParameterToMessage(ofAbstractParameter *p, ofxOscMessage & msg);
     void _BroadcastAudioValues();
     
+    void _BroadcastGlobalParameterLabel(SrPreset * preset,
+                                        const std::string & name);
+    
     void _SendFloatMessage(const std::string & path, float value);
     void _SendStringMessage(const std::string & path, const std::string & value);
     
