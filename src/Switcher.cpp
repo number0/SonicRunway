@@ -261,9 +261,7 @@ SrSwitcher::OnPresetTogglePressed(SrPreset * preset)
         _ApplyPreset(preset);
     }
     
-    // Tell the global parameters that we poked a button.
-    _app->GetGlobalParameters()->OnReceivedManualInput();
-    // Then tell the global params the last thing involved was a preset
+    // Then tell the global params that we changed a preset
     _app->GetGlobalParameters()->OnReceivedPresetInput();
 }
 

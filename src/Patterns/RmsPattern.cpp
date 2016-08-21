@@ -9,6 +9,7 @@
 #include "RmsPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrRmsPattern::SrRmsPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
@@ -66,19 +67,31 @@ SrRmsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     ofFloatColor lowColor;
     ofFloatColor midColor;
     ofFloatColor highColor;
-    if (GetGlobalParameters()->UseLocalParams()) {
-        lowColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
-        midColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
-        highColor.setHsb(_hue1Param, _saturationParam, _brightnessParam);
-    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
-        lowColor.setHsb(GetGlobalParameters()->GetPhraseCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
-        midColor.setHsb(GetGlobalParameters()->GetSlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
-        highColor.setHsb(GetGlobalParameters()->GetVerySlowCycle(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
-    } else {
-        lowColor.setHsb(GetGlobalParameters()->GetDial1(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
-        midColor.setHsb(GetGlobalParameters()->GetDial2(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
-        highColor.setHsb(GetGlobalParameters()->GetDial3(), GetGlobalParameters()->GetSlider1(), GetGlobalParameters()->GetSlider2());
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    float lowHue = _hue1Param + globals->GetPhraseCycle();
+    float midHue = _hue2Param + globals->GetPhraseCycle();
+    float highHue = _hue3Param + globals->GetPhraseCycle();
+    float saturation = _saturationParam;
+    float brightness = _brightnessParam;
+    
+    lowHue = SrUtil_ClampCycle(0, 1, lowHue);
+    midHue = SrUtil_ClampCycle(0, 1, midHue);
+    highHue = SrUtil_ClampCycle(0, 1, highHue);
+    
+    if (GetGlobalParameters()->WasRecentManualInput()) {
+        lowHue = globals->GetDial1();
+        midHue = globals->GetDial2();
+        highHue = globals->GetDial3();
+        
+        saturation = globals->GetSlider1();
+        brightness = globals->GetSlider2();
     }
+    
+    lowColor.setHsb(lowHue, saturation, brightness);
+    midColor.setHsb(midHue, saturation, brightness);
+    highColor.setHsb(highHue, saturation, brightness);
     
     // Square the values to accentuate the peaks
     low *= low;

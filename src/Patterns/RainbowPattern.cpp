@@ -52,9 +52,13 @@ SrRainbowPattern::_Update()
     SrScrollingPattern::_Update();
 
     if (IsOnAtAnyGate()) {
-        if (GetGlobalParameters()->UseLocalParams()) {
-            // Just dont walk params let them be as the user set.
-        } else if (GetGlobalParameters()->GetCycleAutomatically()) {
+        SrGlobalParameters * globals = GetGlobalParameters();
+        
+        if (globals->WasRecentManualInput()) {
+            _hueBiasParam = GetGlobalParameters()->GetDial1();
+            _saturationParam = GetGlobalParameters()->GetSlider1();
+            _brightnessParam = GetGlobalParameters()->GetSlider2();
+        } else {
             _hueBiasParam += _hueBiasChange;
             if (_hueBiasParam >= 0.9 || _hueBiasParam <= -0.4) {
                 _hueBiasChange = -_hueBiasChange;
@@ -69,10 +73,6 @@ SrRainbowPattern::_Update()
             if (_brightnessParam >= 0.9 || _brightnessParam <= 0.0) {
                 _brightnessChange = -_brightnessChange;
             }
-        } else {
-            _hueBiasParam = GetGlobalParameters()->GetDial1();
-            _saturationParam = GetGlobalParameters()->GetSlider1();
-            _brightnessParam = GetGlobalParameters()->GetSlider2();
         }
     }
 }

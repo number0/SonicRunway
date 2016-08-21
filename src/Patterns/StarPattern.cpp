@@ -9,6 +9,7 @@
 #include "StarPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrStarPattern::SrStarPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
@@ -66,25 +67,24 @@ SrStarPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float brightness;
     float number;
     float threshold;
-    if (GetGlobalParameters()->UseLocalParams()) {
-        hue = _hueParam;
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
+        hue = globals->GetDial1();
+        number = globals->GetDial2() * 100;
+        threshold = globals->GetDial3();
+        saturation = globals->GetSlider1();
+        brightness = globals->GetSlider2();
+    } else {
+        hue = _hueParam + globals->GetSlowCycle();
         saturation = _saturationParam;
         brightness = _brightnessParam;
         number = _numberParam;
         threshold = _thresholdParam;
-    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = 1.0;
-        saturation = 0.0;
-        brightness = 0.8;
-        number = 12;
-        threshold = 0.4;
-    } else {
-        hue = GetGlobalParameters()->GetDial1();
-        number = GetGlobalParameters()->GetDial2() * 100;
-        threshold = GetGlobalParameters()->GetDial3();
-        saturation = GetGlobalParameters()->GetSlider1();
-        brightness = GetGlobalParameters()->GetSlider2();
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     if (fftSum < threshold) {
         return;

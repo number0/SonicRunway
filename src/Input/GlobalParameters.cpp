@@ -32,7 +32,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _slider1Parameter(0.5),
     _slider2Parameter(0.5)
 {
-    _cycleAutomatically.setName("Auto Cycle");
+    _cycleAutomatically.setName("AutoCycle");
     _cycleAutomatically.addListener(this, &This::_OnCycleAutomaticallyChanged);
     
     _lockToLocalParams.setName("Lock To Local Params");
@@ -210,16 +210,9 @@ SrGlobalParameters::_ComputeUpdate(float value, int beatsPerCycle) const
 void
 SrGlobalParameters::Update()
 {
-    // If we haven't touched anything for a while, turn the
-    // cycles back on.
+    // If we haven't touched anything for a while, turn the cycles back on.
     if (not _cycleAutomatically and
         ComputeSecondsSinceManualInput() > _delayBeforeAutomaticMode) {
-        // If we are going back to auto cycle transfer some values down from dials
-        // so that the transition is smooth for the patterns that use both
-        _phraseCycle = _dial1Parameter;
-        _slowCycle = _dial2Parameter;
-        _verySlowCycle = _dial3Parameter;
-        _lockToLocalParams = false;
         _cycleAutomatically = true;
     }
     
@@ -260,23 +253,15 @@ SrGlobalParameters::Update()
     }
 }
 
-bool
-SrGlobalParameters::UseLocalParams() const
-{
-    return _lockToLocalParams ||
-      _timeOfLastPresetParameterChange > _timeOfLastManualParameterChange;
-}
-
 void
 SrGlobalParameters::OnReceivedPresetInput()
 {
-    _timeOfLastPresetParameterChange = ofGetElapsedTimef();
+    _timeOfLastManualParameterChange = ofGetElapsedTimef();
 }
 
 void
 SrGlobalParameters::OnReceivedManualInput()
 {
-    _cycleAutomatically = false;
     _timeOfLastManualParameterChange = ofGetElapsedTimef();
 }
 
@@ -299,4 +284,10 @@ float
 SrGlobalParameters::ComputeSecondsSinceManualInput() const
 {
     return ofGetElapsedTimef() - _timeOfLastManualParameterChange;
+}
+
+bool
+SrGlobalParameters::WasRecentManualInput() const
+{
+    return ComputeSecondsSinceManualInput() < (float) _delayBeforeAutomaticMode;
 }
