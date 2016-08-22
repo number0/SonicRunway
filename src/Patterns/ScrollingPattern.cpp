@@ -12,7 +12,8 @@ SrScrollingPattern::SrScrollingPattern(const std::string & name,
                                        SrModel * model, SrAudio * audio,
                                        SrGlobalParameters * globalParameters) :
     SrPattern(name, model, audio, globalParameters),
-    _index(0)
+    _index(0),
+    _mask(false)
 {
     _mask.setName("IsMask");
     _AddUIParameter(_mask);
