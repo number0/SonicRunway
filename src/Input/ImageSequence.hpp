@@ -23,7 +23,8 @@
 //
 class SrImageSequence {
 public:
-    SrImageSequence(const std::string & baseFileName, size_t numFrames,
+    SrImageSequence(const std::string path,
+                    const std::string & baseFileName, size_t numFrames,
                     bool padFrameNumbers);
     ~SrImageSequence();
     

@@ -45,6 +45,7 @@ private:
     void _AddPattern(SrPattern * pattern);
     
     void _MakeVideoPatterns();
+    void _MakeAnimPatterns();
     
 private:
     SrModel _model;

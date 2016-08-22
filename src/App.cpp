@@ -10,7 +10,6 @@
 #include "ofApp.h"
 #include "Util.hpp"
 #include "Debug.hpp"
-
 #include "BeatPattern.hpp"
 #include "BeatBouncePattern.hpp"
 #include "FftPattern.hpp"
@@ -126,10 +125,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
      */
     
     SrAnimPattern *animPattern =
-        new SrAnimPattern("Lightning", "lightning", 82, false,
+        new SrAnimPattern("Lightning", "", "lightning", 82, false,
                           &_model, &_audio, &_globalParameters);
     _AddPattern(animPattern);
-     
+    
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
     _AddPattern(triggerPattern);
@@ -155,6 +154,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _AddPattern(networkInputPattern);
     
     _MakeVideoPatterns();
+    _MakeAnimPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
@@ -215,6 +215,38 @@ SrApp::~SrApp()
         delete *iter;
     }
      */
+}
+
+void
+SrApp::_MakeAnimPatterns()
+{
+    std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    
+    ofDirectory dir(animFolder);
+    dir.listDir();
+    
+    for(size_t i = 0; i < dir.size(); i++) {
+        std::string fname = dir.getName(i);
+        ofDirectory current(animFolder + "/" + fname);
+        current.listDir();
+        
+        if (fname.compare(0,5, "Anim_") != 0) {
+            continue;
+        }
+        
+        std::string patternName = fname.substr(5, fname.size());
+        
+        cout << "Loading anim pattern '" <<
+            current.getName(i) << "' with num frames: "
+            << current.getFiles().size() << "\n\n";
+
+        SrAnimPattern *animPattern =
+        new SrAnimPattern(patternName, "../../../data/Anim/" + fname, fname,
+                          current.getFiles().size(), false,
+                          &_model, &_audio, &_globalParameters);
+        _AddPattern(animPattern);
+        
+    }
 }
 
 void

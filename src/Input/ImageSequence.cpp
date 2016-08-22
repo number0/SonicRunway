@@ -10,13 +10,17 @@
 #include "Util.hpp"
 #include "Debug.hpp"
 
-SrImageSequence::SrImageSequence(const std::string & baseFileName,
+SrImageSequence::SrImageSequence(const std::string path,
+                                 const std::string & baseFileName,
                                  size_t numFrames,
                                  bool padFrameNumbers)
 {
+    
     _images.resize(numFrames);
     
-    std::string prefix = SrUtil_GetAbsolutePathForResource(baseFileName);
+    std::string prefix = SrUtil_GetAbsolutePathForResource(path);
+    
+    prefix = prefix + "/" + baseFileName;
     
     for(size_t i = 0; i < numFrames; i++) {
         char *str;
