@@ -426,7 +426,9 @@ SrApp::Draw()
     
     for(auto iter = _patterns.begin(); iter != _patterns.end(); iter++) {
         SrPattern *pattern = *iter;
-        if( pattern -> GetEnabled() ) {
+        // need to draw if pattern fading out to prevent pops
+        // on preset transitions
+        if( pattern->GetEnabled() || pattern->IsOnAtAnyGate() ) {
             pattern->Draw();
         }
     }

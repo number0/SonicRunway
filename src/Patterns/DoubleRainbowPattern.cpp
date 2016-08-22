@@ -33,7 +33,7 @@ SrDoubleRainbowPattern::SrDoubleRainbowPattern(const std::string & name,
     
     _decayTimeParam.setName("DecayTime");
     _decayTimeParam.setMin(0.0);
-    _decayTimeParam.setMax(1.0);
+    _decayTimeParam.setMax(2.0);
     _AddUIParameter(_decayTimeParam);
     
     _spinSpeedParam.setName("SpinSpeed");
