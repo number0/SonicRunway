@@ -27,7 +27,8 @@ protected:
     virtual void _Update();
     
 private:
-    
+    ofParameter<bool> _random;
+
 };
 
 #endif 
