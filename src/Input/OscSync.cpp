@@ -17,7 +17,7 @@
 
 static const std::string _presetPrefix = std::string("/presets/preset.multitoggle/");
 static const int _presetGridWidth = 5;
-static const int _presetGridHeight = 6;
+static const int _presetGridHeight = 8;
 
 SrOscSync::SrOscSync(SrModel * model, SrAudio * audio,
                      SrSwitcher * switcher,
