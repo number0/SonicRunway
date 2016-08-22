@@ -81,3 +81,30 @@ FaunWarp|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
 FaunWarp|/Runway/Patterns/DoubleRainbow/DoubleRainbows: -0.714286
 FaunWarp|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -1.02041
 FaunWarp|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.341837
+Cotton_Candy|/Runway/Patterns/Stripes/Enabled: 1
+Cotton_Candy|/Runway/Patterns/Stripes/Hue: 0
+Cotton_Candy|/Runway/Patterns/Stripes/NumStripes: 6
+Cotton_Candy|/Runway/Patterns/Stripes/SpinSpeed: 300
+Cotton_Candy|/Runway/Patterns/RMS/Enabled: 1
+Cotton_Candy|/Runway/Patterns/RMS/Hue 1: 0.2
+Cotton_Candy|/Runway/Patterns/RMS/Hue 2: 0.5
+Cotton_Candy|/Runway/Patterns/RMS/Hue 3: 0.8
+Cotton_Candy|/Runway/Patterns/RMS/Saturation: 0.8
+Cotton_Candy|/Runway/Patterns/RMS/Brightness: 0.8
+Cotton_Candy|/Runway/Patterns/Big Trails/Enabled: 1
+Cotton_Candy|/Runway/Patterns/Big Trails/Hue: 0.2
+Cotton_Candy|/Runway/Patterns/Big Trails/Saturation: 0.8
+Cotton_Candy|/Runway/Patterns/Big Trails/Brightness: 0.8
+Cotton_Candy|/Runway/Patterns/Big Trails/Jitter: 30
+Cotton_Candy|/Runway/Patterns/Big Trails/Rotation: 12
+Cotton_Candy|/Runway/Patterns/MocircshiiTwo/Enabled: 1
+Cotton_Candy|/Runway/Patterns/MocircshiiTwo/Scroll: 0
+Anti_Freeze|/Runway/Patterns/Jelly/Enabled: 1
+Anti_Freeze|/Runway/Patterns/Jelly/Scroll: 0
+Anti_Freeze|/Runway/Patterns/Popbottles/Enabled: 1
+Anti_Freeze|/Runway/Patterns/Popbottles/Scroll: 0
+Anti_Freeze|/Runway/Patterns/Beat/Enabled: 1
+Anti_Freeze|/Runway/Patterns/Beat/IsMask: 1
+Anti_Freeze|/Runway/Patterns/Beat/Hue: 0.5
+Anti_Freeze|/Runway/Patterns/Beat/DecayTime: 0.387755
+Anti_Freeze|/Runway/Patterns/Beat/SpinSpeed: 0.25
