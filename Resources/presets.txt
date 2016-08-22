@@ -12,8 +12,10 @@ DiagnosticBeat|/Runway/Patterns/Diagnostic/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Stripes/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Stripes/Hue: 0.693878
 PurpleSwirl|/Runway/Patterns/Stripes/NumStripes: 6
+PurpleSwirl|/Runway/Patterns/Stripes/IsMask: 0
 PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
 PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
+PurpleSwirl|/Runway/Patterns/Trails/IsMask: 0
 PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
 PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20
 SpinTrails_1|/Runway/Patterns/SpinTrails/Enabled: 1
@@ -32,6 +34,7 @@ SpinTrails_1|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
 SpinTrails_1|/Runway/Patterns/SpinTrails/Max Saturation: 1
 SpinTrails_1|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_1|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_1|/Runway/Patterns/SpinTrails/IsMask: 0
 SpinTrails_2|/Runway/Patterns/SpinTrails/Enabled: 1
 SpinTrails_2|/Runway/Patterns/SpinTrails/Num Trails: 6
 SpinTrails_2|/Runway/Patterns/SpinTrails/Duration: 6
@@ -48,6 +51,7 @@ SpinTrails_2|/Runway/Patterns/SpinTrails/Min Saturation: 0.137755
 SpinTrails_2|/Runway/Patterns/SpinTrails/Max Saturation: 0.239796
 SpinTrails_2|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_2|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_2|/Runway/Patterns/SpinTrails/IsMask: 0
 SpinTrails_3|/Runway/Patterns/SpinTrails/Enabled: 1
 SpinTrails_3|/Runway/Patterns/SpinTrails/Num Trails: 6
 SpinTrails_3|/Runway/Patterns/SpinTrails/Duration: 17
@@ -64,17 +68,20 @@ SpinTrails_3|/Runway/Patterns/SpinTrails/Min Saturation: 0.00510204
 SpinTrails_3|/Runway/Patterns/SpinTrails/Max Saturation: 0.586735
 SpinTrails_3|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_3|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_3|/Runway/Patterns/SpinTrails/IsMask: 0
 TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
 TrailsAndStars|/Runway/Patterns/Star/Number: 26.0204
 TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
+TrailsAndStars|/Runway/Patterns/Star/IsMask: 0
 TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
 TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
 TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
 TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
+TrailsAndStars|/Runway/Patterns/Big Trails/IsMask: 0
 FaunWarp|/Runway/Patterns/TracerFaun/Enabled: 1
 FaunWarp|/Runway/Patterns/TracerFaun/Scroll: 1
 FaunWarp|/Runway/Patterns/DoubleRainbow/Enabled: 1
-FaunWarp|/Runway/Patterns/DoubleRainbow/IsMask: 97
+FaunWarp|/Runway/Patterns/DoubleRainbow/IsMask: 1
 FaunWarp|/Runway/Patterns/DoubleRainbow/Hue: 1
 FaunWarp|/Runway/Patterns/DoubleRainbow/DecayTime: 1
 FaunWarp|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
