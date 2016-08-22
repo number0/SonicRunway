@@ -184,7 +184,7 @@
 		7AD9994E1D2A118F002BD0F3 /* shaderFrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9994B1D2A118F002BD0F3 /* shaderFrag.glsl */; };
 		7AD9994F1D2A118F002BD0F3 /* shaderGeom.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9994C1D2A118F002BD0F3 /* shaderGeom.glsl */; };
 		7AD999501D2A118F002BD0F3 /* shaderVert.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */; };
-		7AD999561D2D4F79002BD0F3 /* BeatBouncePattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD999541D2D4F79002BD0F3 /* BeatBouncePattern.cpp */; };
+		7AD999561D2D4F79002BD0F3 /* PaletteBandsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD999541D2D4F79002BD0F3 /* PaletteBandsPattern.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
 		9C7B8B4D99CDFC508E76CC3A /* ofxAubioOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A90A4B17BBB4CB627CA22C4 /* ofxAubioOnset.cpp */; };
@@ -380,7 +380,7 @@
 		305892A21C9921240030F338 /* UiMixin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiMixin.cpp; sourceTree = "<group>"; };
 		305892A31C9921240030F338 /* UiMixin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UiMixin.hpp; sourceTree = "<group>"; };
 		305AD66D1D333F8A00A72E88 /* fireplace2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = fireplace2.mov; path = Resources/fireplace2.mov; sourceTree = "<group>"; };
-		306565A11C472E7C00917ADB /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
+		306565A11C472E7C00917ADB /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = App.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		306565A21C472E7C00917ADB /* App.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = App.hpp; sourceTree = "<group>"; };
 		3068B2421CB576BF0092949A /* previsCameraData.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = previsCameraData.txt; path = Resources/previsCameraData.txt; sourceTree = "<group>"; };
 		3068B2471CB5808E0092949A /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
@@ -493,8 +493,8 @@
 		7AD9994B1D2A118F002BD0F3 /* shaderFrag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shaderFrag.glsl; path = Resources/shaderFrag.glsl; sourceTree = "<group>"; };
 		7AD9994C1D2A118F002BD0F3 /* shaderGeom.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shaderGeom.glsl; path = Resources/shaderGeom.glsl; sourceTree = "<group>"; };
 		7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shaderVert.glsl; path = Resources/shaderVert.glsl; sourceTree = "<group>"; };
-		7AD999541D2D4F79002BD0F3 /* BeatBouncePattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BeatBouncePattern.cpp; sourceTree = "<group>"; };
-		7AD999551D2D4F79002BD0F3 /* BeatBouncePattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BeatBouncePattern.hpp; sourceTree = "<group>"; };
+		7AD999541D2D4F79002BD0F3 /* PaletteBandsPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = PaletteBandsPattern.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		7AD999551D2D4F79002BD0F3 /* PaletteBandsPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = PaletteBandsPattern.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSliderGroup.cpp; path = ../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
 		87F26B4B24CBD428AD9EEBAA /* ofxBaseGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBaseGui.h; path = ../../../addons/ofxGui/src/ofxBaseGui.h; sourceTree = SOURCE_ROOT; };
 		89449E3044D456F7DE7BEA14 /* ofxPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPanel.h; path = ../../../addons/ofxGui/src/ofxPanel.h; sourceTree = SOURCE_ROOT; };
@@ -764,8 +764,8 @@
 				2935D9491D3DD2C2007F45E1 /* BigTrailsPattern.hpp */,
 				303E6E611D4CE00C009BC38A /* AnimPattern.cpp */,
 				303E6E621D4CE00C009BC38A /* AnimPattern.hpp */,
-				7AD999541D2D4F79002BD0F3 /* BeatBouncePattern.cpp */,
-				7AD999551D2D4F79002BD0F3 /* BeatBouncePattern.hpp */,
+				7AD999541D2D4F79002BD0F3 /* PaletteBandsPattern.cpp */,
+				7AD999551D2D4F79002BD0F3 /* PaletteBandsPattern.hpp */,
 				295E8F2B1D5591920054DB40 /* NetworkInputPattern.cpp */,
 				295E8F2C1D5591920054DB40 /* NetworkInputPattern.hpp */,
 				30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */,
@@ -1347,7 +1347,7 @@
 				295E8F2D1D5591930054DB40 /* NetworkInputPattern.cpp in Sources */,
 				30216C411D31976300D2B07F /* Preset.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
-				7AD999561D2D4F79002BD0F3 /* BeatBouncePattern.cpp in Sources */,
+				7AD999561D2D4F79002BD0F3 /* PaletteBandsPattern.cpp in Sources */,
 				30E16C2E1CDEF76C008729E7 /* BeatPattern.cpp in Sources */,
 				306DFD3F1C80100200AB9225 /* ofxArtnet.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
