@@ -14,25 +14,19 @@ SrPaletteBandsPattern::SrPaletteBandsPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                              SrGlobalParameters * globalParameters) :
 SrScrollingPattern(name, model, audio, globalParameters),
-_hueParam(0.5),
 _decayTimeParam(0.25),
-_spinSpeedParam(0.25),
-_spinOffset(0.2)
+_measureChange(1.0)
 {
-    _hueParam.setName("Hue");
-    _hueParam.setMin(0.0);
-    _hueParam.setMax(1.0);
-    _AddUIParameter(_hueParam);
     
     _decayTimeParam.setName("DecayTime");
     _decayTimeParam.setMin(0.0);
     _decayTimeParam.setMax(1.0);
     _AddUIParameter(_decayTimeParam);
     
-    _spinSpeedParam.setName("SpinSpeed");
-    _spinSpeedParam.setMin(-3.0);
-    _spinSpeedParam.setMax(3.0);
-    _AddUIParameter(_spinSpeedParam);
+    _measureChange.setName("MeasureChange");
+    _measureChange.setMin(0.0);
+    _measureChange.setMax(4.0);
+    _AddUIParameter(_measureChange);
  
     _palettes.push_back( std::vector<ofFloatColor>{ofFloatColor(1.0,0,0),
                                                    ofFloatColor(0.0, 1.0, 0.0)} );
@@ -223,15 +217,18 @@ void
 SrPaletteBandsPattern::_Update()
 {
     SrScrollingPattern::_Update();
-    
-    _spinOffset += (float) _spinSpeedParam;
 }
 
 std::vector<ofFloatColor>
 SrPaletteBandsPattern::_RandomPalette() const
 {
+    
+    float nearest = 8.0;
+    // Round float measure to nearest eighth note
+    float measureMult = round(_measureChange * nearest) / nearest;
+
     int globalBeat = GetAudio()->GetBeatHistory().GetGlobalBeat()[0];
-    int globalMeasure = (int)globalBeat / 8;
+    int globalMeasure = (int)globalBeat / (8 * measureMult);
     
     srand(globalMeasure);
     int index = rand() % _palettes.size();
@@ -244,8 +241,7 @@ SrPaletteBandsPattern::_RandomPalette() const
 void
 SrPaletteBandsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-    float hue = (float) _hueParam;
-    
+
     float timeSinceBeat =
     GetAudio()->GetBeatHistory().GetSecondsSinceLastEvent()[0];
     
@@ -271,9 +267,6 @@ SrPaletteBandsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     
     onsetMult *= onsetMult;
     
-    ofFloatColor c;
-    c.setHsb(hue, 1.0, onsetMult);
-    
     // On first measure, choose a new palette
     // this logic is handled in RandomPalette
     std::vector<ofFloatColor> pal;
@@ -282,26 +275,7 @@ SrPaletteBandsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     for(int lightIndex = 0; lightIndex < buffer->size(); lightIndex++) {
         
         float normalizedIndex = (float)lightIndex / (buffer->size()-1);
-        
-        int lightsPerTrailer = buffer->size() / 10;
-        
-        // XXX this is bad b/c it isn't normalized to number of lights.
-        int iNumerator = lightIndex + _spinOffset;
-        
-        float trailDiminish = (float) (iNumerator % lightsPerTrailer) / lightsPerTrailer;
-        trailDiminish = onsetAmount * 1.0 + (1.0 - onsetAmount) * trailDiminish;
-        trailDiminish *= trailDiminish;
-        
-        float thisMult = onsetMult * trailDiminish;
-        float thisHue = hue + 0.3 * (1.0 - thisMult);
-        if (thisHue < 0.0) {
-            thisHue += 1.0;
-        }
-        thisHue = fmod(thisHue, 1.0);
-        
-        ofFloatColor thisC;
-        thisC.setHsb(thisHue, 1.0, thisMult);
-        
+    
         int colorIndex = floor(normalizedIndex * pal.size());
         ofFloatColor palc = pal[colorIndex];
         float o = onsetAmount / 2.0;

@@ -27,13 +27,10 @@ protected:
     virtual void _Update();
     
 private:
-    ofParameter<float> _hueParam;
     ofParameter<float> _decayTimeParam;
-    ofParameter<float> _spinSpeedParam;
+    ofParameter<float> _measureChange;
     
     std::vector<std::vector<ofFloatColor>> _palettes;
-    
-    float _spinOffset;
 
 private:
     std::vector<ofFloatColor> _RandomPalette() const;
