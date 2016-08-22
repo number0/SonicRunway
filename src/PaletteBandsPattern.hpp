@@ -1,25 +1,25 @@
 //
-//  BeatBouncePattern.hpp
+//  PaletteBandsPattern.hpp
 //  SonicRunway
 //
 //  Created by Michael Frederickson on 7/6/16.
 //
 //
 
-#ifndef SR_BEATBOUNCE_PATTERN_HPP
-#define SR_BEATBOUNCE_PATTERN_HPP
+#ifndef SR_PALETTEBANDS_PATTERN_HPP
+#define SR_PALETTEBANDS_PATTERN_HPP
 
 #include "ScrollingPattern.hpp"
 
 //
-// SrBeatBouncePattern draws the beat
+// SrPaletteBandsPattern draws the beat
 //
-class SrBeatBouncePattern : public SrScrollingPattern {
+class SrPaletteBandsPattern : public SrScrollingPattern {
 public:
-    SrBeatBouncePattern(const std::string & name,
+    SrPaletteBandsPattern(const std::string & name,
                   SrModel * model, SrAudio * audio,
                   SrGlobalParameters * globalParameters);
-    virtual ~SrBeatBouncePattern();
+    virtual ~SrPaletteBandsPattern();
     
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;

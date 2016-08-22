@@ -1,16 +1,16 @@
 //
-//  BeatBouncePattern.cpp
+//  PaletteBandsPattern.cpp
 //  SonicRunway
 //
 //  Created by Michael Frederickson on 7/6/16.
 //
 //
 
-#include "BeatBouncePattern.hpp"
+#include "PaletteBandsPattern.hpp"
 #include "Audio.hpp"
 #include "BeatHistory.hpp"
 
-SrBeatBouncePattern::SrBeatBouncePattern(const std::string & name,
+SrPaletteBandsPattern::SrPaletteBandsPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                              SrGlobalParameters * globalParameters) :
 SrScrollingPattern(name, model, audio, globalParameters),
@@ -214,13 +214,13 @@ _spinOffset(0.2)
 
 }
 
-SrBeatBouncePattern::~SrBeatBouncePattern()
+SrPaletteBandsPattern::~SrPaletteBandsPattern()
 {
     
 }
 
 void
-SrBeatBouncePattern::_Update()
+SrPaletteBandsPattern::_Update()
 {
     SrScrollingPattern::_Update();
     
@@ -228,7 +228,7 @@ SrBeatBouncePattern::_Update()
 }
 
 std::vector<ofFloatColor>
-SrBeatBouncePattern::_RandomPalette() const
+SrPaletteBandsPattern::_RandomPalette() const
 {
     int globalBeat = GetAudio()->GetBeatHistory().GetGlobalBeat()[0];
     int globalMeasure = (int)globalBeat / 8;
@@ -242,7 +242,7 @@ SrBeatBouncePattern::_RandomPalette() const
 }
 
 void
-SrBeatBouncePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
+SrPaletteBandsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
     float hue = (float) _hueParam;
     
@@ -302,7 +302,6 @@ SrBeatBouncePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         ofFloatColor thisC;
         thisC.setHsb(thisHue, 1.0, thisMult);
         
-
         int colorIndex = floor(normalizedIndex * pal.size());
         ofFloatColor palc = pal[colorIndex];
         float o = onsetAmount / 2.0;
