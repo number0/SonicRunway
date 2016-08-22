@@ -31,7 +31,7 @@ SrImageSequence::SrImageSequence(const std::string path,
             asprintf(&str, "%s%zu.png", prefix.c_str(), i + 1);
         }
         _loader.loadFromDisk(_images[i], str); // multithreaded background loader
-//        _images[i].load(str); // blocking old-school loader
+        //_images[i].load(str); // blocking old-school loader
         
         free(str);
     }

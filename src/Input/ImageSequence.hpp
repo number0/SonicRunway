@@ -38,7 +38,6 @@ private:
     ofxThreadedImageLoader _loader;
     std::vector<ofImage> _images;
 
-    
 };
 
 #endif /* ImageSequence_hpp */
