@@ -365,3 +365,22 @@ Tardis|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
 Tardis|/Runway/Patterns/SpinTrails/Max Saturation: 1
 Tardis|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 Tardis|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+Miami_Beach|/Runway/Patterns/PoolWater/Enabled: 1
+Miami_Beach|/Runway/Patterns/PoolWater/Scroll: 0
+Miami_Beach|/Runway/Patterns/Phrase/Enabled: 1
+Miami_Beach|/Runway/Patterns/Phrase/IsMask: 0
+Miami_Beach|/Runway/Patterns/Phrase/Random: 0
+Sky_Reach|/Runway/Patterns/Octmesh/Enabled: 1
+Sky_Reach|/Runway/Patterns/Octmesh/Scroll: 0
+Sky_Reach|/Runway/Patterns/Whomp/Enabled: 1
+Sky_Reach|/Runway/Patterns/Whomp/IsMask: 1
+Sky_Reach|/Runway/Patterns/Whomp/Exponent: 1.23214
+Sky_Reach|/Runway/Patterns/Whomp/Multiplier: 0.982143
+Sky_Reach|/Runway/Patterns/Whomp/Scale: 0.363571
+Sky_Reach|/Runway/Patterns/Whomp/Hue Offset: 0
+Sky_Reach|/Runway/Patterns/Whomp/Hue Shift: 0.5
+Sky_Reach|/Runway/Patterns/Whomp/Min Saturation: 0.3
+Sky_Reach|/Runway/Patterns/Whomp/Max Saturation: 1
+Sky_Reach|/Runway/Patterns/Whomp/Cutoff Value: 0.1
+Sky_Reach|/Runway/Patterns/Whomp/Vibrate: 0
+Sky_Reach|/Runway/Patterns/Whomp/Cycle Hues: 1
