@@ -9,20 +9,22 @@
 #include "DoubleRainbowPattern.hpp"
 #include "Audio.hpp"
 #include "BeatHistory.hpp"
+#include "GlobalParameters.hpp"
+#include <math.h>
 
 SrDoubleRainbowPattern::SrDoubleRainbowPattern(const std::string & name,
                                    SrModel * model, SrAudio * audio,
                                    SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
     _hueParam(1.0),
-    _decayTimeParam(0.5),
+    _decayTimeParam(0.9),
     _spinSpeedParam(0.25),
     _hueSpeedParam(0.0),
-    _doubleRainbowsParam(5.0),
-    _trippelRainbowsParam(-5.0),
+    _doubleRainbowsParam(2.55),
+    _trippelRainbowsParam(-2.19),
     _spinOffset(0.2),
     _hueOffset(0.0),
-    _filterParam(0.40)
+    _filterParam(0.20)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);
@@ -31,7 +33,7 @@ SrDoubleRainbowPattern::SrDoubleRainbowPattern(const std::string & name,
     
     _decayTimeParam.setName("DecayTime");
     _decayTimeParam.setMin(0.0);
-    _decayTimeParam.setMax(1.0);
+    _decayTimeParam.setMax(2.0);
     _AddUIParameter(_decayTimeParam);
     
     _spinSpeedParam.setName("SpinSpeed");
@@ -63,7 +65,6 @@ SrDoubleRainbowPattern::SrDoubleRainbowPattern(const std::string & name,
 
 SrDoubleRainbowPattern::~SrDoubleRainbowPattern()
 {
-    
 }
 
 void
@@ -75,46 +76,95 @@ SrDoubleRainbowPattern::_Update()
     _hueOffset += (float) _hueSpeedParam;
 }
 
+std::string
+SrDoubleRainbowPattern::GetGlobalParameterLabel(const std::string & name) const
+{
+    if (name == "Dial1") {
+        return "Double";
+    } else if (name == "Dial2") {
+        return "Trippel";
+    } else if (name == "Slider1") {
+        return "Length";
+    } else if (name == "Slider2") {
+        return "Smoothness";
+    }
+    
+    return std::string();
+}
+
+
 void
 SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
 {
-//    float elapsedTime = ofGetElapsedTimef();
+    SrGlobalParameters * globals = GetGlobalParameters();
+
+    //    float elapsedTime = ofGetElapsedTimef();
 //    int beatIndex = GetAudio()->GetBeatHistory().GetBeatIndex()[0];
-    
+
+    // grab parameter values
+    float onsetDecayTime = (float) _decayTimeParam;
+    float hue = (float) _hueParam;
+    float doubleRainbows = (float) _doubleRainbowsParam;
+    float trippelRainbows = (float) _trippelRainbowsParam;
     float filterTime = (float) _filterParam;
+
+    // grab RMS audio band values
     float low = GetAudio()->GetLows().ComputeValue(0.0f, filterTime);
     float mid = GetAudio()->GetMids()[0];
     float high = GetAudio()->GetHighs().ComputeValue(0.0f, filterTime);
     
-    //float hue = fmod(fabs(_hueParam + _hueOffset), 1.0);
-    float hue = (float) _hueParam;
     
     float timeSinceBeat =
         GetAudio()->GetBeatHistory().GetSecondsSinceLastEvent()[0];
     
+    bool beatless = false;
+    if(timeSinceBeat > 5.0f) { // fallback mode
+        beatless = true;
+    }
+    
     float bpm = GetAudio()->GetBeatHistory().GetBpm()[0];
     float quarterNoteSeconds = 60.0/bpm;
     
-    float onsetDecayTime = (float) _decayTimeParam;
+    // react to parameter inputs
+    // Uses GlobalParams like so:
+    // Dial1 - Double Rainbow +/- 5
+    // Dial2 - Trippel Rainbow +/- 5
+    // Slider1 - Pulse Length
+    // Slider2 - Music Filter Time
+    
+    if (globals->WasRecentManualInput()) {
+        doubleRainbows = ofMap(GetGlobalParameters()->GetDial1(), 0.0f, 1.0f, -5.0f, 5.0f);
+        trippelRainbows = ofMap(GetGlobalParameters()->GetDial2(), 0.0f, 1.0f, -5.0f, 5.0f);
+        onsetDecayTime = GetGlobalParameters()->GetSlider1();
+        filterTime = ofMap(GetGlobalParameters()->GetSlider2(), 0.0f, 1.0f, 0.05f, 1.0f);
+    }
+    
+    float amplitude = GetAudio()->GetCalibratedFftSum();
+    float brightness = pow(amplitude, 0.4f); // scale baseline brightness by amplitude
+        
+    // map the length of the rainbow bands based on the amplitude
+    onsetDecayTime = ofMap(amplitude, 0.0f, 1.0f, 0.2f*onsetDecayTime, 1.2f*onsetDecayTime);
     
     float rainbowTheta = std::min(1.0f, timeSinceBeat / (quarterNoteSeconds*onsetDecayTime));
     
-    float doubleRainbows = (float) _doubleRainbowsParam;
-    float trippelRainbows = (float) _trippelRainbowsParam;
     
-    float amplitude = GetAudio()->GetCalibratedFftSum();
+    
+    // also scale brightness based on beats, if present
+    if ( rainbowTheta == 1.0f) {
+        brightness = 0.0f;
+    }
+
+    // fallback for beatless mode
+    if (beatless) {
+        rainbowTheta = globals->GetSlowCycle();
+        brightness = fabs(sin(globals->GetPhraseCycle()*10.0f));
+        low = globals->GetTwoBeatCycle();
+        high = globals->GetMeasureCycle();
+        doubleRainbows *= globals->GetSlowCycle();
+        trippelRainbows *= globals->GetVerySlowCycle();
+    }
     
     for(int i = 0; i < buffer->size(); i++) {
-        
-        float brightness = amplitude;
-        
-        // Use this instead to trigger off the beat detection
-        /*
-        float brightness = 1.0f;
-        if ( rainbowTheta == 1.0f) {
-            brightness = 0.0f;
-        }
-         */
         
         float gatePhase = float(i) / buffer->size();
         float gateHue = rainbowTheta;
@@ -159,48 +209,4 @@ SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     }
     
     return;
-
-    
-    /*
-    float onsetAmount = 1.0 - timeSinceBeat / onsetDecayTime;
-    
-    if (onsetAmount < 0.0) {
-        return;
-    }
-    
-    float onsetMult = onsetAmount;
-    
-    // Force full onsetAmount if we're less than one full gate behind.
-    if (timeSinceBeat < GetModel()->ComputeDelayPerGate()) {
-        onsetMult = 1.0;
-    }
-    
-    onsetMult *= onsetMult;
-    
-    ofFloatColor c;
-    c.setHsb(hue, 1.0, onsetMult); // XXX never using this color below?
-    for(int i = 0; i < buffer->size(); i++) {
-        
-        int lightsPerTrailer = buffer->size() / 10;
-        
-        // XXX this is bad b/c it isn't normalized to number of lights.
-        int iNumerator = i + _spinOffset;
-        
-        float trailDiminish = (float) (iNumerator % lightsPerTrailer) / lightsPerTrailer;
-        trailDiminish = onsetAmount * 1.0 + (1.0 - onsetAmount) * trailDiminish;
-        trailDiminish *= trailDiminish;
-       
-        float thisMult = onsetMult * trailDiminish;
-        float thisHue = hue; // + 0.3 * (1.0 - thisMult);
-        if (thisHue < 0.0) {
-            thisHue += 1.0;
-        }
-        thisHue = fmod(thisHue, 0.8);
-       
-        ofFloatColor thisC;
-        thisC.setHsb(hue*onsetAmount, 1.0, 1.0); //thisMult);
-        
-        (*buffer)[i] = thisC;
-    }
-    */
 }

@@ -17,7 +17,7 @@
 
 static const std::string _presetPrefix = std::string("/presets/preset.multitoggle/");
 static const int _presetGridWidth = 5;
-static const int _presetGridHeight = 6;
+static const int _presetGridHeight = 8;
 
 SrOscSync::SrOscSync(SrModel * model, SrAudio * audio,
                      SrSwitcher * switcher,
@@ -125,9 +125,9 @@ SrOscSync::_SendStringMessage(const std::string & path, const std::string & valu
 void
 SrOscSync::_BroadcastAudioValues()
 {
-    _SendFloatMessage("/Runway/Audio/Lows", _audio->GetLows()[0]);
-    _SendFloatMessage("/Runway/Audio/Mids", _audio->GetMids()[0]);
-    _SendFloatMessage("/Runway/Audio/Highs", _audio->GetHighs()[0]);
+    _SendFloatMessage("/presets/audioLevels.multifader/1", _audio->GetLows()[0]);
+    _SendFloatMessage("/presets/audioLevels.multifader/2", _audio->GetMids()[0]);
+    _SendFloatMessage("/presets/audioLevels.multifader/3", _audio->GetHighs()[0]);
 }
 
 void

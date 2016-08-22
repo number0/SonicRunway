@@ -12,8 +12,12 @@ SrScrollingPattern::SrScrollingPattern(const std::string & name,
                                        SrModel * model, SrAudio * audio,
                                        SrGlobalParameters * globalParameters) :
     SrPattern(name, model, audio, globalParameters),
-    _index(0)
+    _index(0),
+    _mask(false)
 {
+    _mask.setName("IsMask");
+    _AddUIParameter(_mask);
+
     int width = model->GetNumGates() * model->GetFramesPerGate();
     int height = model->GetLightsPerGate();
     int numChannels = 4;
@@ -51,6 +55,12 @@ SrScrollingPattern::_Update()
     for(int i = 0; i < GetModel()->GetLightsPerGate(); i++) {
         ofColor color = currentColors[i];
        
+        if(_mask) {
+            float b = color.getBrightness()/255.0;
+            b = pow(b, 0.2);
+            color = ofColor(b*255.0,b*255.0,b*255.0);
+        }
+        
         float opacity = GetOpacity()[0];
         
         color *= opacity;
@@ -74,6 +84,10 @@ SrScrollingPattern::_Draw() const
         return;
     }
     
+    if(_mask) {
+        ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+    }
+    
     ofPushMatrix();
     
     if (_FlipLeftRight()) {
@@ -86,4 +100,8 @@ SrScrollingPattern::_Draw() const
     _image.draw(-_index + GetModel()->GetNumGates(),0);
     
     ofPopMatrix();
+    
+    if (_mask) {
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
+    }
 }

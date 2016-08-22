@@ -9,6 +9,7 @@
 #include "TrailsPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrTrailsPattern::SrTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
@@ -59,22 +60,22 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float jitter;
     float saturation;
     float brightness;
-    if (GetGlobalParameters()->UseLocalParams()) {
-        hue = _hueParam;
-        jitter = _jitterParam;
-        saturation = _saturationParam;
-        brightness = _brightnessParam;
-    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = GetGlobalParameters()->GetSlowCycle();
-        jitter = 50.0;
-        saturation = 0.7;
-        brightness = 0.8;
-    } else {
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
         hue = GetGlobalParameters()->GetDial1();
         jitter = GetGlobalParameters()->GetDial2() * 100;
         saturation = GetGlobalParameters()->GetSlider1();
         brightness = GetGlobalParameters()->GetSlider2();
+    } else {
+        hue = _hueParam + globals->GetSlowCycle();
+        jitter = _jitterParam;
+        saturation = _saturationParam;
+        brightness = _brightnessParam;
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     // Protection
     if (segments > pixels) {

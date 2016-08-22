@@ -18,6 +18,7 @@
 class SrAnimPattern : public SrPattern {
 public:
     SrAnimPattern(const std::string & name,
+                  const std::string & path,
                   const std::string & baseFileName,
                   size_t numFrames,
                   bool padFrameNumbers,

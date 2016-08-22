@@ -9,6 +9,7 @@
 #include "PhasorPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrPhasorPattern::SrPhasorPattern(const std::string & name,
                            SrModel * model, SrAudio * audio,
@@ -55,14 +56,15 @@ SrPhasorPattern::_Update()
     SrScrollingPattern::_Update();
     
     float threshold;
-    if (GetGlobalParameters()->UseLocalParams()) {
-        threshold = _thresholdParam;
-    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
-        threshold = 0.05;
+   
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
+        threshold = globals->GetDial2();
     } else {
-        threshold = GetGlobalParameters()->GetDial2();
+        threshold = _thresholdParam;
     }
-
+    
     for (int i = 0; i < segments; ++i) {
         if (_segmentCountdown[i] > 0) {
             _segmentCountdown[i] = _segmentCountdown[i] - 2;
@@ -90,19 +92,20 @@ SrPhasorPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue;
     float saturation;
     float trail;
-    if (GetGlobalParameters()->UseLocalParams()) {
-        hue = _hueParam;
-        saturation = _saturationParam;
-        trail = _trailParam;
-    } else if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = GetGlobalParameters()->GetSlowCycle();
-        saturation = 0.7;
-        trail = 75.0;
-    } else {
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
         hue = GetGlobalParameters()->GetDial1();
         saturation = GetGlobalParameters()->GetSlider1();
         trail = GetGlobalParameters()->GetDial2() * 100;
+    } else {
+        hue = _hueParam + globals->GetSlowCycle();
+        saturation = _saturationParam;
+        trail = _trailParam;
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     // Protection
     if (segments > pixels) {

@@ -10,7 +10,6 @@
 #include "ofApp.h"
 #include "Util.hpp"
 #include "Debug.hpp"
-
 #include "BeatPattern.hpp"
 #include "BeatBouncePattern.hpp"
 #include "FftPattern.hpp"
@@ -39,7 +38,7 @@
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
-static const size_t PATTERNS_PER_COLUMN = 10;
+static const size_t PATTERNS_PER_COLUMN = 8;
 
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
@@ -92,6 +91,8 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_audio.GetParameterGroup());
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
+
+    _MakeAnimPatterns();
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
@@ -142,10 +143,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
      */
     
     SrAnimPattern *animPattern =
-        new SrAnimPattern("Lightning", "lightning", 82, false,
+        new SrAnimPattern("Lightning", "", "lightning", 82, false,
                           &_model, &_audio, &_globalParameters);
     _AddPattern(animPattern);
-     
+    
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
     _AddPattern(triggerPattern);
@@ -169,6 +170,12 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     SrNetworkInputPattern *networkInputPattern =
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
+    
+    _MakeVideoPatterns();
+
+    // Enable the patterns we want on by default.
+    //diagnosticPattern->SetEnabled(true);
+    fftPattern->SetEnabled(false);
     
     SrBeatBouncePattern *beatBouncePattern =
     new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
@@ -226,6 +233,38 @@ SrApp::~SrApp()
         delete *iter;
     }
      */
+}
+
+void
+SrApp::_MakeAnimPatterns()
+{
+    std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    
+    ofDirectory dir(animFolder);
+    dir.listDir();
+    
+    for(size_t i = 0; i < dir.size(); i++) {
+        std::string fname = dir.getName(i);
+        ofDirectory current(animFolder + "/" + fname);
+        current.listDir();
+        
+        if (fname.compare(0,5, "Anim_") != 0) {
+            continue;
+        }
+        
+        std::string patternName = fname.substr(5, fname.size());
+        
+        cout << "Loading anim pattern '" <<
+            current.getName(i) << "' with num frames: "
+            << current.getFiles().size() << "\n\n";
+
+        SrAnimPattern *animPattern =
+        new SrAnimPattern(patternName, "../../../data/Anim/" + fname, fname,
+                          current.getFiles().size(), false,
+                          &_model, &_audio, &_globalParameters);
+        _AddPattern(animPattern);
+        
+    }
 }
 
 void
@@ -387,7 +426,9 @@ SrApp::Draw()
     
     for(auto iter = _patterns.begin(); iter != _patterns.end(); iter++) {
         SrPattern *pattern = *iter;
-        if( pattern -> GetEnabled() ) {
+        // need to draw if pattern fading out to prevent pops
+        // on preset transitions
+        if( pattern->GetEnabled() || pattern->IsOnAtAnyGate() ) {
             pattern->Draw();
         }
     }

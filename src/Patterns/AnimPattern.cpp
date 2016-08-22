@@ -9,6 +9,7 @@
 #include "AnimPattern.hpp"
 
 SrAnimPattern::SrAnimPattern(const std::string & name,
+                             const std::string & path,
                              const std::string & baseFileName,
                              size_t numFrames,
                              bool padFrameNumbers,
@@ -16,7 +17,7 @@ SrAnimPattern::SrAnimPattern(const std::string & name,
                              SrAudio * audio,
                              SrGlobalParameters * globalParameters) :
     SrPattern(name, model, audio, globalParameters),
-    _imageSequence(baseFileName, numFrames, padFrameNumbers),
+    _imageSequence(path, baseFileName, numFrames, padFrameNumbers),
     _currentFrame(0),
     _gateIndex(0),
     _scroll(false)

@@ -1,19 +1,131 @@
+CandyFlip|/Runway/Patterns/Twirlers/Enabled: 1
+CandyFlip|/Runway/Patterns/Twirlers/Scroll: 0
+CandyFlip|/Runway/Patterns/DoubleRainbow/Enabled: 1
+CandyFlip|/Runway/Patterns/DoubleRainbow/IsMask: 1
+CandyFlip|/Runway/Patterns/DoubleRainbow/Hue: 1
+CandyFlip|/Runway/Patterns/DoubleRainbow/DecayTime: 1
+CandyFlip|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
+CandyFlip|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 4.4898
+CandyFlip|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -2.85714
+CandyFlip|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.122449
+Charlottes|/Runway/Patterns/TwistedHall/Enabled: 1
+Charlottes|/Runway/Patterns/TwistedHall/Scroll: 0
+Charlottes|/Runway/Patterns/SpinTrails/Enabled: 1
+Charlottes|/Runway/Patterns/SpinTrails/IsMask: 1
+Charlottes|/Runway/Patterns/SpinTrails/Num Trails: 12
+Charlottes|/Runway/Patterns/SpinTrails/Duration: 15
+Charlottes|/Runway/Patterns/SpinTrails/Wander: 5
+Charlottes|/Runway/Patterns/SpinTrails/Spin: 9
+Charlottes|/Runway/Patterns/SpinTrails/Width: 8
+Charlottes|/Runway/Patterns/SpinTrails/Exponent: 1.42411
+Charlottes|/Runway/Patterns/SpinTrails/Multiplier: 1.67857
+Charlottes|/Runway/Patterns/SpinTrails/Scale: 0.484796
+Charlottes|/Runway/Patterns/SpinTrails/Hue Offset: 0
+Charlottes|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
+Charlottes|/Runway/Patterns/SpinTrails/Hue Vari ation: 0.45
+Charlottes|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
+Charlottes|/Runway/Patterns/SpinTrails/Max Saturation: 1
+Charlottes|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
+Charlottes|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+ClockBlade|/Runway/Patterns/EndlessPlanet/Enabled: 1
+ClockBlade|/Runway/Patterns/EndlessPlanet/Scroll: 0
+ClockBlade|/Runway/Patterns/Beat/Enabled: 1
+ClockBlade|/Runway/Patterns/Beat/IsMask: 0
+ClockBlade|/Runway/Patterns/Beat/Hue: 0.5
+ClockBlade|/Runway/Patterns/Beat/DecayTime: 0.25
+ClockBlade|/Runway/Patterns/Beat/SpinSpeed: 0.25
+ClockBlade|/Runway/Patterns/Phrase/Enabled: 1
+ClockBlade|/Runway/Patterns/Phrase/IsMask: 1
+ClownWarp|/Runway/Patterns/Kwirllars/Enabled: 1
+ClownWarp|/Runway/Patterns/Kwirllars/Scroll: 0
+ClownWarp|/Runway/Patterns/Whomp/Enabled: 1
+ClownWarp|/Runway/Patterns/Whomp/IsMask: 1
+ClownWarp|/Runway/Patterns/Whomp/Exponent: 2.16071
+ClownWarp|/Runway/Patterns/Whomp/Multiplier: 1.75
+ClownWarp|/Runway/Patterns/Whomp/Scale: 0.712092
+ClownWarp|/Runway/Patterns/Whomp/Hue Offset: 0
+ClownWarp|/Runway/Patterns/Whomp/Hue Shift: 0.5
+ClownWarp|/Runway/Patterns/Whomp/Min Saturation: 0.3
+ClownWarp|/Runway/Patterns/Whomp/Max Saturation: 1
+ClownWarp|/Runway/Patterns/Whomp/Cutoff Value: 0.229592
+ClownWarp|/Runway/Patterns/Whomp/Vibrate: 1
+ClownWarp|/Runway/Patterns/Whomp/Cycle Hues: 0
 DiagnosticBeat|/Runway/Patterns/Phrase/Enabled: 1
 DiagnosticBeat|/Runway/Patterns/Diagnostic/Enabled: 1
+FaunWarp|/Runway/Patterns/TracerFaun/Enabled: 1
+FaunWarp|/Runway/Patterns/TracerFaun/Scroll: 1
+FaunWarp|/Runway/Patterns/DoubleRainbow/Enabled: 1
+FaunWarp|/Runway/Patterns/DoubleRainbow/IsMask: 1
+FaunWarp|/Runway/Patterns/DoubleRainbow/Hue: 1
+FaunWarp|/Runway/Patterns/DoubleRainbow/DecayTime: 1
+FaunWarp|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
+FaunWarp|/Runway/Patterns/DoubleRainbow/DoubleRainbows: -0.714286
+FaunWarp|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -1.02041
+FaunWarp|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.341837
+LightGrid|/Runway/Patterns/Lightgrid/Enabled: 1
+LightGrid|/Runway/Patterns/Lightgrid/Scroll: 0
+LightGrid|/Runway/Patterns/Beat/Enabled: 1
+LightGrid|/Runway/Patterns/Beat/IsMask: 1
+LightGrid|/Runway/Patterns/Beat/Hue: 0.5
+LightGrid|/Runway/Patterns/Beat/DecayTime: 0.438776
+LightGrid|/Runway/Patterns/Beat/SpinSpeed: 0
+MesmerFrog|/Runway/Patterns/WarmNeonBirth/Enabled: 1
+MesmerFrog|/Runway/Patterns/WarmNeonBirth/Scroll: 0
+MesmerFrog|/Runway/Patterns/Big Trails/Enabled: 1
+MesmerFrog|/Runway/Patterns/Big Trails/IsMask: 1
+MesmerFrog|/Runway/Patterns/Big Trails/Hue: 1
+MesmerFrog|/Runway/Patterns/Big Trails/Saturation: 0.755102
+MesmerFrog|/Runway/Patterns/Big Trails/Brightness: 1
+MesmerFrog|/Runway/Patterns/Big Trails/Jitter: 1
+MesmerFrog|/Runway/Patterns/Big Trails/Rotation: 1
+MesmerFrog|/Runway/Patterns/Whomp/Enabled: 1
+MesmerFrog|/Runway/Patterns/Whomp/IsMask: 1
+MesmerFrog|/Runway/Patterns/Whomp/Exponent: 2.41071
+MesmerFrog|/Runway/Patterns/Whomp/Multiplier: 2.14286
+MesmerFrog|/Runway/Patterns/Whomp/Scale: 0.641378
+MesmerFrog|/Runway/Patterns/Whomp/Hue Offset: 0
+MesmerFrog|/Runway/Patterns/Whomp/Hue Shift: 0.5
+MesmerFrog|/Runway/Patterns/Whomp/Min Saturation: 0.3
+MesmerFrog|/Runway/Patterns/Whomp/Max Saturation: 1
+MesmerFrog|/Runway/Patterns/Whomp/Cutoff Value: 0.52551
+MesmerFrog|/Runway/Patterns/Whomp/Vibrate: 1
+MesmerFrog|/Runway/Patterns/Whomp/Cycle Hues: 0
+MesmerFrog|/Runway/Patterns/SpinTrails/Enabled: 1
+MesmerFrog|/Runway/Patterns/SpinTrails/IsMask: 0
+MesmerFrog|/Runway/Patterns/SpinTrails/Num Trails: 10
+MesmerFrog|/Runway/Patterns/SpinTrails/Duration: 8
+MesmerFrog|/Runway/Patterns/SpinTrails/Wander: 12
+MesmerFrog|/Runway/Patterns/SpinTrails/Spin: 12
+MesmerFrog|/Runway/Patterns/SpinTrails/Width: 16
+MesmerFrog|/Runway/Patterns/SpinTrails/Exponent: 3.6
+MesmerFrog|/Runway/Patterns/SpinTrails/Multiplier: 1.30357
+MesmerFrog|/Runway/Patterns/SpinTrails/Scale: 0.585816
+MesmerFrog|/Runway/Patterns/SpinTrails/Hue Offset: 0
+MesmerFrog|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
+MesmerFrog|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
+MesmerFrog|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
+MesmerFrog|/Runway/Patterns/SpinTrails/Max Saturation: 1
+MesmerFrog|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
+MesmerFrog|/Runway/Patterns/SpinTrails/Cycle Hues: 1
 PurpleSwirl|/Runway/Patterns/Stripes/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Stripes/Hue: 0.693878
 PurpleSwirl|/Runway/Patterns/Stripes/NumStripes: 6
+PurpleSwirl|/Runway/Patterns/Stripes/IsMask: 0
 PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
 PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
+PurpleSwirl|/Runway/Patterns/Trails/IsMask: 0
 PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
 PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20
-TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
-TrailsAndStars|/Runway/Patterns/Star/Number: 26.0204
-TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
-TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
-TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
-TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
-TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
+Radiant|/Runway/Patterns/Harvest/Enabled: 1
+Radiant|/Runway/Patterns/Harvest/Scroll: 0
+Radiant|/Runway/Patterns/DoubleRainbow/Enabled: 1
+Radiant|/Runway/Patterns/DoubleRainbow/IsMask: 1
+Radiant|/Runway/Patterns/DoubleRainbow/Hue: 1
+Radiant|/Runway/Patterns/DoubleRainbow/DecayTime: 0.811224
+Radiant|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
+Radiant|/Runway/Patterns/DoubleRainbow/DoubleRainbows: -0.714286
+Radiant|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -1.02041
+Radiant|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.341837
 SpinTrails_1|/Runway/Patterns/SpinTrails/Enabled: 1
 SpinTrails_1|/Runway/Patterns/SpinTrails/Num Trails: 15
 SpinTrails_1|/Runway/Patterns/SpinTrails/Duration: 5
@@ -30,6 +142,7 @@ SpinTrails_1|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
 SpinTrails_1|/Runway/Patterns/SpinTrails/Max Saturation: 1
 SpinTrails_1|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_1|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_1|/Runway/Patterns/SpinTrails/IsMask: 0
 SpinTrails_2|/Runway/Patterns/SpinTrails/Enabled: 1
 SpinTrails_2|/Runway/Patterns/SpinTrails/Num Trails: 6
 SpinTrails_2|/Runway/Patterns/SpinTrails/Duration: 6
@@ -46,6 +159,7 @@ SpinTrails_2|/Runway/Patterns/SpinTrails/Min Saturation: 0.137755
 SpinTrails_2|/Runway/Patterns/SpinTrails/Max Saturation: 0.239796
 SpinTrails_2|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_2|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_2|/Runway/Patterns/SpinTrails/IsMask: 0
 SpinTrails_3|/Runway/Patterns/SpinTrails/Enabled: 1
 SpinTrails_3|/Runway/Patterns/SpinTrails/Num Trails: 6
 SpinTrails_3|/Runway/Patterns/SpinTrails/Duration: 17
@@ -62,3 +176,211 @@ SpinTrails_3|/Runway/Patterns/SpinTrails/Min Saturation: 0.00510204
 SpinTrails_3|/Runway/Patterns/SpinTrails/Max Saturation: 0.586735
 SpinTrails_3|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 SpinTrails_3|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+SpinTrails_3|/Runway/Patterns/SpinTrails/IsMask: 0
+TelephasicWorkshop|/Runway/Patterns/Subspace/Enabled: 1
+TelephasicWorkshop|/Runway/Patterns/Subspace/Scroll: 0
+TelephasicWorkshop|/Runway/Patterns/Whomp/Enabled: 1
+TelephasicWorkshop|/Runway/Patterns/Whomp/IsMask: 1
+TelephasicWorkshop|/Runway/Patterns/Whomp/Exponent: 2.33929
+TelephasicWorkshop|/Runway/Patterns/Whomp/Multiplier: 1.76786
+TelephasicWorkshop|/Runway/Patterns/Whomp/Scale: 0.712092
+TelephasicWorkshop|/Runway/Patterns/Whomp/Hue Offset: 0
+TelephasicWorkshop|/Runway/Patterns/Whomp/Hue Shift: 0.5
+TelephasicWorkshop|/Runway/Patterns/Whomp/Min Saturation: 0.3
+TelephasicWorkshop|/Runway/Patterns/Whomp/Max Saturation: 1
+TelephasicWorkshop|/Runway/Patterns/Whomp/Cutoff Value: 0.147959
+TelephasicWorkshop|/Runway/Patterns/Whomp/Vibrate: 1
+TelephasicWorkshop|/Runway/Patterns/Whomp/Cycle Hues: 0
+TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
+TrailsAndStars|/Runway/Patterns/Star/Number: 26.0204
+TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
+TrailsAndStars|/Runway/Patterns/Star/IsMask: 0
+TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
+TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
+TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
+TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
+UnicornProm|/Runway/Patterns/Koll/Enabled: 1
+UnicornProm|/Runway/Patterns/Koll/Scroll: 1
+UnicornProm|/Runway/Patterns/SpinTrails/Enabled: 1
+UnicornProm|/Runway/Patterns/SpinTrails/IsMask: 1
+UnicornProm|/Runway/Patterns/SpinTrails/Num Trails: 10
+UnicornProm|/Runway/Patterns/SpinTrails/Duration: 8
+UnicornProm|/Runway/Patterns/SpinTrails/Wander: 12
+UnicornProm|/Runway/Patterns/SpinTrails/Spin: 12
+UnicornProm|/Runway/Patterns/SpinTrails/Width: 16
+UnicornProm|/Runway/Patterns/SpinTrails/Exponent: 3.6
+UnicornProm|/Runway/Patterns/SpinTrails/Multiplier: 1.30357
+UnicornProm|/Runway/Patterns/SpinTrails/Scale: 0.585816
+UnicornProm|/Runway/Patterns/SpinTrails/Hue Offset: 0
+UnicornProm|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
+UnicornProm|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
+UnicornProm|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
+UnicornProm|/Runway/Patterns/SpinTrails/Max Saturation: 1
+UnicornProm|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
+UnicornProm|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+WhompCity|/Runway/Patterns/DataCity/Enabled: 1
+WhompCity|/Runway/Patterns/DataCity/Scroll: 0
+WhompCity|/Runway/Patterns/Whomp/Enabled: 1
+WhompCity|/Runway/Patterns/Whomp/IsMask: 1
+WhompCity|/Runway/Patterns/Whomp/Exponent: 2.41071
+WhompCity|/Runway/Patterns/Whomp/Multiplier: 2.14286
+WhompCity|/Runway/Patterns/Whomp/Scale: 0.641378
+WhompCity|/Runway/Patterns/Whomp/Hue Offset: 0
+WhompCity|/Runway/Patterns/Whomp/Hue Shift: 0.5
+WhompCity|/Runway/Patterns/Whomp/Min Saturation: 0.3
+WhompCity|/Runway/Patterns/Whomp/Max Saturation: 1
+WhompCity|/Runway/Patterns/Whomp/Cutoff Value: 0.52551
+WhompCity|/Runway/Patterns/Whomp/Vibrate: 1
+WhompCity|/Runway/Patterns/Whomp/Cycle Hues: 0
+TheDefault|/Runway/Patterns/Fft/Enabled: 1
+TheDefault|/Runway/Patterns/Fft/IsMask: 0
+TheDefault|/Runway/Patterns/Fft/Exponent: 2
+TheDefault|/Runway/Patterns/Fft/Multiplier: 2
+TheDefault|/Runway/Patterns/Fft/Spread Exponent: 0.37
+TheDefault|/Runway/Patterns/Fft/Hue Offset: 0
+TheDefault|/Runway/Patterns/Fft/Hue Shift: 0.3
+TheDefault|/Runway/Patterns/Fft/Mirror: 1
+TheDefault|/Runway/Patterns/Fft/Scale: 1
+TheDefault|/Runway/Patterns/Fft/Scale Regions: 1
+TheDefault|/Runway/Patterns/Fft/Spin Slowly: 1
+TheDefault|/Runway/Patterns/Fft/Cycle Hues: 1
+TheDefault|/Runway/Patterns/Whomp/Enabled: 1
+TheDefault|/Runway/Patterns/Whomp/IsMask: 0
+TheDefault|/Runway/Patterns/Whomp/Exponent: 3.6
+TheDefault|/Runway/Patterns/Whomp/Multiplier: 1
+TheDefault|/Runway/Patterns/Whomp/Scale: 0.5
+TheDefault|/Runway/Patterns/Whomp/Hue Offset: 0
+TheDefault|/Runway/Patterns/Whomp/Hue Shift: 0.5
+TheDefault|/Runway/Patterns/Whomp/Min Saturation: 0.3
+TheDefault|/Runway/Patterns/Whomp/Max Saturation: 1
+TheDefault|/Runway/Patterns/Whomp/Cutoff Value: 0.1
+TheDefault|/Runway/Patterns/Whomp/Vibrate: 0
+TheDefault|/Runway/Patterns/Whomp/Cycle Hues: 1
+GlitchMtn|/Runway/Patterns/GlitchmtOne/Enabled: 1
+GlitchMtn|/Runway/Patterns/GlitchmtOne/Scroll: 0
+GlitchMtn|/Runway/Patterns/GlitchmtTwo/Enabled: 1
+GlitchMtn|/Runway/Patterns/GlitchmtTwo/Scroll: 0
+GlitchMtn|/Runway/Patterns/Whomp/Enabled: 1
+GlitchMtn|/Runway/Patterns/Whomp/IsMask: 1
+GlitchMtn|/Runway/Patterns/Whomp/Exponent: 0.696429
+GlitchMtn|/Runway/Patterns/Whomp/Multiplier: 3.64286
+GlitchMtn|/Runway/Patterns/Whomp/Scale: 0.459541
+GlitchMtn|/Runway/Patterns/Whomp/Hue Offset: 0
+GlitchMtn|/Runway/Patterns/Whomp/Hue Shift: 0.5
+GlitchMtn|/Runway/Patterns/Whomp/Min Saturation: 0.3
+GlitchMtn|/Runway/Patterns/Whomp/Max Saturation: 1
+GlitchMtn|/Runway/Patterns/Whomp/Cutoff Value: 0.316327
+GlitchMtn|/Runway/Patterns/Whomp/Vibrate: 1
+GlitchMtn|/Runway/Patterns/Whomp/Cycle Hues: 0
+PlasmaTube|/Runway/Patterns/SpaceCrystals/Enabled: 1
+PlasmaTube|/Runway/Patterns/SpaceCrystals/Scroll: 0
+PlasmaTube|/Runway/Patterns/Whomp/Enabled: 1
+PlasmaTube|/Runway/Patterns/Whomp/IsMask: 1
+PlasmaTube|/Runway/Patterns/Whomp/Exponent: 3.10714
+PlasmaTube|/Runway/Patterns/Whomp/Multiplier: 1.26786
+PlasmaTube|/Runway/Patterns/Whomp/Scale: 0.80301
+PlasmaTube|/Runway/Patterns/Whomp/Hue Offset: 0
+PlasmaTube|/Runway/Patterns/Whomp/Hue Shift: 0.5
+PlasmaTube|/Runway/Patterns/Whomp/Min Saturation: 0.3
+PlasmaTube|/Runway/Patterns/Whomp/Max Saturation: 1
+PlasmaTube|/Runway/Patterns/Whomp/Cutoff Value: 0.137755
+PlasmaTube|/Runway/Patterns/Whomp/Vibrate: 1
+PlasmaTube|/Runway/Patterns/Whomp/Cycle Hues: 0
+Arachnid|/Runway/Patterns/Poxels/Enabled: 1
+Arachnid|/Runway/Patterns/Poxels/Scroll: 1
+Arachnid|/Runway/Patterns/Fft/Enabled: 1
+Arachnid|/Runway/Patterns/Fft/IsMask: 1
+Arachnid|/Runway/Patterns/Fft/Exponent: 0.964286
+Arachnid|/Runway/Patterns/Fft/Multiplier: 3.58929
+Arachnid|/Runway/Patterns/Fft/Spread Exponent: 0.696939
+Arachnid|/Runway/Patterns/Fft/Hue Offset: 0
+Arachnid|/Runway/Patterns/Fft/Hue Shift: 0.3
+Arachnid|/Runway/Patterns/Fft/Mirror: 1
+Arachnid|/Runway/Patterns/Fft/Scale: 1.39357
+Arachnid|/Runway/Patterns/Fft/Scale Regions: 1
+Arachnid|/Runway/Patterns/Fft/Spin Slowly: 1
+Arachnid|/Runway/Patterns/Fft/Cycle Hues: 1
+Arachnid|/Runway/Patterns/DoubleRainbow/Enabled: 1
+Arachnid|/Runway/Patterns/DoubleRainbow/IsMask: 1
+Arachnid|/Runway/Patterns/DoubleRainbow/Hue: 1
+Arachnid|/Runway/Patterns/DoubleRainbow/DecayTime: 1
+Arachnid|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
+Arachnid|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 2.55
+Arachnid|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -2.19
+Arachnid|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.2
+Mescaline|/Runway/Patterns/Purpcycle/Enabled: 1
+Mescaline|/Runway/Patterns/Purpcycle/Scroll: 0
+Mescaline|/Runway/Patterns/Fft/Enabled: 1
+Mescaline|/Runway/Patterns/Fft/IsMask: 1
+Mescaline|/Runway/Patterns/Fft/Exponent: 0.732143
+Mescaline|/Runway/Patterns/Fft/Multiplier: 3.71429
+Mescaline|/Runway/Patterns/Fft/Spread Exponent: 0.869936
+Mescaline|/Runway/Patterns/Fft/Hue Offset: 0
+Mescaline|/Runway/Patterns/Fft/Hue Shift: 0.3
+Mescaline|/Runway/Patterns/Fft/Mirror: 1
+Mescaline|/Runway/Patterns/Fft/Scale: 0.876633
+Mescaline|/Runway/Patterns/Fft/Scale Regions: 1
+Mescaline|/Runway/Patterns/Fft/Spin Slowly: 1
+Mescaline|/Runway/Patterns/Fft/Cycle Hues: 1
+Mescaline|/Runway/Patterns/DoubleRainbow/Enabled: 1
+Mescaline|/Runway/Patterns/DoubleRainbow/IsMask: 1
+Mescaline|/Runway/Patterns/DoubleRainbow/Hue: 1
+Mescaline|/Runway/Patterns/DoubleRainbow/DecayTime: 1
+Mescaline|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
+Mescaline|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 2.55
+Mescaline|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -2.19
+Mescaline|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.2
+MirroredTunnel|/Runway/Patterns/ShiftingPains/Enabled: 1
+MirroredTunnel|/Runway/Patterns/ShiftingPains/Scroll: 1
+MirroredTunnel|/Runway/Patterns/Fft/Enabled: 1
+MirroredTunnel|/Runway/Patterns/Fft/IsMask: 1
+MirroredTunnel|/Runway/Patterns/Fft/Exponent: 0.803571
+MirroredTunnel|/Runway/Patterns/Fft/Multiplier: 3.23214
+MirroredTunnel|/Runway/Patterns/Fft/Spread Exponent: 0.940306
+MirroredTunnel|/Runway/Patterns/Fft/Hue Offset: 0
+MirroredTunnel|/Runway/Patterns/Fft/Hue Shift: 0.3
+MirroredTunnel|/Runway/Patterns/Fft/Mirror: 1
+MirroredTunnel|/Runway/Patterns/Fft/Scale: 0.67898
+MirroredTunnel|/Runway/Patterns/Fft/Scale Regions: 1
+MirroredTunnel|/Runway/Patterns/Fft/Spin Slowly: 1
+MirroredTunnel|/Runway/Patterns/Fft/Cycle Hues: 1
+Tardis|/Runway/Patterns/Fireworks/Enabled: 1
+Tardis|/Runway/Patterns/Fireworks/Scroll: 0
+Tardis|/Runway/Patterns/Jahara/Enabled: 1
+Tardis|/Runway/Patterns/Jahara/Scroll: 0
+Tardis|/Runway/Patterns/SpinTrails/Enabled: 1
+Tardis|/Runway/Patterns/SpinTrails/IsMask: 1
+Tardis|/Runway/Patterns/SpinTrails/Num Trails: 15
+Tardis|/Runway/Patterns/SpinTrails/Duration: 5
+Tardis|/Runway/Patterns/SpinTrails/Wander: 10
+Tardis|/Runway/Patterns/SpinTrails/Spin: 12
+Tardis|/Runway/Patterns/SpinTrails/Width: 16
+Tardis|/Runway/Patterns/SpinTrails/Exponent: 3.6
+Tardis|/Runway/Patterns/SpinTrails/Multiplier: 1
+Tardis|/Runway/Patterns/SpinTrails/Scale: 0.5
+Tardis|/Runway/Patterns/SpinTrails/Hue Offset: 0
+Tardis|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
+Tardis|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
+Tardis|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
+Tardis|/Runway/Patterns/SpinTrails/Max Saturation: 1
+Tardis|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
+Tardis|/Runway/Patterns/SpinTrails/Cycle Hues: 1
+Miami_Beach|/Runway/Patterns/PoolWater/Enabled: 1
+Miami_Beach|/Runway/Patterns/PoolWater/Scroll: 0
+Miami_Beach|/Runway/Patterns/Phrase/Enabled: 1
+Miami_Beach|/Runway/Patterns/Phrase/IsMask: 0
+Miami_Beach|/Runway/Patterns/Phrase/Random: 0
+Sky_Reach|/Runway/Patterns/Octmesh/Enabled: 1
+Sky_Reach|/Runway/Patterns/Octmesh/Scroll: 0
+Sky_Reach|/Runway/Patterns/Whomp/Enabled: 1
+Sky_Reach|/Runway/Patterns/Whomp/IsMask: 1
+Sky_Reach|/Runway/Patterns/Whomp/Exponent: 1.23214
+Sky_Reach|/Runway/Patterns/Whomp/Multiplier: 0.982143
+Sky_Reach|/Runway/Patterns/Whomp/Scale: 0.363571
+Sky_Reach|/Runway/Patterns/Whomp/Hue Offset: 0
+Sky_Reach|/Runway/Patterns/Whomp/Hue Shift: 0.5
+Sky_Reach|/Runway/Patterns/Whomp/Min Saturation: 0.3
+Sky_Reach|/Runway/Patterns/Whomp/Max Saturation: 1
+Sky_Reach|/Runway/Patterns/Whomp/Cutoff Value: 0.1
+Sky_Reach|/Runway/Patterns/Whomp/Vibrate: 0
+Sky_Reach|/Runway/Patterns/Whomp/Cycle Hues: 1
