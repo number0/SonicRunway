@@ -119,7 +119,10 @@ Notes on setting up a Sonic Runway server (not necessary to run the software):
       - Manual IP:  192.168.1.3
       - make 'sonic' the top preferred network.
 
-- Java stuff..
+- Download and install java.
+    - test running jars
+
+- Download and install touchOSC editor
 
 Notes on getting into wifi:
    - reset to 'automatic' network settings
@@ -133,9 +136,6 @@ TODO:
 
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
-
-- Design TouchOSC layout - include master parameter sliders and 
-  buttons for presets (Shawn)
 
 - Add a parameter to delay so first physical gate is #2
 
