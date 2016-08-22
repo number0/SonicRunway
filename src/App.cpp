@@ -11,7 +11,7 @@
 #include "Util.hpp"
 #include "Debug.hpp"
 #include "BeatPattern.hpp"
-#include "BeatBouncePattern.hpp"
+#include "PaletteBandsPattern.hpp"
 #include "FftPattern.hpp"
 #include "ExamplePattern.hpp"
 #include "PhrasePattern.hpp"
@@ -38,7 +38,7 @@
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
-static const size_t PATTERNS_PER_COLUMN = 8;
+static const size_t PATTERNS_PER_COLUMN = 5;
 
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
@@ -97,6 +97,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
     _AddPattern(examplePattern);
+    
+    SrPaletteBandsPattern *paletteBouncePattern =
+    new SrPaletteBandsPattern("Palette Bands", &_model, &_audio, &_globalParameters);
+    _AddPattern(paletteBouncePattern);
     
     SrBeatPattern * beatPattern =
         new SrBeatPattern("Beat", &_model, &_audio, &_globalParameters);
@@ -171,15 +175,11 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
     
-    _MakeVideoPatterns();
+    //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
     fftPattern->SetEnabled(false);
-    
-    SrBeatBouncePattern *beatBouncePattern =
-    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
-    _AddPattern(beatBouncePattern);
     
     SrWhompPattern *whompPattern =
     new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
@@ -193,8 +193,9 @@ SrApp::SrApp(ofBaseApp * ofApp) :
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(true);
-    whompPattern->SetEnabled(true);
+    //fftPattern->SetEnabled(true);
+    //whompPattern->SetEnabled(true);
+    //phrasePattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
