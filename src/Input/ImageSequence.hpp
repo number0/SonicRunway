@@ -15,6 +15,8 @@
 #include <string>
 #include <vector>
 
+#include "ofxThreadedImageLoader.h"
+
 //
 // SrImageSequence loads a numbered series of images into memory and
 // allows them to be drawn in arbitrary order.  Ideally, we'd use quicktimes
@@ -33,7 +35,9 @@ public:
     const ofImage & GetImage(size_t frame) const;
     
 private:
+    ofxThreadedImageLoader _loader;
     std::vector<ofImage> _images;
+
     
 };
 

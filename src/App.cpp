@@ -38,7 +38,7 @@
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
-static const size_t PATTERNS_PER_COLUMN = 10;
+static const size_t PATTERNS_PER_COLUMN = 8;
 
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
@@ -91,6 +91,8 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_audio.GetParameterGroup());
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
+
+    _MakeAnimPatterns();
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
@@ -170,7 +172,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _AddPattern(networkInputPattern);
     
     _MakeVideoPatterns();
-    _MakeAnimPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
@@ -192,8 +193,8 @@ SrApp::SrApp(ofBaseApp * ofApp) :
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(true);
-    whompPattern->SetEnabled(true);
+    fftPattern->SetEnabled(false);
+    whompPattern->SetEnabled(false);
     
     // Add global parameters to the model so they will be accessible
     // from osc

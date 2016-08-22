@@ -141,7 +141,7 @@ SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     
     float amplitude = GetAudio()->GetCalibratedFftSum();
     float brightness = pow(amplitude, 0.4f); // scale baseline brightness by amplitude
-    
+        
     // map the length of the rainbow bands based on the amplitude
     onsetDecayTime = ofMap(amplitude, 0.0f, 1.0f, 0.2f*onsetDecayTime, 1.2f*onsetDecayTime);
     
@@ -209,48 +209,4 @@ SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     }
     
     return;
-
-    
-    /*
-    float onsetAmount = 1.0 - timeSinceBeat / onsetDecayTime;
-    
-    if (onsetAmount < 0.0) {
-        return;
-    }
-    
-    float onsetMult = onsetAmount;
-    
-    // Force full onsetAmount if we're less than one full gate behind.
-    if (timeSinceBeat < GetModel()->ComputeDelayPerGate()) {
-        onsetMult = 1.0;
-    }
-    
-    onsetMult *= onsetMult;
-    
-    ofFloatColor c;
-    c.setHsb(hue, 1.0, onsetMult); // XXX never using this color below?
-    for(int i = 0; i < buffer->size(); i++) {
-        
-        int lightsPerTrailer = buffer->size() / 10;
-        
-        // XXX this is bad b/c it isn't normalized to number of lights.
-        int iNumerator = i + _spinOffset;
-        
-        float trailDiminish = (float) (iNumerator % lightsPerTrailer) / lightsPerTrailer;
-        trailDiminish = onsetAmount * 1.0 + (1.0 - onsetAmount) * trailDiminish;
-        trailDiminish *= trailDiminish;
-       
-        float thisMult = onsetMult * trailDiminish;
-        float thisHue = hue; // + 0.3 * (1.0 - thisMult);
-        if (thisHue < 0.0) {
-            thisHue += 1.0;
-        }
-        thisHue = fmod(thisHue, 0.8);
-       
-        ofFloatColor thisC;
-        thisC.setHsb(hue*onsetAmount, 1.0, 1.0); //thisMult);
-        
-        (*buffer)[i] = thisC;
-    }
-    */
 }

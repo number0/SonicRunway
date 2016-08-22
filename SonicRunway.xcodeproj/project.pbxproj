@@ -177,6 +177,7 @@
 		479DCA850DD8BB469A777AD4 /* ofxAubioBeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96B8F6D2ECF14F9304EBD6C /* ofxAubioBeat.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
+		5D30DA611D6AD4DF007321B3 /* ofxThreadedImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D30DA5F1D6AD4DF007321B3 /* ofxThreadedImageLoader.cpp */; };
 		5DA8ED021D32160900E44D9F /* DoubleRainbowPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8ED001D32160900E44D9F /* DoubleRainbowPattern.cpp */; };
 		67383740F5CC47ED5F955A76 /* ofxAubioMelBands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 776A1553D592FD9AA388C543 /* ofxAubioMelBands.cpp */; };
 		7AD999491D29E652002BD0F3 /* light.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD999481D29E652002BD0F3 /* light.png */; };
@@ -481,6 +482,8 @@
 		3B6AFA97F893CE28547CFCDC /* ofxAubio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubio.h; path = ../../../addons/ofxAubio/src/ofxAubio.h; sourceTree = SOURCE_ROOT; };
 		4B17A983E507AB0B3F71A2D6 /* ofxAubioBlock.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubioBlock.h; path = ../../../addons/ofxAubio/src/ofxAubioBlock.h; sourceTree = SOURCE_ROOT; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
+		5D30DA5F1D6AD4DF007321B3 /* ofxThreadedImageLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThreadedImageLoader.cpp; sourceTree = "<group>"; };
+		5D30DA601D6AD4DF007321B3 /* ofxThreadedImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxThreadedImageLoader.h; sourceTree = "<group>"; };
 		5DA8ED001D32160900E44D9F /* DoubleRainbowPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DoubleRainbowPattern.cpp; path = Patterns/DoubleRainbowPattern.cpp; sourceTree = "<group>"; };
 		5DA8ED011D32160900E44D9F /* DoubleRainbowPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DoubleRainbowPattern.hpp; path = Patterns/DoubleRainbowPattern.hpp; sourceTree = "<group>"; };
 		737C0C27DB7B0C9484DCEBAE /* ofxAubioBlock.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAubioBlock.cpp; path = ../../../addons/ofxAubio/src/ofxAubioBlock.cpp; sourceTree = SOURCE_ROOT; };
@@ -938,6 +941,24 @@
 			name = ofxGui;
 			sourceTree = "<group>";
 		};
+		5D30DA5D1D6AD4DF007321B3 /* ofxThreadedImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				5D30DA5E1D6AD4DF007321B3 /* src */,
+			);
+			name = ofxThreadedImageLoader;
+			path = ../../../addons/ofxThreadedImageLoader;
+			sourceTree = "<group>";
+		};
+		5D30DA5E1D6AD4DF007321B3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5D30DA5F1D6AD4DF007321B3 /* ofxThreadedImageLoader.cpp */,
+				5D30DA601D6AD4DF007321B3 /* ofxThreadedImageLoader.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,6 +1001,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5D30DA5D1D6AD4DF007321B3 /* ofxThreadedImageLoader */,
 				30EB8EDA1D55239F004EF979 /* ofxNetwork */,
 				93621CC75EED5D310C6ADC19 /* ofxAubio */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
@@ -1337,6 +1359,7 @@
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				30E57E281CE194730031D5AF /* IpEndpointName.cpp in Sources */,
 				3068B2491CB5808E0092949A /* Util.cpp in Sources */,
+				5D30DA611D6AD4DF007321B3 /* ofxThreadedImageLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

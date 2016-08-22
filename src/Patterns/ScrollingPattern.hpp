@@ -40,6 +40,7 @@ private:
     int _index;
     
     ofImage _image;
+    ofParameter<bool> _mask;
 };
 
 #endif

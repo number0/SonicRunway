@@ -36,8 +36,8 @@ SrPhrasePattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     int beatIndex = GetAudio()->GetBeatHistory().GetBeatIndex()[0];
     int prevIndex = beatIndex - 1;
     
-    float t = (float) beatIndex / 5;
-    float prevT = (float) prevIndex / 5;
+    float t = (float) beatIndex / 4;
+    float prevT = (float) prevIndex / 4;
     
     int ledIdx = GetModel()->GetLightsPerGate() * t;
     int prevLedIdx = GetModel()->GetLightsPerGate() * prevT;

@@ -30,8 +30,8 @@ SrImageSequence::SrImageSequence(const std::string path,
         } else {
             asprintf(&str, "%s%zu.png", prefix.c_str(), i + 1);
         }
-        
-        _images[i].load(str);
+        _loader.loadFromDisk(_images[i], str); // multithreaded background loader
+//        _images[i].load(str); // blocking old-school loader
         
         free(str);
     }
@@ -39,7 +39,7 @@ SrImageSequence::SrImageSequence(const std::string path,
 
 SrImageSequence::~SrImageSequence()
 {
-    
+    _loader.stopThread();
 }
     
 size_t

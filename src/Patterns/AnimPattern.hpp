@@ -37,6 +37,7 @@ private:
     SrImageSequence _imageSequence;
     size_t _currentFrame;
     int _gateIndex;
+    //ofImage _curImg;
     
     ofParameter<bool> _scroll;
 };
