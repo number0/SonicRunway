@@ -137,9 +137,6 @@ TODO:
 - Debug crash -- maybe in 'BigTrails' when rotation and jitter
   have high values?  (Paul?)
 
-- Design TouchOSC layout - include master parameter sliders and 
-  buttons for presets (Shawn)
-
 - Add a parameter to delay so first physical gate is #2
 
 - Run speed tests to make sure frame rate keeps up.

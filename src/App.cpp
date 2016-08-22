@@ -164,31 +164,26 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _AddPattern(rmsPattern);
 
     SrBigTrailsPattern *bigTrailsPattern =
-    new SrBigTrailsPattern("Big Trails", &_model, &_audio, &_globalParameters);
+        new SrBigTrailsPattern("Big Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(bigTrailsPattern);
 
     SrNetworkInputPattern *networkInputPattern =
-    new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
+        new SrNetworkInputPattern("Network Input", &_model, &_audio, &_globalParameters);
     _AddPattern(networkInputPattern);
     
-    _MakeVideoPatterns();
-
-    // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(false);
-    
     SrBeatBouncePattern *beatBouncePattern =
-    new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
+        new SrBeatBouncePattern("Beat Bounce", &_model, &_audio, &_globalParameters);
     _AddPattern(beatBouncePattern);
     
     SrWhompPattern *whompPattern =
-    new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
+        new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
     _AddPattern(whompPattern);
     
     SrSpinTrailsPattern *spinTrailsPattern =
-    new SrSpinTrailsPattern("SpinTrails", &_model, &_audio, &_globalParameters);
+        new SrSpinTrailsPattern("SpinTrails", &_model, &_audio, &_globalParameters);
     _AddPattern(spinTrailsPattern);
     
+    // XXX Disabling video patterns because they are slow
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
@@ -205,6 +200,9 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _soundStream.setup(ofApp,_model.GetNumChannels(), _model.GetNumChannels(),
                       _model.GetSampleRate(), _model.GetBufferSize(), 4);
     
+    // XXX Disabling Loopback for now.  Planning on using a mixer
+    // instead of the MOTU
+    /*
     std::vector<ofSoundDevice> loopbackDevices =
         _soundStream.getMatchingDevices("Loopback Audio");
     printf("number of matching loopback devices %zu\n", loopbackDevices.size());
@@ -213,6 +211,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
         printf("setting loopback device %d\n", loopbackDeviceID);
         _soundStream.setDeviceID(loopbackDeviceID);
     }
+     */
     
     // Calculate X position of the previs
     _previsXCoord = _uiMargin + _uiColumnWidth * (_patternPanels.size() + 2);
