@@ -13,11 +13,15 @@ SrScrollingPattern::SrScrollingPattern(const std::string & name,
                                        SrGlobalParameters * globalParameters) :
     SrPattern(name, model, audio, globalParameters),
     _index(0),
-    _mask(false)
+    _mask(false),
+    _invertMask(false)
 {
     _mask.setName("IsMask");
     _AddUIParameter(_mask);
-
+    
+    _invertMask.setName("InvertMask");
+    _AddUIParameter(_invertMask);
+    
     int width = model->GetNumGates() * model->GetFramesPerGate();
     int height = model->GetLightsPerGate();
     int numChannels = 4;
@@ -84,8 +88,11 @@ SrScrollingPattern::_Draw() const
         return;
     }
     
-    if(_mask) {
+    if(_mask && !_invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+    }
+    if(_invertMask) {
+        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     }
     
     ofPushMatrix();
@@ -101,7 +108,7 @@ SrScrollingPattern::_Draw() const
     
     ofPopMatrix();
     
-    if (_mask) {
+    if (_mask || _invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_ADD);
     }
 }

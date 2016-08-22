@@ -41,6 +41,7 @@ private:
     
     ofImage _image;
     ofParameter<bool> _mask;
+    ofParameter<bool> _invertMask;
 };
 
 #endif
