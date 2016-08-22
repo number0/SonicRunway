@@ -24,13 +24,6 @@ SrAnimPattern::SrAnimPattern(const std::string & name,
 {
     _scroll.setName("Scroll");
     _AddUIParameter(_scroll);
-    
-    int width = model->GetNumGates(); // * model->GetFramesPerGate();
-    int height = model->GetLightsPerGate();
-    /*
-    _curImg.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
-    _curImg.setColor(ofColor::black);
-     */
 }
 
 SrAnimPattern::~SrAnimPattern()
@@ -58,38 +51,6 @@ SrAnimPattern::_Update()
             _gateIndex = 0;
         }
     }
-
-    /*
-    const ofImage & img = _imageSequence.GetImage(_currentFrame);
-
-    //_curImg.clear();
-    //_curImg.clone(img);
-
-    int newWidth = _curImg.getWidth();
-    int newHeight = _curImg.getHeight();
-    
-    const ofFloatPixels & pixels = GetModel()->GetFloatPixels();
-    int numGates = GetModel()->GetNumGates();
-    int lightsPerGate = GetModel()->GetLightsPerGate();
-    
-    ofFloatColor blackPixel = ofFloatColor(1.0f,1.0f,1.0f,1.0f);
-    
-    for (int x=0; x < newWidth; x++) {
-        for (int y=0; y < newHeight; y++) {
-            int gateIdx = int(ofMap(x, 0, newWidth, 0, numGates));
-            int lightIdx = int(ofMap(y, 0, newHeight, 0, lightsPerGate));
-            ofFloatColor color = pixels.getColor(gateIdx, lightIdx);
-            //_curImg.setColor(x, y, blackPixel);
-            if(color.getBrightness() < 0.5f) {
-                std::cout << "setting pixel " << x << " " << y << " to " << blackPixel << std::endl;
-                std::cout << "brightness of " << color << " was " << color.getBrightness() << std::endl;
-                _curImg.setColor(x, y, blackPixel);
-            }
-        }
-    }
-    
-    _curImg.update();
-    */
 }
 
 void
@@ -102,7 +63,7 @@ SrAnimPattern::_Draw() const
     }
     
     const ofImage & img = _imageSequence.GetImage(_currentFrame);
-
+    
     ofSetColor(ofFloatColor(opacity, opacity, opacity));
     
     img.draw(_gateIndex, 0, img.getWidth(), GetModel()->GetLightsPerGate());
