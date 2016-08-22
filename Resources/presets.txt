@@ -92,18 +92,21 @@ Cotton_Candy|/Runway/Patterns/Stripes/Enabled: 1
 Cotton_Candy|/Runway/Patterns/Stripes/Hue: 0
 Cotton_Candy|/Runway/Patterns/Stripes/NumStripes: 6
 Cotton_Candy|/Runway/Patterns/Stripes/SpinSpeed: 300
+Cotton_Candy|/Runway/Patterns/Stripes/IsMask: 0
 Cotton_Candy|/Runway/Patterns/RMS/Enabled: 1
 Cotton_Candy|/Runway/Patterns/RMS/Hue 1: 0.2
 Cotton_Candy|/Runway/Patterns/RMS/Hue 2: 0.5
 Cotton_Candy|/Runway/Patterns/RMS/Hue 3: 0.8
 Cotton_Candy|/Runway/Patterns/RMS/Saturation: 0.8
 Cotton_Candy|/Runway/Patterns/RMS/Brightness: 0.8
+Cotton_Candy|/Runway/Patterns/RMS/IsMask: 0
 Cotton_Candy|/Runway/Patterns/Big Trails/Enabled: 1
 Cotton_Candy|/Runway/Patterns/Big Trails/Hue: 0.2
 Cotton_Candy|/Runway/Patterns/Big Trails/Saturation: 0.8
 Cotton_Candy|/Runway/Patterns/Big Trails/Brightness: 0.8
 Cotton_Candy|/Runway/Patterns/Big Trails/Jitter: 30
 Cotton_Candy|/Runway/Patterns/Big Trails/Rotation: 12
+Cotton_Candy|/Runway/Patterns/Big Trails/IsMask: 0
 Cotton_Candy|/Runway/Patterns/MocircshiiTwo/Enabled: 1
 Cotton_Candy|/Runway/Patterns/MocircshiiTwo/Scroll: 0
 Anti_Freeze|/Runway/Patterns/Jelly/Enabled: 1
