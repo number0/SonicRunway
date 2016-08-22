@@ -9,14 +9,43 @@
 #include "BigTrailsPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
                                        SrGlobalParameters * globalParameters) :
     SrScrollingPattern(name, model, audio, globalParameters),
-    _average(0.0)
+    _average(0.0),
+    _hueParam(0.2),
+    _saturationParam(0.8),
+    _brightnessParam(0.8),
+    _jitterParam(30.0),
+    _rotationParam(12.0)
 {
-
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
+    
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
+    
+    _jitterParam.setName("Jitter");
+    _jitterParam.setMin(0.0);
+    _jitterParam.setMax(1.0);
+    _AddUIParameter(_jitterParam);
+    
+    _rotationParam.setName("Rotation");
+    _rotationParam.setMin(0.0);
+    _rotationParam.setMax(1.0);
+    _AddUIParameter(_rotationParam);
 }
 
 SrBigTrailsPattern::~SrBigTrailsPattern()
@@ -39,10 +68,13 @@ SrBigTrailsPattern::_Update()
     float high = GetAudio()->GetHighs()[0];
     
     float jitter;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
-        jitter = 20;
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
+        jitter = globals->GetDial2() * 100;
     } else {
-        jitter = GetGlobalParameters()->GetDial2() * 100;
+        jitter = _jitterParam;
     }
     
     low *= jitter;
@@ -63,19 +95,24 @@ SrBigTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float brigthness;
     float rotation;
     float jitter;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = GetGlobalParameters()->GetVerySlowCycle();
-        saturation = 0.9;
-        brigthness = 0.7;
-        rotation = 12;
-        jitter = 20;
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (GetGlobalParameters()->WasRecentManualInput()) {
+        hue = globals->GetDial1();
+        jitter = globals->GetDial2() * 100;
+        rotation = globals->GetDial3() * 100 - 50;
+        saturation = globals->GetSlider1();
+        brigthness = globals->GetSlider2();
     } else {
-        hue = GetGlobalParameters()->GetDial1();
-        jitter = GetGlobalParameters()->GetDial2() * 100;
-        rotation = GetGlobalParameters()->GetDial3() * 100 - 50;
-        saturation = GetGlobalParameters()->GetSlider1();
-        brigthness = GetGlobalParameters()->GetSlider2();
+        hue = _hueParam + globals->GetVerySlowCycle();
+        saturation = _saturationParam;
+        brigthness = _brightnessParam;
+        rotation = _rotationParam;
+        jitter = _jitterParam;
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     float low = GetAudio()->GetLows()[0];
     float mid = GetAudio()->GetMids()[0];

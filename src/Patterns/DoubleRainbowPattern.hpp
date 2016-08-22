@@ -22,6 +22,8 @@ public:
                      SrGlobalParameters * globalParameters);
     virtual ~SrDoubleRainbowPattern();
     
+    virtual std::string GetGlobalParameterLabel(const std::string & name) const;
+    
 protected:
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const;
     

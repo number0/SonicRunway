@@ -64,6 +64,8 @@ public:
     // The value is ramped after the pattern is explicitly enabled/disabled.
     const SrFloatSimpleBuffer & GetOpacity() const;
     
+    virtual std::string GetGlobalParameterLabel(const std::string & name) const;
+    
 protected:
     
     // Update the pattern in response to the current state.

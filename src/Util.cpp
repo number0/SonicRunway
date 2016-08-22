@@ -192,3 +192,15 @@ SrUtil_Lerp(float a, float b, float t)
     return a * (1.0 - t) + b * t;
 }
 
+
+std::string
+SrUtil_GetParameterPath(ofAbstractParameter & parameter)
+{
+    std::string ret("/Runway"); // XXX not ideal to hard code this here..
+    std::vector<std::string> parentList = parameter.getGroupHierarchyNames();
+    for(size_t i = 0; i < parentList.size(); i++) {
+        ret += '/' + parentList[i];
+    }
+    
+    return ret;
+}

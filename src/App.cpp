@@ -30,6 +30,7 @@
 #include "WhompPattern.hpp"
 #include "BigTrailsPattern.hpp"
 #include "NetworkInputPattern.hpp"
+#include "SpinTrailsPattern.hpp"
 #include "GlobalParameters.hpp"
 
 #include "Switcher.hpp"
@@ -46,6 +47,11 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio, this),
     _switcher("Switcher", "presets.txt", this),
+    _oscSync(&_model, &_audio, &_switcher, 8000, "", 9000),
+    _showGlobals(true),
+    _showFft(true),
+    _showPatternParameters(true),
+    _showPrevis(true),
     _uiColumnWidth(220),
     _uiMargin(10),
     _previsXCoord(0),
@@ -61,13 +67,22 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     CGSSetDebugOptions(0x08000000);
     CGSDeferredUpdates(true);
     
+    _uiTogglesPanel.setup("UI Toggles");
+    _uiTogglesPanel.setPosition(_uiMargin, _uiMargin);
+    _showGlobals.setName("Show Globals");
+    _showFft.setName("Show FFT");
+    _showPatternParameters.setName("Show Patterns");
+    _showPrevis.setName("Show Previs");
+    _uiTogglesPanel.add(_showGlobals);
+    _uiTogglesPanel.add(_showFft);
+    _uiTogglesPanel.add(_showPatternParameters);
+    _uiTogglesPanel.add(_showPrevis);
+    
     _globalPanel.setup("Global");
-    _globalPanel.setPosition(_uiMargin,_uiMargin);
     
     _globalPanel.add(_previs.GetUiPanel());
     _globalPanel.add(_artnet.GetUiPanel());
     _globalPanel.add(_audio.GetUiPanel());
-    _globalPanel.add(_globalParameters.GetUiPanel());
     
     _switcher.GetUiPanel()->setPosition(_uiMargin + _uiColumnWidth, _uiMargin);
     
@@ -75,6 +90,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_patternsParameterGroup);
     _model.GetParameterGroup().add(_audio.GetParameterGroup());
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
+    _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
@@ -168,19 +184,20 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
     _AddPattern(whompPattern);
     
+    SrSpinTrailsPattern *spinTrailsPattern =
+    new SrSpinTrailsPattern("SpinTrails", &_model, &_audio, &_globalParameters);
+    _AddPattern(spinTrailsPattern);
+    
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
     //diagnosticPattern->SetEnabled(true);
-    //fftPattern->SetEnabled(true);
-    //whompPattern->SetEnabled(true);
+    fftPattern->SetEnabled(true);
+    whompPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
-    
-    // Set up syncing between ofParameters and OSC
-    _oscParameterSync.setup(_model.GetParameterGroup(), 8000, "", 9000);
     
     ofSoundStreamListDevices();
     
@@ -280,11 +297,17 @@ SrApp::LeftAlignPrevis(bool &on)
 {
     _leftAlignPrevis = on;
     
+    float globalParamsY = 560;
+    
     if( on ) {
-        _globalPanel.setPosition(_uiMargin + _previsWidth *_leftAlignScale + _uiMargin,_uiMargin);
+        float x = _uiMargin + _previsWidth * _leftAlignScale + _uiMargin;
+        _globalPanel.setPosition(x, _uiMargin);
+        _globalParameters.GetUiPanel()->setPosition(x, _uiMargin + globalParamsY);
     }
     else {
-        _globalPanel.setPosition(_uiMargin,_uiMargin);
+        _globalPanel.setPosition(_uiMargin,_uiMargin + 100);
+        _globalParameters.GetUiPanel()->setPosition(
+                        _uiMargin, _uiMargin + 100 + globalParamsY);
     }
     
     if (on) {
@@ -346,6 +369,12 @@ SrApp::GetAudio()
     return &_audio;
 }
 
+SrOscSync *
+SrApp::GetOscSync()
+{
+    return &_oscSync;
+}
+
 SrGlobalParameters *
 SrApp::GetGlobalParameters()
 {
@@ -369,7 +398,7 @@ SrApp::Update()
 {
     _globalParameters.Update();
     
-    _oscParameterSync.update();
+    _oscSync.Update();
     
     _switcher.Update();
     
@@ -406,32 +435,43 @@ SrApp::Draw()
     ofBackground(40,40,40);
     
     if ( _leftAlignPrevis ){
-        _model.RenderFrameBuffer(_uiMargin, _uiMargin, _uiColumnWidth * 2, 75);
+        _model.RenderFrameBuffer(_uiMargin + _uiColumnWidth * 2,
+                                 _uiMargin, _uiColumnWidth * 2, 75);
     }
     else {
         _model.RenderFrameBuffer(_previsXCoord, _uiMargin, _uiColumnWidth * 2, 75);
     }
         
-    _globalPanel.draw();
+    _uiTogglesPanel.draw();
     
-    _switcher.GetUiPanel()->draw();
-    
-    if ( _leftAlignPrevis ){
-        _audio.DrawFftBands(_uiColumnWidth + _uiMargin + _previsWidth*_leftAlignScale, 400, _uiColumnWidth, _uiColumnWidth);
-    }
-    else {
-        _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
-    }
-        
-    for(size_t i = 0; i < _patternPanels.size(); i++) {
-        _patternPanels[i]->draw();
+    if (_showGlobals) {
+        _globalPanel.draw();
+        _globalParameters.GetUiPanel()->draw();
+        _switcher.GetUiPanel()->draw();
     }
     
-    if( _leftAlignPrevis ) {
-        _previs.Draw(_uiMargin, 100, _previsWidth*_leftAlignScale, _previsHeight*_leftAlignScale);
+    if (_showFft) {
+        if ( _leftAlignPrevis ){
+            _audio.DrawFftBands(_uiColumnWidth + _uiMargin + _previsWidth*_leftAlignScale, 400, _uiColumnWidth, _uiColumnWidth);
+        }
+        else {
+            _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
+        }
     }
-    else {
-        _previs.Draw(_previsXCoord, 100, _previsWidth, _previsHeight);
+    
+    if (_showPatternParameters) {
+        for(size_t i = 0; i < _patternPanels.size(); i++) {
+            _patternPanels[i]->draw();
+        }
+    }
+    
+    if (_showPrevis) {
+        if( _leftAlignPrevis ) {
+            _previs.Draw(_uiMargin, 100, _previsWidth*_leftAlignScale, _previsHeight*_leftAlignScale);
+        }
+        else {
+            _previs.Draw(_previsXCoord, 100, _previsWidth, _previsHeight);
+        }
     }
     
     _artnet.UpdateLights();

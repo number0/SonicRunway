@@ -250,6 +250,8 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
     
     // Now apply the new preset.
     preset->Apply();
+    
+    _app->GetOscSync()->BroadcastPresetInfo(preset);
 }
 
 void
@@ -259,8 +261,8 @@ SrSwitcher::OnPresetTogglePressed(SrPreset * preset)
         _ApplyPreset(preset);
     }
     
-    // Tell the global parameters that we poked a button.
-    _app->GetGlobalParameters()->OnReceivedManualInput();
+    // Then tell the global params that we changed a preset
+    _app->GetGlobalParameters()->OnReceivedPresetInput();
 }
 
 SrPattern *
@@ -275,4 +277,15 @@ SrSwitcher::FindPatternByName(const std::string & name) const
     }
     
     return NULL;
+}
+
+void
+SrSwitcher::ApplyPresetAtIndex(size_t index)
+{
+    if (index >= _presets.size()) {
+        SrError("Unknown preset with index %zu\n", index);
+        return;
+    }
+    
+    _ApplyPreset(_presets[index]);
 }

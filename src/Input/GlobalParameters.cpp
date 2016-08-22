@@ -18,6 +18,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _model(model),
     _audio(audio),
     _cycleAutomatically(true),
+    _lockToLocalParams(false),
     _delayBeforeAutomaticMode(60.0), // seconds
     _twoBeatCycle(0.0),
     _measureCycle(0.0),
@@ -31,8 +32,10 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _slider1Parameter(0.5),
     _slider2Parameter(0.5)
 {
-    _cycleAutomatically.setName("Auto Cycle");
+    _cycleAutomatically.setName("AutoCycle");
     _cycleAutomatically.addListener(this, &This::_OnCycleAutomaticallyChanged);
+    
+    _lockToLocalParams.setName("Lock To Local Params");
     
     _delayBeforeAutomaticMode.setName("Delay b4 auto");
     _delayBeforeAutomaticMode.setMin(0.0);
@@ -83,6 +86,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _slider2Parameter.setMax(1.0);
     
     _AddUIParameter(_cycleAutomatically);
+    _AddUIParameter(_lockToLocalParams);
     _AddUIParameter(_delayBeforeAutomaticMode);
     
     _AddUIParameter(_fadeDuration);
@@ -100,6 +104,7 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     
     _dial1Parameter.addListener(this, &This::_OnParameterChanged);
     _dial2Parameter.addListener(this, &This::_OnParameterChanged);
+    _dial3Parameter.addListener(this, &This::_OnParameterChanged);
     _slider1Parameter.addListener(this, &This::_OnParameterChanged);
     _slider2Parameter.addListener(this, &This::_OnParameterChanged);
 }
@@ -205,8 +210,7 @@ SrGlobalParameters::_ComputeUpdate(float value, int beatsPerCycle) const
 void
 SrGlobalParameters::Update()
 {
-    // If we haven't touched anything for a while, turn the
-    // cycles back on.
+    // If we haven't touched anything for a while, turn the cycles back on.
     if (not _cycleAutomatically and
         ComputeSecondsSinceManualInput() > _delayBeforeAutomaticMode) {
         _cycleAutomatically = true;
@@ -250,6 +254,12 @@ SrGlobalParameters::Update()
 }
 
 void
+SrGlobalParameters::OnReceivedPresetInput()
+{
+    _timeOfLastManualParameterChange = ofGetElapsedTimef();
+}
+
+void
 SrGlobalParameters::OnReceivedManualInput()
 {
     _timeOfLastManualParameterChange = ofGetElapsedTimef();
@@ -273,5 +283,13 @@ SrGlobalParameters::_OnCycleAutomaticallyChanged(bool & value)
 float
 SrGlobalParameters::ComputeSecondsSinceManualInput() const
 {
-    return ofGetElapsedTimef() - _timeOfLastManualParameterChange;
+    // elapsed time starts at 0.0, so add in the _delay parameter so we don't get phantom
+    // "manual inputs" in the first minute of runtime.
+    return (ofGetElapsedTimef()+_delayBeforeAutomaticMode) - _timeOfLastManualParameterChange;
+}
+
+bool
+SrGlobalParameters::WasRecentManualInput() const
+{
+    return ComputeSecondsSinceManualInput() < (float) _delayBeforeAutomaticMode;
 }

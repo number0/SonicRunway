@@ -9,13 +9,36 @@
 #include "ArcPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrArcPattern::SrArcPattern(const std::string & name,
                              SrModel * model, SrAudio * audio,
                            SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters)
+SrScrollingPattern(name, model, audio, globalParameters),
+_hueParam(0.2),
+_saturationParam(0.8),
+_brightnessParam(0.8),
+_thresholdParam(0.5)
 {
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
     
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
+    
+    _thresholdParam.setName("Threshold");
+    _thresholdParam.setMin(0.0);
+    _thresholdParam.setMax(1.0);
+    _AddUIParameter(_thresholdParam);
 }
 
 SrArcPattern::~SrArcPattern()
@@ -33,10 +56,13 @@ SrArcPattern::_Update()
     SrScrollingPattern::_Update();
     
     float threshold;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
-        threshold = 0.05;
-    } else {
+   
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
         threshold = GetGlobalParameters()->GetDial2();
+    } else {
+        threshold = _thresholdParam;
     }
     
     vector<float> fftValues = GetAudio()->GetCurrentRawFftValues();
@@ -76,15 +102,20 @@ SrArcPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float hue;
     float saturation;
     float brightness;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = GetGlobalParameters()->GetSlowCycle();
-        saturation = 0.8;
-        brightness = 0.8;
+   
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
+        hue = globals->GetDial1();
+        saturation = globals->GetSlider1();
+        brightness = globals->GetSlider2();
     } else {
-        hue = GetGlobalParameters()->GetDial1();
-        saturation = GetGlobalParameters()->GetSlider1();
-        brightness = GetGlobalParameters()->GetSlider2();
+        hue = _hueParam + globals->GetSlowCycle();
+        saturation = _saturationParam;
+        brightness = _brightnessParam;
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     int pixels = buffer->size();
     if (segments > pixels) {

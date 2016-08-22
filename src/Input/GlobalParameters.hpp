@@ -31,8 +31,8 @@ class SrAudio;
 // Note:  some parameters are called 'Dial' even though they show up as sliders
 // in the default UI.  We intend to represent them as dials through TouchOSC
 //
-// So far:
-//   - Dial1 : generally used to shift hues in a relative way.  Range [0,1]
+// Patterns can set the labels for the global parameters to indicate
+// their meaning.
 //
 // Global parameters are accessible through OSC with the paths like this:
 //
@@ -65,7 +65,10 @@ public:
     float GetSlider2() const;
     
     float ComputeSecondsSinceManualInput() const;
+    bool WasRecentManualInput() const;
+    
     void OnReceivedManualInput();
+    void OnReceivedPresetInput();
     
 private:
     float _ComputeUpdate(float value, int beatsPerCycle) const;
@@ -77,8 +80,10 @@ private:
     SrModel * _model;
     SrAudio * _audio;
     float _timeOfLastManualParameterChange;
+    float _timeOfLastPresetParameterChange;
     
     ofParameter<bool> _cycleAutomatically;
+    ofParameter<bool> _lockToLocalParams;
     ofParameter<float> _delayBeforeAutomaticMode;
     
     ofParameter<float> _twoBeatCycle;

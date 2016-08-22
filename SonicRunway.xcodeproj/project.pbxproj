@@ -34,6 +34,7 @@
 		301742261CAE3140007F3D32 /* libaubio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 301742251CAE3140007F3D32 /* libaubio.dylib */; };
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
+		30229D991D68A40200AB4A3E /* OscSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30229D971D68A40200AB4A3E /* OscSync.cpp */; };
 		302626681D52F6270016DAF3 /* presets.txt in Resources */ = {isa = PBXBuildFile; fileRef = 302626671D52F6270016DAF3 /* presets.txt */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
@@ -145,6 +146,7 @@
 		308CEE5D1C48598D007C124A /* Artnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308CEE5B1C48598D007C124A /* Artnet.cpp */; };
 		30AEA5981C4052A80034C794 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 30AEA5971C4052A80034C794 /* README.md */; };
 		30B1F96D1D63B7BB00916EBA /* WhompPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */; };
+		30B1F9701D65D73500916EBA /* SpinTrailsPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B1F96E1D65D73500916EBA /* SpinTrailsPattern.cpp */; };
 		30B8DCE91CB589AC00164558 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B8DCE71CB589AC00164558 /* Environment.cpp */; };
 		30B8DCEB1CB58C3A00164558 /* skyTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B8DCEA1CB58C3A00164558 /* skyTexture.png */; };
 		30C2F45B1D3AE647003F4910 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C2F4591D3AE647003F4910 /* Debug.cpp */; };
@@ -267,6 +269,8 @@
 		30211DBA1CFE89BC0085FF93 /* VideoPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VideoPattern.hpp; path = Patterns/VideoPattern.hpp; sourceTree = "<group>"; };
 		30216C3F1D31976300D2B07F /* Preset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preset.cpp; sourceTree = "<group>"; };
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
+		30229D971D68A40200AB4A3E /* OscSync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscSync.cpp; path = Input/OscSync.cpp; sourceTree = "<group>"; };
+		30229D981D68A40200AB4A3E /* OscSync.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OscSync.hpp; path = Input/OscSync.hpp; sourceTree = "<group>"; };
 		302626671D52F6270016DAF3 /* presets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = presets.txt; path = Resources/presets.txt; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302EA7D31D60382900F82B57 /* OscTest.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = OscTest.touchosc; path = Resources/OscTest.touchosc; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 		30AEA5971C4052A80034C794 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WhompPattern.cpp; path = Patterns/WhompPattern.cpp; sourceTree = "<group>"; };
 		30B1F96C1D63B7BB00916EBA /* WhompPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WhompPattern.hpp; path = Patterns/WhompPattern.hpp; sourceTree = "<group>"; };
+		30B1F96E1D65D73500916EBA /* SpinTrailsPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpinTrailsPattern.cpp; path = Patterns/SpinTrailsPattern.cpp; sourceTree = "<group>"; };
+		30B1F96F1D65D73500916EBA /* SpinTrailsPattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SpinTrailsPattern.hpp; path = Patterns/SpinTrailsPattern.hpp; sourceTree = "<group>"; };
 		30B8DCE71CB589AC00164558 /* Environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Environment.cpp; path = Previs/Environment.cpp; sourceTree = "<group>"; };
 		30B8DCE81CB589AC00164558 /* Environment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Environment.hpp; path = Previs/Environment.hpp; sourceTree = "<group>"; };
 		30B8DCEA1CB58C3A00164558 /* skyTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skyTexture.png; path = Resources/skyTexture.png; sourceTree = "<group>"; };
@@ -494,6 +500,7 @@
 		93CAC8A94359FD331BAD8CFA /* ofxAubioPitch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAubioPitch.cpp; path = ../../../addons/ofxAubio/src/ofxAubioPitch.cpp; sourceTree = SOURCE_ROOT; };
 		9604B925D32EE39065747725 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBaseGui.cpp; path = ../../../addons/ofxGui/src/ofxBaseGui.cpp; sourceTree = SOURCE_ROOT; };
 		9D2C29B96659EBB7A0C5672F /* ofxAubioPitch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubioPitch.h; path = ../../../addons/ofxAubio/src/ofxAubioPitch.h; sourceTree = SOURCE_ROOT; };
+		A3AF33231D69796200ED87FC /* Sonic Runway iPad H.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sonic Runway iPad H.touchosc"; path = "Resources/Sonic Runway iPad H.touchosc"; sourceTree = "<group>"; };
 		A96B8F6D2ECF14F9304EBD6C /* ofxAubioBeat.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxAubioBeat.cpp; path = ../../../addons/ofxAubio/src/ofxAubioBeat.cpp; sourceTree = SOURCE_ROOT; };
 		B87C60311EC1FE841C1ECD89 /* ofxLabel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLabel.h; path = ../../../addons/ofxGui/src/ofxLabel.h; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
@@ -652,6 +659,7 @@
 				7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */,
 				7AD999481D29E652002BD0F3 /* light.png */,
 				302EA7D31D60382900F82B57 /* OscTest.touchosc */,
+				A3AF33231D69796200ED87FC /* Sonic Runway iPad H.touchosc */,
 				3068B2421CB576BF0092949A /* previsCameraData.txt */,
 				30B8DCEA1CB58C3A00164558 /* skyTexture.png */,
 				300802101CB723AD0031DAF2 /* burner1.png */,
@@ -759,6 +767,8 @@
 				295E8F2C1D5591920054DB40 /* NetworkInputPattern.hpp */,
 				30B1F96B1D63B7BB00916EBA /* WhompPattern.cpp */,
 				30B1F96C1D63B7BB00916EBA /* WhompPattern.hpp */,
+				30B1F96E1D65D73500916EBA /* SpinTrailsPattern.cpp */,
+				30B1F96F1D65D73500916EBA /* SpinTrailsPattern.hpp */,
 			);
 			name = Patterns;
 			sourceTree = "<group>";
@@ -782,6 +792,8 @@
 				303E6D961D4CD8F1009BC38A /* ImageSequence.hpp */,
 				308594B91D599F740027A9A1 /* GlobalParameters.cpp */,
 				308594BA1D599F740027A9A1 /* GlobalParameters.hpp */,
+				30229D971D68A40200AB4A3E /* OscSync.cpp */,
+				30229D981D68A40200AB4A3E /* OscSync.hpp */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -1275,6 +1287,7 @@
 				302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				305892A41C9921240030F338 /* UiMixin.cpp in Sources */,
+				30229D991D68A40200AB4A3E /* OscSync.cpp in Sources */,
 				295D34481D3C0E0C009CDC91 /* ArcPattern.cpp in Sources */,
 				30E57E241CE194730031D5AF /* ofxOscMessage.cpp in Sources */,
 				30E57E231CE194730031D5AF /* ofxOscBundle.cpp in Sources */,
@@ -1297,6 +1310,7 @@
 				302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */,
 				29D2205D1D3ABE380040B22B /* StarPattern.cpp in Sources */,
 				3002E85E1C88F9C900689E57 /* Previs.cpp in Sources */,
+				30B1F9701D65D73500916EBA /* SpinTrailsPattern.cpp in Sources */,
 				30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */,
 				30E16C281CDC00D5008729E7 /* ScrollingPattern.cpp in Sources */,
 				30C844391C42D110006452BE /* Model.cpp in Sources */,

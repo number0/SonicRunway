@@ -17,7 +17,7 @@
 #include "Artnet.hpp"
 #include "Previs.hpp"
 #include "Switcher.hpp"
-#include "ofxOscParameterSync.h"
+#include "OscSync.hpp"
 
 class SrPattern;
 
@@ -39,6 +39,7 @@ public:
     const std::vector<SrPattern *> & GetPatterns() const;
     SrModel * GetModel();
     SrAudio * GetAudio();
+    SrOscSync * GetOscSync();
     SrGlobalParameters * GetGlobalParameters();
     
 private:
@@ -55,6 +56,12 @@ private:
     SrArtnet _artnet;
     SrSwitcher _switcher;
     
+    ofxPanel _uiTogglesPanel;
+    ofParameter<bool> _showGlobals;
+    ofParameter<bool> _showFft;
+    ofParameter<bool> _showPatternParameters;
+    ofParameter<bool> _showPrevis;
+    
     ofSoundStream _soundStream;
     
     std::vector<SrPattern *> _patterns;
@@ -62,7 +69,7 @@ private:
     
     ofxPanel _globalPanel;
     std::vector<ofxPanel *> _patternPanels;
-    ofxOscParameterSync _oscParameterSync;
+    SrOscSync _oscSync;
     float _uiColumnWidth;
     float _uiMargin;
     float _previsXCoord;

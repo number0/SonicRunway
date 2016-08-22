@@ -9,13 +9,36 @@
 #include "TrailsPattern.hpp"
 #include "Audio.hpp"
 #include "GlobalParameters.hpp"
+#include "Util.hpp"
 
 SrTrailsPattern::SrTrailsPattern(const std::string & name,
                                  SrModel * model, SrAudio * audio,
                                  SrGlobalParameters * globalParameters) :
-SrScrollingPattern(name, model, audio, globalParameters)
+SrScrollingPattern(name, model, audio, globalParameters),
+_hueParam(0.75),
+_jitterParam(50.0),
+_saturationParam(0.8),
+_brightnessParam(0.8)
 {
-
+    _hueParam.setName("Hue");
+    _hueParam.setMin(0.0);
+    _hueParam.setMax(1.0);
+    _AddUIParameter(_hueParam);
+    
+    _jitterParam.setName("Jitter");
+    _jitterParam.setMin(0.0);
+    _jitterParam.setMax(1.0);
+    _AddUIParameter(_jitterParam);
+    
+    _saturationParam.setName("Saturation");
+    _saturationParam.setMin(0.0);
+    _saturationParam.setMax(1.0);
+    _AddUIParameter(_saturationParam);
+    
+    _brightnessParam.setName("Brightness");
+    _brightnessParam.setMin(0.0);
+    _brightnessParam.setMax(1.0);
+    _AddUIParameter(_brightnessParam);
 }
 
 SrTrailsPattern::~SrTrailsPattern()
@@ -37,17 +60,22 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     float jitter;
     float saturation;
     float brightness;
-    if (GetGlobalParameters()->GetCycleAutomatically()) {
-        hue = GetGlobalParameters()->GetSlowCycle();
-        jitter = 50.0;
-        saturation = 0.7;
-        brightness = 0.8;
-    } else {
+    
+    SrGlobalParameters * globals = GetGlobalParameters();
+    
+    if (globals->WasRecentManualInput()) {
         hue = GetGlobalParameters()->GetDial1();
         jitter = GetGlobalParameters()->GetDial2() * 100;
         saturation = GetGlobalParameters()->GetSlider1();
         brightness = GetGlobalParameters()->GetSlider2();
+    } else {
+        hue = _hueParam + globals->GetSlowCycle();
+        jitter = _jitterParam;
+        saturation = _saturationParam;
+        brightness = _brightnessParam;
     }
+    
+    hue = SrUtil_ClampCycle(0, 1, hue);
     
     // Protection
     if (segments > pixels) {

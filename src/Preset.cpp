@@ -115,6 +115,24 @@ SrPreset::IsAudioReactive() const
     }
 }
 
+std::set<SrPattern *>
+SrPreset::GetPatterns() const
+{
+    std::set<SrPattern *> ret;
+    
+    for(size_t i = 0; i < _strings.size(); i++) {
+        const std::string & str = _strings[i];
+        
+        SrPattern * pattern = _FindPattern(_strings[i]);
+        
+        if (pattern) {
+            ret.insert(pattern);
+        }
+    }
+    
+    return ret;
+}
+
 void
 SrPreset::Store()
 {

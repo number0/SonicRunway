@@ -39,6 +39,12 @@ private:
     char *_buffer;
     int _bufferSize;
     
+    // Parameters
+    ofParameter<bool> _flipH;
+    ofParameter<bool> _flipV;
+
+    // Functions
+    
     // Reads the all the specified number of bytes from the TCP connection.
     bool readFully(char * buf, const int32_t count);
 
