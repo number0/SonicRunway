@@ -143,10 +143,6 @@ TODO:
 
 - Change 'rainbow' pattern so it doesn't go all white
 
-- Add a subtle pattern going the other way.
-
-- Add pattern that makes a stripe that wanders based on RMS
-
 - (low priority) Figure out how to build standalone app.  
   Product->Archive does this mostly,
   but dependencies on dylibs causes problems.  This means either figuring out
