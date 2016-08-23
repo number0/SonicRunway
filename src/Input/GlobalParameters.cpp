@@ -30,7 +30,8 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _dial2Parameter(0.5),
     _dial3Parameter(0.75),
     _slider1Parameter(0.5),
-    _slider2Parameter(0.5)
+    _slider2Parameter(0.5),
+    _timeOfLastManualParameterChange(0.0)
 {
     _cycleAutomatically.setName("AutoCycle");
     _cycleAutomatically.addListener(this, &This::_OnCycleAutomaticallyChanged);
@@ -40,6 +41,8 @@ SrGlobalParameters::SrGlobalParameters(const std::string & name,
     _delayBeforeAutomaticMode.setName("Delay b4 auto");
     _delayBeforeAutomaticMode.setMin(0.0);
     _delayBeforeAutomaticMode.setMax(100.0);
+    
+    _timeOfLastManualParameterChange = -_delayBeforeAutomaticMode;
     
     _twoBeatCycle.setName("Two Beat");
     _twoBeatCycle.setMin(0.0);
@@ -283,9 +286,7 @@ SrGlobalParameters::_OnCycleAutomaticallyChanged(bool & value)
 float
 SrGlobalParameters::ComputeSecondsSinceManualInput() const
 {
-    // elapsed time starts at 0.0, so add in the _delay parameter so we don't get phantom
-    // "manual inputs" in the first minute of runtime.
-    return (ofGetElapsedTimef()+_delayBeforeAutomaticMode) - _timeOfLastManualParameterChange;
+    return ofGetElapsedTimef() - _timeOfLastManualParameterChange;
 }
 
 bool

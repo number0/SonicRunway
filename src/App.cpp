@@ -31,6 +31,7 @@
 #include "BigTrailsPattern.hpp"
 #include "NetworkInputPattern.hpp"
 #include "SpinTrailsPattern.hpp"
+#include "AmbientRainbowPattern.hpp"
 #include "GlobalParameters.hpp"
 
 #include "Switcher.hpp"
@@ -38,7 +39,8 @@
 extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
-static const size_t PATTERNS_PER_COLUMN = 5;
+// static const size_t PATTERNS_PER_COLUMN = 5;
+static const int MAX_COLUMN_HEIGHT = 850;
 
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
@@ -188,6 +190,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     SrSpinTrailsPattern *spinTrailsPattern =
         new SrSpinTrailsPattern("SpinTrails", &_model, &_audio, &_globalParameters);
     _AddPattern(spinTrailsPattern);
+
+    SrAmbientRainbowPattern *ambientRainbowPattern =
+    new SrAmbientRainbowPattern("AmbientRainbow", &_model, &_audio, &_globalParameters);
+    _AddPattern(ambientRainbowPattern);
     
     // XXX Disabling video patterns because they are slow
     //_MakeVideoPatterns();
@@ -341,9 +347,32 @@ void
 SrApp::_AddPattern(SrPattern * pattern)
 {
     _patterns.push_back(pattern);
-    
+
     // Figure out which panel it should be in
     // Allocate another patternPanel (column) if we need it
+    
+    int patternHeight = pattern->GetUiPanel()->getHeight();
+    
+    bool needNewPanel = false;
+    if (_patternPanels.size() < 1) {
+        needNewPanel = true;
+    } else {
+        ofxPanel * curMaxPanel = _patternPanels.back();
+        if (curMaxPanel->getHeight() + patternHeight > MAX_COLUMN_HEIGHT) {
+            needNewPanel = true;
+        }
+    }
+
+    size_t panelIdx = _patternPanels.size()-1;
+    if (needNewPanel) {
+        ofxPanel * newPanel = new ofxPanel();
+        newPanel->setup("Patterns");
+        newPanel->setPosition(_uiMargin + _uiColumnWidth * (2 + panelIdx), _uiMargin);
+        _patternPanels.push_back(newPanel);
+        panelIdx += 1;
+    }
+    
+    /*
     size_t panelIdx = _patterns.size() / PATTERNS_PER_COLUMN;
     if (panelIdx >= _patternPanels.size()) {
         ofxPanel * newPanel = new ofxPanel();
@@ -351,6 +380,7 @@ SrApp::_AddPattern(SrPattern * pattern)
         newPanel->setPosition(_uiMargin + _uiColumnWidth * (2 + panelIdx), _uiMargin);
         _patternPanels.push_back(newPanel);
     }
+     */
     
     // Add the Ui
     _patternPanels[panelIdx]->add(pattern->GetUiPanel());
@@ -461,7 +491,7 @@ SrApp::Draw()
     
     if (_showFft) {
         if ( _leftAlignPrevis ){
-            _audio.DrawFftBands(_uiColumnWidth + _uiMargin + _previsWidth*_leftAlignScale, 400, _uiColumnWidth, _uiColumnWidth);
+            _audio.DrawFftBands(_uiColumnWidth, _previsHeight - int(_uiColumnWidth/2), _uiColumnWidth, _uiColumnWidth);
         }
         else {
             _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);
