@@ -21,7 +21,7 @@ SrAnimPattern::SrAnimPattern(const std::string & name,
     _currentFrame(0),
     _gateIndex(0),
     _scroll(false),
-    _playPingPong(true),
+    _playPingPong(false),
     _isPonging(false)
 {
     _scroll.setName("Scroll");
