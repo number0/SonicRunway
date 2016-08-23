@@ -259,7 +259,9 @@ SrGlobalParameters::Update()
 void
 SrGlobalParameters::OnReceivedPresetInput()
 {
-    _timeOfLastManualParameterChange = ofGetElapsedTimef();
+    // XXX not sure we want to switch to "manual parameter" mode just
+    // because we switched a preset? leaving this off for now...
+    // _timeOfLastManualParameterChange = ofGetElapsedTimef();
 }
 
 void
@@ -292,5 +294,11 @@ SrGlobalParameters::ComputeSecondsSinceManualInput() const
 bool
 SrGlobalParameters::WasRecentManualInput() const
 {
+    // NOTE: this parameter was never wired up. I think this is the right place to query it,
+    // but I'm not sure if "lock to local" means use the built-in params of the pattern, or lock
+    // to the OSC global params. i think it's the former, which would be the below logic. -jdn
+    if ( (bool) _lockToLocalParams == true) {
+        return false;
+    }
     return ComputeSecondsSinceManualInput() < (float) _delayBeforeAutomaticMode;
 }
