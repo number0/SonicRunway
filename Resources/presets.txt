@@ -593,3 +593,164 @@ vid_WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Enabled: 1
 vid_WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Scroll: 0
 vid_Yellowbrick|/Runway/Patterns/Yellowbrick/Enabled: 1
 vid_Yellowbrick|/Runway/Patterns/Yellowbrick/Scroll: 0
+Nonsense|/Runway/Patterns/SkyStars/Enabled: 1
+Nonsense|/Runway/Patterns/SkyStars/Scroll: 0
+Nonsense|/Runway/Patterns/Fft/Enabled: 1
+Nonsense|/Runway/Patterns/Fft/IsMask: 0
+Nonsense|/Runway/Patterns/Fft/InvertMask: 0
+Nonsense|/Runway/Patterns/Fft/Exponent: 2
+Nonsense|/Runway/Patterns/Fft/Multiplier: 2
+Nonsense|/Runway/Patterns/Fft/Spread Exponent: 0.37
+Nonsense|/Runway/Patterns/Fft/Hue Offset: 0
+Nonsense|/Runway/Patterns/Fft/Hue Shift: 0.3
+Nonsense|/Runway/Patterns/Fft/Mirror: 1
+Nonsense|/Runway/Patterns/Fft/Scale: 1
+Nonsense|/Runway/Patterns/Fft/Scale Regions: 1
+Nonsense|/Runway/Patterns/Fft/Spin Slowly: 1
+Nonsense|/Runway/Patterns/Fft/Cycle Hues: 1
+Nonsense|/Runway/Patterns/Big Trails/Enabled: 1
+Nonsense|/Runway/Patterns/Big Trails/IsMask: 1
+Nonsense|/Runway/Patterns/Big Trails/InvertMask: 1
+Nonsense|/Runway/Patterns/Big Trails/Hue: 0.2
+Nonsense|/Runway/Patterns/Big Trails/Saturation: 0.8
+Nonsense|/Runway/Patterns/Big Trails/Brightness: 0.8
+Nonsense|/Runway/Patterns/Big Trails/Jitter: 0.35
+Nonsense|/Runway/Patterns/Big Trails/Rotation: 0.38
+SkyDance|/Runway/Patterns/Clouds/Enabled: 1
+SkyDance|/Runway/Patterns/Clouds/Scroll: 0
+SkyDance|/Runway/Patterns/Beat/Enabled: 1
+SkyDance|/Runway/Patterns/Beat/IsMask: 0
+SkyDance|/Runway/Patterns/Beat/InvertMask: 0
+SkyDance|/Runway/Patterns/Beat/Hue: 0.5
+SkyDance|/Runway/Patterns/Beat/DecayTime: 0.0969388
+SkyDance|/Runway/Patterns/Beat/SpinSpeed: 0.25
+SkyDance|/Runway/Patterns/Big Trails/Enabled: 1
+SkyDance|/Runway/Patterns/Big Trails/IsMask: 1
+SkyDance|/Runway/Patterns/Big Trails/InvertMask: 1
+SkyDance|/Runway/Patterns/Big Trails/Hue: 0.2
+SkyDance|/Runway/Patterns/Big Trails/Saturation: 0.8
+SkyDance|/Runway/Patterns/Big Trails/Brightness: 0.00510204
+SkyDance|/Runway/Patterns/Big Trails/Jitter: 0.0663265
+SkyDance|/Runway/Patterns/Big Trails/Rotation: 0.418367
+NonsenseTwo|/Runway/Patterns/Purpcycle/Enabled: 1
+NonsenseTwo|/Runway/Patterns/Purpcycle/Scroll: 0
+NonsenseTwo|/Runway/Patterns/Fft/Enabled: 1
+NonsenseTwo|/Runway/Patterns/Fft/IsMask: 1
+NonsenseTwo|/Runway/Patterns/Fft/InvertMask: 1
+NonsenseTwo|/Runway/Patterns/Fft/Exponent: 0.892857
+NonsenseTwo|/Runway/Patterns/Fft/Multiplier: 1.64286
+NonsenseTwo|/Runway/Patterns/Fft/Spread Exponent: 0.609694
+NonsenseTwo|/Runway/Patterns/Fft/Hue Offset: 0
+NonsenseTwo|/Runway/Patterns/Fft/Hue Shift: 0.3
+NonsenseTwo|/Runway/Patterns/Fft/Mirror: 1
+NonsenseTwo|/Runway/Patterns/Fft/Scale: 0.755
+NonsenseTwo|/Runway/Patterns/Fft/Scale Regions: 0
+NonsenseTwo|/Runway/Patterns/Fft/Spin Slowly: 0
+NonsenseTwo|/Runway/Patterns/Fft/Cycle Hues: 0
+NonsenseTwo|/Runway/Patterns/RMS/Enabled: 1
+NonsenseTwo|/Runway/Patterns/RMS/IsMask: 0
+NonsenseTwo|/Runway/Patterns/RMS/InvertMask: 0
+NonsenseTwo|/Runway/Patterns/RMS/Hue 1: 0.0867347
+NonsenseTwo|/Runway/Patterns/RMS/Hue 2: 0.5
+NonsenseTwo|/Runway/Patterns/RMS/Hue 3: 0.8
+NonsenseTwo|/Runway/Patterns/RMS/Saturation: 1
+NonsenseTwo|/Runway/Patterns/RMS/Brightness: 0.576531
+RollerRink|/Runway/Patterns/Hexgrow/Enabled: 1
+RollerRink|/Runway/Patterns/Hexgrow/Scroll: 1
+RollerRink|/Runway/Patterns/Phrase/Enabled: 1
+RollerRink|/Runway/Patterns/Phrase/IsMask: 1
+RollerRink|/Runway/Patterns/Phrase/InvertMask: 1
+RollerRink|/Runway/Patterns/Phrase/Random: 1
+Crush|/Runway/Patterns/Hexgrow/Enabled: 1
+Crush|/Runway/Patterns/Hexgrow/Scroll: 0
+Crush|/Runway/Patterns/Beat/Enabled: 1
+Crush|/Runway/Patterns/Beat/IsMask: 0
+Crush|/Runway/Patterns/Beat/InvertMask: 0
+Crush|/Runway/Patterns/Beat/Hue: 0.5
+Crush|/Runway/Patterns/Beat/DecayTime: 0.0663265
+Crush|/Runway/Patterns/Beat/SpinSpeed: 0.25
+Navigator|/Runway/Patterns/Jahara/Enabled: 1
+Navigator|/Runway/Patterns/Jahara/Scroll: 0
+Navigator|/Runway/Patterns/Jelly/Enabled: 1
+Navigator|/Runway/Patterns/Jelly/Scroll: 0
+Navigator|/Runway/Patterns/Star/Enabled: 1
+Navigator|/Runway/Patterns/Star/IsMask: 0
+Navigator|/Runway/Patterns/Star/InvertMask: 0
+Navigator|/Runway/Patterns/Star/Hue: 1
+Navigator|/Runway/Patterns/Star/Number: 0.3
+Navigator|/Runway/Patterns/Star/Threshold: 0.4
+Navigator|/Runway/Patterns/Star/Saturation: 1
+Navigator|/Runway/Patterns/Star/Brightness: 1
+FullDay|/Runway/Patterns/SkyStars/Enabled: 1
+FullDay|/Runway/Patterns/SkyStars/Scroll: 0
+FullDay|/Runway/Patterns/Star/Enabled: 1
+FullDay|/Runway/Patterns/Star/IsMask: 0
+FullDay|/Runway/Patterns/Star/InvertMask: 0
+FullDay|/Runway/Patterns/Star/Hue: 1
+FullDay|/Runway/Patterns/Star/Number: 0.3
+FullDay|/Runway/Patterns/Star/Threshold: 0.4
+FullDay|/Runway/Patterns/Star/Saturation: 0
+FullDay|/Runway/Patterns/Star/Brightness: 0.244898
+PacificRim|/Runway/Patterns/UnderMeTab/Enabled: 1
+PacificRim|/Runway/Patterns/UnderMeTab/Scroll: 0
+PacificRim|/Runway/Patterns/Star/Enabled: 1
+PacificRim|/Runway/Patterns/Star/IsMask: 0
+PacificRim|/Runway/Patterns/Star/InvertMask: 0
+PacificRim|/Runway/Patterns/Star/Hue: 1
+PacificRim|/Runway/Patterns/Star/Number: 0.3
+PacificRim|/Runway/Patterns/Star/Threshold: 0.30102
+PacificRim|/Runway/Patterns/Star/Saturation: 0
+PacificRim|/Runway/Patterns/Star/Brightness: 1
+PacificRim|/Runway/Patterns/Phrase/Enabled: 1
+PacificRim|/Runway/Patterns/Phrase/IsMask: 0
+PacificRim|/Runway/Patterns/Phrase/InvertMask: 0
+PacificRim|/Runway/Patterns/Phrase/Random: 1
+DaySucker|/Runway/Patterns/ParticlesFour/Enabled: 1
+DaySucker|/Runway/Patterns/ParticlesFour/Scroll: 0
+DaySucker|/Runway/Patterns/Big Trails/Enabled: 1
+DaySucker|/Runway/Patterns/Big Trails/IsMask: 0
+DaySucker|/Runway/Patterns/Big Trails/InvertMask: 0
+DaySucker|/Runway/Patterns/Big Trails/Hue: 0.52551
+DaySucker|/Runway/Patterns/Big Trails/Saturation: 0.8
+DaySucker|/Runway/Patterns/Big Trails/Brightness: 0.8
+DaySucker|/Runway/Patterns/Big Trails/Jitter: 0.35
+DaySucker|/Runway/Patterns/Big Trails/Rotation: 0
+Fewsha|/Runway/Patterns/Subspace/Enabled: 1
+Fewsha|/Runway/Patterns/Subspace/Scroll: 0
+Fewsha|/Runway/Patterns/Beat/Enabled: 1
+Fewsha|/Runway/Patterns/Beat/IsMask: 0
+Fewsha|/Runway/Patterns/Beat/InvertMask: 0
+Fewsha|/Runway/Patterns/Beat/Hue: 0.5
+Fewsha|/Runway/Patterns/Beat/DecayTime: 0.607143
+Fewsha|/Runway/Patterns/Beat/SpinSpeed: -3
+ShiftShift|/Runway/Patterns/Popbottles/Enabled: 1
+ShiftShift|/Runway/Patterns/Popbottles/Scroll: 0
+ShiftShift|/Runway/Patterns/Phrase/Enabled: 1
+ShiftShift|/Runway/Patterns/Phrase/IsMask: 1
+ShiftShift|/Runway/Patterns/Phrase/InvertMask: 1
+ShiftShift|/Runway/Patterns/Phrase/Random: 1
+Caustic|/Runway/Patterns/PoolWater/Enabled: 1
+Caustic|/Runway/Patterns/PoolWater/Scroll: 0
+Caustic|/Runway/Patterns/Phrase/Enabled: 1
+Caustic|/Runway/Patterns/Phrase/IsMask: 1
+Caustic|/Runway/Patterns/Phrase/InvertMask: 1
+Caustic|/Runway/Patterns/Phrase/Random: 1
+Goodnight|/Runway/Patterns/Jelly/Enabled: 1
+Goodnight|/Runway/Patterns/Jelly/Scroll: 0
+Goodnight|/Runway/Patterns/Fft/Enabled: 1
+Goodnight|/Runway/Patterns/Fft/IsMask: 0
+Goodnight|/Runway/Patterns/Fft/InvertMask: 0
+Goodnight|/Runway/Patterns/Fft/Exponent: 2
+Goodnight|/Runway/Patterns/Fft/Multiplier: 2
+Goodnight|/Runway/Patterns/Fft/Spread Exponent: 0.37
+Goodnight|/Runway/Patterns/Fft/Hue Offset: 0
+Goodnight|/Runway/Patterns/Fft/Hue Shift: 0.3
+Goodnight|/Runway/Patterns/Fft/Mirror: 1
+Goodnight|/Runway/Patterns/Fft/Scale: 1
+Goodnight|/Runway/Patterns/Fft/Scale Regions: 1
+Goodnight|/Runway/Patterns/Fft/Spin Slowly: 1
+Goodnight|/Runway/Patterns/Fft/Cycle Hues: 1
+Goodnight|/Runway/Patterns/Phrase/Enabled: 1
+Goodnight|/Runway/Patterns/Phrase/IsMask: 1
+Goodnight|/Runway/Patterns/Phrase/InvertMask: 1
+Goodnight|/Runway/Patterns/Phrase/Random: 1
