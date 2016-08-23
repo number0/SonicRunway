@@ -83,8 +83,8 @@ MesmerFrog|/Runway/Patterns/Big Trails/IsMask: 1
 MesmerFrog|/Runway/Patterns/Big Trails/Hue: 1
 MesmerFrog|/Runway/Patterns/Big Trails/Saturation: 0.755102
 MesmerFrog|/Runway/Patterns/Big Trails/Brightness: 1
-MesmerFrog|/Runway/Patterns/Big Trails/Jitter: 1
-MesmerFrog|/Runway/Patterns/Big Trails/Rotation: 1
+MesmerFrog|/Runway/Patterns/Big Trails/Jitter: .1
+MesmerFrog|/Runway/Patterns/Big Trails/Rotation: .1
 MesmerFrog|/Runway/Patterns/Whomp/Enabled: 1
 MesmerFrog|/Runway/Patterns/Whomp/InvertMask: 0
 MesmerFrog|/Runway/Patterns/Whomp/IsMask: 1
@@ -126,7 +126,7 @@ PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
 PurpleSwirl|/Runway/Patterns/Trails/InvertMask: 0
 PurpleSwirl|/Runway/Patterns/Trails/IsMask: 0
 PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
-PurpleSwirl|/Runway/Patterns/Trails/Jitter: 20
+PurpleSwirl|/Runway/Patterns/Trails/Jitter: 0.20
 Radiant|/Runway/Patterns/Harvest/Enabled: 1
 Radiant|/Runway/Patterns/Harvest/Scroll: 0
 Radiant|/Runway/Patterns/DoubleRainbow/Enabled: 1
@@ -208,14 +208,14 @@ TelephasicWorkshop|/Runway/Patterns/Whomp/Cutoff Value: 0.147959
 TelephasicWorkshop|/Runway/Patterns/Whomp/Vibrate: 1
 TelephasicWorkshop|/Runway/Patterns/Whomp/Cycle Hues: 0
 TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
-TrailsAndStars|/Runway/Patterns/Star/Number: 26.0204
+TrailsAndStars|/Runway/Patterns/Star/Number: 0.26
 TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
 TrailsAndStars|/Runway/Patterns/Star/InvertMask: 0
 TrailsAndStars|/Runway/Patterns/Star/IsMask: 0
 TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
 TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
-TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 20
-TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: 12
+TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 0.20
+TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: .12
 UnicornProm|/Runway/Patterns/Koll/Enabled: 1
 UnicornProm|/Runway/Patterns/Koll/Scroll: 1
 UnicornProm|/Runway/Patterns/SpinTrails/Enabled: 1
@@ -438,7 +438,7 @@ PlayerPiano|/Runway/Patterns/Trails/Enabled: 1
 PlayerPiano|/Runway/Patterns/Trails/InvertMask: 0
 PlayerPiano|/Runway/Patterns/Trails/IsMask: 1
 PlayerPiano|/Runway/Patterns/Trails/Hue: 1
-PlayerPiano|/Runway/Patterns/Trails/Jitter: 0
+PlayerPiano|/Runway/Patterns/Trails/Jitter: 0.4
 PlayerPiano|/Runway/Patterns/Trails/Saturation: 0.821429
 PlayerPiano|/Runway/Patterns/Trails/Brightness: 1
 ColorCut|/Runway/Patterns/Palette Bands/Enabled: 1

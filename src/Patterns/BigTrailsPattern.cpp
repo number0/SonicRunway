@@ -19,8 +19,8 @@ SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
     _hueParam(0.2),
     _saturationParam(0.8),
     _brightnessParam(0.8),
-    _jitterParam(30.0),
-    _rotationParam(12.0)
+    _jitterParam(0.35),
+    _rotationParam(0.38)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);
@@ -108,8 +108,8 @@ SrBigTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         hue = _hueParam + globals->GetVerySlowCycle();
         saturation = _saturationParam;
         brigthness = _brightnessParam;
-        rotation = _rotationParam;
-        jitter = _jitterParam;
+        rotation = _rotationParam * 100 - 50;
+        jitter = _jitterParam * 100;
     }
     
     hue = SrUtil_ClampCycle(0, 1, hue);

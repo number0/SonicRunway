@@ -18,7 +18,7 @@ SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.2),
 _saturationParam(0.8),
 _brightnessParam(0.8),
-_thresholdParam(0.5)
+_thresholdParam(0.05)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);
