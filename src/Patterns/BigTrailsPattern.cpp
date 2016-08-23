@@ -19,8 +19,8 @@ SrBigTrailsPattern::SrBigTrailsPattern(const std::string & name,
     _hueParam(0.2),
     _saturationParam(0.8),
     _brightnessParam(0.8),
-    _jitterParam(30.0),
-    _rotationParam(12.0)
+    _jitterParam(0.35),
+    _rotationParam(0.38)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);

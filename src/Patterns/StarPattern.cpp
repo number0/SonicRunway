@@ -16,7 +16,7 @@ SrStarPattern::SrStarPattern(const std::string & name,
                              SrGlobalParameters * globalParameters) :
 SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(1.0),
-_numberParam(30.0),
+_numberParam(0.3),
 _thresholdParam(0.4),
 _saturationParam(1.0),
 _brightnessParam(1.0)
