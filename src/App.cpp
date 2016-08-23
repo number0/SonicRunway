@@ -257,7 +257,9 @@ SrApp::~SrApp()
 void
 SrApp::_MakeAnimPatterns()
 {
-    std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    //std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    std::string animFolder = std::string(getenv("HOME")) + "/Desktop/Anim/";
+    printf("Looking for anim patterns in %s\n", animFolder.c_str());
     
     ofDirectory dir(animFolder);
     dir.listDir();
