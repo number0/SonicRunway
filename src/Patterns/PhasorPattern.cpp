@@ -17,8 +17,8 @@ SrPhasorPattern::SrPhasorPattern(const std::string & name,
 SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.75),
 _saturationParam(0.8),
-_trailParam(90.0),
-_thresholdParam(0.04)
+_trailParam(0.07),
+_thresholdParam(0.1)
 {
     _hueParam.setName("Hue");
     _hueParam.setMin(0.0);
