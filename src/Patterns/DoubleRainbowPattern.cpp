@@ -140,7 +140,7 @@ SrDoubleRainbowPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
     }
     
     float amplitude = GetAudio()->GetCalibratedFftSum();
-    float brightness = pow(amplitude, 0.4f); // scale baseline brightness by amplitude
+    float brightness = ofMap(pow(amplitude, 0.4f), 0.0f, 1.0f, 0.15f, 1.0f); // scale baseline brightness by amplitude
         
     // map the length of the rainbow bands based on the amplitude
     onsetDecayTime = ofMap(amplitude, 0.0f, 1.0f, 0.2f*onsetDecayTime, 1.2f*onsetDecayTime);
