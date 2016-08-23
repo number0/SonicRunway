@@ -113,6 +113,7 @@ SrPreset::IsAudioReactive() const
             return true;
         }
     }
+    return false;
 }
 
 std::set<SrPattern *>

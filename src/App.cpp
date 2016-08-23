@@ -40,7 +40,14 @@ extern "C" void CGSSetDebugOptions(int);
 extern "C" void CGSDeferredUpdates(int);
 
 // static const size_t PATTERNS_PER_COLUMN = 5;
+
+// Max screen height to use for pattern auto-layout
 static const int MAX_COLUMN_HEIGHT = 850;
+
+// Maximum number of frames to load from anim sequences.
+// Can set this artificially low for testing...
+// Our longest sequence is currently 1201 frames.
+static const size_t ANIM_MAX_FRAMES = 1400;
 
 SrApp::SrApp(ofBaseApp * ofApp) :
     _model(),
@@ -266,13 +273,17 @@ SrApp::_MakeAnimPatterns()
         
         std::string patternName = fname.substr(5, fname.size());
         
+        size_t numFrames = current.getFiles().size();
+        
         cout << "Loading anim pattern '" <<
             current.getName(i) << "' with num frames: "
-            << current.getFiles().size() << "\n\n";
+            << numFrames << "\n\n";
 
+        numFrames = std::min(numFrames, ANIM_MAX_FRAMES);
+        
         SrAnimPattern *animPattern =
         new SrAnimPattern(patternName, "../../../data/Anim/" + fname, fname,
-                          current.getFiles().size(), false,
+                          numFrames, false,
                           &_model, &_audio, &_globalParameters);
         _AddPattern(animPattern);
         
@@ -491,7 +502,7 @@ SrApp::Draw()
     
     if (_showFft) {
         if ( _leftAlignPrevis ){
-            _audio.DrawFftBands(_uiColumnWidth, _previsHeight - int(_uiColumnWidth/2), _uiColumnWidth, _uiColumnWidth);
+            _audio.DrawFftBands(_uiMargin, _previsHeight - int(_uiColumnWidth/2), _uiColumnWidth, _uiColumnWidth);
         }
         else {
             _audio.DrawFftBands(_uiColumnWidth + _uiMargin, 400, _uiColumnWidth, _uiColumnWidth);

@@ -37,6 +37,8 @@ private:
     SrImageSequence _imageSequence;
     size_t _currentFrame;
     int _gateIndex;
+    bool _playPingPong;
+    bool _isPonging;
     
     ofParameter<bool> _scroll;
 };
