@@ -254,11 +254,10 @@ MesmerFrog|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
 MesmerFrog|/Runway/Patterns/SpinTrails/Cycle Hues: 1
 Miami_Beach|/Runway/Patterns/PoolWater/Enabled: 1
 Miami_Beach|/Runway/Patterns/PoolWater/Scroll: 0
-Miami_Beach|/Runway/Patterns/Phrase/Random: 0
+Miami_Beach|/Runway/Patterns/Phrase/Random: 1
 Miami_Beach|/Runway/Patterns/Phrase/Enabled: 1
 Miami_Beach|/Runway/Patterns/Phrase/InvertMask: 0
 Miami_Beach|/Runway/Patterns/Phrase/IsMask: 0
-Miami_Beach|/Runway/Patterns/Phrase/Random: 0
 MirroredTunnel|/Runway/Patterns/ShiftingPains/Enabled: 1
 MirroredTunnel|/Runway/Patterns/ShiftingPains/Scroll: 1
 MirroredTunnel|/Runway/Patterns/Fft/Enabled: 1
