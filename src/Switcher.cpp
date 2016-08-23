@@ -38,12 +38,12 @@ SrSwitcher::SrSwitcher(const std::string & name,
     
     _secondsBetweenPresets.setName("Time between presets");
     _secondsBetweenPresets.setMin(0.0);
-    _secondsBetweenPresets.setMax(10.0);
+    _secondsBetweenPresets.setMax(40.0);
     _AddUIParameter(_secondsBetweenPresets);
    
     _secondsToNextPreset.setName("Time to next preset");
     _secondsToNextPreset.setMin(0.0);
-    _secondsToNextPreset.setMax(10.0);
+    _secondsToNextPreset.setMax(40.0);
     _AddUIParameter(_secondsToNextPreset);
     
     _newButton.setup("New", 40, 40);
@@ -201,6 +201,12 @@ SrSwitcher::Update()
         if (preset) {
             _ApplyPreset(preset);
         }
+        _secondsToNextPreset = (float) _secondsBetweenPresets;
+    }
+    
+    // catch case where we're scrubbed the "time between presets"
+    // slider lower and want the timer to "catch up".
+    if ((float) _secondsToNextPreset > (float) _secondsBetweenPresets) {
         _secondsToNextPreset = (float) _secondsBetweenPresets;
     }
 }

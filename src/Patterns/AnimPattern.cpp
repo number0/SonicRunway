@@ -20,7 +20,9 @@ SrAnimPattern::SrAnimPattern(const std::string & name,
     _imageSequence(path, baseFileName, numFrames, padFrameNumbers),
     _currentFrame(0),
     _gateIndex(0),
-    _scroll(false)
+    _scroll(false),
+    _playPingPong(true),
+    _isPonging(false)
 {
     _scroll.setName("Scroll");
     _AddUIParameter(_scroll);
@@ -40,9 +42,26 @@ SrAnimPattern::IsAudioReactive() const
 void
 SrAnimPattern::_Update()
 {
-    _currentFrame++;
-    if (_currentFrame >= _imageSequence.GetNumFrames()) {
-        _currentFrame = 0;
+    if(_playPingPong) {
+        if (_isPonging) {
+            if (_currentFrame > 0) {
+                _currentFrame--;
+            } else {
+                _isPonging = false;
+                _currentFrame++;
+            }
+        } else { // pinging
+            _currentFrame++;
+            if(_currentFrame >= _imageSequence.GetNumFrames()) {
+                _currentFrame--;
+                _isPonging = true;
+            }
+        }
+    } else { // not playing ping pong, just increment and loop
+        _currentFrame++;
+        if (_currentFrame >= _imageSequence.GetNumFrames()) {
+            _currentFrame = 0;
+        }
     }
     
     if (_scroll) {
