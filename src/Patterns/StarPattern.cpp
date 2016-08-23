@@ -80,7 +80,7 @@ SrStarPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         hue = _hueParam + globals->GetSlowCycle();
         saturation = _saturationParam;
         brightness = _brightnessParam;
-        number = _numberParam;
+        number = _numberParam * 100;
         threshold = _thresholdParam;
     }
     

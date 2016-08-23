@@ -16,7 +16,7 @@ SrTrailsPattern::SrTrailsPattern(const std::string & name,
                                  SrGlobalParameters * globalParameters) :
 SrScrollingPattern(name, model, audio, globalParameters),
 _hueParam(0.75),
-_jitterParam(50.0),
+_jitterParam(0.5),
 _saturationParam(0.8),
 _brightnessParam(0.8)
 {
@@ -70,7 +70,7 @@ SrTrailsPattern::_DrawCurrentGate(std::vector<ofColor> * buffer) const
         brightness = GetGlobalParameters()->GetSlider2();
     } else {
         hue = _hueParam + globals->GetSlowCycle();
-        jitter = _jitterParam;
+        jitter = _jitterParam * 100;
         saturation = _saturationParam;
         brightness = _brightnessParam;
     }
