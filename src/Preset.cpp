@@ -203,3 +203,9 @@ SrPreset::_OnTogglePressed(bool & value)
         _switcher->OnPresetTogglePressed(this);
     }
 }
+
+int
+SrPreset::GetIndex() const
+{
+    return _switcher->GetPresetIndex(this);
+}

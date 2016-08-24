@@ -288,10 +288,30 @@ SrSwitcher::FindPatternByName(const std::string & name) const
 void
 SrSwitcher::ApplyPresetAtIndex(size_t index)
 {
-    if (index >= _presets.size()) {
+    const std::vector<SrPreset *> presets =
+        (bool) _isChoosingAudioReactivePresets ?
+        _audioReactivePresets : _nonAudioReactivePresets;
+    
+    if (index >= presets.size()) {
         SrError("Unknown preset with index %zu\n", index);
         return;
     }
     
-    _ApplyPreset(_presets[index]);
+    _ApplyPreset(presets[index]);
+}
+
+int
+SrSwitcher::GetPresetIndex(const SrPreset * preset) const
+{
+    if (not preset) {
+        return;
+    }
+    
+    for(size_t i = 0; i < _presets.size(); i++) {
+        if (_presets[i] == preset) {
+            return i;
+        }
+    }
+    
+    return -1;
 }
