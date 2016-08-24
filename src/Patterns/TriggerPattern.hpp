@@ -32,6 +32,8 @@ protected:
 private:
     ofParameter<bool> _triggerParam;
     bool _triggerWasPressed;
+    int _trailLength;
+    int _framesSinceTrigger;
 };
 
 #endif
