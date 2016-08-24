@@ -148,18 +148,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
-    /*
-    SrVideoPattern *videoPattern =
-        new SrVideoPattern("Fireplace", "fireplace2.mov",
-                           &_model, &_audio, &_globalParameters);
-    _AddPattern(videoPattern);
-     */
-    
-    SrAnimPattern *animPattern =
-        new SrAnimPattern("Lightning", "", "lightning", 82, false,
-                          &_model, &_audio, &_globalParameters);
-    _AddPattern(animPattern);
-    
     SrTriggerPattern *triggerPattern =
         new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
     _AddPattern(triggerPattern);
