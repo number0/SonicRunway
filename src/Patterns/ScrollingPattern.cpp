@@ -58,16 +58,19 @@ SrScrollingPattern::_Update()
     // Copy the colors to our pixel cache
     for(int i = 0; i < GetModel()->GetLightsPerGate(); i++) {
         ofColor color = currentColors[i];
-       
+        float opacity = GetOpacity()[0];
+
         if(_mask) {
             float b = color.getBrightness()/255.0;
             b = pow(b, 0.2);
+            // if we're a mask, "fade out" means go to 1.0.
+            b = ofMap(b, 0.0f, 1.0f, (1.0f-opacity), 1.0f);
             color = ofColor(b*255.0,b*255.0,b*255.0);
+        } else if (_invertMask) {
+            color *= opacity; // NOTE: still working on this -jdn
+        } else {
+            color *= opacity;
         }
-        
-        float opacity = GetOpacity()[0];
-        
-        color *= opacity;
         
         _image.setColor(_index, i, color);
     }
@@ -112,3 +115,15 @@ SrScrollingPattern::_Draw() const
         ofEnableBlendMode(OF_BLENDMODE_ADD);
     }
 }
+
+/*
+bool
+SrScrollingPattern::CanXfade() const
+{
+    if(_mask) {
+        return false;
+    } else {
+        return true;
+    }
+}
+*/
