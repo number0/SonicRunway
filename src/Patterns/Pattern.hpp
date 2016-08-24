@@ -58,6 +58,10 @@ public:
     // Return 'true' if the pattern reacts to the audio signal.
     // Default returns true.
     virtual bool IsAudioReactive() const;
+
+    // Return 'true' if this pattern can be crossfaded during
+    // transitions
+//    virtual bool CanXfade() const;
     
     // Get a buffer with per-gate opacity information.
     // Opacity is 1 if the pattern is enabled, 0 if disabled.

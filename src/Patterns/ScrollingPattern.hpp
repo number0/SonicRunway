@@ -36,6 +36,8 @@ protected:
     // Subclasses implement this to draw the current gate.
     virtual void _DrawCurrentGate(std::vector<ofColor> * buffer) const = 0;
     
+//    virtual bool CanXfade() const;
+    
 private:
     int _index;
     

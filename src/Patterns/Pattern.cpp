@@ -140,3 +140,11 @@ SrPattern::IsAudioReactive() const
 {
     return true;
 }
+
+/*
+bool
+SrPattern::CanXfade() const
+{
+    return true;
+}
+*/
