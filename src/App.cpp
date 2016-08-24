@@ -57,10 +57,10 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _previs(&_model, &_audio, this),
     _switcher("Switcher", this),
     _oscSync(&_model, &_audio, &_switcher, 8000, "", 9000),
-    _showGlobals(true),
-    _showFft(true),
-    _showPatternParameters(true),
-    _showPrevis(true),
+    _showGlobals(false),
+    _showFft(false),
+    _showPatternParameters(false),
+    _showPrevis(false),
     _uiColumnWidth(220),
     _uiMargin(10),
     _previsXCoord(0),
@@ -190,10 +190,13 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
-    diagnosticPattern->SetEnabled(true);
     //fftPattern->SetEnabled(true);
     //whompPattern->SetEnabled(true);
     //phrasePattern->SetEnabled(true);
+    diagnosticPattern->SetEnabled(true);
+    
+    // Always enable trigger pattern
+    triggerPattern->SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc

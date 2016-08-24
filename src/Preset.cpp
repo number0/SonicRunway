@@ -80,7 +80,7 @@ SrPreset::Apply() const
             SrUtil_FindParameter(parameterGroup, pathStr);
         
         if (not param) {
-            SrWarn("couldn't find parameter %s\n", pathStr.c_str());
+            printf("couldn't find parameter %s\n", pathStr.c_str());
             continue;
         }
         

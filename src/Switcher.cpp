@@ -20,8 +20,8 @@ SrSwitcher::SrSwitcher(const std::string & name,
     _app(app),
     _currentPreset(NULL),
     _cyclePresets(false),
-    _delayBeforeAutomatic(1055.0),
-    _secondsBetweenPresets(3.0),
+    _delayBeforeAutomatic(55.0),
+    _secondsBetweenPresets(15.0),
     _secondsToNextPreset((float) _secondsBetweenPresets),
     _secondsBeforeSwitchingToNonAudioPresets(5),
     _isChoosingAudioReactivePresets(false)
@@ -239,15 +239,13 @@ SrSwitcher::_GetRandomPreset() const
     
     // XXX Considering adding this to bias the default.  Would be nicer to
     // have a file weighting how col
-    /*
     // If we're choosing audio reactive presets, choose the first one
     // more often..
     if (_isChoosingAudioReactivePresets) {
-        if (rand() % 2 == 0) {
+        if (rand() % 3 == 0) {
             return presets[0];
         }
     }
-     */
 
     int r = rand();
     int s = presets.size();
@@ -282,6 +280,9 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
     // the ones explicitly enabled in the preset.
     const std::vector<SrPattern *> & patterns = _app->GetPatterns();
     for (size_t i = 0; i < patterns.size(); i++) {
+        if (patterns[i]->GetName() == "Trigger") {
+            continue;
+        }
         patterns[i]->SetEnabled(false);
     }
     
