@@ -55,7 +55,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio, this),
-    _switcher("Switcher", "presets.txt", this),
+    _switcher("Switcher", this),
     _oscSync(&_model, &_audio, &_switcher, 8000, "", 9000),
     _showGlobals(true),
     _showFft(true),

@@ -15,10 +15,8 @@
 #include "Util.hpp"
 
 SrSwitcher::SrSwitcher(const std::string & name,
-                       const std::string & fileName,
                        SrApp * app) :
     SrUiMixin(name),
-    _fileName(fileName),
     _app(app),
     _currentPreset(NULL),
     _cyclePresets(false),
@@ -69,8 +67,16 @@ SrSwitcher::SrSwitcher(const std::string & name,
 void
 SrSwitcher::ReadPresets()
 {
+    _ReadPresets("presets_noVideos.txt");
+    //_ReadPresets("presets_audioVideos.txt");
+    //_ReadPresets("presets_justVideos.txt");
+}
+
+void
+SrSwitcher::_ReadPresets(const std::string & fileName)
+{
     std::string installedFileName =
-        SrUtil_GetAbsolutePathForResource(_fileName);
+        SrUtil_GetAbsolutePathForResource(fileName);
     std::ifstream ifs(installedFileName, std::ifstream::in);
     if (not ifs) {
         SrError("ReadPresets: error opening file %s\n",
@@ -84,6 +90,8 @@ SrSwitcher::ReadPresets()
     // Read strings into a map
     std::map<std::string, std::vector<std::string> > _presetMap;
     
+    std::vector<std::string> orderedPresetList;
+    
     std::string str;
     while (std::getline(ifs, str)) {
         std::vector<std::string> strVec = SrUtil_SplitString(str, '|');
@@ -96,12 +104,24 @@ SrSwitcher::ReadPresets()
         std::string presetStr = strVec[1];
         presetStr += std::string("\n");
         
+        auto findIter = _presetMap.find(presetName);
+        if (findIter == _presetMap.end()) {
+            orderedPresetList.push_back(presetName);
+        }
+        
         _presetMap[presetName].push_back(presetStr);
     }
     
-    for(auto iter = _presetMap.begin(); iter != _presetMap.end(); iter++) {
-        const std::string name = iter->first;
-        const std::vector<std::string> & strings = iter->second;
+    for(auto iter = orderedPresetList.begin(); iter != orderedPresetList.end(); iter++) {
+        const std::string name = *iter;
+        
+        auto findIter = _presetMap.find(name);
+        if (findIter == _presetMap.end()) {
+            SrError("Couldn't find new preset in map");
+            continue;
+        }
+        
+        const std::vector<std::string> & strings = findIter->second;
         
         SrPreset * newPreset = new SrPreset(name, _app->GetModel(), this);
         newPreset->Unpickle(strings);
@@ -109,7 +129,6 @@ SrSwitcher::ReadPresets()
         _AddPreset(newPreset);
         
     }
-    
 }
 
 SrSwitcher::~SrSwitcher()
@@ -132,7 +151,7 @@ SrSwitcher::_OnNewButtonPressed()
 void
 SrSwitcher::_OnSaveButtonPressed()
 {
-    std::string tmpFileName = std::string("/tmp/") + _fileName;
+    std::string tmpFileName = std::string("/tmp/tmpPresets.txt");
     FILE *fp = fopen(tmpFileName.c_str(), "w");
     if (not fp) {
         SrError("Error opening file");
@@ -217,6 +236,18 @@ SrSwitcher::_GetRandomPreset() const
     const std::vector<SrPreset *> & presets =
         (bool) _isChoosingAudioReactivePresets ?
         _audioReactivePresets : _nonAudioReactivePresets;
+    
+    // XXX Considering adding this to bias the default.  Would be nicer to
+    // have a file weighting how col
+    /*
+    // If we're choosing audio reactive presets, choose the first one
+    // more often..
+    if (_isChoosingAudioReactivePresets) {
+        if (rand() % 2 == 0) {
+            return presets[0];
+        }
+    }
+     */
 
     int r = rand();
     int s = presets.size();

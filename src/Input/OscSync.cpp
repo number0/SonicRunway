@@ -186,11 +186,13 @@ SrOscSync::BroadcastPresetInfo(SrPreset * preset)
     _BroadcastGlobalParameterLabel(preset, "Slider2");
     
     // XXX sadly, this part isn't working yet...
+    /*
     std::pair<int, int> xy = _ComputeGridCoordinates(preset->GetIndex());
     std::string path = _presetPrefix + std::to_string(xy.first) +
         "/" + std::to_string(xy.second);
     printf("sending preset message %s\n", path.c_str());
     _SendFloatMessage(path, 1.0);
+     */
 }
 
 void
