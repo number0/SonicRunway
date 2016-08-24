@@ -35,6 +35,7 @@
 		30211DBB1CFE89BC0085FF93 /* VideoPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30211DB91CFE89BC0085FF93 /* VideoPattern.cpp */; };
 		30216C411D31976300D2B07F /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30216C3F1D31976300D2B07F /* Preset.cpp */; };
 		30229D991D68A40200AB4A3E /* OscSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30229D971D68A40200AB4A3E /* OscSync.cpp */; };
+		30229DA31D6DD90700AB4A3E /* presets_patterns.txt in Resources */ = {isa = PBXBuildFile; fileRef = 30229DA21D6DD90700AB4A3E /* presets_patterns.txt */; };
 		302F35951C93CA39001D5E51 /* OnsetHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35931C93CA39001D5E51 /* OnsetHistory.cpp */; };
 		302F35981C972BE2001D5E51 /* BeatHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35961C972BE2001D5E51 /* BeatHistory.cpp */; };
 		302F359B1C972DE6001D5E51 /* EventHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 302F35991C972DE6001D5E51 /* EventHistory.cpp */; };
@@ -193,6 +194,7 @@
 		30216C401D31976300D2B07F /* Preset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Preset.hpp; sourceTree = "<group>"; };
 		30229D971D68A40200AB4A3E /* OscSync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscSync.cpp; path = Input/OscSync.cpp; sourceTree = "<group>"; };
 		30229D981D68A40200AB4A3E /* OscSync.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OscSync.hpp; path = Input/OscSync.hpp; sourceTree = "<group>"; };
+		30229DA21D6DD90700AB4A3E /* presets_patterns.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = presets_patterns.txt; path = Resources/presets_patterns.txt; sourceTree = "<group>"; };
 		302695351C8FEE1D007F749C /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Buffer.hpp; sourceTree = "<group>"; };
 		302EA7D31D60382900F82B57 /* OscTest.touchosc */ = {isa = PBXFileReference; lastKnownFileType = file; name = OscTest.touchosc; path = Resources/OscTest.touchosc; sourceTree = "<group>"; };
 		302F35931C93CA39001D5E51 /* OnsetHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnsetHistory.cpp; path = Input/OnsetHistory.cpp; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				A3E18FA61D6D773C006C065A /* presets_audioVideos.txt */,
 				A3E18FA41D6D74FA006C065A /* presets_justVideos.txt */,
 				A3E18FA81D6D7747006C065A /* presets_noVideos.txt */,
+				30229DA21D6DD90700AB4A3E /* presets_patterns.txt */,
 				7AD9994B1D2A118F002BD0F3 /* shaderFrag.glsl */,
 				7AD9994C1D2A118F002BD0F3 /* shaderGeom.glsl */,
 				7AD9994D1D2A118F002BD0F3 /* shaderVert.glsl */,
@@ -918,6 +921,7 @@
 			files = (
 				7AD9994E1D2A118F002BD0F3 /* shaderFrag.glsl in Resources */,
 				3068B2461CB579B30092949A /* previsCameraData.txt in Resources */,
+				30229DA31D6DD90700AB4A3E /* presets_patterns.txt in Resources */,
 				30B8DCEB1CB58C3A00164558 /* skyTexture.png in Resources */,
 				A3E18FA51D6D74FA006C065A /* presets_justVideos.txt in Resources */,
 				305AD66E1D333F8A00A72E88 /* fireplace2.mov in Resources */,

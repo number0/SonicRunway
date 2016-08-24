@@ -1,0 +1,18 @@
+AmbientRainbow|/Runway/Patterns/AmbientRainbow/Enabled: 1
+Arc|/Runway/Patterns/Arc/Enabled: 1
+Beat|/Runway/Patterns/Beat/Enabled: 1
+Big Trails|/Runway/Patterns/Big Trails/Enabled: 1
+Diagnostic|/Runway/Patterns/Diagnostic/Enabled: 1
+DoubleRainbow|/Runway/Patterns/DoubleRainbow/Enabled: 1
+Fft|/Runway/Patterns/Fft/Enabled: 1
+NetworkInput|/Runway/Patterns/NetworkInput/Enabled: 1
+Phasor|/Runway/Patterns/Phasor/Enabled: 1
+Phrase|/Runway/Patterns/Phrase/Enabled: 1
+Rainbow|/Runway/Patterns/Rainbow/Enabled: 1
+Rms|/Runway/Patterns/Rms/Enabled: 1
+SpinTrails|/Runway/Patterns/SpinTrails/Enabled: 1
+Star|/Runway/Patterns/Star/Enabled: 1
+Stripes|/Runway/Patterns/Stripes/Enabled: 1
+Trails|/Runway/Patterns/Trails/Enabled: 1
+Whomp|/Runway/Patterns/Whomp/Enabled: 1
+Network Input|/Runway/Patterns/Network Input/Enabled: 1

@@ -68,8 +68,10 @@ void
 SrSwitcher::ReadPresets()
 {
     _ReadPresets("presets_noVideos.txt");
-    _ReadPresets("presets_audioVideos.txt");
-    _ReadPresets("presets_justVideos.txt");
+    //_ReadPresets("presets_audioVideos.txt");
+    //_ReadPresets("presets_justVideos.txt");
+    
+    //_ReadPresets("presets_patterns.txt");
 }
 
 void
