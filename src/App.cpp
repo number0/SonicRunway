@@ -174,10 +174,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     
     //_MakeVideoPatterns();
 
-    // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(false);
-    
     SrWhompPattern *whompPattern =
         new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
     _AddPattern(whompPattern);
@@ -194,7 +190,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
+    diagnosticPattern->SetEnabled(true);
     //fftPattern->SetEnabled(true);
     //whompPattern->SetEnabled(true);
     //phrasePattern->SetEnabled(true);
