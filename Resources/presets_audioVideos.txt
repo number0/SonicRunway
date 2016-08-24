@@ -1,10 +1,3 @@
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/Enabled: 1
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/IsMask: 0
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/InvertMask: 0
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/SpinSpeed: 0.25
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/HueSpeed: 0
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/DoubleRainbows: 2.55
-AmbientRainbow|/Runway/Patterns/AmbientRainbow/TrippelRainbows: -2.19
 Arachnid|/Runway/Patterns/Poxels/Enabled: 1
 Arachnid|/Runway/Patterns/Poxels/Scroll: 1
 Arachnid|/Runway/Patterns/Fft/Enabled: 1
@@ -104,53 +97,6 @@ ColorCut|/Runway/Patterns/Phrase/Enabled: 1
 ColorCut|/Runway/Patterns/Phrase/IsMask: 1
 ColorCut|/Runway/Patterns/Phrase/InvertMask: 1
 ColorCut|/Runway/Patterns/Phrase/Random: 1
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/Enabled: 1
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/IsMask: 0
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/InvertMask: 0
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/Hue: 1
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/DecayTime: 1.72449
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 2.70408
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -2.39796
-DoubleRainbows_1|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.341837
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/Enabled: 1
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/IsMask: 0
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/InvertMask: 0
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/Hue: 1
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/DecayTime: 1.0
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 3.36
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -3.87
-DoubleRainbows_2|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.046
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/Enabled: 1
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/IsMask: 0
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/InvertMask: 0
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/Hue: 1
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/DecayTime: 2
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/SpinSpeed: 0.25
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/DoubleRainbows: 3.36
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/TrippelRainbows: -3.87
-DoubleRainbows_3|/Runway/Patterns/DoubleRainbow/MusicFilterTime: 0.046
-DoubleRainbows_3|/Runway/Patterns/Whomp/Enabled: 1
-DoubleRainbows_3|/Runway/Patterns/Whomp/IsMask: 1
-DoubleRainbows_3|/Runway/Patterns/Whomp/InvertMask: 0
-DoubleRainbows_3|/Runway/Patterns/Whomp/Exponent: 1.03571
-DoubleRainbows_3|/Runway/Patterns/Whomp/Multiplier: 2.25
-DoubleRainbows_3|/Runway/Patterns/Whomp/Scale: 0.5
-DoubleRainbows_3|/Runway/Patterns/Whomp/Hue Offset: 0
-DoubleRainbows_3|/Runway/Patterns/Whomp/Hue Shift: 0.5
-DoubleRainbows_3|/Runway/Patterns/Whomp/Min Saturation: 0.3
-DoubleRainbows_3|/Runway/Patterns/Whomp/Max Saturation: 1
-DoubleRainbows_3|/Runway/Patterns/Whomp/Cutoff Value: 0.1
-DoubleRainbows_3|/Runway/Patterns/Whomp/Vibrate: 1
-DoubleRainbows_3|/Runway/Patterns/Whomp/Cycle Hues: 1
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/Enabled: 1
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/IsMask: 0
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/InvertMask: 0
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/SpinSpeed: 0.25
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/HueSpeed: 0
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/DoubleRainbows: 2.55
-DoubleRainbows_3|/Runway/Patterns/AmbientRainbow/TrippelRainbows: -2.19
 FaunWarp|/Runway/Patterns/TracerFaun/Enabled: 1
 FaunWarp|/Runway/Patterns/TracerFaun/Scroll: 1
 FaunWarp|/Runway/Patterns/DoubleRainbow/Enabled: 1
@@ -313,17 +259,6 @@ PlayerPiano|/Runway/Patterns/Trails/Hue: 1
 PlayerPiano|/Runway/Patterns/Trails/Jitter: 0.4
 PlayerPiano|/Runway/Patterns/Trails/Saturation: 0.821429
 PlayerPiano|/Runway/Patterns/Trails/Brightness: 1
-PurpleSwirl|/Runway/Patterns/Stripes/Enabled: 1
-PurpleSwirl|/Runway/Patterns/Stripes/Hue: 0.693878
-PurpleSwirl|/Runway/Patterns/Stripes/NumStripes: 6
-PurpleSwirl|/Runway/Patterns/Stripes/InvertMask: 0
-PurpleSwirl|/Runway/Patterns/Stripes/IsMask: 0
-PurpleSwirl|/Runway/Patterns/Stripes/SpinSpeed: -367.347
-PurpleSwirl|/Runway/Patterns/Trails/Enabled: 1
-PurpleSwirl|/Runway/Patterns/Trails/InvertMask: 0
-PurpleSwirl|/Runway/Patterns/Trails/IsMask: 0
-PurpleSwirl|/Runway/Patterns/Trails/Hue: 0.75
-PurpleSwirl|/Runway/Patterns/Trails/Jitter: 0.20
 Radiant|/Runway/Patterns/Harvest/Enabled: 1
 Radiant|/Runway/Patterns/Harvest/Scroll: 0
 Radiant|/Runway/Patterns/DoubleRainbow/Enabled: 1
@@ -350,60 +285,6 @@ Sky_Reach|/Runway/Patterns/Whomp/Max Saturation: 1
 Sky_Reach|/Runway/Patterns/Whomp/Cutoff Value: 0.1
 Sky_Reach|/Runway/Patterns/Whomp/Vibrate: 0
 Sky_Reach|/Runway/Patterns/Whomp/Cycle Hues: 1
-SpinTrails_1|/Runway/Patterns/SpinTrails/Enabled: 1
-SpinTrails_1|/Runway/Patterns/SpinTrails/Num Trails: 15
-SpinTrails_1|/Runway/Patterns/SpinTrails/Duration: 5
-SpinTrails_1|/Runway/Patterns/SpinTrails/Wander: 10
-SpinTrails_1|/Runway/Patterns/SpinTrails/Spin: 12
-SpinTrails_1|/Runway/Patterns/SpinTrails/Width: 16
-SpinTrails_1|/Runway/Patterns/SpinTrails/Exponent: 3.6
-SpinTrails_1|/Runway/Patterns/SpinTrails/Multiplier: 1
-SpinTrails_1|/Runway/Patterns/SpinTrails/Scale: 0.5
-SpinTrails_1|/Runway/Patterns/SpinTrails/Hue Offset: 0
-SpinTrails_1|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
-SpinTrails_1|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
-SpinTrails_1|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
-SpinTrails_1|/Runway/Patterns/SpinTrails/Max Saturation: 1
-SpinTrails_1|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
-SpinTrails_1|/Runway/Patterns/SpinTrails/Cycle Hues: 1
-SpinTrails_1|/Runway/Patterns/SpinTrails/InvertMask: 0
-SpinTrails_1|/Runway/Patterns/SpinTrails/IsMask: 0
-SpinTrails_2|/Runway/Patterns/SpinTrails/Enabled: 1
-SpinTrails_2|/Runway/Patterns/SpinTrails/Num Trails: 6
-SpinTrails_2|/Runway/Patterns/SpinTrails/Duration: 6
-SpinTrails_2|/Runway/Patterns/SpinTrails/Wander: 10
-SpinTrails_2|/Runway/Patterns/SpinTrails/Spin: 18
-SpinTrails_2|/Runway/Patterns/SpinTrails/Width: 3
-SpinTrails_2|/Runway/Patterns/SpinTrails/Exponent: 3.6
-SpinTrails_2|/Runway/Patterns/SpinTrails/Multiplier: 1
-SpinTrails_2|/Runway/Patterns/SpinTrails/Scale: 0.5
-SpinTrails_2|/Runway/Patterns/SpinTrails/Hue Offset: 0
-SpinTrails_2|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
-SpinTrails_2|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
-SpinTrails_2|/Runway/Patterns/SpinTrails/Min Saturation: 0.137755
-SpinTrails_2|/Runway/Patterns/SpinTrails/Max Saturation: 0.239796
-SpinTrails_2|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
-SpinTrails_2|/Runway/Patterns/SpinTrails/Cycle Hues: 1
-SpinTrails_2|/Runway/Patterns/SpinTrails/InvertMask: 0
-SpinTrails_2|/Runway/Patterns/SpinTrails/IsMask: 0
-SpinTrails_3|/Runway/Patterns/SpinTrails/Enabled: 1
-SpinTrails_3|/Runway/Patterns/SpinTrails/Num Trails: 6
-SpinTrails_3|/Runway/Patterns/SpinTrails/Duration: 17
-SpinTrails_3|/Runway/Patterns/SpinTrails/Wander: 0
-SpinTrails_3|/Runway/Patterns/SpinTrails/Spin: 0
-SpinTrails_3|/Runway/Patterns/SpinTrails/Width: 3
-SpinTrails_3|/Runway/Patterns/SpinTrails/Exponent: 3.6
-SpinTrails_3|/Runway/Patterns/SpinTrails/Multiplier: 1
-SpinTrails_3|/Runway/Patterns/SpinTrails/Scale: 0.5
-SpinTrails_3|/Runway/Patterns/SpinTrails/Hue Offset: 0
-SpinTrails_3|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
-SpinTrails_3|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
-SpinTrails_3|/Runway/Patterns/SpinTrails/Min Saturation: 0.00510204
-SpinTrails_3|/Runway/Patterns/SpinTrails/Max Saturation: 0.586735
-SpinTrails_3|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
-SpinTrails_3|/Runway/Patterns/SpinTrails/Cycle Hues: 1
-SpinTrails_3|/Runway/Patterns/SpinTrails/InvertMask: 0
-SpinTrails_3|/Runway/Patterns/SpinTrails/IsMask: 0
 Tardis|/Runway/Patterns/Fireworks/Enabled: 1
 Tardis|/Runway/Patterns/Fireworks/Scroll: 0
 Tardis|/Runway/Patterns/Jahara/Enabled: 1
@@ -441,41 +322,6 @@ TelephasicWorkshop|/Runway/Patterns/Whomp/Max Saturation: 1
 TelephasicWorkshop|/Runway/Patterns/Whomp/Cutoff Value: 0.147959
 TelephasicWorkshop|/Runway/Patterns/Whomp/Vibrate: 1
 TelephasicWorkshop|/Runway/Patterns/Whomp/Cycle Hues: 0
-TheDefault|/Runway/Patterns/Fft/Enabled: 1
-TheDefault|/Runway/Patterns/Fft/InvertMask: 0
-TheDefault|/Runway/Patterns/Fft/IsMask: 0
-TheDefault|/Runway/Patterns/Fft/Exponent: 2
-TheDefault|/Runway/Patterns/Fft/Multiplier: 2
-TheDefault|/Runway/Patterns/Fft/Spread Exponent: 0.37
-TheDefault|/Runway/Patterns/Fft/Hue Offset: 0
-TheDefault|/Runway/Patterns/Fft/Hue Shift: 0.3
-TheDefault|/Runway/Patterns/Fft/Mirror: 1
-TheDefault|/Runway/Patterns/Fft/Scale: 1
-TheDefault|/Runway/Patterns/Fft/Scale Regions: 1
-TheDefault|/Runway/Patterns/Fft/Spin Slowly: 1
-TheDefault|/Runway/Patterns/Fft/Cycle Hues: 1
-TheDefault|/Runway/Patterns/Whomp/Enabled: 1
-TheDefault|/Runway/Patterns/Whomp/InvertMask: 0
-TheDefault|/Runway/Patterns/Whomp/IsMask: 0
-TheDefault|/Runway/Patterns/Whomp/Exponent: 3.6
-TheDefault|/Runway/Patterns/Whomp/Multiplier: 1
-TheDefault|/Runway/Patterns/Whomp/Scale: 0.5
-TheDefault|/Runway/Patterns/Whomp/Hue Offset: 0
-TheDefault|/Runway/Patterns/Whomp/Hue Shift: 0.5
-TheDefault|/Runway/Patterns/Whomp/Min Saturation: 0.3
-TheDefault|/Runway/Patterns/Whomp/Max Saturation: 1
-TheDefault|/Runway/Patterns/Whomp/Cutoff Value: 0.1
-TheDefault|/Runway/Patterns/Whomp/Vibrate: 0
-TheDefault|/Runway/Patterns/Whomp/Cycle Hues: 1
-TrailsAndStars|/Runway/Patterns/Star/Enabled: 1
-TrailsAndStars|/Runway/Patterns/Star/Number: 0.26
-TrailsAndStars|/Runway/Patterns/Star/Threshold: 0
-TrailsAndStars|/Runway/Patterns/Star/InvertMask: 0
-TrailsAndStars|/Runway/Patterns/Star/IsMask: 0
-TrailsAndStars|/Runway/Patterns/Big Trails/Enabled: 1
-TrailsAndStars|/Runway/Patterns/Big Trails/Hue: 1
-TrailsAndStars|/Runway/Patterns/Big Trails/Jitter: 0.20
-TrailsAndStars|/Runway/Patterns/Big Trails/Rotation: .12
 UnicornProm|/Runway/Patterns/Koll/Enabled: 1
 UnicornProm|/Runway/Patterns/Koll/Scroll: 1
 UnicornProm|/Runway/Patterns/SpinTrails/Enabled: 1
@@ -511,88 +357,6 @@ WhompCity|/Runway/Patterns/Whomp/Max Saturation: 1
 WhompCity|/Runway/Patterns/Whomp/Cutoff Value: 0.52551
 WhompCity|/Runway/Patterns/Whomp/Vibrate: 1
 WhompCity|/Runway/Patterns/Whomp/Cycle Hues: 0
-vid_Atommy|/Runway/Patterns/Atommy/Enabled: 1
-vid_Atommy|/Runway/Patterns/Atommy/Scroll: 0
-vid_Cycloid|/Runway/Patterns/Cycloid/Enabled: 1
-vid_Cycloid|/Runway/Patterns/Cycloid/Scroll: 0
-vid_DataCity|/Runway/Patterns/DataCity/Enabled: 1
-vid_DataCity|/Runway/Patterns/DataCity/Scroll: 0
-vid_EndlessPlanet|/Runway/Patterns/EndlessPlanet/Enabled: 1
-vid_EndlessPlanet|/Runway/Patterns/EndlessPlanet/Scroll: 0
-vid_FarkedPatternOne|/Runway/Patterns/FarkedPatternOne/Enabled: 1
-vid_FarkedPatternOne|/Runway/Patterns/FarkedPatternOne/Scroll: 0
-vid_FarkedPatternTwo|/Runway/Patterns/FarkedPatternTwo/Enabled: 1
-vid_FarkedPatternTwo|/Runway/Patterns/FarkedPatternTwo/Scroll: 0
-vid_Fireworks|/Runway/Patterns/Fireworks/Enabled: 1
-vid_Fireworks|/Runway/Patterns/Fireworks/Scroll: 0
-vid_Fleer|/Runway/Patterns/Fleer/Enabled: 1
-vid_Fleer|/Runway/Patterns/Fleer/Scroll: 0
-vid_Glaubox|/Runway/Patterns/Glaubox/Enabled: 1
-vid_Glaubox|/Runway/Patterns/Glaubox/Scroll: 0
-vid_GlitchmtOne|/Runway/Patterns/GlitchmtOne/Enabled: 1
-vid_GlitchmtOne|/Runway/Patterns/GlitchmtOne/Scroll: 0
-vid_GlitchmtTwo|/Runway/Patterns/GlitchmtTwo/Enabled: 1
-vid_GlitchmtTwo|/Runway/Patterns/GlitchmtTwo/Scroll: 0
-vid_Gloablee|/Runway/Patterns/Gloablee/Enabled: 1
-vid_Gloablee|/Runway/Patterns/Gloablee/Scroll: 0
-vid_Harvest|/Runway/Patterns/Harvest/Enabled: 1
-vid_Harvest|/Runway/Patterns/Harvest/Scroll: 0
-vid_Hexgrow|/Runway/Patterns/Hexgrow/Enabled: 1
-vid_Hexgrow|/Runway/Patterns/Hexgrow/Scroll: 0
-vid_Jahara|/Runway/Patterns/Jahara/Enabled: 1
-vid_Jahara|/Runway/Patterns/Jahara/Scroll: 0
-vid_Jelly|/Runway/Patterns/Jelly/Enabled: 1
-vid_Jelly|/Runway/Patterns/Jelly/Scroll: 0
-vid_Kidspats|/Runway/Patterns/Kidspats/Enabled: 1
-vid_Kidspats|/Runway/Patterns/Kidspats/Scroll: 0
-vid_Koll|/Runway/Patterns/Koll/Enabled: 1
-vid_Koll|/Runway/Patterns/Koll/Scroll: 0
-vid_Kwirllars|/Runway/Patterns/Kwirllars/Enabled: 1
-vid_Kwirllars|/Runway/Patterns/Kwirllars/Scroll: 0
-vid_Lightgrid|/Runway/Patterns/Lightgrid/Enabled: 1
-vid_Lightgrid|/Runway/Patterns/Lightgrid/Scroll: 0
-vid_Metabuild|/Runway/Patterns/Metabuild/Enabled: 1
-vid_Metabuild|/Runway/Patterns/Metabuild/Scroll: 0
-vid_MocircshiiOne|/Runway/Patterns/MocircshiiOne/Enabled: 1
-vid_MocircshiiOne|/Runway/Patterns/MocircshiiOne/Scroll: 0
-vid_MocircshiiTwo|/Runway/Patterns/MocircshiiTwo/Enabled: 1
-vid_MocircshiiTwo|/Runway/Patterns/MocircshiiTwo/Scroll: 0
-vid_Octmesh|/Runway/Patterns/Octmesh/Enabled: 1
-vid_Octmesh|/Runway/Patterns/Octmesh/Scroll: 0
-vid_Outb|/Runway/Patterns/Outb/Enabled: 1
-vid_Outb|/Runway/Patterns/Outb/Scroll: 0
-vid_Plugsslower|/Runway/Patterns/Plugsslower/Enabled: 1
-vid_Plugsslower|/Runway/Patterns/Plugsslower/Scroll: 0
-vid_PoolWater|/Runway/Patterns/PoolWater/Enabled: 1
-vid_PoolWater|/Runway/Patterns/PoolWater/Scroll: 0
-vid_Popbottles|/Runway/Patterns/Popbottles/Enabled: 1
-vid_Popbottles|/Runway/Patterns/Popbottles/Scroll: 0
-vid_Poxels|/Runway/Patterns/Poxels/Enabled: 1
-vid_Poxels|/Runway/Patterns/Poxels/Scroll: 0
-vid_Purpcycle|/Runway/Patterns/Purpcycle/Enabled: 1
-vid_Purpcycle|/Runway/Patterns/Purpcycle/Scroll: 0
-vid_ShiftingPains|/Runway/Patterns/ShiftingPains/Enabled: 1
-vid_ShiftingPains|/Runway/Patterns/ShiftingPains/Scroll: 0
-vid_SpaceCrystals|/Runway/Patterns/SpaceCrystals/Enabled: 1
-vid_SpaceCrystals|/Runway/Patterns/SpaceCrystals/Scroll: 0
-vid_Sphere|/Runway/Patterns/Sphere/Enabled: 1
-vid_Sphere|/Runway/Patterns/Sphere/Scroll: 0
-vid_Subspace|/Runway/Patterns/Subspace/Enabled: 1
-vid_Subspace|/Runway/Patterns/Subspace/Scroll: 0
-vid_Tech|/Runway/Patterns/Tech/Enabled: 1
-vid_Tech|/Runway/Patterns/Tech/Scroll: 0
-vid_TracerFaun|/Runway/Patterns/TracerFaun/Enabled: 1
-vid_TracerFaun|/Runway/Patterns/TracerFaun/Scroll: 1
-vid_Twirlers|/Runway/Patterns/Twirlers/Enabled: 1
-vid_Twirlers|/Runway/Patterns/Twirlers/Scroll: 0
-vid_TwistedHall|/Runway/Patterns/TwistedHall/Enabled: 1
-vid_TwistedHall|/Runway/Patterns/TwistedHall/Scroll: 0
-vid_UnderMeTab|/Runway/Patterns/UnderMeTab/Enabled: 1
-vid_UnderMeTab|/Runway/Patterns/UnderMeTab/Scroll: 0
-vid_WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Enabled: 1
-vid_WarmNeonBirth|/Runway/Patterns/WarmNeonBirth/Scroll: 0
-vid_Yellowbrick|/Runway/Patterns/Yellowbrick/Enabled: 1
-vid_Yellowbrick|/Runway/Patterns/Yellowbrick/Scroll: 0
 Nonsense|/Runway/Patterns/SkyStars/Enabled: 1
 Nonsense|/Runway/Patterns/SkyStars/Scroll: 0
 Nonsense|/Runway/Patterns/Fft/Enabled: 1

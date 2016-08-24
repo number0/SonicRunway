@@ -34,7 +34,6 @@ class SrSwitcher : public SrUiMixin {
     
 public:
     SrSwitcher(const std::string & name,
-               const std::string & fileName,
                SrApp * app);
     virtual ~SrSwitcher();
     
@@ -48,6 +47,8 @@ public:
     
     void ApplyPresetAtIndex(size_t index);
     
+    int GetPresetIndex(const SrPreset * preset) const;
+    
 private:
     void _AddPreset(SrPreset * preset);
     SrPreset * _GetRandomPreset() const;
@@ -56,8 +57,9 @@ private:
     void _OnNewButtonPressed();
     void _OnSaveButtonPressed();
     
+    void _ReadPresets(const std::string & fileName);
+    
 private:
-    std::string _fileName;
     SrApp * _app;
     SrPreset * _currentPreset;
     

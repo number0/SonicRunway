@@ -55,7 +55,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _globalParameters("GlobalParams", &_model, &_audio),
     _artnet("Artnet", &_model),
     _previs(&_model, &_audio, this),
-    _switcher("Switcher", "presets.txt", this),
+    _switcher("Switcher", this),
     _oscSync(&_model, &_audio, &_switcher, 8000, "", 9000),
     _showGlobals(true),
     _showFft(true),
@@ -174,10 +174,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     
     //_MakeVideoPatterns();
 
-    // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
-    fftPattern->SetEnabled(false);
-    
     SrWhompPattern *whompPattern =
         new SrWhompPattern("Whomp", &_model, &_audio, &_globalParameters);
     _AddPattern(whompPattern);
@@ -194,7 +190,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     //_MakeVideoPatterns();
 
     // Enable the patterns we want on by default.
-    //diagnosticPattern->SetEnabled(true);
+    diagnosticPattern->SetEnabled(true);
     //fftPattern->SetEnabled(true);
     //whompPattern->SetEnabled(true);
     //phrasePattern->SetEnabled(true);

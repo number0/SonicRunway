@@ -45,24 +45,38 @@ SrOscSync::~SrOscSync()
                      &SrOscSync::_OnParameterChanged);
 }
 
-static size_t
+static int
 _GetPresetIndex(ofxOscMessage & msg)
 {
+    printf("getting preset index %s\n", msg.getAddress().c_str());
     std::vector<std::string> address = ofSplitString(msg.getAddress(),"/",true);
     if (address.size() != 4) {
         SrError("OSC Preset message not the right size");
-        return;
+        return -1;
     }
     
     int x = atoi(address[3].c_str());
     int y = atoi(address[2].c_str());
+    
+    printf("coords %d %d\n", x, y);
     
     x = x - 1;
     y = _presetGridHeight - y;
     
     int idx = y * _presetGridWidth + x;
     
+    printf("index %d\n", idx);
+    
     return idx;
+}
+
+static std::pair<int, int>
+_ComputeGridCoordinates(int index)
+{
+    int y = _presetGridHeight - (index / _presetGridWidth);
+    int x = index % _presetGridWidth;
+   
+    return std::pair<int, int>(y, x + 1);
 }
 
 void
@@ -93,7 +107,11 @@ SrOscSync::Update()
             
             float value = m.getArgAsFloat(0);
             if (value == 1.0) {
-                size_t presetIndex = _GetPresetIndex(m);
+                int presetIndex = _GetPresetIndex(m);
+                if (presetIndex == -1) {
+                    continue;
+                }
+                
                 _switcher->ApplyPresetAtIndex(presetIndex);
             }
         }
@@ -166,6 +184,15 @@ SrOscSync::BroadcastPresetInfo(SrPreset * preset)
     _BroadcastGlobalParameterLabel(preset, "Dial3");
     _BroadcastGlobalParameterLabel(preset, "Slider1");
     _BroadcastGlobalParameterLabel(preset, "Slider2");
+    
+    // XXX sadly, this part isn't working yet...
+    /*
+    std::pair<int, int> xy = _ComputeGridCoordinates(preset->GetIndex());
+    std::string path = _presetPrefix + std::to_string(xy.first) +
+        "/" + std::to_string(xy.second);
+    printf("sending preset message %s\n", path.c_str());
+    _SendFloatMessage(path, 1.0);
+     */
 }
 
 void

@@ -38,6 +38,7 @@ private:
     
     void _BroadcastGlobalParameterLabel(SrPreset * preset,
                                         const std::string & name);
+    void _BroadcastPresetNumber(bool isAudioReactive, int index);
     
     void _SendFloatMessage(const std::string & path, float value);
     void _SendStringMessage(const std::string & path, const std::string & value);
