@@ -18,9 +18,8 @@ SrImageSequence::SrImageSequence(const std::string path,
     
     _images.resize(numFrames);
     
-    std::string prefix = SrUtil_GetAbsolutePathForResource(path);
-    
-    prefix = prefix + "/" + baseFileName;
+    //std::string prefix = SrUtil_GetAbsolutePathForResource(path);
+    std::string prefix = path + "/" + baseFileName;
     
     for(size_t i = 0; i < numFrames; i++) {
         char *str;

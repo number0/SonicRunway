@@ -257,14 +257,17 @@ SrApp::~SrApp()
 void
 SrApp::_MakeAnimPatterns()
 {
-    std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    //std::string animFolder = SrUtil_GetAbsolutePathForResource("../../../data/Anim/");
+    std::string animFolder = std::string(getenv("HOME")) + "/Desktop/Anim/";
+    printf("Looking for anim patterns in %s\n", animFolder.c_str());
     
     ofDirectory dir(animFolder);
     dir.listDir();
     
     for(size_t i = 0; i < dir.size(); i++) {
         std::string fname = dir.getName(i);
-        ofDirectory current(animFolder + "/" + fname);
+        std::string animPath = animFolder + fname;
+        ofDirectory current(animPath);
         current.listDir();
         
         if (fname.compare(0,5, "Anim_") != 0) {
@@ -282,7 +285,7 @@ SrApp::_MakeAnimPatterns()
         numFrames = std::min(numFrames, ANIM_MAX_FRAMES);
         
         SrAnimPattern *animPattern =
-        new SrAnimPattern(patternName, "../../../data/Anim/" + fname, fname,
+        new SrAnimPattern(patternName, animPath, fname,
                           numFrames, false,
                           &_model, &_audio, &_globalParameters);
         _AddPattern(animPattern);
