@@ -101,7 +101,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
 
-    _MakeAnimPatterns();
+    //_MakeAnimPatterns();
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
