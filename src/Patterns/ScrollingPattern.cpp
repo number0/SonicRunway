@@ -14,7 +14,8 @@ SrScrollingPattern::SrScrollingPattern(const std::string & name,
     SrPattern(name, model, audio, globalParameters),
     _index(0),
     _mask(false),
-    _invertMask(false)
+    _invertMask(false),
+    _maskWasOn(false)
 {
     _mask.setName("IsMask");
     _AddUIParameter(_mask);
@@ -38,6 +39,11 @@ SrScrollingPattern::~SrScrollingPattern()
 void
 SrScrollingPattern::_Update()
 {
+    if(_maskWasOn && (!_mask)) {
+        _image.setColor(ofColor::black);
+    }
+    _maskWasOn = _mask;
+    
     _index--;
     if (_index < 0) {
         _index = (int) _image.getWidth() - 1;
@@ -62,12 +68,14 @@ SrScrollingPattern::_Update()
 
         if(_mask) {
             float b = color.getBrightness()/255.0;
-            b = pow(b, 0.2);
+            if (_invertMask) {
+                b = 1.0f-b;
+            } else {
+                b = pow(b, 0.2);
+            }
             // if we're a mask, "fade out" means go to 1.0.
             b = ofMap(b, 0.0f, 1.0f, (1.0f-opacity), 1.0f);
             color = ofColor(b*255.0,b*255.0,b*255.0);
-        } else if (_invertMask) {
-            color *= opacity; // NOTE: still working on this -jdn
         } else {
             color *= opacity;
         }
@@ -91,12 +99,24 @@ SrScrollingPattern::_Draw() const
         return;
     }
     
+    
+    if(_mask) {
+        ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+    }
+    
+    /*
+     NOTE: below is mtf's masking that I can't get to
+     xfade. -jdn
+     */
+    
+    /*
     if(_mask && !_invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
     }
     if(_invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     }
+    */
     
     ofPushMatrix();
     
@@ -115,15 +135,3 @@ SrScrollingPattern::_Draw() const
         ofEnableBlendMode(OF_BLENDMODE_ADD);
     }
 }
-
-/*
-bool
-SrScrollingPattern::CanXfade() const
-{
-    if(_mask) {
-        return false;
-    } else {
-        return true;
-    }
-}
-*/
