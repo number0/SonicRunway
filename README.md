@@ -1,3 +1,6 @@
+# To Run touchOSC
+java -jar touchoscservice-1.1.0-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc" 
+
 # SonicRunway
 
 Software control for Sonic Runway art installation, a visualization of the
