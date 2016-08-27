@@ -42,6 +42,7 @@ private:
     ofImage _image;
     ofParameter<bool> _mask;
     ofParameter<bool> _invertMask;
+    ofParameter<bool> _reverse;
     
     bool _maskWasOn;
 };

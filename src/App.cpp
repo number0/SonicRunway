@@ -116,6 +116,11 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _AddPattern(beatPattern);
     beatPattern->SetEnabled(false);
     
+    SrBeatPattern * beatPatternSecondary =
+        new SrBeatPattern("BeatSecondary", &_model, &_audio, &_globalParameters);
+    _AddPattern(beatPatternSecondary);
+    beatPatternSecondary->SetEnabled(false);
+    
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio, &_globalParameters);
     _AddPattern(fftPattern);
