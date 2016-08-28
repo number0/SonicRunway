@@ -15,13 +15,17 @@ SrScrollingPattern::SrScrollingPattern(const std::string & name,
     _index(0),
     _mask(false),
     _invertMask(false),
-    _maskWasOn(false)
+    _maskWasOn(false),
+    _reverse(false)
 {
     _mask.setName("IsMask");
     _AddUIParameter(_mask);
     
     _invertMask.setName("InvertMask");
     _AddUIParameter(_invertMask);
+    
+    _reverse.setName("Reverse");
+    _AddUIParameter(_reverse);
     
     int width = model->GetNumGates() * model->GetFramesPerGate();
     int height = model->GetLightsPerGate();
@@ -44,9 +48,18 @@ SrScrollingPattern::_Update()
     }
     _maskWasOn = _mask;
     
-    _index--;
-    if (_index < 0) {
-        _index = (int) _image.getWidth() - 1;
+    if ( _reverse ){
+        _index++;
+        if(_index > _image.getWidth() - 1){
+            _index = 0;
+        }
+    }
+    else {
+        _index--;
+        if (_index < 0) {
+            _index = (int) _image.getWidth() - 1;
+        }
+     
     }
     
     if (not IsOnAtAnyGate()) {
@@ -112,7 +125,7 @@ SrScrollingPattern::_Draw() const
     /*
     if(_mask && !_invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
-    }
+    
     if(_invertMask) {
         ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     }

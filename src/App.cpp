@@ -61,6 +61,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _showFft(false),
     _showPatternParameters(false),
     _showPrevis(false),
+    _intentionalCrash(false),
     _uiColumnWidth(220),
     _uiMargin(10),
     _previsXCoord(0),
@@ -82,10 +83,12 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _showFft.setName("Show FFT");
     _showPatternParameters.setName("Show Patterns");
     _showPrevis.setName("Show Previs");
+    _intentionalCrash.setName("CRASH!");
     _uiTogglesPanel.add(_showGlobals);
     _uiTogglesPanel.add(_showFft);
     _uiTogglesPanel.add(_showPatternParameters);
     _uiTogglesPanel.add(_showPrevis);
+    _uiTogglesPanel.add(_intentionalCrash);
     
     _globalPanel.setup("Global");
     
@@ -101,7 +104,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _model.GetParameterGroup().add(_previs.GetParameterGroup());
     _model.GetParameterGroup().add(_globalParameters.GetParameterGroup());
 
-    //_MakeAnimPatterns();
+    _MakeAnimPatterns();
     
     SrExamplePattern *examplePattern =
     new SrExamplePattern("Example", &_model, &_audio, &_globalParameters);
@@ -115,6 +118,11 @@ SrApp::SrApp(ofBaseApp * ofApp) :
         new SrBeatPattern("Beat", &_model, &_audio, &_globalParameters);
     _AddPattern(beatPattern);
     beatPattern->SetEnabled(false);
+    
+    SrBeatPattern * beatPatternSecondary =
+        new SrBeatPattern("BeatSecondary", &_model, &_audio, &_globalParameters);
+    _AddPattern(beatPatternSecondary);
+    beatPatternSecondary->SetEnabled(false);
     
     SrFftPattern *fftPattern =
         new SrFftPattern("Fft", &_model, &_audio, &_globalParameters);
@@ -434,6 +442,11 @@ SrApp::AudioOut(float *output, int bufferSize, int nChannels)
 void
 SrApp::Update()
 {
+    if (_intentionalCrash) {
+        // Crash on purspose!  for testing restart behavior
+        char *a = NULL;
+        cout << *a;
+    }
     _globalParameters.Update();
     
     _oscSync.Update();

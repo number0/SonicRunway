@@ -61,6 +61,7 @@ private:
     ofParameter<bool> _showFft;
     ofParameter<bool> _showPatternParameters;
     ofParameter<bool> _showPrevis;
+    ofParameter<bool> _intentionalCrash;
     
     ofSoundStream _soundStream;
     

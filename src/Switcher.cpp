@@ -68,9 +68,12 @@ void
 SrSwitcher::ReadPresets()
 {
     _ReadPresets("presets_noVideos.txt");
-    //_ReadPresets("presets_audioVideos.txt");
-    //_ReadPresets("presets_justVideos.txt");
+    _ReadPresets("presets_audioVideos.txt");
+    _ReadPresets("presets_justVideos.txt");
     
+    //mtf 8/26 - not sure these will work properly as is, b/c
+    //they don't explicitly reset the patterns to their default
+    //params
     //_ReadPresets("presets_patterns.txt");
 }
 

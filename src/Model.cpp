@@ -16,7 +16,8 @@ SrModel::SrModel() :
     _numGates(33),  // Gate 0 exists in software, but not physically..
     _lightsPerGate(277),
     _distanceBetweenGates(32.0), // feet
-    _speedOfSound(1126.0), // feet per second
+    _speedOfSound(1156.0), // feet per second
+    //_speedOfSound(1126.0), // feet per second
     //_speedOfSound(1500.0), // debug feet per second
     _archLength(31.0),     // feet
     _framesPerGate(1)

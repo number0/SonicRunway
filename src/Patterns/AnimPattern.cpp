@@ -84,6 +84,7 @@ SrAnimPattern::_Draw() const
     const ofImage & img = _imageSequence.GetImage(_currentFrame);
     
     ofSetColor(ofFloatColor(opacity, opacity, opacity));
+   // CRASH
     
     img.draw(_gateIndex, 0, img.getWidth(), GetModel()->GetLightsPerGate());
     img.draw(_gateIndex - GetModel()->GetNumGates(), 0);
