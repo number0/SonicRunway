@@ -224,6 +224,7 @@ SrSwitcher::Update()
         SrPreset * preset = _GetRandomPreset();
         if (preset) {
             _ApplyPreset(preset);
+            cout << "Preset cycling switching to: " << preset -> GetName() << "\n\n";
         }
         _secondsToNextPreset = (float) _secondsBetweenPresets;
     }

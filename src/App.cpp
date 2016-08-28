@@ -70,6 +70,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _leftAlignScale(.7),
     _leftAlignPrevis(true)
 {
+    
     ofSetFrameRate(_model.ComputeFramesPerSecond());
     
     // Disable vertical sync so FPS can be greater than 60.

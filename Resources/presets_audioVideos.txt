@@ -52,7 +52,7 @@ Charlottes|/Runway/Patterns/SpinTrails/Multiplier: 1.67857
 Charlottes|/Runway/Patterns/SpinTrails/Scale: 0.484796
 Charlottes|/Runway/Patterns/SpinTrails/Hue Offset: 0
 Charlottes|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
-Charlottes|/Runway/Patterns/SpinTrails/Hue Vari ation: 0.45
+Charlottes|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
 Charlottes|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
 Charlottes|/Runway/Patterns/SpinTrails/Max Saturation: 1
 Charlottes|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
