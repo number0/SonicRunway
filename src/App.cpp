@@ -69,6 +69,7 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     _leftAlignScale(.7),
     _leftAlignPrevis(true)
 {
+    
     ofSetFrameRate(_model.ComputeFramesPerSecond());
     
     // Disable vertical sync so FPS can be greater than 60.
@@ -439,6 +440,14 @@ SrApp::AudioOut(float *output, int bufferSize, int nChannels)
 void
 SrApp::Update()
 {
+    if (_showPrevis) {
+        cout << "hello\n";
+        char * a = nullptr;
+        cout << *a;
+    }
+    
+   
+    
     _globalParameters.Update();
     
     _oscSync.Update();
