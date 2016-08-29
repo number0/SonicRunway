@@ -1,26 +1,26 @@
 //
-//  TriggerPattern.hpp
+//  DropoutPattern.hpp
 //  SonicRunway
 //
 //  Created by Rob Jensen on 7/9/16.
 //
 //
 
-#ifndef SR_TRIGGER_PATTERN_HPP
-#define SR_TRIGGER_PATTERN_HPP
+#ifndef SR_DROPOUT_PATTERN_HPP
+#define SR_DROPOUT_PATTERN_HPP
 
 #include "ScrollingPattern.hpp"
 
 //
-// SrTriggerPattern demonstrates how to set up a
+// SrDropoutPattern demonstrates how to set up a
 // button and osc receiver and respond to clicks or signals
 //
-class SrTriggerPattern : public SrScrollingPattern {
+class SrDropoutPattern : public SrScrollingPattern {
 public:
-    SrTriggerPattern(const std::string & name,
+    SrDropoutPattern(const std::string & name,
                      SrModel * model, SrAudio * audio,
                      SrGlobalParameters * globalParameters);
-    virtual ~SrTriggerPattern();
+    virtual ~SrDropoutPattern();
     
     virtual bool IsAudioReactive() const;
     
@@ -30,12 +30,10 @@ protected:
     virtual void _Update();
     
 private:
-    ofParameter<bool> _triggerParam;
-   
-    bool _triggerWasPressed;
-    int _framesSinceTrigger;
-    
+    ofParameter<bool> _dropoutParam;
+    bool _dropoutWasPressed;
     int _trailLength;
+    int _framesSinceDropout;
 };
 
 #endif

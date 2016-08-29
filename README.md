@@ -1,5 +1,24 @@
 # Hackin' on the playa
 
+Chris - Elena came by. Bee Camp (Bee Art Car) 7:45 and C
+
+Can we access all presets?
+
+Got a crash in ClownWarp, after Arachnid. Crashed in exact same place that rob comments in SrAnimPattern
+
+Good videos:
+
+Crush
+NonenseTwo
+
+iPad
+3585
+
+rob cell
+510 501 5878
+
+password aquazone
+
 TODO:
 
     Change so first gate is 0 to compensate for mic

@@ -23,6 +23,7 @@
 #include "PhasorPattern.hpp"
 #include "TrailsPattern.hpp"
 #include "TriggerPattern.hpp"
+#include "DropoutPattern.hpp"
 #include "VideoPattern.hpp"
 #include "AnimPattern.hpp"
 #include "DiagnosticPattern.hpp"
@@ -157,10 +158,6 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrTrailsPattern("Trails", &_model, &_audio, &_globalParameters);
     _AddPattern(trailsPattern);
     
-    SrTriggerPattern *triggerPattern =
-        new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
-    _AddPattern(triggerPattern);
-    
     SrPhrasePattern *phrasePattern =
         new SrPhrasePattern("Phrase", &_model, &_audio, &_globalParameters);
     _AddPattern(phrasePattern);
@@ -195,6 +192,14 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     new SrAmbientRainbowPattern("AmbientRainbow", &_model, &_audio, &_globalParameters);
     _AddPattern(ambientRainbowPattern);
     
+    SrDropoutPattern *dropoutPattern =
+        new SrDropoutPattern("Dropout", &_model, &_audio, &_globalParameters);
+    _AddPattern(dropoutPattern);
+    
+    SrTriggerPattern *triggerPattern =
+        new SrTriggerPattern("Trigger", &_model, &_audio, &_globalParameters);
+    _AddPattern(triggerPattern);
+    
     // XXX Disabling video patterns because they are slow
     //_MakeVideoPatterns();
 
@@ -206,6 +211,9 @@ SrApp::SrApp(ofBaseApp * ofApp) :
     
     // Always enable trigger pattern
     triggerPattern->SetEnabled(true);
+    
+    // Always enable dropout pattern
+    dropoutPattern -> SetEnabled(true);
     
     // Add global parameters to the model so they will be accessible
     // from osc
@@ -448,6 +456,7 @@ SrApp::Update()
         char *a = NULL;
         cout << *a;
     }
+    
     _globalParameters.Update();
     
     _oscSync.Update();

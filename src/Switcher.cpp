@@ -286,7 +286,7 @@ SrSwitcher::_ApplyPreset(SrPreset * preset)
     // the ones explicitly enabled in the preset.
     const std::vector<SrPattern *> & patterns = _app->GetPatterns();
     for (size_t i = 0; i < patterns.size(); i++) {
-        if (patterns[i]->GetName() == "Trigger") {
+        if (patterns[i]->GetName() == "Trigger" || patterns[i] -> GetName() == "Dropout") {
             continue;
         }
         patterns[i]->SetEnabled(false);

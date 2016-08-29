@@ -26,6 +26,9 @@ public:
                        SrGlobalParameters * globalParameters);
     ~SrScrollingPattern();
     
+    void SetIsMask(bool mask);
+    void SetIsInvertMask(bool invert);
+    
 protected:
     // Implemented from SrPattern
     virtual void _Update();

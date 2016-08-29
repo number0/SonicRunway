@@ -203,22 +203,6 @@ Miami_Beach|/Runway/Patterns/Phrase/Enabled: 1
 Miami_Beach|/Runway/Patterns/Phrase/InvertMask: 0
 Miami_Beach|/Runway/Patterns/Phrase/Reverse: 0
 Miami_Beach|/Runway/Patterns/Phrase/IsMask: 0
-MirroredTunnel|/Runway/Patterns/ShiftingPains/Enabled: 1
-MirroredTunnel|/Runway/Patterns/ShiftingPains/Scroll: 1
-MirroredTunnel|/Runway/Patterns/Fft/Enabled: 1
-MirroredTunnel|/Runway/Patterns/Fft/InvertMask: 0
-MirroredTunnel|/Runway/Patterns/Fft/Reverse: 0
-MirroredTunnel|/Runway/Patterns/Fft/IsMask: 1
-MirroredTunnel|/Runway/Patterns/Fft/Exponent: 0.803571
-MirroredTunnel|/Runway/Patterns/Fft/Multiplier: 3.23214
-MirroredTunnel|/Runway/Patterns/Fft/Spread Exponent: 0.940306
-MirroredTunnel|/Runway/Patterns/Fft/Hue Offset: 0
-MirroredTunnel|/Runway/Patterns/Fft/Hue Shift: 0.3
-MirroredTunnel|/Runway/Patterns/Fft/Mirror: 1
-MirroredTunnel|/Runway/Patterns/Fft/Scale: 0.67898
-MirroredTunnel|/Runway/Patterns/Fft/Scale Regions: 1
-MirroredTunnel|/Runway/Patterns/Fft/Spin Slowly: 1
-MirroredTunnel|/Runway/Patterns/Fft/Cycle Hues: 1
 PlasmaTube|/Runway/Patterns/SpaceCrystals/Enabled: 1
 PlasmaTube|/Runway/Patterns/SpaceCrystals/Scroll: 0
 PlasmaTube|/Runway/Patterns/Whomp/Enabled: 1
@@ -330,27 +314,6 @@ TelephasicWorkshop|/Runway/Patterns/Whomp/Max Saturation: 1
 TelephasicWorkshop|/Runway/Patterns/Whomp/Cutoff Value: 0.147959
 TelephasicWorkshop|/Runway/Patterns/Whomp/Vibrate: 1
 TelephasicWorkshop|/Runway/Patterns/Whomp/Cycle Hues: 0
-UnicornProm|/Runway/Patterns/Koll/Enabled: 1
-UnicornProm|/Runway/Patterns/Koll/Scroll: 1
-UnicornProm|/Runway/Patterns/SpinTrails/Enabled: 1
-UnicornProm|/Runway/Patterns/SpinTrails/InvertMask: 0
-UnicornProm|/Runway/Patterns/SpinTrails/Reverse: 0
-UnicornProm|/Runway/Patterns/SpinTrails/IsMask: 1
-UnicornProm|/Runway/Patterns/SpinTrails/Num Trails: 10
-UnicornProm|/Runway/Patterns/SpinTrails/Duration: 8
-UnicornProm|/Runway/Patterns/SpinTrails/Wander: 12
-UnicornProm|/Runway/Patterns/SpinTrails/Spin: 12
-UnicornProm|/Runway/Patterns/SpinTrails/Width: 16
-UnicornProm|/Runway/Patterns/SpinTrails/Exponent: 3.6
-UnicornProm|/Runway/Patterns/SpinTrails/Multiplier: 1.30357
-UnicornProm|/Runway/Patterns/SpinTrails/Scale: 0.585816
-UnicornProm|/Runway/Patterns/SpinTrails/Hue Offset: 0
-UnicornProm|/Runway/Patterns/SpinTrails/Hue Shift: 0.5
-UnicornProm|/Runway/Patterns/SpinTrails/Hue Variation: 0.45
-UnicornProm|/Runway/Patterns/SpinTrails/Min Saturation: 0.3
-UnicornProm|/Runway/Patterns/SpinTrails/Max Saturation: 1
-UnicornProm|/Runway/Patterns/SpinTrails/Cutoff Value: 0.1
-UnicornProm|/Runway/Patterns/SpinTrails/Cycle Hues: 1
 WhompCity|/Runway/Patterns/DataCity/Enabled: 1
 WhompCity|/Runway/Patterns/DataCity/Scroll: 0
 WhompCity|/Runway/Patterns/Whomp/Enabled: 1
@@ -435,13 +398,6 @@ NonsenseTwo|/Runway/Patterns/RMS/Hue 2: 0.5
 NonsenseTwo|/Runway/Patterns/RMS/Hue 3: 0.8
 NonsenseTwo|/Runway/Patterns/RMS/Saturation: 1
 NonsenseTwo|/Runway/Patterns/RMS/Brightness: 0.576531
-RollerRink|/Runway/Patterns/Hexgrow/Enabled: 1
-RollerRink|/Runway/Patterns/Hexgrow/Scroll: 1
-RollerRink|/Runway/Patterns/Phrase/Enabled: 1
-RollerRink|/Runway/Patterns/Phrase/Reverse: 0
-RollerRink|/Runway/Patterns/Phrase/IsMask: 1
-RollerRink|/Runway/Patterns/Phrase/InvertMask: 1
-RollerRink|/Runway/Patterns/Phrase/Random: 1
 Crush|/Runway/Patterns/Hexgrow/Enabled: 1
 Crush|/Runway/Patterns/Hexgrow/Scroll: 0
 Crush|/Runway/Patterns/Beat/Enabled: 1

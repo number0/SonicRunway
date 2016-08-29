@@ -41,6 +41,16 @@ SrScrollingPattern::~SrScrollingPattern()
 }
 
 void
+SrScrollingPattern::SetIsMask(bool mask){
+    _mask = mask;
+}
+
+void
+SrScrollingPattern::SetIsInvertMask(bool invert){
+    _invertMask = invert;
+}
+
+void
 SrScrollingPattern::_Update()
 {
     if(_maskWasOn && (!_mask)) {
