@@ -1,57 +1,3 @@
-# Hackin' on the playa
-
-Chris - Elena came by. Bee Camp (Bee Art Car) 7:45 and C
-
-Can we access all presets?
-
-Got a crash in ClownWarp, after Arachnid. Crashed in exact same place that rob comments in SrAnimPattern
-
-Good videos:
-
-Crush
-NonenseTwo
-
-iPad
-3585
-
-rob cell
-510 501 5878
-
-password aquazone
-
-TODO:
-
-    Change so first gate is 0 to compensate for mic
-
-    Videos going black after 10 mins?
-
-    Crash during draw
-
-    Crash in color script
-
-    Script to start java
-
-Info on turning off crash reporter dialog
-
-Lingon 2 - Check Startup, Always, and on Advanced, Uncheck "Successful Exit"
-
-Turn crash reporting off:
-
-launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
-
-To turn back on:
-
-launchctl load -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
-
-Notes:
-
-Crash is on drawing upper left box, fourth toggle 3rd param when changing 
-to color cut with all global params turned all the way up
-
-# To Run touchOSC
-java -jar touchoscservice-1.1.0-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc" 
 
 # SonicRunway
 
@@ -208,4 +154,40 @@ http://lessons.livecode.com/m/4071/l/15029-linking-an-osx-external-bundle-with-a
 - Add parameters to fiddle the gain on the LEDs so we can color 
   correct them.  (time permitting)
 
+On Playa hacking:
+------------------
+
+TODO:
+
+    Change so first gate is 0 to compensate for mic
+
+    Videos going black after 10 mins?
+
+    Crash during draw
+
+    Crash in color script
+
+    Script to start java
+
+Info on turning off crash reporter dialog
+
+Lingon 2 - Check Startup, Always, and on Advanced, Uncheck "Successful Exit"
+
+Turn crash reporting off:
+
+launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
+To turn back on:
+
+launchctl load -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
+Notes:
+
+Crash is on drawing upper left box, fourth toggle 3rd param when changing 
+to color cut with all global params turned all the way up
+
+# To Run touchOSC
+java -jar touchoscservice-1.1.0-jar-with-dependencies.jar "Sonic Runway iPad H.touchosc" 
 
